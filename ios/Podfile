@@ -34,6 +34,13 @@ target 'clubbenz' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+	# Required by RNFirebase
+	pod 'Firebase/Core'
+	pod 'Firebase/DynamicLinks'
+  pod 'Firebase/Messaging'
+  pod 'GoogleAnalytics'
+  pod 'TesseractOCRiOS', :git => 'git://github.com/parallaxe/Tesseract-OCR-iOS.git', :branch => 'macos-support'
+
   target 'clubbenzTests' do
     inherit! :search_paths
     # Pods for testing
