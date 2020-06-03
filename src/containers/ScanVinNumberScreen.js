@@ -11,7 +11,7 @@ import { Fonts } from '../resources/constants/Fonts';
 const { height, width } = Dimensions.get('window');
 
 import { RNCamera } from 'react-native-camera';
-import RNTextDetector from "react-native-text-detector";
+// import RNTextDetector from "react-native-text-detector";
 import SimpleToast from 'react-native-simple-toast';
 
 import * as authAction from './../redux/actions/auth'
@@ -55,7 +55,7 @@ class SearchVinScreen extends Component {
     }
 
     detectText = async () => {
-        
+
         console.log('Entered')
         console.log(this.camera.state)
         if (this.camera.state.isAuthorized) {
@@ -67,23 +67,23 @@ class SearchVinScreen extends Component {
                         base64: true,
                         skipProcessing: true,
                     };
-                    
+
                     const { uri } = await this.camera.takePictureAsync(options);
-                    
+
                     const visionResp = await RNTextDetector.detectFromUri(uri);
                     this.setState({
                         arrOfText: visionResp,
                     })
-                    
+
                     if (visionResp.length > 0) {
                         var textArr = visionResp;
                         textArr.forEach(item => {
                             if (item.text.length == 17) {
 
-                               
+
 
                                 if (!(/\s/.test(item.text))) {
-                                    
+
                                     var prefix = item.text.substring(3, 9);
                                     console.log(prefix)
                                     SimpleToast.show('Your VIN is ' + prefix, SimpleToast.SHORT)
@@ -220,7 +220,7 @@ class SearchVinScreen extends Component {
                         }
                     })
                 }
-                
+
             }).catch(err => {
                 console.log('Error', err)
             })

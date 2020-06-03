@@ -403,12 +403,8 @@ PODS:
     - RNSound/Core (= 0.10.12)
   - RNSound/Core (0.10.12):
     - React-Core
-  - RNTextDetector (0.0.6):
-    - React
-    - TesseractOCRiOS (~> 4.0.0)
   - RNVectorIcons (6.6.0):
     - React
-  - TesseractOCRiOS (4.0.0)
   - Toast (4.0.0)
   - Yoga (1.14.0)
 
@@ -466,7 +462,6 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSound (from `../node_modules/react-native-sound`)
-  - RNTextDetector (from `../node_modules/react-native-text-detector/ios`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -497,7 +492,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - TesseractOCRiOS
     - Toast
 
 EXTERNAL SOURCES:
@@ -593,8 +587,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-share"
   RNSound:
     :path: "../node_modules/react-native-sound"
-  RNTextDetector:
-    :path: "../node_modules/react-native-text-detector/ios"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -672,9 +664,7 @@ SPEC CHECKSUMS:
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNShare: 48cf88cadf9ca2143cdaa557c1ec7f8808040ffc
   RNSound: 4d05b8df3ba64bb2aa6e3b8a9613dd764bdcffed
-  RNTextDetector: bcbfed60c7d2a8f455314955a519fae6d5ab921a
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 

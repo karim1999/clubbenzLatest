@@ -39,7 +39,6 @@ target 'clubbenz' do
 	pod 'Firebase/DynamicLinks'
   pod 'Firebase/Messaging'
   pod 'GoogleAnalytics'
-  pod 'TesseractOCRiOS', :git => 'git://github.com/parallaxe/Tesseract-OCR-iOS.git', :branch => 'macos-support'
 
   target 'clubbenzTests' do
     inherit! :search_paths

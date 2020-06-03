@@ -5556,11 +5556,6 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-text-detector@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-text-detector/-/react-native-text-detector-0.0.6.tgz#c33cdcfd574b15cb94ffe4db320e7a22ead12c86"
-  integrity sha512-Etwflm4EU1rOvMiQ8iStaGZkl6qbYyIcApJRWvvpHvkc+NTJ2btM3FAayF829E6FLFWOwjZCBzaRns1LTrQcFw==
-
 react-native-textinput-effects@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/react-native-textinput-effects/-/react-native-textinput-effects-0.5.1.tgz#52b54bb56b58a4b67b5d3fa4ffccba3d288cd8c9"
