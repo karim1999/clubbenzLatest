@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "138270877606",
+    "firebase_url": "https://clubenz-232206.firebaseio.com",
+    "project_id": "clubenz-232206",
+    "storage_bucket": "clubenz-232206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138270877606:android:65b6e484f9dbb340",
+        "android_client_info": {
+          "package_name": "com.clubbenz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138270877606-sml2pgnal4nrvp79s25vo0rk4mgds1ag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtxwObPCeIvookMbwzVEMhepvYegfL07Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138270877606-sml2pgnal4nrvp79s25vo0rk4mgds1ag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

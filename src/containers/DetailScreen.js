@@ -1,0 +1,850 @@
+import React, { PureComponent } from 'react';
+import {
+	View,
+	Text,
+	TouchableWithoutFeedback,
+	Dimensions,
+	Image,
+	ImageBackground,
+	StatusBar,
+	TouchableOpacity,
+	StyleSheet,
+	FlatList,
+	Modal,
+	Clipboard,
+	PermissionsAndroid,
+	ActivityIndicator,
+	Platform
+} from 'react-native';
+
+import { IMG_PREFIX_URL } from '../config/constant';
+import { styles, fonts, colors, metrics, } from '../themes';
+import SplitHeading from '../components/common/splitHeading';
+import ListItem from '../components/list/ListItem';
+import CustomAd from '../components/common/customAd';
+const { width, height } = Dimensions.get('window');
+import * as partAction from "./../redux/actions/parts";
+import { getProviderDetails } from "./../redux/actions/provider";
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
+import Share from 'react-native-share';
+import Toast from "react-native-simple-toast";
+
+import { connect } from "react-redux";
+import { ScrollView } from 'react-native-gesture-handler';
+import { Fonts } from '../resources/constants/Fonts';
+import __ from '../resources/copy';
+import Slideshow from 'react-native-image-slider-show';
+
+import OpenMap from "react-native-open-map";
+import { ShareDialog } from 'react-native-fbsdk';
+import SendSMS from 'react-native-sms';
+import {addToFavorite, checkIsFavorite, removeFromFavorite} from "../redux/actions/favorite";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const navigationOptions = {
+	header: null,
+};
+
+class DetailScreen extends PureComponent {
+	constructor(props) {
+		super(props);
+	}
+	state = {
+		partDetail: [],
+		ler_parts: [],
+		modalVisible: false,
+		shareModalVisible: false,
+		images: [],
+		position: 0,
+		indicatorSize: 4,
+		interval: null,
+		phoneArray: [],
+		provider: {},
+		isFavorite: false,
+		loadingFavorite: false
+	}
+	componentDidMount() {
+		this.partDetail();
+	}
+
+	componentWillMount() {
+		this.setState({
+			interval: setInterval(() => {
+				this.setState({
+					// this is commented to remove the autoslide feature
+					// position: this.state.position === this.state.pictures.length ? 0 : this.state.position + 1
+				});
+			}, 2000)
+		});
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.state.interval);
+	}
+
+	shareFACEBOOK = () => {
+		const shareOptions = {
+
+			title: "Share Via",
+			message: "Facebook",
+			url: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			subject: "Share Link" //  for email
+		};
+
+		const shareLinkContent = {
+			contentType: 'link',
+
+			contentUrl: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			contentTitle: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+
+			contentDescription: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			setQuote: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+		};
+
+		this.shareLinkWithShareDialog(shareLinkContent);
+	}
+
+	shareLinkWithShareDialog(shareLinkContent) {
+		var tmp = this;
+		ShareDialog.canShow(shareLinkContent).then(
+			function (canShow) {
+				if (canShow) {
+					return ShareDialog.show(shareLinkContent);
+				}
+			}
+		).then(
+			function (result) {
+				if (result.isCancelled) {
+					// alert('Share cancelled');
+				} else {
+					// alert('Share success with postId: ' + result.postId);
+				}
+			},
+			function (error) {
+				// alert('Share fail with error: ' + error);
+			}
+		);
+	}
+
+	partDetail = (a) => {
+		partAction.partDetail1(a ? a : this.props.navigation.state.params.partItem.id).then(res => {
+			// alert(JSON.stringify(res))
+			if (res) {
+				// alert(JSON.stringify(res.shop_detail))
+				console.log(res)
+			debugger
+				let phone = JSON.stringify(res.shop_detail.phone)
+				phone = phone.replace(/"/g, "");
+
+				var phoneArray = phone.split(",");
+
+				this.setState({ partDetail: res.shop_detail, phoneArray: phoneArray });
+				this.setState({ similer_parts: res.similer_parts });
+
+				// alert(JSON.stringify(res.shop_detail))
+
+				var imgs = res.images;
+
+				var prod_imgs = [];
+
+				if (imgs != null) {
+					// debugger
+					imgs.forEach(function (item) {
+						prod_imgs.push({ url: IMG_PREFIX_URL + item.photo_name });
+					});
+				}
+
+				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.image })
+				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_category[0].image })
+				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_sub_category[0].image })
+				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_brand[0].image })
+
+				// console.log('This is url')
+				// console.log(IMG_PREFIX_URL + res.shop_detail.part_brand[0].image)
+
+				this.setState({ images: prod_imgs })
+				return res.shop_detail;
+			}
+
+		}).then(res => {
+			if(res) {
+				this.setState({loadingFavorite: true})
+				let provider_id = res.provider_id
+				getProviderDetails(provider_id).then(provider => {
+					this.setState({provider});
+				}).then(() => {
+					checkIsFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+						this.setState({isFavorite});
+					})
+				}).then(()=> {
+					this.setState({loadingFavorite: false})
+				})
+			}
+		})
+	}
+	addToFavorite= () => {
+		this.setState({loadingFavorite: true})
+		return addToFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+			if(isFavorite)
+				this.setState({isFavorite: true});
+		}).then(() => {
+			this.setState({loadingFavorite: false})
+		})
+	}
+	removeFromFavorite= () => {
+		this.setState({loadingFavorite: true})
+		return removeFromFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+			if(isFavorite)
+				this.setState({isFavorite: false});
+		}).then(() => {
+			this.setState({loadingFavorite: false})
+		})
+	}
+	// renderAds = () => {
+
+	// 	for (i = 0; i < this.props.preferences.home_ads.length; i++) {
+	// 		if (this.props.preferences.home_ads[i].type === "Detail page") {
+	// 			return <CustomAd home_ads={this.props.preferences.home_ads[i]} />;
+	// 		}
+	// 	}
+
+	// }
+
+	renderAds = () => {
+		if (this.props.preferences.banner[2] != null && this.props.preferences.banner[2].status === 'active' && this.props.preferences.banner[2].type === 'Company Profile') {
+			return <CustomAd home_ads={this.props.preferences.banner[2]} />;
+		} else {
+			return null;
+		}
+	}
+
+	goToBackScreen = () => {
+		this.props.navigation.goBack();
+	};
+	opnItem = (partItem) => {
+
+		this.partDetail(partItem.id);
+
+	}
+	showContact = async () => {
+		if (Platform.OS === 'android') {
+			const granted = await PermissionsAndroid.request(
+				PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+				{
+					title: 'Clubenz Need Call Permission',
+					message:
+						'Clubenz App needs access to make call ' +
+						'so you can call the delear.',
+					buttonNeutral: 'Ask Me Later',
+					buttonNegative: 'Cancel',
+					buttonPositive: 'OK',
+				},
+			);
+			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
+				this.setState({
+					modalVisible: !this.state.modalVisible
+				});
+			} else {
+
+			}
+		} else if (Platform.OS === 'ios') {
+			this.setState({
+				modalVisible: !this.state.modalVisible
+			});
+		}
+
+	}
+	showShare = () => {
+		this.setState({ shareModalVisible: !this.state.shareModalVisible });
+	};
+	shareWHATSAPP = (a) => {
+		const shareOptions = {
+			title: 'Share via',
+			url: Platform.OS == 'android' ? 'https://clubbenz.app.link/parts/' + this.state.partDetail.id : 'clubbenz.app.link://parts/' + this.state.partDetail.id,
+			social: Share.Social.WHATSAPP
+		};
+		Share.shareSingle(shareOptions);
+	}
+	shareFACEBOOK = () => {
+		const shareOptions = {
+			title: 'Share via',
+			url: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			social: Share.Social.FACEBOOK
+		};
+		Share.shareSingle(shareOptions);
+	}
+	copyLink = () => {
+		if (Platform.OS == 'android') {
+			Clipboard.setString('https://clubbenz.app.link/parts/' + this.state.partDetail.id);
+		} else {
+			Clipboard.setString('clubbenz.app.link://parts/' + this.state.partDetail.id);
+		}
+		this.showShare();
+		setTimeout(() => {
+			Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);
+		}, 100)
+	}
+	_renderFooter = () => {
+		return (
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginVertical: height * 0.02,
+				}}
+			>
+				<TouchableOpacity>
+					<View
+						style={[
+							styles.tapableButton,
+							{
+								paddingHorizontal: width * 0.3,
+								backgroundColor: 'transparent',
+								borderColor: colors.blueText,
+								borderWidth: 1,
+							},
+						]}
+					>
+						<Text style={styles.tapButtonStyleTextBlue}>Load more</Text>
+					</View>
+				</TouchableOpacity>
+			</View>
+		);
+	};
+
+	onMapIconPress = () => {
+
+		OpenMap.show({
+			// latitude: this.state.partDetail.location_latitude,
+			// longitude: this.state.partDetail.location_longitude,
+			latitude: this.state.provider.governorate,
+			longitude: this.state.provider.country,
+			title: this.state.partDetail.name,
+			cancelText: 'Close',
+			actionSheetTitle: 'Chose app',
+			actionSheetMessage: 'Available applications '
+		});
+	}
+
+	sendSMS = () => {
+		// debugger
+		SendSMS.send({
+			body: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			recipients: [''],
+			successTypes: ['sent', 'queued'],
+			allowAndroidSendWithoutReadPermission: false
+		}, (completed, cancelled, error) => {
+			this.setState({ shareModalVisible: false })
+			console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error);
+
+		});
+	}
+
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				<StatusBar
+					hidden={false}
+					backgroundColor={colors.navgationBar}
+				/>
+
+				{/* <View style={{aspectRatio: 1.77, width: metrics.deviceWidth, paddingTop: 20, backgroundColor: 'black'}}> */}
+
+				<View style={{ flex: 600, height: 280, width: metrics.deviceWidth, }}>
+					<View
+						style={{
+							justifyContent: 'space-between',
+							flexDirection: 'row',
+							alignItems: 'center',
+							paddingHorizontal: 18,
+							zIndex: 1,
+							height: 62,
+							paddingTop: Platform.OS === 'ios' ? 25 : 0
+							// backgroundColor: 'black'
+						}}
+					>
+						<View style={{flex: 1}}>
+							<TouchableWithoutFeedback onPress={this.goToBackScreen}>
+								<Image
+									resizeMode="contain"
+									style={{ width: 32, height: 32 }}
+									source={require('../resources/images/ic-back.png')}
+								/>
+							</TouchableWithoutFeedback>
+						</View>
+						<View style={{flex: 1, flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end"}}>
+							<TouchableWithoutFeedback onPress={this.showShare}>
+								<Image
+									style={{ width: 32, height: 32 }}
+									source={require('../resources/icons/ic-share.png')}
+								/>
+							</TouchableWithoutFeedback>
+							<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>
+								<View style={{marginLeft: 10}}>
+									<Image
+										style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
+										resizeMode="contain"
+										source={require('../resources/images/white-logo.png')}
+									/>
+								</View>
+							</TouchableWithoutFeedback>
+							{
+								this.state.loadingFavorite ?
+									<TouchableWithoutFeedback>
+										<View style={{marginLeft: 10}}>
+											<ActivityIndicator size={30} color="white" />
+										</View>
+									</TouchableWithoutFeedback> :
+								this.state.isFavorite ?
+									<TouchableWithoutFeedback onPress={() => this.removeFromFavorite()}>
+										<View style={{marginLeft: 10}}>
+											<Icon name="heart" size={30} color="#F24601"/>
+										</View>
+									</TouchableWithoutFeedback>
+									:
+									<TouchableWithoutFeedback onPress={() => this.addToFavorite()}>
+										<View style={{marginLeft: 10}}>
+											<Icon name="heart-o" size={30} color="white"/>
+										</View>
+									</TouchableWithoutFeedback>
+							}
+						</View>
+					</View>
+					<View style={{ zIndex: -1, marginTop: -62, }}>
+						<Slideshow
+							height={280}
+							arrowLeft={<Image source={require('../resources/icons/left_arrow.png')} />}
+							arrowRight={<Image source={require('../resources/icons/right_arrow.png')} />}
+							dataSource={this.state.images}
+							position={this.state.position}
+							indicatorSize={this.state.indicatorSize}
+							indicatorSelectedColor={colors.blueButton}
+							onPositionChanged={position => this.setState({ position })}
+							marginBottom={30}
+							indicatorColor='#E6EFF9'
+							overlay={true} />
+					</View>
+
+					{/* </View> */}
+
+					{/* <ImageBackground
+					style={{ flex: 400, width: metrics.deviceWidth, paddingTop: 20, backgroundColor: 'black' }}
+					source={{ uri: IMG_PREFIX_URL + this.state.partDetail.image }}
+				> */}
+
+
+				</View>
+				{/* </ImageBackground> */}
+				{/*
+				<View
+					style={{
+						flex: 500,
+						width: metrics.deviceWidth,
+						height: metrics.deviceHeight / 1.7,
+					}}
+				/> */}
+
+				<View
+					style={{
+						width: metrics.deviceWidth,
+						height: metrics.deviceHeight - 280,
+						backgroundColor: 'white',
+						borderTopLeftRadius: metrics.radius20,
+						borderTopRightRadius: metrics.radius20,
+						bottom: 0,
+						left: 0,
+						right: 0,
+						zIndex: 10,
+						top: -15,
+					}}
+				>
+					<ScrollView nestedScrollEnabled={true}>
+						<View style={{ flex: 2.5, marginTop: 14, width: width}}>
+
+							<View
+								style={{
+									flexDirection: 'row',
+									flex: 1,
+									borderBottomWidth: 1,
+									marginHorizontal: width * 0.05,
+									borderBottomColor: colors.lightGray,
+									paddingBottom: 10,
+									marginBottom: 10,
+								}}
+							>
+
+								<View style={{ flex: 0, width: width / 2}}>
+									<View style={{ flexDirection: 'row', alignItems: 'flex-end', maxWidth: width / 2.2 }}>
+										<Text
+											ellipsizeMode="tail"
+											style={{
+												color: '#0E2D3C',
+												fontSize: width * 0.06,
+												fontFamily: Fonts.CircularBold,
+												marginBottom: 10,
+												maxWidth: 200,
+												// flex: 0.8,
+											}}
+										>
+											{this.state.partDetail.title ? this.state.partDetail.title : ""}
+										</Text>
+									</View>
+
+									<Text style={{ fontSize: 14, fontFamily: Fonts.CircularMedium, color: '#8E8E93' }}>{__('Part Number', this.props.language)}</Text>
+									<Text style={{ color: colors.blueText, fontSize: 24, fontFamily: Fonts.CircularBook, }}>{this.state.partDetail.part_number ? this.state.partDetail.part_number : ""}</Text>
+								</View>
+								<View style={{ flex: 2, alignItems: 'flex-end', marginTop: 10, marginBottom: 10, maxWidth: 150, flexGrow: 1.8, }}>
+									<View style={{
+										backgroundColor: 'white',
+										borderColor: '#2eac6d',
+										justifyContent: 'center',
+										alignItems: 'center',
+										width: 40,
+										height: 20,
+										borderRadius: 4,
+										borderWidth: 1,
+										marginLeft: 5,
+										marginBottom: 10,
+									}}>
+										<Text style={{ color: '#2eac6d', fontSize: 11, fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.part_case ? this.state.partDetail.part_case : ""}</Text>
+									</View>
+
+									<Text style={{ color: colors.blueText, fontSize: 26, fontFamily: Fonts.CircularBook, }}>	{this.state.partDetail.price ? this.state.partDetail.price : "0"} {__('EGP', this.props.language)}</Text>
+									{/* {this.state.partDetail.discount > 10 ? <View style={{ flexDirection: 'row' }}> */}
+									{this.state.partDetail.discount && this.state.partDetail.discount > 0 ? <View style={{ flexDirection: 'row' }}>
+										<View
+											style={{
+												// backgroundColor: colors.badge,
+												backgroundColor: '#F24601',
+												flexDirection: 'row',
+												alignItems: 'center',
+												borderRadius: width * 0.05,
+												paddingHorizontal: width * 0.02,
+												paddingVertical: width * 0.01,
+											}}
+										>
+											<Text style={{ color: '#fff', fontSize: 14, fontFamily: Fonts.CircularMedium }}>{this.state.partDetail.discount ? this.state.partDetail.discount : "0"}%</Text>
+										</View>
+										<Text
+											style={{
+												color: '#8E8E93',
+												fontSize: 15, textDecorationLine: 'line-through',
+												paddingLeft: 5,
+												fontFamily: Fonts.CircularMedium,
+											}}
+										>
+											{this.state.partDetail.discount && this.state.partDetail.discount > 0 ? Math.round(this.state.partDetail.price / (parseFloat(this.state.partDetail.discount / 100) ) , 2) + __('EGP', this.props.language) : ''}
+										</Text>
+									</View> : null}
+								</View>
+							</View>
+
+
+							<View style={{ flex: 1 }}>
+								<View
+									style={{
+										flexDirection: 'row',
+										flex: 2,
+										borderBottomWidth: 1,
+										marginHorizontal: width * 0.05,
+										borderBottomColor: colors.lightGray,
+										marginBottom: 10,
+										paddingBottom: 10,
+									}}
+								>
+									<View style={{ flex: 2, justifyContent: 'center' }}>
+										<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, }}>
+											{this.state.partDetail.description ? this.state.partDetail.description : __("No Description Available")}
+										</Text>
+									</View>
+									<View
+										style={{
+											flex: 1,
+											justifyContent: 'center',
+											alignItems: 'center',
+										}}
+									>
+										<TouchableWithoutFeedback onPress={this.onMapIconPress}>
+											<View style={styles.center}>
+												<View
+													style={{
+														height: width * 0.2,
+														width: width * 0.2,
+														borderRadius: width * 0.2,
+													}}
+												>
+													{/*<Image*/}
+													{/*	source={require('../resources/icons/mask_group.png')}*/}
+													{/*	style={{ flex: 1, height: null, width: null }}*/}
+													{/*/>*/}
+												</View>
+												<View style={{ position: 'absolute', height: width * 0.1, width: width * 0.1 }}>
+													<Image
+														style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }}
+														source={require('../resources/icons/ic_pin_selected.png')}
+													/>
+												</View>
+												{
+													this.state.provider && this.state.provider.id ?
+														<Text style={{textAlign: "center"}}>{this.state.provider.governorate.name},{this.state.provider.country.name}</Text>:null
+												}
+											</View>
+										</TouchableWithoutFeedback>
+									</View>
+								</View>
+							</View>
+							<View style={{ flex: 1 }}>
+								<View
+									style={{
+										flexDirection: 'row',
+										marginHorizontal: width * 0.05,
+										// marginBottom: height * 0.02,
+										marginBottom: 10,
+									}}
+								>
+									<View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+										<Text style={{ fontSize: 12, fontFamily: Fonts.CircularMedium, color: '#0E2D3C' }}>{this.state.partDetail.views ? this.state.partDetail.views : "000"}</Text>
+										<Text style={{ color: '#0E2D3C', fontFamily: Fonts.circular_book, fontSize: 10, marginLeft: 2, justifyContent: 'center', alignItems: 'center', }}>{__('Views', this.props.language)}</Text>
+									</View>
+
+									<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+										<Text style={{ fontSize: 10, fontFamily: Fonts.circular_medium, color: '#5A5A5A' }}>{this.state.partDetail.add_date ? this.state.partDetail.add_date : "17 Jan 2018, 12 PM"} </Text>
+									</View>
+
+								</View>
+								<TouchableOpacity style={styles.center} onPress={this.showContact}>
+									<View style={styleDetailScreen.contactBtnStyle}>
+										<Text style={styleDetailScreen.btnText}>{__('Contact now', this.props.language)}</Text>
+									</View>
+								</TouchableOpacity>
+							</View>
+							{
+								this.state.provider && this.state.provider.id ?
+									<TouchableOpacity
+										onPress={() => this.props.navigation.navigate("ProviderScreen", {provider: this.state.provider})}
+										style={{
+											// flex: 1,
+											height: 100,
+											backgroundColor: colors.grayLight,
+											alignItems: "center",
+											justifyContent: "center",
+											marginTop: 20
+										}}
+									>
+										<Image
+											style={{height:27,width:27}}
+											source={{ uri: IMG_PREFIX_URL + this.state.provider.logo }}
+											// source={require('../resources/images/white-logo.png')}
+										/>
+										<Text style={styleDetailScreen.btnText}>{this.state.provider.store_name}</Text>
+										{/*<Text>{this.state.provider.address}</Text>*/}
+									</TouchableOpacity>
+									: null
+							}
+
+						</View>
+
+						<View style={{ flex: 0.2, padding: 10 }}>
+							{this.renderAds()}
+						</View>
+						<View
+							style={{
+								// flex: 1,
+								height: 200,
+								backgroundColor: colors.grayLight,
+								// marignTop: height * 0.02,
+								borderTopLeftRadius: width * 0.05,
+								borderTopRightRadius: width * 0.05,
+							}}
+						>
+							<SplitHeading
+								text={__('Similar Items', this.props.language)}
+								headingStyle={{ padding: 5, marginTop: 5 }}
+								lineColor={{ backgroundColor: 'rgba(6,0,41, 0.2)' }}
+								textColor={{ color: '#8E8E93', fontFamily: Fonts.circular_medium }}
+							/>
+							<FlatList
+								nestedScrollEnabled={true}
+								style={{ height: 160, }}
+								data={this.state.similer_parts}
+								keyExtractor={(item, index) => item.id}
+								renderItem={({ item, index }) => <ListItem item={item} index={index} onPress={this.opnItem} language={this.props.language} preferences={this.props.preferences} />}
+							// ListFooterComponent={this._renderFooter}
+							/>
+						</View>
+					</ScrollView>
+				</View>
+
+				<Modal
+					transparent={true}
+					visible={this.state.modalVisible}
+					animationType="slide"
+					onRequestClose={() => {
+						this.showContact();
+					}}
+					style={{ alignItems: 'flex-end' }}
+				>
+					<View style={{ flex: 1, backgroundColor: '#08080847' }} >
+						<View style={{ flex: 0.3 }}></View>
+						<View style={styleDetailScreen.modelStyle}>
+							<View style={[styleDetailScreen.modalInnerView, { backgroundColor: '#FFFFFF' }]}>
+								<View style={styles.center}>
+									<Text style={{ height: 30, fontSize: 13, alignItems: "center", justifyContent: 'center', fontFamily: Fonts.CircularBold, color: '#5A5A5A', marginTop: 10, width: metrics.deviceWidth - 10, textAlign: 'center' }}>{__('Contact Us', this.props.language)}</Text>
+
+									<FlatList
+										// data={['03366024409', '03366024409', '03366024409']}
+										data={this.state.phoneArray}
+										//   data={this.state.phoneArray}
+										keyExtractor={(item, index) => item.id}
+										renderItem={({ item, index }) =>
+
+											<TouchableOpacity style={styles.center} onPress={() => RNImmediatePhoneCall.immediatePhoneCall(item)}>
+
+												<View style={styleDetailScreen.btnStyle}>
+													<Text style={styleDetailScreen.btnText} >{item}</Text>
+												</View>
+											</TouchableOpacity>}
+									// ListFooterComponent={this._renderFooter}
+									/>
+
+								</View>
+							</View>
+							<TouchableOpacity style={styles.center} onPress={this.showContact}>
+								<View style={[styleDetailScreen.cancelBtnStyle, { backgroundColor: '#E6EFF9' }]}>
+									<Text style={styleDetailScreen.cancelBtnText}>{__('Cancel', this.props.language)}</Text>
+								</View>
+							</TouchableOpacity>
+						</View>
+					</View>
+				</Modal>
+
+				{/*share model*/}
+
+				<Modal
+					transparent={true}
+					visible={this.state.shareModalVisible}
+					animationType="slide"
+					onRequestClose={() => {
+						this.showShare();
+					}}
+					style={{ alignItems: 'flex-end' }}
+				>
+
+					<View style={{ flex: 1, backgroundColor: '#08080847' }} >
+						<View style={{ flex: 0.3, }}></View>
+						<View style={styleDetailScreen.modelStyle}>
+							<View style={styleDetailScreen.modalInnerView}>
+								<View style={[styles.center, { backgroundColor: '#FFFFFF', borderRadius: metrics.radius15, }]}>
+
+									<Text style={{ height: 30, fontSize: 13, alignItems: "center", justifyContent: 'center', fontFamily: Fonts.CircularBold, color: '#5A5A5A', marginTop: 10, borderBottomColor: '#000000', width: metrics.deviceWidth - 10, textAlign: 'center' }}>{__('Share Via', this.props.language)}</Text>
+
+									<TouchableOpacity style={styles.center} onPress={this.shareFACEBOOK}>
+										<View style={styleDetailScreen.btnStyle}>
+											<Text style={styleDetailScreen.btnText} >{__('Facebook', this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+
+									<TouchableOpacity style={styles.center} onPress={this.shareWHATSAPP}>
+										<View style={styleDetailScreen.btnStyle}>
+											<Text style={styleDetailScreen.btnText} >{__('WhatsApp', this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+									<TouchableOpacity style={styles.center} onPress={() => this.sendSMS()} >
+										<View style={styleDetailScreen.btnStyle}>
+											<Text style={styleDetailScreen.btnText} >{__('SMS', this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+									<TouchableOpacity style={styles.center} onPress={this.copyLink}>
+										<View style={styleDetailScreen.btnStyle}>
+											<Text style={styleDetailScreen.btnText} >{__('Copy Link', this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+
+								</View>
+
+							</View>
+						</View>
+					</View>
+					<TouchableOpacity style={styles.center} onPress={this.showShare}>
+						<View style={[styleDetailScreen.cancelBtnStyle, { backgroundColor: '#E6EFF9' }]}>
+							<Text style={styleDetailScreen.cancelBtnText}>{__('Cancel', this.props.language)}</Text>
+						</View>
+					</TouchableOpacity>
+
+				</Modal>
+			</View>
+		);
+	}
+}
+
+mapStateToProps = state => {
+	return {
+		user: state.auth.user,
+		language: state.language,
+		preferences: state.init.preferences,
+	};
+};
+
+export default connect(mapStateToProps, null)(DetailScreen)
+
+const styleDetailScreen = StyleSheet.create({
+	btnStyle: {
+		width: metrics.deviceWidth - 10,
+		height: 60,
+		borderTopWidth: 0.5,
+		borderBottomWidth: 0,
+		borderRightWidth: 0,
+		borderLeftWidth: 0,
+		borderStyle: 'solid',
+		alignItems: "center",
+		justifyContent: 'center',
+		// borderColor: '#3F3F3F',
+	},
+	btnText: {
+		fontSize: 17,
+		color: "#11455F",
+		fontFamily: Fonts.circular_medium,
+	},
+	modalInnerView: {
+		borderRadius: metrics.radius15,
+	},
+	modelStyle: {
+		flex: 0.7,
+		justifyContent: 'flex-end',
+		marginRight: metrics.deviceWidth - (metrics.deviceWidth - 5),
+		marginLeft: metrics.deviceWidth - (metrics.deviceWidth - 5),
+		borderRadius: metrics.radius15,
+		marginBottom: 20,
+	},
+
+	cancelBtnStyle: {
+		width: metrics.deviceWidth - 10,
+		height: 60,
+		marginTop: 15,
+		marginBottom: 20,
+		backgroundColor: '#E6EFF9',
+		borderRadius: metrics.radius40,
+		alignItems: "center",
+		justifyContent: 'center',
+	},
+	cancelBtnText: {
+		color: '#0E2D3C',
+		fontSize: 18,
+		fontFamily: Fonts.CircularBold,
+		textAlign: 'center',
+	},
+	contactBtnStyle: {
+		width: metrics.deviceWidth - 40,
+		height: 60,
+		fontFamily: Fonts.CircularMedium,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderColor: '#11455F',
+		borderWidth: 1,
+		borderStyle: 'solid',
+		borderRadius: metrics.radius40,
+		marginBottom: 4,
+	}
+});

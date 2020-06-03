@@ -1,0 +1,59 @@
+{
+  "_from": "react-native-material-textinput@^1.1.0",
+  "_id": "react-native-material-textinput@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-z+8WkI1JAW/qqiaktAtNdyPs40di2eYDwL3rheZ6t6qQWEFv2jgIYbr0U8evlYVG3BSsVMZ48XejFNju8/DFwQ==",
+  "_location": "/react-native-material-textinput",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "react-native-material-textinput@^1.1.0",
+    "name": "react-native-material-textinput",
+    "escapedName": "react-native-material-textinput",
+    "rawSpec": "^1.1.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.1.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-material-textinput/-/react-native-material-textinput-1.1.0.tgz",
+  "_shasum": "98bd0916cd0693a6c138b0d8ac24265d84a987f2",
+  "_spec": "react-native-material-textinput@^1.1.0",
+  "_where": "/Users/sagarchhatrola/Desktop/React Native/Club 2",
+  "author": {
+    "name": "Maxim Postnikov",
+    "email": "itsmaximpostnikov@gmail.com",
+    "url": "https://github.com/maximpostnikov"
+  },
+  "bugs": {
+    "url": "https://github.com/perushevandkhmelev-agency/react-native-material-textinput/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "deprecated": false,
+  "description": "Textual input component for React Native",
+  "homepage": "https://github.com/perushevandkhmelev-agency/react-native-material-textinput",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "textfield",
+    "textinput",
+    "material-design"
+  ],
+  "license": "MIT",
+  "main": "lib/Input.js",
+  "name": "react-native-material-textinput",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/perushevandkhmelev-agency/react-native-material-textinput.git"
+  },
+  "version": "1.1.0"
+}
