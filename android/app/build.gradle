@@ -188,7 +188,6 @@ dependencies {
     implementation project(':@react-native-community_async-storage')
 //    implementation project(':react-native-background-task')
     implementation project(':react-native-branch')
-    implementation project(':react-native-text-detector')
     implementation project(':react-native-sms')
     implementation project(':react-native-firebase')
     implementation project(':react-native-sound')
@@ -225,9 +224,6 @@ implementation project(':react-native-view-pdf')
         force = true
     }
 
-    implementation (project(':react-native-text-detector')) {
-        exclude group: 'com.google.firebase'
-    }
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

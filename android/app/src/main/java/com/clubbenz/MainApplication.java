@@ -9,37 +9,9 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
-import com.facebook.CallbackManager;
-import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-//import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
-import com.facebook.react.shell.MainReactPackage;
-import com.fetchsky.RNTextDetector.RNTextDetectorPackage;
-import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
-import com.henninghall.date_picker.DatePickerPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.tkporter.sendsms.SendSMSPackage;
-import com.zmxv.RNSound.RNSoundPackage;
-
-import org.reactnative.camera.RNCameraPackage;
-
 import java.util.Arrays;
 
-import cl.json.RNSharePackage;
-import cl.json.ShareApplication;
-import io.branch.rnbranch.RNBranchModule;
-import io.branch.rnbranch.RNBranchPackage;
-import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.links.RNFirebaseLinksPackage; // <-- Add this line
-import com.rumax.reactnative.pdfviewer.PDFViewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
