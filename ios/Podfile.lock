@@ -338,6 +338,8 @@ PODS:
     - Toast (~> 4.0.0)
   - react-native-sms (1.11.0):
     - React
+  - react-native-viewpager (4.0.0):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -394,6 +396,8 @@ PODS:
     - React
   - RNPDF (0.10.2):
     - React
+  - RNReanimated (1.9.0):
+    - React
   - RNScreens (2.8.0):
     - React
   - RNShare (1.2.1):
@@ -441,6 +445,7 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-sms (from `../node_modules/react-native-sms`)
+  - "react-native-viewpager (from `../node_modules/@react-native-community/viewpager`)"
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -459,6 +464,7 @@ DEPENDENCIES:
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPDF (from `../node_modules/react-native-view-pdf`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSound (from `../node_modules/react-native-sound`)
@@ -547,6 +553,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-simple-toast"
   react-native-sms:
     :path: "../node_modules/react-native-sms"
+  react-native-viewpager:
+    :path: "../node_modules/@react-native-community/viewpager"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -581,6 +589,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNPDF:
     :path: "../node_modules/react-native-view-pdf"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNShare:
@@ -644,6 +654,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: cb74e17062b2af5a16a4b137f32495f241df1a8e
   react-native-simple-toast: 58b71ef003f01d2c0bf5dcd2fdccc75861dabade
   react-native-sms: 31fbb9d6ebb565ad32e409eaf9dc70329936a129
+  react-native-viewpager: 859f14262726819ab9bc993838511289edec46f2
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -661,6 +672,7 @@ SPEC CHECKSUMS:
   RNFirebase: 37daa9a346d070f9f6ee1f3b4aaf4c8e3b1d5d1c
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNPDF: 488a91d30f102a8aa302f304920505756a780137
+  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNShare: 48cf88cadf9ca2143cdaa557c1ec7f8808040ffc
   RNSound: 4d05b8df3ba64bb2aa6e3b8a9613dd764bdcffed

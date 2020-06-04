@@ -753,13 +753,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = clubbenz/ClubBenz.entitlements;
-				CURRENT_PROJECT_VERSION = 5.1;
+				CURRENT_PROJECT_VERSION = 5.3;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = clubbenz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.1;
+				MARKETING_VERSION = 5.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -781,12 +781,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = clubbenz/ClubBenz.entitlements;
-				CURRENT_PROJECT_VERSION = 5.1;
+				CURRENT_PROJECT_VERSION = 5.3;
 				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = clubbenz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.1;
+				MARKETING_VERSION = 5.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
