@@ -10,8 +10,10 @@ import {
   ScrollView,
   Modal,
   AsyncStorage,
-  NetInfo, Image
+  Image
 } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
+
 import NavigationComponent from "../components/navigation/navWIthInput";
 import { colors, styles } from "../themes";
 import { list } from "../resources/constants/ShopListConstant";

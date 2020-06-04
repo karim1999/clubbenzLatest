@@ -11,7 +11,6 @@ import { Fonts } from '../resources/constants/Fonts';
 const { height, width } = Dimensions.get('window');
 
 import { RNCamera } from 'react-native-camera';
-// import RNTextDetector from "react-native-text-detector";
 import SimpleToast from 'react-native-simple-toast';
 
 import * as authAction from './../redux/actions/auth'
