@@ -76,6 +76,7 @@ class Header extends PureComponent {
 export default Header;
 
 let Styles= StyleSheet.create({
+  
     nav: {
         minHeight: 120,
         position: "absolute",
