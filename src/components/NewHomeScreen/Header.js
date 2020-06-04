@@ -76,9 +76,10 @@ class Header extends PureComponent {
 export default Header;
 
 let Styles= StyleSheet.create({
-  
+
     nav: {
-        minHeight: 120,
+      minHeight: (Platform.OS === 'ios') ? 120 : 120,
+      paddingTop: (Platform.OS === 'ios') ? 30 : 0,
         position: "absolute",
         left: 0,
         right: 0,
