@@ -567,7 +567,7 @@ class NewHomeScreen extends Component {
             } else {
                 //  IOS app version
 
-                Geolocation.requestAuthorization();
+                // Geolocation.requestAuthorization();
                 Permissions.request('location').then(response => {
 
                     if (response === 'authorized') {
