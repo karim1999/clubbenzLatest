@@ -306,7 +306,7 @@ class NewHomeScreen extends Component {
                         alert(granted);
                     }
                 } else {
-                    Geolocation.requestAuthorization();
+                    // Geolocation.requestAuthorization();
 
                     Permissions.request('location').then(response => {
                         // Returns once the user has chosen to 'allow' or to 'not allow' access
