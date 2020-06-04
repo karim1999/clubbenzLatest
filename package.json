@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
     "@react-native-community/netinfo": "^5.9.2",
+    "@react-native-community/viewpager": "^4.0.0",
     "add": "^2.0.6",
     "image-downloader": "^3.5.0",
     "jetifier": "^1.6.5",
