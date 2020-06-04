@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { View, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import {
-  createStackNavigator,
-  createAppContainer,
-  createDrawerNavigator
+  createAppContainer
 } from "react-navigation";
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import NavigationService from "./NavigationService";
 import HowToScreen from "./containers/HowToScreen";
 import SplashScreen from "./containers/SplashScreen";

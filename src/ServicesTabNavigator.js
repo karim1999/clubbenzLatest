@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Dimensions } from 'react-native';
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 import { colors, metrics } from './themes';
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, Dimensions } from 'react-native';
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import { colors, metrics } from './themes';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 const { height, width } = Dimensions.get("window");
 

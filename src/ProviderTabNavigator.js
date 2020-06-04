@@ -1,7 +1,8 @@
 import React from 'react';
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import { colors, metrics } from './themes';
 
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 import ProviderInfoScreen from "./containers/ProviderInfoScreen";
 import ProviderContactScreen from "./containers/ProviderContactScreen";
