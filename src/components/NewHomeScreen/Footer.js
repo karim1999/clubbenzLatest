@@ -9,7 +9,7 @@ class Footer extends PureComponent {
     }
 
     navigate(screen){
-        this.props.navigation.navigate(screen);
+        this.props.navigation.navigate(screen, { fromSlideMenu: true });
     }
 
     render() {
