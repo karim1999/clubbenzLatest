@@ -58,7 +58,7 @@ class PartsDetailScreen extends PureComponent {
   componentDidMount() {
     NetInfo.fetch().then(isConnected => {
 			if (!isConnected) {
-				Toast.show('Not connected to internet', Toast.BOTTOM)
+				Toast.show('Not connected to internet')
 			}
 		})
   }
@@ -90,7 +90,7 @@ class PartsDetailScreen extends PureComponent {
    Clipboard.setString(this.state.partName)
    this.share();
    setTimeout(() => {
-    Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);  
+    Toast.show('Coppied Content Successfully', Toast.LONG);
   }, 100)
   }
   render() {
@@ -250,7 +250,7 @@ const stylePartsDetailScreen = StyleSheet.create({
   backgroundImage1: {
     width: metrics.deviceWidth,
     flex: 400
-    
+
   },
   btnText: {
 		fontSize: 18,
@@ -262,7 +262,7 @@ const stylePartsDetailScreen = StyleSheet.create({
 		borderTopStartRadius: metrics.radius15,
 	},
 	modelStyle:{
-		flex:0.7,	
+		flex:0.7,
 		justifyContent:'flex-end'
   },
   btnStyle: {

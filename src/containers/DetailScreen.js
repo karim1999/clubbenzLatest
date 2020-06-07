@@ -282,7 +282,7 @@ class DetailScreen extends PureComponent {
 		}
 		this.showShare();
 		setTimeout(() => {
-			Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);
+			Toast.show('Coppied Content Successfully', Toast.LONG);
 		}, 100)
 	}
 	_renderFooter = () => {

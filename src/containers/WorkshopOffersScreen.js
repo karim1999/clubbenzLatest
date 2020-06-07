@@ -118,7 +118,7 @@ class WorkshopOffersScreen extends PureComponent {
         Clipboard.setString(this.state.link + '');
         this.setState({shareModalVisible:!this.state.shareModalVisible})
         setTimeout(() => {
-            Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);
+            Toast.show('Coppied Content Successfully', Toast.LONG);
         }, 100)
       }
 

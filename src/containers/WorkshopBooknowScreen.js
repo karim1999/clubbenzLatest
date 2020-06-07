@@ -55,7 +55,7 @@ class WorkshopBooknowsScreen extends PureComponent {
 
 					} else {
 						setTimeout(() => {
-							Toast.show('Something gone wrong, Try again.', Toast.LONG, Toast.BOTTOM);
+							Toast.show('Something gone wrong, Try again.', Toast.LONG);
 						}, 100)
 					}
 				})

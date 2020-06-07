@@ -79,13 +79,13 @@ class PartsOffersScreen extends PureComponent {
              // title: 'Share via',
              // url: 'https://google.com',
              // social: Share.Social.FACEBOOK
-       
+
              title: "Share Via",
              message: "Facebook",
              url: "http://facebook.github.io/react-native/",
              subject: "Share Link" //  for email
            };
-       
+
            const shareLinkContent = {
              contentType: 'link',
              contentUrl: this.state.link,
@@ -124,8 +124,8 @@ class PartsOffersScreen extends PureComponent {
               Clipboard.setString(this.state.link + '');
               this.setState({shareModalVisible:!this.state.shareModalVisible})
               setTimeout(() => {
-                Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);
-            }, 100) 
+                Toast.show('Coppied Content Successfully', Toast.LONG);
+            }, 100)
             }
 
             sendSMS = () => {
@@ -137,7 +137,7 @@ class PartsOffersScreen extends PureComponent {
               }, (completed, cancelled, error) => {
                   this.setState({shareModalVisible: false})
                   console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error);
-            
+
               });
               }
 
@@ -219,7 +219,7 @@ class PartsOffersScreen extends PureComponent {
             <View style={[styles.center, {flex: 1,}]}>
 
                 {/* <Text style={{ textAlign: 'center' }}> Sorry, No Data Present</Text> */}
-                
+
                         <View style={{flex: 0.2}}></View>
                         <View style={[styles.center, {flex: 0.6}]}>
                             <Image source={require('../resources/images/discount.png')} style={{height: 60, width: 55, justifyContent: 'center'}}/>
@@ -227,7 +227,7 @@ class PartsOffersScreen extends PureComponent {
                             <Text style={{fontSize: 14, fontFamily: Fonts.CircularBook, color: colors.grey93}}>{__('Looks like this shop doesn’t have any offers yet', this.props.language)}</Text>
                         </View>
                         <View style={{flex: 0.2}}></View>
-             
+
 
             </View>
 
@@ -260,7 +260,7 @@ const stylePartsOffersScreen = StyleSheet.create({
     borderRadius: metrics.radius15,
 	},
 	modelStyle:{
-		flex:0.7,	
+		flex:0.7,
     justifyContent:'flex-end',
     marginRight: metrics.deviceWidth - (metrics.deviceWidth - 5),
     marginLeft: metrics.deviceWidth - (metrics.deviceWidth - 5),
@@ -279,7 +279,7 @@ const stylePartsOffersScreen = StyleSheet.create({
     justifyContent: 'center',
     // borderColor: '#3F3F3F',
   },
-  
+
   cancelBtnStyle: {
     width: metrics.deviceWidth - 10,
     height: 60,

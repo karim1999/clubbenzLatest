@@ -37,7 +37,7 @@ class ForgotPasswordScreen extends PureComponent {
 		let {user,code1,code2,code3,code4,code5,code6} = this.state
 		if(code1=='' || code2=='' || code3=='' || code4=='' || code5=='' || code6==''){
 			setTimeout(() => {
-				Toast.show(VERIFICATION_CODE_WARNING,Toast.BOTTOM,Toast.LONG)
+				Toast.show(VERIFICATION_CODE_WARNING,Toast.LONG)
 			}, 100)
 		}
 		else{
@@ -50,8 +50,8 @@ class ForgotPasswordScreen extends PureComponent {
 					self.props.navigation.reset([NavigationActions.navigate({ routeName: 'EnableNotificationScreen' })], 0);
 				} else {
 					setTimeout(() => {
-						Toast.show(res.message,Toast.LONG,Toast.BOTTOM)
-					}, 100)		
+						Toast.show(res.message,Toast.LONG)
+					}, 100)
 				}
 			}).catch(err=>{
 				alert(JSON.stringify(err))

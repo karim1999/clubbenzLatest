@@ -22,7 +22,7 @@ class ForgotPassScreen extends PureComponent {
         const phone = this.state.mobile;
         if (phone == '') {
 					setTimeout(() => {
-						Toast.show(MOBILE_ERROR, Toast.LONG, Toast.BOTTOM);
+						Toast.show(MOBILE_ERROR, Toast.LONG);
 					}, 100)
         } else {
             authAction.requestPasswordReset({ phone })
@@ -32,7 +32,7 @@ class ForgotPassScreen extends PureComponent {
                     // alert("A password reset link has been sent on your email. Please check your email!")
                 } else {
 									setTimeout(() => {
-										Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+										Toast.show(res.message, Toast.LONG);
 									 }, 100)
                 }
             })
@@ -41,12 +41,12 @@ class ForgotPassScreen extends PureComponent {
             });
         }
     }
-		
+
 	render() {
 		return (
 			<View style={[styles.imageContain, styles.center, {width: metrics.deviceWidth, height: metrics.deviceHeight, backgroundColor: '#0D2D3C'}]}>
-			<StatusBar 
-					hidden={false} 
+			<StatusBar
+					hidden={false}
 					backgroundColor={colors.navgationBar}
 			/>
 				<View style={[styles.center]}>
@@ -78,7 +78,7 @@ class ForgotPassScreen extends PureComponent {
 
 				</View>
 
-				
+
 			</View>
 		);
     }

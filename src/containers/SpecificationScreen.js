@@ -49,7 +49,7 @@ class SpecificationScreen extends Component {
 
 	get_Carguide = () => {
 		this.setState({ spinner: true })
-		// Toast.show("chassis = " +this.props.navigation.state.params.selected_car.chassis, Toast.LONG, Toast.BOTTOM);
+		// Toast.show("chassis = " +this.props.navigation.state.params.selected_car.chassis, Toast.LONG);
 
 		carAction.get_Carguide({ chassis: this.props.navigation.state.params.selected_car.chassis })
 			.then(res => {

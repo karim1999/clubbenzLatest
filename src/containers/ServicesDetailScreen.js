@@ -157,7 +157,7 @@ class ServicesDetailScreen extends PureComponent {
     Clipboard.setString(this.state.shopShareURL + '');
     this.setState({ shareModalVisible: !this.state.shareModalVisible })
     setTimeout(() => {
-      Toast.show('Coppied Content Successfully', Toast.LONG, Toast.BOTTOM);
+      Toast.show('Coppied Content Successfully', Toast.LONG);
     }, 100)
   }
 
@@ -321,7 +321,7 @@ const styleServicesDetailScreen = StyleSheet.create({
 
     // backgroundColor: 'rgba(17,69,95, 0.32)',
 
-    // paddingHorizontal: metrics.deviceWidth * 0.01, 
+    // paddingHorizontal: metrics.deviceWidth * 0.01,
   },
   topBarImage: {
     width: 32,

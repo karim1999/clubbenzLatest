@@ -173,12 +173,12 @@ class RegisterScreen extends PureComponent {
     // debugger
     if (first_name == '' || last_name == '' || email == '' && password == '' || mobile == '') {
       setTimeout(() => {
-        Toast.show(REGISTER_ERROR1, Toast.LONG, Toast.BOTTOM)
+        Toast.show(REGISTER_ERROR1, Toast.LONG)
       }, 100)
     }
     else if (profile_picture == '') {
       setTimeout(() => {
-        Toast.show(REGISTER_ERROR2, Toast.LONG, Toast.BOTTOM)
+        Toast.show(REGISTER_ERROR2, Toast.LONG)
       }, 100)
     }
     else if (acceptTerms == true) {
@@ -294,7 +294,7 @@ class RegisterScreen extends PureComponent {
           else {
             // debugger
             setTimeout(() => {
-              Toast.show(res.message, Toast.LONG, Toast.BOTTOM)
+              Toast.show(res.message, Toast.LONG)
             }, 100)
           }
         }).catch(err => {
@@ -304,7 +304,7 @@ class RegisterScreen extends PureComponent {
     }
     else {
       setTimeout(() => {
-        Toast.show(REGISTER_ERROR3, Toast.LONG, Toast.BOTTOM)
+        Toast.show(REGISTER_ERROR3, Toast.LONG)
       }, 100)
     }
   };
@@ -334,7 +334,7 @@ class RegisterScreen extends PureComponent {
         }
         else {
           setTimeout(() => {
-            Toast.show(res.message, Toast.LONG, Toast.BOTTOM)
+            Toast.show(res.message, Toast.LONG)
           }, 100)
         }
       }).catch(err => {

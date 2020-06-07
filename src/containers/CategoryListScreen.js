@@ -30,7 +30,7 @@ class CategoryListScreen extends PureComponent {
                this.setState({subCategories:res.data});
 			}
 			//  else {
-			// //   Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+			// //   Toast.show(res.message, Toast.LONG);
 			// }
 		  })
 

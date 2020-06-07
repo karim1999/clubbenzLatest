@@ -95,7 +95,7 @@ class LoginScreen extends PureComponent {
             // NavigationService.reset("HomeScreen");
           } else {
             setTimeout(() => {
-              Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+              Toast.show(res.message, Toast.LONG);
             }, 100);
           }
         })
@@ -188,7 +188,7 @@ class LoginScreen extends PureComponent {
               NavigationService.reset('HomeScreen');
             } else {
               setTimeout(() => {
-                Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+                Toast.show(res.message, Toast.LONG);
               }, 100);
             }
           })
@@ -223,7 +223,7 @@ class LoginScreen extends PureComponent {
     //     if (res.success) {
     //       this.props.navigation.navigate("ForgotPasswordScreen");
     //     } else {
-    //       Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+    //       Toast.show(res.message, Toast.LONG);
     //     }
     //   })
     //   .catch(err => {
@@ -241,7 +241,7 @@ class LoginScreen extends PureComponent {
           Toast.show(res.message);
         } else {
           setTimeout(() => {
-            Toast.show(res.message, Toast.LONG, Toast.BOTTOM);
+            Toast.show(res.message, Toast.LONG);
           }, 100);
         }
       })

@@ -230,7 +230,7 @@ class ClusterErrorSolutionsScreen extends Component {
 				// alert(data.cluster_error_id)
 				if (description.length == 0) {
 					setTimeout(() => {
-						Toast.show("Please fill the description", Toast.LONG, Toast.BOTTOM)
+						Toast.show("Please fill the description", Toast.LONG)
 					}, 100)
 				} else {
 					this.setState({ spinner: true, addSolModalVisible: false })
@@ -243,7 +243,7 @@ class ClusterErrorSolutionsScreen extends Component {
 						} else {
 							setTimeout(() => {
 								this.setState({ spinner: false, addSolModalVisible: true })
-								Toast.show(res.message, Toast.LONG, Toast.BOTTOM)
+								Toast.show(res.message, Toast.LONG)
 							}, 100)
 						}
 					}).catch(err => {

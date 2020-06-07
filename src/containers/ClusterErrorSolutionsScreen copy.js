@@ -73,7 +73,7 @@ class ClusterErrorSolutionsScreen extends Component {
 }
 
 	componentDidMount(){
-		this.get_Cluster_error_solution();		
+		this.get_Cluster_error_solution();
 	  }
 	  get_Cluster_error_solution = () =>{
 		// alert('id' + this.props.navigation.state.params.errorDetail.id);
@@ -139,7 +139,7 @@ class ClusterErrorSolutionsScreen extends Component {
 		// this.props.navigation.navigate('WorkShopListScreen' , {});
 		// alert(JSON.stringify(this.state.error_details));
 		// debugger
-		
+
 		if(this.state.error_details.shop_type == "partShop"){
 			AsyncStorage.setItem("partShopId", this.state.error_details.shop_id);
 			this.props.navigation.navigate("PartShopDetailScreen",{preferences:[]});
@@ -162,11 +162,11 @@ class ClusterErrorSolutionsScreen extends Component {
 	sendSolution = () => {
 		AsyncStorage.getItem("user").then(value => {
 			if (value != null) {
-				
+
 				var description = this.state.solution;
 				var token = JSON.parse(value).token;
 				var language = this.props.language.isArabic == true ? 'arabic' : 'english'
-				
+
 				const data = {
 					language: language,
 					description: description,
@@ -185,19 +185,19 @@ class ClusterErrorSolutionsScreen extends Component {
 						this.setState({ modalVisible: false })
 					} else {
 						setTimeout(() => {
-              Toast.show(res.message,Toast.LONG,Toast.BOTTOM)
+              Toast.show(res.message,Toast.LONG)
             }, 100)
 					}
 				}).catch(err=>{
 					alert(JSON.stringify(err))
 				})
-				
+
 			}
 		});
 }
 
 	render() {
-	
+
 		return (
 			<View style={styleClusterErrorScreen.container}>
 				<View style={{ position: 'absolute', zIndex: 0 }}>
@@ -223,7 +223,7 @@ class ClusterErrorSolutionsScreen extends Component {
 						}}
 						// source={require('../resources/images/car_error_sample-2.png')}
 						source={{uri:IMG_PREFIX_URL+this.props.navigation.state.params.errorDetail.pic1}}
-					  
+
 					/>
 				</View>
 				<View style={styleClusterErrorScreen.solutionsContainer}>
@@ -289,7 +289,7 @@ class ClusterErrorSolutionsScreen extends Component {
 							alignItems: 'flex-end',
 							// opacity: 0.1,
 						}}
-					>	
+					>
 					</View>
 
 					<View
@@ -429,7 +429,7 @@ const styleClusterErrorScreen = StyleSheet.create({
     borderStyle: 'dashed',
 	  borderRadius: 8,
 	  marginVertical: 12,
-	  
+
 	},
 	problemHeading: {
 		marginTop: 12,

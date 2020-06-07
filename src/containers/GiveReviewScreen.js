@@ -52,7 +52,7 @@ class GiveReviewScreen extends PureComponent {
         // debugger
         // if (this.state.review == '' || this.state.review.length == 0) {
         //     setTimeout(() => {
-        //         Toast.show('Please add comments or requests!', Toast.LONG, Toast.BOTTOM);
+        //         Toast.show('Please add comments or requests!', Toast.LONG);
         //     }, 100)
         // } else {
         submitReview(payload)

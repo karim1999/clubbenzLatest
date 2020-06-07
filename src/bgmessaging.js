@@ -12,8 +12,8 @@ export default async (message: RemoteMessage) => {
     debugger
     console.log('background and app killed notification from firebase')
 
-    Toast.show('Background Message', Toast.LONG, Toast.BOTTOM);
-    
+    Toast.show('Background Message', Toast.LONG);
+
     AsyncStorage.setItem("Notification", JSON.stringify(message.data));
 
     return Promise.resolve();

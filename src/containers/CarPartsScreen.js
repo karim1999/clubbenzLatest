@@ -96,7 +96,7 @@ class CarSelectionScreen extends PureComponent {
 			}
 			else{
 				setTimeout(() => {
-					Toast.show('No Information found for current selection', Toast.LONG, Toast.BOTTOM);
+					Toast.show('No Information found for current selection', Toast.LONG);
 				}, 100)
 			}
 		}
