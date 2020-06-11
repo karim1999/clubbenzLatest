@@ -36,6 +36,7 @@ class MembershipsScreen extends PureComponent {
     updateList(){
         let memberships= getMemberships(this.props.user.id).then(res => {
             this.setState({memberships: res.memberships, current: res.current, isDone: true})
+            // alert(JSON.stringify(res))
         })
     }
 
@@ -46,7 +47,7 @@ class MembershipsScreen extends PureComponent {
 
     subscribe(membership, price){
         // subscribe(this.props.user.id, membership, this.state.address).then(() => {
-            this.props.navigation.navigate("SubscribeScreen", {name: membership, price: price})
+            this.props.navigation.navigate("SubscribeScreen", {membership: membership, name: membership.name, price: price})
         // })
     }
 
@@ -58,34 +59,36 @@ class MembershipsScreen extends PureComponent {
                 <Header title={__('Memberships')} navigation={this.props.navigation} goBack={true}/>
                 <View style={{flex: 1, marginTop: 120}} >
                     {
-                        this.props.navigation.state.params &&
+                        (this.props.navigation.state.params && this.props.navigation.state.params.msg) &&
                             <Text style={{textAlign: "center", marginTop: 10, color: 'green'}}>Your have subscribed successfully.</Text>
                     }
-                    {
-                        this.state.memberships.gold &&
-                        <ScrollView horizontal={true}>
+                    <FlatList
+                        horizontal={true}
+                        data={this.state.memberships}
+                        keyExtractor={(item, index) => item.id}
+                        renderItem={({item}) => (
                             <View style={Styles.card}>
                                 <View style={Styles.cardHeader}>
-                                    <Text style={Styles.h1}>Gold</Text>
-                                    <Text style={Styles.h1}>${this.state.memberships.gold ? this.state.memberships.gold.price : 0}</Text>
+                                    <Text style={Styles.h1}>{item.name}</Text>
+                                    <Text style={Styles.h1}>${item.price}</Text>
                                 </View>
                                 <View style={Styles.cardContent}>
                                     <FlatList
-                                        data={this.state.memberships.gold.features}
+                                        data={item.benefits}
                                         keyExtractor={(item, index) => item.id}
-                                        renderItem={({ item, index }) => (
+                                        renderItem={({item}) => (
                                             <View>
-                                                <Text style={Styles.h2}>{item.benefit}</Text>
+                                                <Text style={Styles.h2}>{item.name}</Text>
                                                 {
-                                                    item.details.map(feature => <Text style={Styles.h3}>-{feature.details}</Text> )
+                                                    item.details.map(info => <Text style={Styles.h3}>-{info.details}</Text> )
                                                 }
                                             </View>
                                         )}
                                     />
                                     <View>
                                         {
-                                            (!this.state.current || (this.state.current && this.state.current.membership != "gold") )&&
-                                            <TouchableOpacity onPress={() => this.subscribe('gold',this.state.memberships.gold.price)}>
+                                            (!this.state.current || (this.state.current.id && item.id != this.state.current.membership_id) )&&
+                                            <TouchableOpacity onPress={() => this.subscribe(item,item.price)}>
                                                 <View style={Styles.btn}>
                                                     <Text style={Styles.h1}>Subscribe</Text>
                                                 </View>
@@ -94,39 +97,8 @@ class MembershipsScreen extends PureComponent {
                                     </View>
                                 </View>
                             </View>
-                            <View style={Styles.card}>
-                                <View style={Styles.cardHeader}>
-                                    <Text style={Styles.h1}>Platinum</Text>
-                                    <Text style={Styles.h1}>${this.state.memberships.platinum ? this.state.memberships.platinum.price : 0}</Text>
-                                </View>
-                                <View style={Styles.cardContent}>
-                                    <FlatList
-                                        data={this.state.memberships.platinum.features}
-                                        keyExtractor={(item, index) => item.id}
-                                        renderItem={({ item, index }) => (
-                                            <View>
-                                                <Text style={Styles.h2}>{item.benefit}</Text>
-                                                {
-                                                    item.details.map(feature => <Text style={Styles.h3}>-{feature.details}</Text> )
-                                                }
-                                            </View>
-                                        )}
-                                    />
-                                    <View>
-                                        {
-                                            (!this.state.current || (this.state.current && this.state.current.membership != "platinum") )&&
-                                            <TouchableOpacity onPress={() => this.subscribe('platinum',this.state.memberships.platinum.price)}>
-                                                <View style={Styles.btn}>
-                                                    <Text style={Styles.h1}>Subscribe</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        }
-                                    </View>
-                                </View>
-                            </View>
-
-                        </ScrollView>
-                    }
+                        )}
+                    />
                     <View></View>
                 </View>
             </View>

@@ -53,7 +53,7 @@ export class RequestService {
       if (!isConnected)
         SimpleToast.show('Not connected to internet', SimpleToast.SHORT)
     })
-    
+
     // if (NetInfo)
     //   SimpleToast.show('Connected To Internet', 2000);
     // else if (!NetInfo)
@@ -62,11 +62,11 @@ export class RequestService {
       try{
         // debugger
         store.dispatch({type:UPDATE_INDICATOR_FLAG,data:true})
-        
+
         const asyncResponse = await fetch(this.params.url, this.mountRequest(this.params))
-        
+
         const json = await asyncResponse.json()
-        
+
         store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false})
         // alert(JSON.stringify(json))
         return json
@@ -86,17 +86,17 @@ export class RequestService {
     //   if (!isConnected)
     //     SimpleToast.show('Not connected to internet', SimpleToast.SHORT)
     // })
-    
+
       try{
-        
+
         const asyncResponse = await fetch(this.params.url, this.mountRequest(this.params))
-        
+
         const json = await asyncResponse.json()
-        
+
         return json
       }
       catch(e){
-        
+
         console.log(e);
         return {"success":false,"message":"Something went wrong on server"}
       }
@@ -108,7 +108,7 @@ export class RequestService {
       method: this.params.method,
       headers: this.mountHeaders()
     }
-    
+
     if (request.method !== GET && request.method !== HEAD) {
       request.body = this.mountBody()
     }
@@ -120,24 +120,24 @@ export class RequestService {
     if (!this.params.body) return {}
     let form_data = new FormData();
     let body = this.params.body
-    
+
     for ( var key in body) {
-      
+
         form_data.append(key, body[key]);
     }
-    
+
     for (var file in this.params.files) {
-      
+
       var photo = {
         uri: this.params.files[file],
         type: 'image/jpg',
         name: 'profile_picture.jpg',
       };
-      
+
       form_data.append(file, photo);
     }
-    console.log('yes')
-    
+    console.log(form_data)
+
     return form_data
   }
 
@@ -145,15 +145,15 @@ export class RequestService {
     let mountedHeaders = Object.assign(
       DEFAULT_HEADERS
     )
-      
+
     if (this.params.headers) {
-      
+
       mountedHeaders = Object.assign(
         mountedHeaders,
         this.params.headers
       )
     }
-    
+
     return mountedHeaders
   }
   mountFiles=()=>{
@@ -169,7 +169,7 @@ export class RequestService {
         fileArray.push(json)
       }
       return fileArray
-    }    
+    }
     else{
       return fileArray
     }
