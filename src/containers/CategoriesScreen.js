@@ -108,7 +108,7 @@ class CategoriesScreen extends Component {
 						lineColor={{ backgroundColor: 'rgba(6,0,41, 0.2)' }}
 						textColor={{ color: '#8E8E93', fontFamily: Fonts.CircularMedium, fontSize: 14 }}
 					/>
-					<View style={{ flexWrap: 'wrap', flex: 1, flexDirection: 'row', marginTop: 2.5 }}>
+					<ScrollView style={{ flexWrap: 'wrap', flex: 1, flexDirection: 'row', marginTop: 2.5 }}>
 						<FlatList
 							// data={[{name: 'Condenser',image:''},{name: 'Receiver Drier',image:''},{name: 'Air Conditioning Pipe',image:''},{name: 'Controls / Regulation',image:''},{name: 'Sensors',image:''},{name: 'Pressure Switch',image:''} ]}
 							data={this.state.categories}
@@ -120,7 +120,7 @@ class CategoriesScreen extends Component {
 							/>}
 						/>
 
-					</View>
+					</ScrollView>
 				</View>
 			</View>
 		);

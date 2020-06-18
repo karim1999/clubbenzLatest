@@ -38,6 +38,7 @@ import NavigationService from "../NavigationService";
 import ServiceItem from "../components/services/Service";
 import RoundedButton from "../components/common/RoundedButton";
 const { width, height } = Dimensions.get('window');
+import __ from '../resources/copy';
 
 class NewHomeScreen extends Component {
     constructor(props){
@@ -53,7 +54,7 @@ class NewHomeScreen extends Component {
         computationDone: false,
         searchText: '',
         locationPermission: '',
-        shareText: 'Hey! Downlaod ClubBenz App now at https://www.google.com/',
+        shareText: __('Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link', this.props.language),
         data: [
             {
                 serviceName: 'Workshops',
@@ -529,12 +530,12 @@ class NewHomeScreen extends Component {
         }
     }
 
-    navigateToHomeListScreen = () => {
+    navigateToHomeListScreen = (searchText) => {
         Geolocation.getCurrentPosition(
             (position) => {
                 var text = this.state.searchText;
                 this.setState({ searchText: '' })
-                this.props.navigation.navigate("HomeListScreen", { position, searchText: text, preferences: this.props.preferences });
+                this.props.navigation.navigate("HomeListScreen", { position, searchText, preferences: this.props.preferences });
             },
             (error) => {
                 // See error code charts below.
@@ -544,9 +545,8 @@ class NewHomeScreen extends Component {
         );
     }
 
-    onSeachSubmit = async () => {
-
-        if (this.state.searchText) {
+    onSeachSubmit = async (searchText) => {
+        if (searchText) {
 
 
             if (Platform.OS == "android") {
@@ -560,7 +560,7 @@ class NewHomeScreen extends Component {
                     }
                 );
                 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                    this.navigateToHomeListScreen()
+                    this.navigateToHomeListScreen(searchText)
                 } else {
                     alert(granted);
                 }
@@ -573,7 +573,7 @@ class NewHomeScreen extends Component {
                     if (response === 'authorized') {
                         console.log('authorized')
 
-                        this.navigateToHomeListScreen()
+                        this.navigateToHomeListScreen(searchText)
 
                     } else {
                         // asking for permission using Permissions dialog.
@@ -671,7 +671,7 @@ class NewHomeScreen extends Component {
                     {this.renderAds()}
                 </ScrollView>
                 <Footer navigation={this.props.navigation}/>
-                <Header navigation={this.props.navigation}/>
+                <Header onSearch={this.onSeachSubmit} navigation={this.props.navigation}/>
             </View>
         )
     }

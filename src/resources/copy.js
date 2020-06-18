@@ -217,7 +217,8 @@ const es = {
   'Notifications': 'التنبيهات',
   'Memberships': 'العضويات',
   'FIND A SERVICE PROVIDER': 'ابحث عن مزود خدمة',
-  'The provider is not available during that time': 'مزود الخدمة غير متوفر في هذا الوقت'
+  'The provider is not available during that time': 'مزود الخدمة غير متوفر في هذا الوقت',
+  'Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link': 'ا تفوت الفرصة و ابدأ الان في الحصول علي جميع المزايا و العروض المقدمة، استمتع يقيادتك و حافظ علي سيارتك من خلال تنزيل ابليكيشن ClubBenz.  لتنزيل الابليكيشن اضغط علي الرابط التالي',
 };
 
 export default function __(k ,language) {
