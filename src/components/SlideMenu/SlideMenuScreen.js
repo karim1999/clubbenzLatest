@@ -15,6 +15,7 @@ import { StackActions } from 'react-navigation';
 import { Fonts } from '../../resources/constants/Fonts';
 import __ from '../../resources/copy';
 import { returnProfilePicture, returnProfilePictureWithoutPrefix } from '../../components/profile/ProfilePicture';
+import RNRestart from 'react-native-restart';
 
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -33,6 +34,11 @@ class SlideMenuScreen extends Component {
 		AsyncStorage.clear()
 		authAction.logOut({ token: this.props.user.token })
 		NavigationService.reset('LanguageScreen')
+		I18nManager.forceRTL(false)
+		setTimeout(() => {
+			RNRestart.Restart();
+		}, 200)
+
 	}
 
 	getMonth = (month) => {

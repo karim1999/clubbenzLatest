@@ -471,13 +471,16 @@ class MyProfileScreen extends PureComponent {
 		if (value == 'Arabic'){
 			this.props.setLanguage(ARABIC);
 			I18nManager.forceRTL(true)
-			RNRestart.Restart();
+			setTimeout(() => {
+				RNRestart.Restart();
+			}, 200)
 
 		}	else if (value == 'English'){
 			this.props.setLanguage(ENGLISH);
 			I18nManager.forceRTL(false)
-			RNRestart.Restart();
-
+			setTimeout(() => {
+				RNRestart.Restart();
+			}, 200)
 		}
 
 		console.log(store.getState());

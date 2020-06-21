@@ -8,7 +8,7 @@ import {
   StatusBar,
   AsyncStorage,
   TextInput,
-  Platform,
+  Platform, I18nManager,
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -28,6 +28,7 @@ import {Fonts} from '../resources/constants/Fonts';
 import {connect} from 'react-redux';
 import __ from '../resources/copy';
 import firebase from 'react-native-firebase';
+import RNRestart from 'react-native-restart';
 
 class LoginScreen extends PureComponent {
   constructor(props) {
@@ -70,7 +71,14 @@ class LoginScreen extends PureComponent {
       console.log(value);
       // debugger
       AsyncStorage.setItem('user', JSON.stringify(value));
+      if(this.props.language.isArabic){
+        I18nManager.forceRTL(false)
+        setTimeout(() => {
+          RNRestart.Restart();
+        }, 200)
+      }
       NavigationService.reset('HomeScreen');
+
     }
   }
 

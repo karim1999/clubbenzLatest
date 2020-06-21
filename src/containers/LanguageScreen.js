@@ -1,5 +1,16 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, StatusBar, Text, TouchableOpacity, Dimensions, Image, ImageBackground, Animated } from 'react-native';
+import {
+	View,
+	StyleSheet,
+	StatusBar,
+	Text,
+	TouchableOpacity,
+	Dimensions,
+	Image,
+	ImageBackground,
+	Animated,
+	I18nManager,
+} from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { styles, fonts, colors, metrics } from '../themes';
@@ -12,6 +23,7 @@ import Advertisement from '../components/advertisement/advertisement';
 // import BackgroundTask from 'react-native-background-task'
 
 import { LoginManager, AccessToken } from "react-native-fbsdk";
+import RNRestart from 'react-native-restart';
 
 // import firebase from 'react-native-firebase';
 
@@ -76,6 +88,8 @@ class LanguageScreen extends PureComponent {
 
 	openHowToScreen(language) {
 		this.props.setLanguage(language)
+		I18nManager.forceRTL(false)
+
 		this.props.navigation.replace('HowToScreen');
 		// NavigationService.navigate('HowToScreen', { userName: 'Lucy' });
 		// NavigationService.navigate('HowToScreen', { userName: 'Lucy' });
