@@ -17,7 +17,7 @@ import {checkIsFavorite} from "../redux/actions/favorite";
 class ProviderReviewsScreen extends PureComponent {
 
     static navigationOptions = ({ navigation }) => ({
-        title: __('Reviews', '')
+        title: __('Reviews', this.props.language)
     });
 
     constructor(props) {

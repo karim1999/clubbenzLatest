@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, StyleSheet, View, Dimensions, TouchableWithoutFeedback, TextInput ,Platform, TouchableOpacity , StatusBar} from 'react-native';
+import { I18nManager, Text, Image, StyleSheet, View, Dimensions, TouchableWithoutFeedback, TextInput ,Platform, TouchableOpacity , StatusBar} from 'react-native';
 import { colors, fonts, metrics, styles } from '../../themes';
 import moduleName from 'react-native-vector-icons/';
 import Icon from "react-native-vector-icons/EvilIcons";
@@ -50,7 +50,7 @@ class NavInput extends PureComponent {
 							<TouchableWithoutFeedback onPress={this.props.goBack}>
 								<View style={navigationStyle.leftContainer}>
 									<Image
-										style={{height:32,width:32, alignItems: 'center', justifyContent: 'center'}}
+										style={{height:32,width:32, alignItems: 'center', justifyContent: 'center', transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}
 										resizeMode="contain"
 										source={require('../../resources/images/ic-back.png')}
 									/>

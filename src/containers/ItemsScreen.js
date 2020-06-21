@@ -419,7 +419,7 @@ class ItemsScreen extends PureComponent {
 					</TouchableWithoutFeedback>
 				</View>
 
-				<View >
+				<View style={{alignItems: 'flex-start'}}>
 					{/*<ScrollView horizontal showsHorizontalScrollIndicator={false}>*/}
 					<FlatList
 					    horizontal={true}

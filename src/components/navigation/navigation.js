@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, StyleSheet, View, Dimensions, Platform, TouchableWithoutFeedback } from 'react-native';
+import { Text, Image, StyleSheet, View, Dimensions, Platform, TouchableWithoutFeedback, I18nManager } from 'react-native';
 import { colors, fonts, metrics, styles } from '../../themes';
 import { Fonts } from '../../resources/constants/Fonts';
 const { width, height } = Dimensions.get('window');
@@ -25,7 +25,7 @@ class Navigation extends PureComponent {
 							</TouchableWithoutFeedback>
 						) : (
 							<TouchableWithoutFeedback onPress={this.props.goBack}>
-								<View style={navigationStyle.leftContainer}>
+								<View style={[navigationStyle.leftContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
 									<Image
 										resizeMode="contain"
 										style={{height:32,width:32, marginLeft: 15,}}

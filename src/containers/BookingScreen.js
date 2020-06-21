@@ -41,7 +41,7 @@ class BookingScreen extends PureComponent {
 
     render() {
         return (
-            <View style={styleWorkShopListScreen.container}>
+            <View style={styleWorkShopListScreen.container}>f
                 <NavigationEvents onDidFocus={() => this.updateList()} />
                 <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
                 {/*<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>*/}
@@ -51,7 +51,7 @@ class BookingScreen extends PureComponent {
                 {/*    goBack={() => NavigationService.goBack()}*/}
                 {/*    title={__('Booking' , this.props.language)}*/}
                 {/*/>*/}
-                <Header title={__('booking' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
+                <Header title={__('Booking Info' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
                 <View style={{flex: 1, marginTop: 120}} >
                     <FlatList
                         data={this.state.bookings}

@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
   Clipboard,
   Platform,
-  Linking, default as PermissionsAndroid
-} from "react-native";
+  Linking, default as PermissionsAndroid, I18nManager,
+} from 'react-native';
 
 import TabNavigator from "../ShopTabNavigator";
 
@@ -193,7 +193,7 @@ class WorkshopDetailScreen extends PureComponent {
               <TouchableWithoutFeedback onPress={this.goToBackScreen}>
                 <Image
                   resizeMode="contain"
-                  style={styleWorkshopDetailScreen.topBarImage}
+                  style={[styleWorkshopDetailScreen.topBarImage, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }]}
                   source={require("../resources/images/ic-back.png")}
                 />
               </TouchableWithoutFeedback>

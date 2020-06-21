@@ -14,7 +14,7 @@ import {
 	Clipboard,
 	PermissionsAndroid,
 	ActivityIndicator,
-	Platform
+	Platform, I18nManager,
 } from 'react-native';
 
 import { IMG_PREFIX_URL } from '../config/constant';
@@ -369,7 +369,7 @@ class DetailScreen extends PureComponent {
 							<TouchableWithoutFeedback onPress={this.goToBackScreen}>
 								<Image
 									resizeMode="contain"
-									style={{ width: 32, height: 32 }}
+									style={{ width: 32, height: 32, transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]  }}
 									source={require('../resources/images/ic-back.png')}
 								/>
 							</TouchableWithoutFeedback>
@@ -415,8 +415,8 @@ class DetailScreen extends PureComponent {
 					<View style={{ zIndex: -1, marginTop: -62, }}>
 						<Slideshow
 							height={280}
-							arrowLeft={<Image source={require('../resources/icons/left_arrow.png')} />}
-							arrowRight={<Image source={require('../resources/icons/right_arrow.png')} />}
+							arrowLeft={I18nManager.isRTL ? <Image source={require('../resources/icons/right_arrow.png')} /> : <Image source={require('../resources/icons/left_arrow.png')} />}
+							arrowRight={I18nManager.isRTL ? <Image source={require('../resources/icons/left_arrow.png')} /> : <Image source={require('../resources/icons/right_arrow.png')} />}
 							dataSource={this.state.images}
 							position={this.state.position}
 							indicatorSize={this.state.indicatorSize}
@@ -492,8 +492,8 @@ class DetailScreen extends PureComponent {
 										</Text>
 									</View>
 
-									<Text style={{ fontSize: 14, fontFamily: Fonts.CircularMedium, color: '#8E8E93' }}>{__('Part Number', this.props.language)}</Text>
-									<Text style={{ color: colors.blueText, fontSize: 24, fontFamily: Fonts.CircularBook, }}>{this.state.partDetail.part_number ? this.state.partDetail.part_number : ""}</Text>
+									<Text style={{ fontSize: 14, fontFamily: Fonts.CircularMedium, color: '#8E8E93', alignSelf: 'flex-start' }}>{__('Part Number', this.props.language)}</Text>
+									<Text style={{ color: colors.blueText, fontSize: 24, fontFamily: Fonts.CircularBook, alignSelf: 'flex-start' }}>{this.state.partDetail.part_number ? this.state.partDetail.part_number : ""}</Text>
 								</View>
 								<View style={{ flex: 2, alignItems: 'flex-end', marginTop: 10, marginBottom: 10, maxWidth: 150, flexGrow: 1.8, }}>
 									<View style={{
@@ -555,7 +555,7 @@ class DetailScreen extends PureComponent {
 									}}
 								>
 									<View style={{ flex: 2, justifyContent: 'center' }}>
-										<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, }}>
+										<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, alignSelf: 'flex-start'}}>
 											{this.state.partDetail.description ? this.state.partDetail.description : __("No Description Available")}
 										</Text>
 									</View>

@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flex: 3,
+        alignItems: "flex-start"
     },
     title: {
         fontWeight: "900",
@@ -104,9 +105,10 @@ const styles = StyleSheet.create({
 
     secondRow: {
         flex: 1,
+        alignItems: "flex-start"
     },
     description: {
         fontWeight: "500",
-        fontSize: 13
+        fontSize: 13,
     },
 });

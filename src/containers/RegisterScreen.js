@@ -173,7 +173,7 @@ class RegisterScreen extends PureComponent {
     // debugger
     if (first_name == '' || last_name == '' || email == '' && password == '' || mobile == '') {
       setTimeout(() => {
-        Toast.show(REGISTER_ERROR1, Toast.LONG)
+        Toast.show(__(REGISTER_ERROR1, this.props.language), Toast.LONG)
       }, 100)
     }
     else if (profile_picture == '') {
@@ -498,7 +498,7 @@ class RegisterScreen extends PureComponent {
             </View>
           </View>
           <View style={{ height: 22 }}>
-            <Text style={[styleRegisterScreen.placeHolder]}>Add your photo</Text>
+            <Text style={[styleRegisterScreen.placeHolder]}>{__("Add your photo", this.props.language)}</Text>
           </View>
 
           <View style={styleRegisterScreen.innerContainer}>

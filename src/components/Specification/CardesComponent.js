@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions, ImageBackground, ScrollView, TouchableOpacity, Modal, Linking, ActivityIndicator } from 'react-native';
+import { I18nManager, Text, View, Image, Dimensions, ImageBackground, ScrollView, TouchableOpacity, Modal, Linking, ActivityIndicator } from 'react-native';
 import Antdesg from 'react-native-vector-icons/AntDesign';
 import { colors } from '../../themes';
 const right = <Antdesg name="arrowright" size={30} color="#273946" />;
+const left = <Antdesg name="arrowleft" size={30} color="#273946" />;
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { Fonts } from '../../resources/constants/Fonts';
 import PDFView from 'react-native-view-pdf';
+import {connect} from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
 class CardesComponent extends Component {
@@ -135,7 +137,7 @@ class CardesComponent extends Component {
 							<View style={{ padding: 7, alignItems: 'flex-start', justifyContent: 'center' }}>
 								<Text style={{ color: '#1E313E', fontSize: 13, fontFamily: Fonts.CircularBook }}>{this.props.content}</Text>
 							</View>
-							<View style={{ justifyContent: 'center', flex: 1, alignItems: 'flex-end' }}>{right}</View>
+							<View style={{ justifyContent: 'center', flex: 1, alignItems: 'flex-end' }}>{I18nManager.isRTL ? left: right}</View>
 						</View>
 					</View>
 				</TouchableOpacity>
@@ -143,4 +145,10 @@ class CardesComponent extends Component {
 		);
 	}
 }
-export default CardesComponent;
+mapStateToProps = state => {
+	return {
+		language: state.language,
+	};
+};
+
+export default connect(mapStateToProps, null)(CardesComponent);

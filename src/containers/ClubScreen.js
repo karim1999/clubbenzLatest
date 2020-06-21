@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import {
-	View, StyleSheet, StatusBar, Text,FlatList, TouchableOpacity, Dimensions, Image, ImageBackground,TouchableWithoutFeedback,Platform,
-	Linking
+	View,
+	StyleSheet,
+	StatusBar,
+	Text,
+	FlatList,
+	TouchableOpacity,
+	Dimensions,
+	Image,
+	ImageBackground,
+	TouchableWithoutFeedback,
+	Platform,
+	Linking,
+	I18nManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { styles, fonts, colors, metrics } from '../themes';
@@ -123,7 +134,7 @@ class ClubScreen extends Component {
 									<View style={{  marginLeft: 20,marginTop: Platform.OS == 'android' ? 10 : 25, height: 32,width: 32 }}>
 										<Image
 											source={require('../resources/images/ic-back.png')}
-											style={{ flex: 1, height: 32, width: 32, resizeMode: 'contain' }}
+											style={{ flex: 1, height: 32, width: 32, resizeMode: 'contain', transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]  }}
 										/>
 									</View>
 								</TouchableOpacity>

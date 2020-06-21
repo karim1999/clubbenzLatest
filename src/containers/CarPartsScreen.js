@@ -11,7 +11,7 @@ import {
 	StatusBar,
 	Modal,
 	Alert,
-	FlatList
+	FlatList, I18nManager,
 } from 'react-native';
 
 import { styles, fonts, colors, metrics } from '../themes';
@@ -245,6 +245,7 @@ class CarSelectionScreen extends PureComponent {
 							<View
 								style={{
 									flex: 5,
+									alignItems: 'flex-start',
 									paddingVertical: height * 0.02,
 									paddingHorizontal: width * 0.02,
 								}}
@@ -273,7 +274,7 @@ class CarSelectionScreen extends PureComponent {
 									justifyContent: 'center',
 								}}
 							>
-								<Icon name="ios-arrow-round-forward" size={width * 0.1} color={'#fff'} />
+								<Icon name={I18nManager.isRTL ? "ios-arrow-round-back" : "ios-arrow-round-forward"} size={width * 0.1} color={'#fff'} />
 							</View>
 						</View>
 					</TouchableOpacity>

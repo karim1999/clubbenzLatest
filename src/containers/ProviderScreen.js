@@ -6,8 +6,8 @@ import {
     TouchableWithoutFeedback,
     Image,
     ImageBackground,
-    StatusBar,
-} from "react-native";
+    StatusBar, I18nManager,
+} from 'react-native';
 
 import TabNavigator from "../ProviderTabNavigator";
 
@@ -62,7 +62,7 @@ class ProviderScreen extends PureComponent {
                             <TouchableWithoutFeedback onPress={this.goToBackScreen}>
                                 <Image
                                     resizeMode="contain"
-                                    style={styleProviderScreen.topBarImage}
+                                    style={[styleProviderScreen.topBarImage, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }]}
                                     source={require("../resources/images/ic-back.png")}
                                 />
                             </TouchableWithoutFeedback>

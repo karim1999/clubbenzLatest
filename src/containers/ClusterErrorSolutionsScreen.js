@@ -627,9 +627,9 @@ class ClusterErrorSolutionsScreen extends Component {
 									// 	marginRight: 10,
 									// }]}
 
-									style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10, flex: 0.9, textAlign: 'left' }]}
+									style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10, flex: 0.9, textAlign: this.props.language.isArabic ? 'right' : 'left' }]}
 
-									placeholder='Enter Solution ...'
+									placeholder={__('Enter Solution...', this.props.language)}
 									placeholderTextColor='rgba(0, 0, 0, 0.5)'
 									value={this.state.solution}
 									textInputStyle={{ fontFamily: Fonts.CircularMedium, color: '#000000' }}
@@ -654,7 +654,7 @@ class ClusterErrorSolutionsScreen extends Component {
 							<View style={{ height: 50, width: width / 1.1, backgroundColor: '#EFEFF4', flexDirection: 'row', justifyContent: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, }}>
 								<TouchableOpacity onPress={this.sendSolution} style={[styles.tapableButtonHollow, { width: width / 3, height: 40 }]}>
 
-									<Text style={styles.tapButtonStyleTextBlue}>Submit</Text>
+									<Text style={styles.tapButtonStyleTextBlue}>{__('Submit', this.props.language)}</Text>
 
 								</TouchableOpacity>
 							</View>

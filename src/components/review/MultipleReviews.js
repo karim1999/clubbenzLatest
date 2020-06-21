@@ -16,6 +16,7 @@ import SplitHeading from "../common/splitHeading";
 import {Fonts} from "../../resources/constants/Fonts";
 import {colors, fonts, metrics, styles} from "../../themes";
 import __ from "../../resources/copy";
+import {connect} from 'react-redux';
 const { width, height } = Dimensions.get('window');
 
 class MultipleReviews extends PureComponent {
@@ -50,7 +51,7 @@ class MultipleReviews extends PureComponent {
             <ScrollView contentContainerStyle={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                 <View style={{flexDirection: "column", flex: 1}}>
                     <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20}}>
-                        <Text style={{fontSize: 15, color: "black"}}>Overall: </Text>
+                        <Text style={{fontSize: 15, color: "black"}}>{__("Overall:", this.props.language)} </Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -65,7 +66,7 @@ class MultipleReviews extends PureComponent {
                         textColor={{ color: "grey", fontFamily: Fonts.circular_medium }}
                     />
                     <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20, paddingBottom: 0}}>
-                        <Text style={{fontSize: 15, color: "black"}}>Service Level: </Text>
+                        <Text style={{fontSize: 15, color: "black"}}>{__("Service Level:", this.props.language)} </Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -78,7 +79,7 @@ class MultipleReviews extends PureComponent {
                         />
                     </View>
                     <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20, paddingBottom: 0}}>
-                        <Text style={{fontSize: 15, color: "black"}}>Value For Money: </Text>
+                        <Text style={{fontSize: 15, color: "black"}}>{__("Value For Money:", this.props.language)} </Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -91,7 +92,7 @@ class MultipleReviews extends PureComponent {
                         />
                     </View>
                     <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20, paddingBottom: 0}}>
-                        <Text style={{fontSize: 15, color: "black"}}>Cleanliness: </Text>
+                        <Text style={{fontSize: 15, color: "black"}}>{__("Cleanliness:", this.props.language)} </Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -104,7 +105,7 @@ class MultipleReviews extends PureComponent {
                         />
                     </View>
                     <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 20}}>
-                        <Text style={{fontSize: 15, color: "black"}}>Competency: </Text>
+                        <Text style={{fontSize: 15, color: "black"}}>{__("Competency:", this.props.language)} </Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -142,8 +143,13 @@ class MultipleReviews extends PureComponent {
         );
     }
 }
+mapStateToProps = (state) => {
+    return {
+        language: state.language,
+    }
+}
 
-export default MultipleReviews;
+export default connect(mapStateToProps, null)(MultipleReviews)
 
 let Styles= StyleSheet.create({
     container: {

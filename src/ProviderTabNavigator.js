@@ -8,17 +8,24 @@ import ProviderInfoScreen from "./containers/ProviderInfoScreen";
 import ProviderContactScreen from "./containers/ProviderContactScreen";
 import ProviderReviewsScreen from "./containers/ProviderReviewsScreen";
 import { Fonts } from "./resources/constants/Fonts";
+import __ from './resources/copy';
 
 
 const TabNavigator = createMaterialTopTabNavigator({
     // 'Location': {
     //     screen: props => <ProviderInfoScreen provider={props.screenProps.provider} />,
     // },
-    'contacts': {
+    contacts: {
         screen: props => <ProviderContactScreen provider={props.screenProps.provider} />,
+        navigationOptions: ({ navigation, navigationOptions }) => ({
+            tabBarLabel: __('Contacts', '')
+        }),
     },
-    'reviews': {
+    Reviews: {
         screen: props => <ProviderReviewsScreen provider={props.screenProps.provider} />,
+        navigationOptions: ({ navigation, navigationOptions }) => ({
+            tabBarLabel: __('Reviews', '')
+        }),
     },
 }, {
     tabBarPosition: "top",

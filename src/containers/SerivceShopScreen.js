@@ -200,7 +200,6 @@ class ServiceShopScreen extends Component {
             navigation={this.props.navigation}
             homeButton={true}
             goBack={() => NavigationService.goBack()}
-            placeholder='Try a common Name to Access'
             title="Services Shop"
             onSearch={this.onSearch}
             onMapPress={this.onMapPress}

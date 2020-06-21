@@ -64,7 +64,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 							</View>
 							</View>
 							<View style={{flex: .5}}>
-								<Text style={[styles.name, {paddingLeft: 0, width: 170}]}>{language.isArabic == true ? item.title + arr_temp : item.title}</Text>
+								<Text style={[styles.name, {paddingLeft: 0, maxWidth: 170, alignSelf: 'flex-start'}]}>{language.isArabic == true ? item.title + arr_temp : item.title}</Text>
 							</View>
 						</View>
 

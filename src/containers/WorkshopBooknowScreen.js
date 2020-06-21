@@ -183,7 +183,7 @@ class WorkshopBooknowsScreen extends PureComponent {
 				<View>
 					<TouchableOpacity onPress={this.submit}>
 						<View style={styleWorkshopBooknowsScreen.contactBtnStyle}>
-							<Text style={[styleWorkshopBooknowsScreen.cancelBtnText, {color: '#11455F'}]}>{__('Send Request' , this.props.language)}</Text>
+							<Text style={[styleWorkshopBooknowsScreen.cancelBtnText, {color: '#11455F'}]}>{__('Book Now' , this.props.language)}</Text>
 						</View>
 					</TouchableOpacity>
 				</View>

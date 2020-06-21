@@ -32,13 +32,12 @@ class ProviderContactScreen extends PureComponent {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.CALL_PHONE,
                 {
-                    title: "Get permission to call Providers",
+                    title: __("Get permission to call Providers", this.props.language),
                     message:
-                        "Clubbenz needs the permission to call" +
-                        "so you can reach the provider you want.",
-                    buttonNeutral: "Ask Me Later",
-                    buttonNegative: "Cancel",
-                    buttonPositive: "OK"
+                        __("Clubbenz needs the permission to call so you can reach the provider you want.", this.props.language),
+                    buttonNeutral: __("Ask Me Later", this.props.language),
+                    buttonNegative: __("Cancel", this.props.language),
+                    buttonPositive: __("OK", this.props.language)
                 }
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -64,16 +63,16 @@ class ProviderContactScreen extends PureComponent {
                 <View style={styleProviderContactScreen.innerContainer}>
                     <View>
                         <Text style={styleProviderContactScreen.shopAddress}>
-                            <Text style={{color: "black"}}>Address:</Text> {this.state.provider.address}
+                            <Text style={{color: "black"}}>{__("Address:", this.props.language)}</Text> {this.state.provider.address}
                         </Text>
                         <Text style={styleProviderContactScreen.shopAddress}>
-                            <Text style={{color: "black"}}>City:</Text> {this.state.provider.city}
+                            <Text style={{color: "black"}}>{__("City:", this.props.language)}</Text> {this.state.provider.city}
                         </Text>
                         <Text style={styleProviderContactScreen.shopAddress}>
-                            <Text style={{color: "black"}}>State:</Text> {this.state.provider.governorate.name}
+                            <Text style={{color: "black"}}>{__("State:", this.props.language)}</Text> {this.state.provider.governorate.name}
                         </Text>
                         <Text style={styleProviderContactScreen.shopAddress}>
-                            <Text style={{color: "black"}}>Country:</Text> {this.state.provider.country.name}
+                            <Text style={{color: "black"}}>{__("Country:", this.props.language)}</Text> {this.state.provider.country.name}
                         </Text>
                     </View>
                 </View>

@@ -203,7 +203,6 @@ class PartShopScreen extends Component {
             homeButton={false}
 
             goBack={() => NavigationService.goBack()}
-          placeholder='Try a common Name to Access'
           title={__('Part shops' , this.props.language)}
             onSearch={this.onSearch}
           onMapPress={this.onMapPress}

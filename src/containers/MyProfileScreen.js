@@ -9,8 +9,9 @@ import {
 	ScrollView,
 	Picker,
 	StatusBar, Alert,
-	PermissionsAndroid, Platform,
+	PermissionsAndroid, Platform, I18nManager,
 } from 'react-native';
+import RNRestart from 'react-native-restart';
 
 import {UPDATE_INDICATOR_FLAG} from './../redux/actions/types';
 import DropdownMenu from 'react-native-dropdown-menu';
@@ -467,10 +468,17 @@ class MyProfileScreen extends PureComponent {
 
 	updateUserLanguage = (value) => {
 
-		if (value == 'Arabic')
+		if (value == 'Arabic'){
 			this.props.setLanguage(ARABIC);
-		else if (value == 'English')
+			I18nManager.forceRTL(true)
+			RNRestart.Restart();
+
+		}	else if (value == 'English'){
 			this.props.setLanguage(ENGLISH);
+			I18nManager.forceRTL(false)
+			RNRestart.Restart();
+
+		}
 
 		console.log(store.getState());
 
@@ -484,6 +492,14 @@ class MyProfileScreen extends PureComponent {
 		const { user } = this.props;
 
 		// const profile_picture = user.profile_picture != '' ? { uri: PROFILE_PIC_PREFIX + user.profile_picture } : (user.fb_picture != '' ? { uri: user.fb_picture } : require('../resources/images/ic_menu_userplaceholder.png'))
+		var months;
+		if(this.props.language.isArabic)
+			months = ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+				"يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+			];
+		else{
+			months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		}
 
 		const profile_picture = returnProfilePicture(this.props.user);
 
@@ -567,7 +583,7 @@ class MyProfileScreen extends PureComponent {
 							<StaticUsersView profile_picture={profile_picture} profile_pictures={this.props.preferences.profile_pictures} updateProfileImage={this.showImagePicker} profile={true} fromPicker={this.state.fromPicker} fromPicker_uri={this.state.fromPicker_uri} />
 
 							<View style={{ height: 22 }}>
-								<Text style={[styleMyProfileScreen.placeHolder1]}>Add your photo</Text>
+								<Text style={[styleMyProfileScreen.placeHolder1]}>{__("Add your photo", this.props.language)}</Text>
 							</View>
 						</View>
 						<View style={styleMyProfileScreen.innerContainer}>

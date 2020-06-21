@@ -78,7 +78,7 @@ class CategoriesScreen extends Component {
 					homeButton={false}
 					navigation={this.props.navigation}
 					goBack={() => this.props.navigation.goBack()}
-					placeholder={__('Part Catalog', this.props.language)}
+					placeholder={__('Search Part Catalogue', this.props.language)}
 					onSearch={this.onSearch}
 					onSubmitEditing={this.onSearch}
 				// onMapPress={this.onMapPress}
@@ -87,10 +87,10 @@ class CategoriesScreen extends Component {
 				<View style={styles.columnContainer}>
 					{this.state.top_products.length > 0 ?
 
-						<View style={{ height: height * 0.20, }}>
+						<View style={{ height: height * 0.20 }}>
 							<Text style={{ textAlign: 'center', color: '#000', fontSize: 18, marginVertical: 15, fontFamily: Fonts.circular_book }}>{__('Common requested parts for this model', this.props.language)}</Text>
 							<FlatList
-								style={{ marginLeft: -10 }}
+								style={{ marginLeft: -10, alignSelf: 'flex-start' }}
 								horizontal={true}
 								showsHorizontalScrollIndicator={false}
 								data={this.state.top_products}

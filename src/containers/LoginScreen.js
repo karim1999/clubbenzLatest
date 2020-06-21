@@ -79,7 +79,7 @@ class LoginScreen extends PureComponent {
     let {email, password, fcm_token} = this.state;
     if (email == '' || password == '') {
       setTimeout(() => {
-        Toast.show(LOGIN_ERROR, Toast.LONG);
+        Toast.show(__(LOGIN_ERROR, this.props.language), Toast.LONG);
       }, 100);
     } else {
       var mobile_number = email;
@@ -95,7 +95,11 @@ class LoginScreen extends PureComponent {
             // NavigationService.reset("HomeScreen");
           } else {
             setTimeout(() => {
-              Toast.show(res.message, Toast.LONG);
+              if(__(res.message, this.props.language)){
+                Toast.show(__(res.message, this.props.language), Toast.LONG);
+              }else{
+                Toast.show(res.message, Toast.LONG);
+              }
             }, 100);
           }
         })
@@ -348,7 +352,7 @@ class LoginScreen extends PureComponent {
 
             {this.state.wrongPhone ? (
               <Text style={{color: 'red', textAlign: 'center'}}>
-                Please add country code (Ex: +201 2xx xxx xxx)
+                {__('Please add country code (Ex: +201 2xx xxx xxx)', this.props.language)}
               </Text>
             ) : null}
 

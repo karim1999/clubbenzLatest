@@ -7,6 +7,7 @@ import {
 	Dimensions,
 	ImageBackground,
 	ScrollView,
+	I18nManager,
 	FlatList,
 	StatusBar,
 	Platform,
@@ -66,6 +67,11 @@ class SpecificationScreen extends Component {
 				console.log("error" + JSON.stringify(err));
 			});
 	}
+	scrollToEnd = () => {
+		if(this.props.language.isArabic)
+			this.carousel.scrollToEnd({ animated: false });
+	}
+
 	render() {
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -96,7 +102,7 @@ class SpecificationScreen extends Component {
 										<View style={{ height: height * 0.05, width: width * 0.1 }}>
 											<Image
 												source={require('../resources/images/ic-back.png')}
-												style={{ flex: 1, height: 45, width: 45, resizeMode: 'contain' }}
+												style={{ flex: 1, height: 45, width: 45, resizeMode: 'contain', transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -125,7 +131,12 @@ class SpecificationScreen extends Component {
 
 							</View>
 							<View style={{ marginBottom: height * 0.02 }}>
-								<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+								<ScrollView
+									ref={it => {
+										this.carousel = it;
+									}}
+									onContentSizeChange={this.scrollToEnd}
+									horizontal={true} showsHorizontalScrollIndicator={false}>
 									<ScrollViewComponent title={__('Displacement', this.props.language)} price={this.props.navigation.state.params.selected_car.displacement} />
 									<ScrollViewComponent title={__('Engine Code', this.props.language)} price={this.props.navigation.state.params.selected_car.motor_code} />
 									<ScrollViewComponent title={__('Horsepower', this.props.language)} price={this.props.navigation.state.params.selected_car.horse_power} />

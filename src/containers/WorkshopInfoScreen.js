@@ -378,14 +378,15 @@ const styleWorkshopInfoScreen = StyleSheet.create({
     flexDirection: "row",
     marginTop: metrics.margin18,
     justifyContent: "space-between",
-    marginHorizontal: 18
+    marginHorizontal: 18,
   },
   shopAddress: {
     fontSize: 14,
     color: "#11455F",
     lineHeight: 22,
-    width: 250,
+    maxWidth: 250,
     fontFamily: Fonts.circular_medium,
+    alignSelf: 'flex-start'
   },
   shopTimings: {
     lineHeight: 22,

@@ -12,8 +12,8 @@ import {
   Clipboard,
   Linking,
   Platform,
-  InteractionManager,
-} from "react-native";
+  InteractionManager, I18nManager,
+} from 'react-native';
 
 import TabNavigator from "../PartShopTabNavigator";
 
@@ -191,7 +191,7 @@ class PartShopDetailScreen extends PureComponent {
             <View style={stylePartsDetailScreen.topBar}>
               <TouchableWithoutFeedback onPress={this.goToBackScreen}>
                 <Image
-                  style={stylePartsDetailScreen.topBarImage}
+                  style={[stylePartsDetailScreen.topBarImage, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }]}
                   resizeMode="contain"
                   source={require("../resources/images/ic-back.png")}
                 />

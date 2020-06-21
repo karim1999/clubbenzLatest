@@ -12,8 +12,8 @@ import {
   InteractionManager,
   Clipboard,
   Linking,
-  Platform
-} from "react-native";
+  Platform, I18nManager,
+} from 'react-native';
 
 import TabNavigator from "../ServicesTabNavigator";
 
@@ -192,7 +192,7 @@ class ServicesDetailScreen extends PureComponent {
             <View style={styleServicesDetailScreen.topBar}>
               <TouchableWithoutFeedback onPress={this.goToBackScreen}>
                 <Image
-                  style={styleServicesDetailScreen.topBarImage}
+                  style={[styleServicesDetailScreen.topBarImage, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }]}
                   resizeMode="contain"
                   source={require("../resources/images/ic-back.png")}
                 />

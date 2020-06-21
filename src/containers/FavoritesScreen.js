@@ -49,7 +49,7 @@ class FavoritesScreen extends PureComponent {
                 {/*    goBack={() => NavigationService.goBack()}*/}
                 {/*    title={__('Favorites' , this.props.language)}*/}
                 {/*/>*/}
-                <Header title={__('booking' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
+                <Header title={__('Favorites' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
                 <View style={{flex: 1, marginTop: 120}} >
                     <FlatList
                         data={this.state.favorites}

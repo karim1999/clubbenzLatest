@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, StatusBar, Dimensions, Image, TouchableOpacity, Platform, AsyncStorage, ScrollView } from 'react-native';
+import { I18nManager, Text, View, StyleSheet, StatusBar, Dimensions, Image, TouchableOpacity, Platform, AsyncStorage, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/Feather';
@@ -43,6 +43,14 @@ class SlideMenuScreen extends Component {
 		const { user, selected_car } = this.props;
 		// let created_date = new Date(user.created_date.slice(0,10))
 		// const member_since = this.getMonth(created_date.getMonth()) +'.'+created_date.getFullYear()
+		var months;
+		if(this.props.language.isArabic)
+			months = ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+				"يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+			];
+		else{
+			months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		}
 		var member_since = user.created_date;
 
 		// const str1 = member_since;
@@ -78,7 +86,7 @@ class SlideMenuScreen extends Component {
 						<View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
 							<TouchableOpacity onPress={() => this.props.navigation.closeDrawer()}>
 								<View style={{ marginRight: width * 0.05 }}>
-									<Icon name="arrowright" size={width * 0.07} color="#fff" />
+									<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.07} color="#fff" />
 								</View>
 							</TouchableOpacity>
 						</View>
@@ -397,7 +405,7 @@ class SlideMenuScreen extends Component {
                                                 paddingVertical: height * 0.01,
                                             }}
                                         >
-                                            <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Booking' , this.props.language)}</Text>
+                                            <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Booking Info' , this.props.language)}</Text>
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -491,7 +499,7 @@ class SlideMenuScreen extends Component {
 									{__('Classic member' , this.props.language)}
 								</Text>
 							</View>
-							<Text style={{ color: '#000', fontSize: width * 0.04, fontFamily: Fonts.CircularMedium }}>{user.first_name} {user.last_name}</Text>
+							<Text style={{ color: '#000', fontSize: width * 0.04, fontFamily: Fonts.CircularMedium, alignSelf: 'flex-start' }}>{user.first_name} {user.last_name}</Text>
 							<Text style={{ fontSize: width * 0.025, fontFamily: Fonts.CircularMediumItalic }}>
 							{__('Member since' , this.props.language)} <Text style={{ color: '#000' }}>{member_since}</Text>
 							</Text>

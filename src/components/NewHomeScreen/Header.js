@@ -1,4 +1,4 @@
-import {Text, View, StyleSheet, ImageBackground, Image, TextInput, TouchableWithoutFeedback} from "react-native";
+import {Text, View, StyleSheet, ImageBackground, Image, TextInput, TouchableWithoutFeedback, I18nManager} from "react-native";
 import React, {PureComponent} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import __ from "../../resources/copy";
@@ -30,7 +30,7 @@ class Header extends PureComponent {
                 <View style={Styles.navContent}>
                     {
                         this.props.goBack ?
-                            <Icon onPress={this.goBack} size={23} color={"#FFFFFF"} name="chevron-left"/>
+                            <Icon onPress={this.goBack} size={23} color={"#FFFFFF"} name={I18nManager.isRTL ? "chevron-right" : "chevron-left"}/>
                             :
                             <Icon onPress={this.onSlidePress} size={23} color={"#FFFFFF"} name="bars"/>
                     }

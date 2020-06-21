@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
-    StatusBar, InteractionManager, AsyncStorage, Alert, Platform, PermissionsAndroid, Share, Linking, FlatList
+    StatusBar, InteractionManager, AsyncStorage, Alert, Platform, PermissionsAndroid, Share, Linking, FlatList, I18nManager
 } from "react-native"
 import NetInfo from "@react-native-community/netinfo";
 
@@ -105,6 +105,10 @@ class NewHomeScreen extends Component {
     };
     componentDidMount() {
         console.log(this.props.preferences)
+        if(this.props.language.isArabic)
+            I18nManager.forceRTL(true)
+        else
+            I18nManager.forceRTL(false)
         if(!this.props.preferences.activate_part_catalogue){
             let newData= [...this.state.data]
             newData.splice(3,1)
@@ -433,7 +437,7 @@ class NewHomeScreen extends Component {
     renderItem = ({ item, index }) => {
         console.log('The length of data is ' + this.state.data.length);
         console.log(this.state.data);
-        return <Service onPress={this.onMenuPress.bind(this, item)} language={this.props.language} title={item.serviceName} image={item.serviceUrl} />
+        return <Service onPress={this.onMenuPress.bind(this, item)} language={this.props.language} title={__(item.serviceName, this.props.language)} image={item.serviceUrl} />
         // return <ServiceItem data={item} navigate={this.onMenuPress} language={this.props.language} />;
     };
 
@@ -644,17 +648,17 @@ class NewHomeScreen extends Component {
                                     source={{ uri: IMG_PREFIX_URL + this.props.preferences.home_slide[2].image }} />
                             </TouchableOpacity> : null}
                     </ScrollView>
-                    <View style={Styles.controlsContainer}>
+                    <View style={[Styles.controlsContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
                         <View style={Styles.controls}>
-                            <Icon onPress={this.gotoPrevious} style={Styles.icon} color={"black"} size={30} name="angle-left" />
+                            <Icon onPress={this.gotoPrevious} style={Styles.icon} color={"black"} size={30} name={I18nManager.isRTL ? "angle-right" : "angle-left"} />
                             <Icon onPress={this.gotToSlider.bind(this, 1)} style={Styles.icon} size={10} name="circle-o" color={this.state.active_index == 1 ? "black" : "grey"} />
                             <Icon onPress={this.gotToSlider.bind(this, 2)} style={Styles.icon} size={10} name="circle-o" color={this.state.active_index == 2 ? "black" : "grey"} />
                             <Icon onPress={this.gotToSlider.bind(this, 3)} style={Styles.icon} size={10} name="circle-o" color={this.state.active_index == 3 ? "black" : "grey"} />
-                            <Icon onPress={this.gotoNext} style={Styles.icon} color={"black"} size={30} name="angle-right" />
+                            <Icon onPress={this.gotoNext} style={Styles.icon} color={"black"} size={30} name={I18nManager.isRTL ? "angle-left" : "angle-right"} />
                         </View>
                     </View>
                     <View style={Styles.services}>
-                        <Title title={"Services Clubbenz"} />
+                        <Title title={__("Services Clubbenz", this.props.language)} />
                         <FlatList
                             style={{ backgroundColor: colors.white }}
                             data={this.state.data}
@@ -664,8 +668,8 @@ class NewHomeScreen extends Component {
                         />
                     </View>
                     <View style={Styles.social}>
-                        <ShareButton onPress={this.onInviteOwnerPress.bind(this)} icon="check-square-o" title="Share Your Opinion" />
-                        <Title title={"Share With Friends"} />
+                        <ShareButton onPress={this.onInviteOwnerPress.bind(this)} icon="check-square-o" title={__("Share Your Opinion", this.props.language)} />
+                        <Title title={__("Share With Friends", this.props.language)} />
                         {this.props.preferences.profile_pictures ? <StaticUsersView home={true} profile_picture={profile_picture} profile_pictures={this.props.preferences.profile_pictures} /> : null}
                     </View>
                     {this.renderAds()}

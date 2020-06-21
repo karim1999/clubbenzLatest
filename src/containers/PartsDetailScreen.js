@@ -1,16 +1,16 @@
 import React, { PureComponent } from "react";
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  ImageBackground,
-  StatusBar,
-  Modal,
-  TouchableOpacity,
-  Clipboard,
-} from "react-native";
+    View,
+    StyleSheet,
+    Text,
+    TouchableWithoutFeedback,
+    Image,
+    ImageBackground,
+    StatusBar,
+    Modal,
+    TouchableOpacity,
+    Clipboard, I18nManager,
+} from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
 
 import TabNavigator from "../PartsTabNavigator";
@@ -111,7 +111,7 @@ class PartsDetailScreen extends PureComponent {
            <View style={stylePartsDetailScreen.topBar}>
             <TouchableWithoutFeedback onPress={this.goToBackScreen}>
               <Image
-                style={stylePartsDetailScreen.topBarImage}
+                style={[stylePartsDetailScreen.topBarImage, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }]}
                 resizeMode="contain"
                 source={require("../resources/images/ic-back.png")}
               />

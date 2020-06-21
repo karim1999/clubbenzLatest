@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { TouchableOpacity, View, Text, Image, StyleSheet, Dimensions, I18nManager } from 'react-native';
 import { colors } from '../../themes';
 import Icon from 'react-native-vector-icons/AntDesign';
 const { height, width } = Dimensions.get('window');
@@ -28,7 +28,7 @@ const SubCategory = ({ Item, onPress, language }) => {
 					<Text style={otherCategoryStyle.text}>{language.isArabic == true ? Item.arabic_name : Item.name}</Text>
 				</View>
 				<View style={otherCategoryStyle.rightContainer}>
-					<Icon name="arrowright" size={width * 0.06} color={colors.blueText} />
+					<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.06} color={colors.blueText} />
 				</View>
 			</View>
 		</TouchableOpacity>

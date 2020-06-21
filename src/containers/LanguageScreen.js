@@ -124,7 +124,7 @@ class LanguageScreen extends PureComponent {
 							<Text style={styleSplashScreen.sectionBreak}> ____________</Text>
 						</View>
 						<View style={styleSplashScreen.languageSection}>
-						<Text style={[styleSplashScreen.languageSectionHelper, {fontFamily: Fonts.GE_SS_MEDIUM}]}>كمل باللغة</Text>
+						<Text style={[styleSplashScreen.languageSectionHelper, {fontFamily: Fonts.GE_SS_MEDIUM}]}>أكمل باللغة</Text>
 							<TouchableOpacity onPress={()=>this.openHowToScreen(ARABIC)}>
 								<Text style={[styleSplashScreen.languageSectionMain, {fontFamily: Fonts.GE_SS_MEDIUM}]}>العربية</Text>
 							</TouchableOpacity>
@@ -147,7 +147,7 @@ mapStateToProps = (state) => {
     },
     dispatch
   );
-  
+
   export default connect(null, mapDispatchToProps)(LanguageScreen)
 
 const styleSplashScreen = StyleSheet.create({

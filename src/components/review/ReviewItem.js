@@ -53,7 +53,7 @@ const ReviewItem = ({ item, key, index, preferences, length }) => {
                                 source={{ uri: PROFILE_PIC_PREFIX + item.user_picture }}
                                  />
                         :
-                        // <Icon name="comment-o" size={60} color='#11455F' /> 
+                        // <Icon name="comment-o" size={60} color='#11455F' />
                         <Image style={{ width: 56, height: 56, borderRadius: 100 }} source={require('../../resources/images/icon1.png')} />
                     }
 
@@ -76,7 +76,7 @@ const ReviewItem = ({ item, key, index, preferences, length }) => {
 
                 <View style={{ justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: colors.grey93, flex: 3 }}>
                     <View style={{ marginVertical: 10 }}>
-                        <Text style={{ fontFamily: Fonts.circular_book, color: '#1E313E', fontSize: 14, marginRight: metrics.baseMargin }}>{item.detail != "" ? item.detail : "No details"}</Text>
+                        <Text style={{ fontFamily: Fonts.circular_book, color: '#1E313E', fontSize: 14, marginRight: metrics.baseMargin, alignSelf: 'flex-start' }}>{item.detail != "" ? item.detail : "No details"}</Text>
                         {item.picture ? <Image style={styleReviewItem.reviewImage} source={{ uri: IMG_PREFIX_URL + item.picture }} resizeMode='cover' /> : null}
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: metrics.baseMargin }}>
                             <Text style={{ fontFamily: Fonts.CircularBoldItalic, color: '#8E8E93', fontSize: 11 }}>{item.user_name ? item.user_name : "Unknown User"}</Text>

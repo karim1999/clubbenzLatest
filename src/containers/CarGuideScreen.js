@@ -10,6 +10,7 @@ import {
 	StatusBar,
 	Modal,
 	Alert,
+	I18nManager,
 	FlatList
 } from 'react-native';
 
@@ -294,6 +295,7 @@ class CarGuideScreen extends PureComponent {
 							<View
 								style={{
 									flex: 5,
+									alignItems: 'flex-start',
 									paddingVertical: height * 0.02,
 									paddingHorizontal: width * 0.02,
 								}}
@@ -325,7 +327,7 @@ class CarGuideScreen extends PureComponent {
 									justifyContent: 'center',
 								}}
 							>
-								<Icon name="ios-arrow-round-forward" size={width * 0.1} color={'#fff'} />
+								<Icon name={I18nManager.isRTL ? "ios-arrow-round-back" : "ios-arrow-round-forward"} size={width * 0.1} color={'#fff'} />
 							</View>
 						</View>
 					</TouchableOpacity>
