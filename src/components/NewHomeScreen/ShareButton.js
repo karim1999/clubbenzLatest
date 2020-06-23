@@ -10,7 +10,7 @@ class ShareButton extends PureComponent {
     render() {
         return (
             <TouchableOpacity onPress={this.props.onPress} style={Styles.container}>
-                <Icon style={Styles.icon} size={20} color="white" name={this.props.icon} />
+                {/*<Icon style={Styles.icon} size={20} color="white" name={this.props.icon} />*/}
                 <Text style={Styles.title}>{this.props.title}</Text>
             </TouchableOpacity>
         );
@@ -26,12 +26,13 @@ let Styles= StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         minHeight: 70,
-        backgroundColor: "#060029",
+        backgroundColor: "#0e2d3c",
+        borderRadius: 50,
         margin: 30
     },
     title: {
         textAlign: "center",
-        fontSize: 17,
+        fontSize: 20,
         color: "white",
     },
     icon: {

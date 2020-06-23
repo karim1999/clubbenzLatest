@@ -192,7 +192,7 @@ class SubscribeScreen extends PureComponent {
         return (
             <View style={Styles.container}>
                 <NavigationEvents onDidFocus={() => this.updateList()} />
-                <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
+                <StatusBar hidden={false} backgroundColor={"#0e2d3c"} barStyle='light-content' />
                 <Header title={"Subscribe"} navigation={this.props.navigation} goBack={true}/>
                 <ScrollView style={{flex: 1, marginTop: 120}} >
                     <View style={Styles.card}>

@@ -608,7 +608,7 @@ class NewHomeScreen extends Component {
         const profile_picture = returnProfilePicture(user);
         return (
             <View>
-                <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
+                <StatusBar hidden={false} backgroundColor={"#0e2d3c"} barStyle='light-content' />
                 {/*<View style={Styles.margin}></View>*/}
                 <ScrollView contentContainerStyle={Styles.mainContainer}>
                     <ScrollView
@@ -669,9 +669,10 @@ class NewHomeScreen extends Component {
                         />
                     </View>
                     <View style={Styles.social}>
-                        <ShareButton onPress={this.onInviteOwnerPress.bind(this)} icon="check-square-o" title={__("Share Your Opinion", this.props.language)} />
-                        <Title title={__("Share With Friends", this.props.language)} />
+                        <Title title={__("Spread the Word", this.props.language)} />
                         {this.props.preferences.profile_pictures ? <StaticUsersView home={true} profile_picture={profile_picture} profile_pictures={this.props.preferences.profile_pictures} /> : null}
+                        <Text style={{fontSize: 16, fontWeight: 'bold', textAlign: 'center', padding: 10}}>” Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et ”</Text>
+                        <ShareButton onPress={this.onInviteOwnerPress.bind(this)} icon="check-square-o" title={__("Invite Owners", this.props.language)} />
                     </View>
                     {this.renderAds()}
                 </ScrollView>

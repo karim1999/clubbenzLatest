@@ -56,7 +56,7 @@ class NotificationScreen extends PureComponent {
         return (
             <View style={styleWorkShopListScreen.container}>
                 <NavigationEvents onDidFocus={() => this.updateList()} />
-                <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
+                <StatusBar hidden={false} backgroundColor={"#0e2d3c"} barStyle='light-content' />
                 {/*<NavigationComponent*/}
                 {/*    homeButton={false}*/}
                 {/*    navigation={this.props.navigation}*/}

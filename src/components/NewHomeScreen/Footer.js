@@ -43,7 +43,7 @@ export default Footer;
 
 let Styles= StyleSheet.create({
     footer: {
-        minHeight: 140,
+        minHeight: 80,
         position: "absolute",
         bottom: 0,
         left: 0,

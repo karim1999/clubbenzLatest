@@ -248,7 +248,8 @@ const es = {
   'City:': 'المدينة',
   'State:': 'المحافظة',
   'Country:': 'الدولة',
-  'No bookings was found': 'لا يوجد حجوزات سابقة'
+  'No bookings was found': 'لا يوجد حجوزات سابقة',
+  'Spread the Word': 'انشر الخبر',
 };
 
 export default function __(k ,language) {

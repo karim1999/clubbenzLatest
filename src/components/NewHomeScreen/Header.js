@@ -101,8 +101,9 @@ let Styles= StyleSheet.create({
         alignItems: "center"
     },
     logo: {
-        width: 130,
-        height: 40,
+        width: 140,
+        height: 30,
+        marginBottom: 10,
         resizeMode: "stretch"
     },
     title: {
@@ -119,7 +120,7 @@ let Styles= StyleSheet.create({
         color: "white",
         borderBottomWidth: 1,
         borderBottomColor: "white",
-        textAlign: "right",
+        alignSelf: "flex-start",
         minWidth: 170,
     },
     inputIcon: {

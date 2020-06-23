@@ -102,8 +102,11 @@ class WorkShopListScreen extends Component {
     }
 
     OpenNow = () => {
-      this.setState({workshopList:[] ,  totalWorkShops:0 });
-      this.workshops(0, '&shop_open=true');
+        if(this.flatListRef)
+            this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+        this.workshops(0, '&shop_open=true', this.state.sortBy, this.state.sortType).then(res => {
+            this.setState({workshopList: res})
+        })
     }
   onLoadMore() {
     // this.workshops(this.state.workshopList.length, '')

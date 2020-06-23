@@ -150,8 +150,11 @@ class ServiceShopScreen extends Component {
     })
   }
   OpenNow = () => {
-    this.setState({serviceShopList:[] , totalServiceShops:0});
-    this.serviceShop(0, '&shop_open=true');
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    this.serviceShop(0,'&shop_open=true', this.state.sortBy, this.state.sortType).then(res => {
+      this.setState({serviceShopList: res})
+    })
   }
   onMapPress = ()=>{
     var index = 0;

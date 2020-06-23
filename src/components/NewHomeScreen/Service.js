@@ -9,7 +9,7 @@ class Service extends PureComponent {
     render() {
         return (
             <ImageBackground style={Styles.container} source={this.props.image}>
-                <TouchableOpacity onPress={this.props.onPress}>
+                <TouchableOpacity style={Styles.textContainer} onPress={this.props.onPress}>
                     <Text style={Styles.title}>{this.props.title}</Text>
                 </TouchableOpacity>
             </ImageBackground>
@@ -22,20 +22,21 @@ export default Service;
 let Styles= StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: "flex-end",
         alignItems: "center",
         height: 150,
-        padding: 10,
         marginTop: 20
+    },
+    textContainer: {
+        backgroundColor: "rgba(255,255,255,0.39)",
+        alignSelf: 'stretch',
+        paddingVertical: 10
     },
     title: {
         fontSize: 20,
-        borderWidth: 1,
-        borderColor: "white",
-        color: "white",
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 15,
-        paddingRight: 15,
+        color: "#0e2d3c",
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
 })
