@@ -42,6 +42,8 @@ class ServiceShopScreen extends Component {
       showOverlay: false,
       formBy: "distance",
       formType: "ASC",
+      search: "",
+      isSearching: false
 
     };
     // this.serviceShop(0, '');
@@ -104,7 +106,7 @@ class ServiceShopScreen extends Component {
 
   onLoadMore() {
     // this.serviceShop(this.state.serviceShopList.length, '')
-    this.serviceShop(this.state.serviceShopList.length, '', this.state.sortBy, this.state.sortType).then(res => {
+    this.serviceShop(this.state.serviceShopList.length, this.state.isSearching != "" ? this.state.search : '', this.state.sortBy, this.state.sortType).then(res => {
       this.setState(prevState => ({serviceShopList: [...prevState.serviceShopList, ...res]}));
     });
   }
@@ -140,10 +142,12 @@ class ServiceShopScreen extends Component {
   };
 
   onSearch = (text)=>{
-    if (text.length > 0)
-      this.serviceShop(0,text)
-    else
-      alert('Please Enter Some Key To Search');
+    this.setState({search: text, isSearching: true})
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    this.serviceShop(0,text, this.state.sortBy, this.state.sortType).then(res => {
+      this.setState({serviceShopList: res})
+    })
   }
   OpenNow = () => {
     this.setState({serviceShopList:[] , totalServiceShops:0});
@@ -164,7 +168,8 @@ class ServiceShopScreen extends Component {
     NavigationService.navigate('MapScreen', {markers , fromScreen:'serviceShop', position: this.props.navigation.state.params.position})
   }
   sortBy(type){
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
     this.setState({"sortBy": type}, () =>
         this.serviceShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
           this.setState({serviceShopList: res})
@@ -172,7 +177,8 @@ class ServiceShopScreen extends Component {
     );
   }
   sortType(type){
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
     this.setState({"sortType": type}, () =>
         this.serviceShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
           this.setState({serviceShopList: res})

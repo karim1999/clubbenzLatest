@@ -611,13 +611,6 @@ class NewHomeScreen extends Component {
                 <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
                 {/*<View style={Styles.margin}></View>*/}
                 <ScrollView contentContainerStyle={Styles.mainContainer}>
-                    {
-
-                        this.props.preferences && this.props.preferences.timeDisplay && this.props.preferences.timeDisplay[0] != null && this.props.preferences.timeDisplay[0].status === "active" && this.getTimer()?
-                            <Advertisement ad={this.getAdvertisement()} time={this.getTimer()} /> : null
-
-
-                    }
                     <ScrollView
                         overScrollMode="never"
                         ref="car_slider"
@@ -648,6 +641,14 @@ class NewHomeScreen extends Component {
                                     source={{ uri: IMG_PREFIX_URL + this.props.preferences.home_slide[2].image }} />
                             </TouchableOpacity> : null}
                     </ScrollView>
+                    {
+
+                        this.props.preferences && this.props.preferences.timeDisplay && this.props.preferences.timeDisplay[0] != null && this.props.preferences.timeDisplay[0].status === "active" && this.getTimer()?
+                            <Advertisement ad={this.getAdvertisement()} time={this.getTimer()} /> : null
+
+
+                    }
+
                     <View style={[Styles.controlsContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
                         <View style={Styles.controls}>
                             <Icon onPress={this.gotoPrevious} style={Styles.icon} color={"black"} size={30} name={I18nManager.isRTL ? "angle-right" : "angle-left"} />

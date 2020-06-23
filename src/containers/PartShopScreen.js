@@ -44,7 +44,10 @@ class PartShopScreen extends Component {
       sortType: "ASC",
       showOverlay: false,
       formBy: "distance",
-      formType: "ASC"
+      formType: "ASC",
+      search: "",
+      isSearching: false
+
     };
     this.partShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
       this.setState({
@@ -96,19 +99,22 @@ class PartShopScreen extends Component {
   }
 
   onLoadMore() {
-    this.partShop(this.state.partShopList.length, '', this.state.sortBy, this.state.sortType).then(res => {
+    this.partShop(this.state.partShopList.length, this.state.isSearching ? this.state.search : '', this.state.sortBy, this.state.sortType).then(res => {
       this.setState(prevState => ({partShopList: [...prevState.partShopList, ...res]}));
     });
   }
 
   onSearch = (text)=>{
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    this.setState({search: text, isSearching: true})
     this.partShop(0, text, this.state.sortBy, this.state.sortType).then(res => {
       this.setState({partShopList: res})
     })
   }
   OpenNow = () => {
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
     this.setState({partShopList:[] ,  totalPartShops:0,}, () =>
         this.partShop(0, '&shop_open=true', this.state.sortBy, this.state.sortType).then(res => {
           this.setState({partShopList: res})
@@ -167,7 +173,8 @@ class PartShopScreen extends Component {
   }
 
   sortBy(type){
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
     this.setState({"sortBy": type}, () =>
         this.partShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
           this.setState({partShopList: res})
@@ -175,7 +182,8 @@ class PartShopScreen extends Component {
     );
   }
   sortType(type){
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    if(this.flatListRef)
+      this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
     this.setState({"sortType": type}, () =>
         this.partShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
           this.setState({partShopList: res})

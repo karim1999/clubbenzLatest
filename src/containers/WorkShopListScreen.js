@@ -42,7 +42,9 @@ class WorkShopListScreen extends Component {
         formBy: "distance",
         formType: "ASC",
         sortBy: "distance",
-        sortType: "ASC"
+        sortType: "ASC",
+        search: "",
+        isSearching: false
     };
     // this.workshops(0, '');
       this.workshops(0, '', this.state.sortBy, this.state.sortType).then(res => {
@@ -105,7 +107,7 @@ class WorkShopListScreen extends Component {
     }
   onLoadMore() {
     // this.workshops(this.state.workshopList.length, '')
-      this.workshops(this.state.workshopList.length, '', this.state.sortBy, this.state.sortType).then(res => {
+      this.workshops(this.state.workshopList.length, this.state.isSearching ? this.state.search : '', this.state.sortBy, this.state.sortType).then(res => {
           this.setState(prevState => ({workshopList: [...prevState.workshopList, ...res]}));
       });
   }
@@ -146,7 +148,17 @@ class WorkShopListScreen extends Component {
   };
 
   onSearch = (text)=>{
-      if (text) this.workshops(0, text)
+      if (text){
+          this.setState({search: text, isSearching: true})
+          if(this.flatListRef)
+              this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+          this.workshops(0, text, this.state.sortBy, this.state.sortType).then(res => {
+              this.setState({
+                  workshopList: res
+              });
+          });
+
+      }
   }
 
   onMapPress = ()=>{
@@ -164,7 +176,8 @@ class WorkShopListScreen extends Component {
       NavigationService.navigate('MapScreen', {markers , fromScreen:"workShop", preferences:this.props.navigation.state.params.preferences, position: this.props.navigation.state.params.position})
   }
     sortBy(type){
-        this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+        if(this.flatListRef)
+            this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
         this.setState({"sortBy": type}, () =>
             this.workshops(0, '', this.state.sortBy, this.state.sortType).then(res => {
                 this.setState({workshopList: res})
@@ -172,7 +185,8 @@ class WorkShopListScreen extends Component {
         );
     }
     sortType(type){
-        this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+        if(this.flatListRef)
+            this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
         this.setState({"sortType": type}, () =>
             this.workshops(0, '', this.state.sortBy, this.state.sortType).then(res => {
                 this.setState({workshopList: res})

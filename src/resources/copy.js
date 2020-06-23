@@ -248,6 +248,7 @@ const es = {
   'City:': 'المدينة',
   'State:': 'المحافظة',
   'Country:': 'الدولة',
+  'No bookings was found': 'لا يوجد حجوزات سابقة'
 };
 
 export default function __(k ,language) {

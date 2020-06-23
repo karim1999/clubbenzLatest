@@ -29,13 +29,14 @@ class ClusterErrorScreen extends Component {
 		super(props);
 		this.state = {
 			errorList: '',
+			finished: false,
 			text: '',
 			serverErrorList: '',
 		};
 	}
-	
+
 	componentDidMount(){
-	  this.get_Cluster_error();		
+	  this.get_Cluster_error();
 	}
 	get_Cluster_error = () =>{
 	// carAction.get_Cluster_error({chassis:211})
@@ -44,11 +45,11 @@ class ClusterErrorScreen extends Component {
 			if (res.success) {
 				//  alert(JSON.stringify(res))
 				// debugger
-			  this.setState({errorList:res.data, serverErrorList: res.data});
+			  this.setState({errorList:res.data, serverErrorList: res.data, finished: true});
 			}
 		  })
 	}
-	
+
 
 	onSearchPress = () => {
 		// alert(JSON.stringify(this.state.errorList));
@@ -61,7 +62,7 @@ class ClusterErrorScreen extends Component {
 			var temp = errors[i].title ? errors[i].title.toLowerCase() : '';
 			shortWords.push(temp);
 		}
-		
+
 		for (var i=0; i<shortWords.length; i++) {
 			if (shortWords[i].includes(searchedText)) {
 				matchedText.push(errors[i]);
@@ -75,20 +76,22 @@ class ClusterErrorScreen extends Component {
 	ListEmptyView = () => {
 		return (
 		  <View style={styles.MainContainer}>
-	 
-			<Text style={{textAlign: 'center'}}> Sorry, No Data Present</Text>
-	 
+			  {
+			  	this.state.finished &&
+				<Text style={{textAlign: 'center'}}> Sorry, No Data Present</Text>
+			  }
+
 		  </View>
-	 
+
 		);
 	  }
 
 	renderItem = ({ item, index }) => {
 		return (
-			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('ClusterErrorSolutionsScreen' , 
+			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('ClusterErrorSolutionsScreen' ,
 			{
-				errorDetail:item , 
-				token:this.props.navigation.state.params.token , 
+				errorDetail:item ,
+				token:this.props.navigation.state.params.token ,
 				title:this.props.navigation.state.params.selected_car_model ? this.props.navigation.state.params.selected_car_model.name + " "+this.props.navigation.state.params.selected_car_year.name:this.props.navigation.state.params.selected_car.model_id.name + " "+this.props.navigation.state.params.selected_car.model_year_end,
 				chassis: this.props.navigation.state.params.selected_car.chassis,
 				preferences: this.props.navigation.state.params.preferences
@@ -142,7 +145,7 @@ class ClusterErrorScreen extends Component {
 					>
 						<Image
 							style={{ flex: 1,  aspectRatio: 1.5, resizeMode: 'contain' }}
-							
+
 							source={{uri:IMG_PREFIX_URL+image}}
 						/>
 					</ImageBackground>

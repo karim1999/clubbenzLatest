@@ -63,8 +63,8 @@ class NotificationScreen extends PureComponent {
                 {/*    goBack={() => NavigationService.goBack()}*/}
                 {/*    title={__('Notifications' , this.props.language)}*/}
                 {/*/>*/}
-                <Header title={__('Notifications' , this.props.language)} navigation={this.props.navigation} goBack={true} homeButton={true}/>
-                <View style={{flex: 1, marginTop: 120}} >
+                <Header noSearch title={__('Notifications' , this.props.language)} navigation={this.props.navigation} goBack={true} homeButton={true}/>
+                <View style={{flex: 1, marginTop: 80}} >
                     <FlatList
                         data={this.state.notifications}
                         keyExtractor={(item, index) => item.id}

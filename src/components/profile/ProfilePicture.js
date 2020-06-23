@@ -5,7 +5,7 @@ export function returnProfilePicture(user) {
     if (user.enableFacebook === 'true') {
         return user.fb_picture;
     } else {
-        if (user.profile_picture.includes('https://platform-lookaside.fbsbx.com')) {
+        if (user.profile_picture && user.profile_picture.includes('https://platform-lookaside.fbsbx.com')) {
             // debugger
             return user.profile_picture;
         } else {
@@ -21,7 +21,7 @@ export function returnProfilePictureWithoutPrefix(user) {
     if (user.enableFacebook === 'true') {
         return user.fb_picture;
     } else {
-        if (user.profile_picture.includes('https://platform-lookaside.fbsbx.com')) {
+        if (user.profile_picture && user.profile_picture.includes('https://platform-lookaside.fbsbx.com')) {
             return user.profile_picture;
         } else {
             return user.profile_picture;

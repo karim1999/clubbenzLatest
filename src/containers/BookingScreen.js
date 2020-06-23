@@ -41,7 +41,7 @@ class BookingScreen extends PureComponent {
 
     render() {
         return (
-            <View style={styleWorkShopListScreen.container}>f
+            <View style={styleWorkShopListScreen.container}>
                 <NavigationEvents onDidFocus={() => this.updateList()} />
                 <StatusBar hidden={false} backgroundColor={"#060029"} barStyle='light-content' />
                 {/*<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>*/}
@@ -51,15 +51,15 @@ class BookingScreen extends PureComponent {
                 {/*    goBack={() => NavigationService.goBack()}*/}
                 {/*    title={__('Booking' , this.props.language)}*/}
                 {/*/>*/}
-                <Header title={__('Booking Info' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
-                <View style={{flex: 1, marginTop: 120}} >
+                <Header noSearch title={__('Booking Info' , this.props.language)} navigation={this.props.navigation} goBack={true}/>
+                <View style={{flex: 1, marginTop: 80}} >
                     <FlatList
                         data={this.state.bookings}
                         keyExtractor={(item, index) => item.id}
                         renderItem={({ item, index }) => (
                             <NotificationItem onPress={() => this.onBookingClick(item.workshop_id)} title={item.workshop_details.name} date={item.date} pic={IMG_PREFIX_URL + item.workshop_details.workshop_logo} details={item.status}/>
                         )}
-                        ListEmptyComponent={() => (this.state.isDone ? <Text style={{flex: 1, textAlign: "center"}}>No bookings was found</Text> : null)}
+                        ListEmptyComponent={() => (this.state.isDone ? <Text style={{flex: 1, textAlign: "center"}}>{__("No bookings was found", this.props.language)}</Text> : null)}
                     />
                     <View></View>
                 </View>

@@ -26,7 +26,7 @@ class Header extends PureComponent {
         return (
             <ImageBackground
                 resizeMode= 'stretch'
-                source={require("./../../resources/images/header.png")} style={Styles.nav}>
+                source={require("./../../resources/images/header.png")} style={[Styles.nav, {minHeight: this.props.noSearch ? 80 : 120}]}>
                 <View style={Styles.navContent}>
                     {
                         this.props.goBack ?
@@ -41,19 +41,22 @@ class Header extends PureComponent {
                                 :
                                 <Image style={Styles.logo} source={require("./../../resources/images/benz_logo.png")} />
                         }
-                        <View style={Styles.inputContainer}>
-                            <View styles={Styles.inputIcon}>
-                                <Icon size={16} color={"#FFFFFF"} name="search"/>
+                        {
+                            !this.props.noSearch &&
+                            <View style={Styles.inputContainer}>
+                                <View styles={Styles.inputIcon}>
+                                    <Icon size={16} color={"#FFFFFF"} name="search"/>
+                                </View>
+                                <TextInput
+                                    onChangeText={(text)=>this.setState({text:text})}
+                                    onSubmitEditing={()=> {
+                                        if(this.props.onSearch){
+                                            this.props.onSearch(this.state.text)
+                                        }
+                                    }}
+                                    placeholderTextColor="white" style={Styles.searchInput} placeholder={this.props.placeholder || __("FIND A SERVICE PROVIDER")}  />
                             </View>
-                            <TextInput
-                                onChangeText={(text)=>this.setState({text:text})}
-                                onSubmitEditing={()=> {
-                                    if(this.props.onSearch){
-                                        this.props.onSearch(this.state.text)
-                                    }
-                                }}
-                                placeholderTextColor="white" style={Styles.searchInput} placeholder={this.props.placeholder || __("FIND A SERVICE PROVIDER")}  />
-                        </View>
+                        }
                     </View>
                     {
                         this.props.homeButton ?

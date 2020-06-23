@@ -158,20 +158,20 @@ export default class Advertisement extends Component {
 
                         <ImageBackground style={{ width: width, flex: 0.4, marginTop: 20 }} source={require('../../resources/images/transparent-layer-1.png')}>
                             <View style={{ flexDirection: 'row', flex: 1 }}>
-                                <View style={{ alignItems: 'flex-start', flex: 0.1 }}>
-                                    <Image style={{ width: 40, flex: 1, resizeMode: 'contain', marginLeft: -9 }} source={require('../../resources/icons/left_icon.png')} />
-                                </View>
+                                {/*<View style={{ alignItems: 'flex-start', flex: 0.1 }}>*/}
+                                {/*    <Image style={{ width: 40, flex: 1, resizeMode: 'contain', marginLeft: -9 }} source={require('../../resources/icons/left_icon.png')} />*/}
+                                {/*</View>*/}
 
                                 <View style={[styles.center, { flex: 0.8 }]}>
                                     {/* {this.state.ad.discount_percentage != '' ?
-                                <Text style={[style.offerText, {opacity: this.state.textOpacity}]}>{this.state.ad.discount_percentage}%</Text> : 
+                                <Text style={[style.offerText, {opacity: this.state.textOpacity}]}>{this.state.ad.discount_percentage}%</Text> :
                                 <Text style={[style.offerText, {opacity: this.state.textOpacity}]}>% N/A</Text>
                                 } */}
                                 </View>
 
-                                <View style={{ alignItems: 'flex-end', flex: 0.1 }}>
-                                    <Image style={{ width: 40, flex: 1, resizeMode: 'contain', marginRight: -9, }} source={require('../../resources/icons/right_icon.png')} />
-                                </View>
+                                {/*<View style={{ alignItems: 'flex-end', flex: 0.1 }}>*/}
+                                {/*    <Image style={{ width: 40, flex: 1, resizeMode: 'contain', marginRight: -9, }} source={require('../../resources/icons/right_icon.png')} />*/}
+                                {/*</View>*/}
                             </View>
 
                             {/* <View style={{ flex: 0.5, flexDirection: 'column', paddingBottom: 10 }}>

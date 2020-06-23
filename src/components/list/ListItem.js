@@ -7,6 +7,11 @@ import { IMG_PREFIX_URL } from '../../config/constant';
 import { Fonts } from '../../resources/constants/Fonts';
 import __ from '../../resources/copy';
 import ListingAd from '../../components/common/listingAd';
+import TimeAgo from 'javascript-time-ago'
+
+// Load locale-specific relative date/time formatting rules.
+import en from 'javascript-time-ago/locale/en'
+import ar from 'javascript-time-ago/locale/ar'
 
 renderAds = (preferences) => {
 	// for (i = 0; i < preferences.home_ads.length; i++) {
@@ -29,6 +34,20 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 	console.log(item);
 	// alert(JSON.stringify(item))
 	// debugger;
+	TimeAgo.addLocale(ar)
+	TimeAgo.addLocale(en)
+	let timeAgo;
+	if(language.isArabic){
+		timeAgo = new TimeAgo('ar')
+	}else{
+		timeAgo = new TimeAgo('en-US')
+	}
+	if(item.add_date){
+		var myDate = item.add_date;
+		myDate = myDate.split("-");
+		var newDate = myDate[1]+"/"+myDate[2]+"/"+myDate[0];
+	}
+
 	return (
 		<View>
 			<TouchableOpacity style={[styles.container]} onPress={() => onPress(item)}>
@@ -59,9 +78,17 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 					<View style={styles.textWrapper}>
 						<View style={{ flex: 1, flexDirection: 'column' }}>
 							<View style={{flex: 0.5, backgroundColor: '#FFFFFF', justifyContent: 'center'}}>
-							<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', width: 28, height: 14, marginTop: 5, marginBottom: 5}}>
-								<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{item.part_case}</Text>
-							</View>
+								<View style={{flexDirection: 'row'}}>
+									<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', width: 28, height: 14, marginTop: 5, marginBottom: 5}}>
+										<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{item.part_case}</Text>
+									</View>
+									{
+										item.featured &&
+										<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', height: 14, marginTop: 5, marginBottom: 5, marginHorizontal: 5, paddingHorizontal: 5}}>
+											<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>Featured</Text>
+										</View>
+									}
+								</View>
 							</View>
 							<View style={{flex: .5}}>
 								<Text style={[styles.name, {paddingLeft: 0, maxWidth: 170, alignSelf: 'flex-start'}]}>{language.isArabic == true ? item.title + arr_temp : item.title}</Text>
@@ -98,8 +125,8 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 						</View>
 					</View>
 					<View style={styles.belowTextWrapper}>
-						<Text style={styles.dis}>{item.part_brand ? item.part_brand[0].name:'Seller name'}</Text>
-						<Text style={styles.data}>{item.add_date ? item.add_date :'7 Jan'} </Text>
+						<Text style={styles.dis}>{item.username ? item.username : item.part_brand ? item.part_brand[0].name:'Seller name'}</Text>
+						<Text style={styles.data}>{item.add_date ? timeAgo.format((new Date(newDate)).getTime()) :'7 Jan'} </Text>
 					</View>
 				</View>
 				<View style={styles.rightContainer} />

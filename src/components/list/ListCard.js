@@ -158,9 +158,9 @@ const ListCard = ({ item, index, onPress, preferences, language }) => {
 
         {
           (index + 1) % 5 === 0  && (index + 1) != 0 ? !item.isWorkshop ?
-              preferences.partshops[1] != null ? <ListingAd home_ads={preferences.partshops[index % preferences.partshops.length]} marginTop={12} marginHorizontal={20} /> : null
+              <ListingAd home_ads={preferences.partshops[index % preferences.partshops.length]} marginTop={12} marginHorizontal={20} />
               :
-          preferences.workshop[1] != null ? <ListingAd home_ads={preferences.workshop[index % preferences.workshop.length]} marginTop={12} marginHorizontal={20} /> : null :null
+          <ListingAd home_ads={preferences.workshop[index % preferences.workshop.length]} marginTop={12} marginHorizontal={20} /> :null
 
         }
 

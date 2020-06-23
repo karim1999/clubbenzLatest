@@ -430,9 +430,10 @@ class MyProfileScreen extends PureComponent {
 				// here update the name which we are showing in the navigation
 				if (res.data) {
 					// debugger
+					// alert(JSON.stringify(res.data))
 					store.dispatch({ type: UPDATE_USER, data: res.data });
-					if (res.data.enableFacebook == 'true')
-						this.getFacebookProfileFromFacebook();
+					// if (res.data.enableFacebook == 'true')
+					// 	this.getFacebookProfileFromFacebook();
 					console.log(store.getState());
 				} else {
 					SimpleToast.show(res.message, SimpleToast.LONG)

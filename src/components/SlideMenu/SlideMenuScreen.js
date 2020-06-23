@@ -89,17 +89,17 @@ class SlideMenuScreen extends Component {
 						style={[style.rightContainer, { paddingTop: height * 0.04 }]}
 					>
                         <View style={[style.leftContainer, { backgroundColor: '#0E191F' }]} />
-						<View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
-							<TouchableOpacity onPress={() => this.props.navigation.closeDrawer()}>
-								<View style={{ marginRight: width * 0.05 }}>
-									<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.07} color="#fff" />
-								</View>
-							</TouchableOpacity>
-						</View>
 
                         <ScrollView >
+							<View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
+								<TouchableOpacity onPress={() => this.props.navigation.closeDrawer()}>
+									<View style={{ marginRight: width * 0.05 }}>
+										<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.07} color="#fff" />
+									</View>
+								</TouchableOpacity>
+							</View>
 
-                            <View style={{ flex: 9, paddingTop: 40 }}>
+                            <View style={{ flex: 9, paddingTop: 10 }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
                                     {this.state.selected === 1 ? (
                                         <View
