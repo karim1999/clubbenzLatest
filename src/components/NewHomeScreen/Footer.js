@@ -18,13 +18,13 @@ class Footer extends PureComponent {
                 resizeMode= 'stretch'
                 source={require("./../../resources/images/footer.png")} style={Styles.footer}
             >
-                <TouchableOpacity onPress={this.navigate.bind(this, "HomeScreen")} style={Styles.iconContainer}>
-                    <Icon name="home" size={22} color="#ffffff" />
-                    <Text style={Styles.text}>{__('Home')}</Text>
-                </TouchableOpacity>
+                {/*<TouchableOpacity onPress={this.navigate.bind(this, "HomeScreen")} style={Styles.iconContainer}>*/}
+                {/*    <Icon name="home" size={22} color="#ffffff" />*/}
+                {/*    <Text style={Styles.text}>{__('Home')}</Text>*/}
+                {/*</TouchableOpacity>*/}
                 <TouchableOpacity onPress={this.navigate.bind(this, "CarGuide")} style={Styles.iconContainer}>
-                    <Icon name="car" size={22} color="#ffffff" />
-                    <Text style={Styles.text}>{__('Car Guide')}</Text>
+                    <Icon name="id-card" size={22} color="#ffffff" />
+                    <Text style={Styles.text}>{__('My Card')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.navigate.bind(this, "MembershipsScreen")} style={Styles.iconContainer}>
                     <Icon name="money" size={22} color="#ffffff" />

@@ -120,6 +120,7 @@ const es = {
   'Services provided': 'قائمة الخدمات',
   'Share with friends':	'شارك مع أصحابك',
   'Part Catalog': 'كتالوج قطع الغيار',
+  'Part Catalogue': 'كتالوج قطع الغيار',
   'Search Part Catalogue': 'ابحث باسم قطع الغيار او رقمها',
   'Mototrcode': 'رقم المحرك ',
   'HP': 'عدد الاحصنه',
@@ -140,9 +141,10 @@ const es = {
   'Link to Facebook': 'الربط من خلال فيسبوك',
   'Common requested parts for this model': 'قطع غيار تطلب عادة لهذا الموديل',
   'Explore all listed parts': 'تصفح مجموعات قطع الغيار',
-  'All': 'كل القطع',
-  'Used': 'قطعة مستعمله',
-  'New': 'قطعة جديدة',
+  'All': 'الكل',
+  'Used': 'مستعمل',
+  'New': 'جديد',
+  'Featured': 'مميز',
   'Workshops': 'مراكز الخدمة',
   'Part shops': 'محلات قطع غيار',
   'Services': ' كل الخدمات',
@@ -232,7 +234,6 @@ const es = {
   'Share Your Opinion': 'شارك برأيك',
   'Share With Friends': 'شارك مع اصدقائك',
   'Services Clubbenz': 'خدمات Clubbenz',
-  'Part Catalogue': 'كتالوج قطع الغيار',
   'Cluster Error': 'اخطاء العداد',
   'Booking Info': 'تفاصيل الحجز',
   'Overall:': 'شامل:',
@@ -250,6 +251,10 @@ const es = {
   'Country:': 'الدولة',
   'No bookings was found': 'لا يوجد حجوزات سابقة',
   'Spread the Word': 'انشر الخبر',
+  'My Card': 'بطاقتي',
+  'My Bookings': 'حجوزاتي',
+  'My Booking': 'حجوزاتي',
+  'Favorite Parts': 'المفضلة'
 };
 
 export default function __(k ,language) {

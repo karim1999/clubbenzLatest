@@ -4,6 +4,9 @@ import { Text, Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'rea
 import { colors, fonts, metrics, styles } from '../../themes';
 import { IMG_PREFIX_URL } from '../../config/constant';
 import { Fonts } from '../../resources/constants/Fonts';
+import {bindActionCreators} from 'redux';
+import {updateUser} from '../../redux/actions/auth';
+import {connect} from 'react-redux';
 
 const { height, width } = Dimensions.get('window');
 class CarClass extends PureComponent {
@@ -20,7 +23,7 @@ class CarClass extends PureComponent {
 			<View>
 				<View style={[ {width: this.props.selectionResult ? 150 : 200 },CarClassStyle.classContainer]}>
 					<Text style={[ CarClassStyle.title, this.props.item.selected || this.props.selected ? { color: colors.navgationBar } : {color : 'rgba(14,45,60, 0.2)'} , {fontSize: this.props.selectionResult ? fonts.size.h2 : fonts.size.h1}, {marginTop: 15}]}>
-						{item.name}
+						{this.props.language.isArabic ? item.arabic_name : item.name}
 					</Text>
 					<View style={[this.props.item.selected || this.props.selected ? { flex: 1, width: '100%', opacity: 1} : { flex: 1, width: '100%', opacity: 0.4 }]}>
 						<Image
@@ -34,7 +37,14 @@ class CarClass extends PureComponent {
 		);
 	}
 }
-export default CarClass;
+mapStateToProps = (state) => {
+	return {
+		language: state.language,
+	}
+}
+
+export default connect(mapStateToProps, {})(CarClass)
+
 CarClass.propTypes = {
 	title: PropTypes.string,
 	carImage: PropTypes.string,

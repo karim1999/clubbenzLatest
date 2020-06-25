@@ -397,7 +397,7 @@ class CarSelectionScreen extends PureComponent {
 											this.scrollToFuel(index)
 											this.onChangeCarType(item)
 										} }>
-											{item.name}
+											{this.props.language.isArabic ? item.arabic_name : item.name}
 										</Bubble>
 									)}
 									ListFooterComponent={this._renderFooter}

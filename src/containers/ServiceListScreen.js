@@ -21,6 +21,9 @@ import * as serviceAction from "./../redux/actions/services";
 import { getServices } from "./../redux/actions/home";
 import __ from '../resources/copy';
 import SimpleToast from 'react-native-simple-toast';
+import Service from '../components/NewHomeScreen/Service';
+import {IMG_PREFIX_URL} from '../config/constant';
+import Service2 from '../components/NewHomeScreen/Service2';
 
 class ServiceListScreen extends Component {
   constructor(props) {
@@ -84,17 +87,16 @@ class ServiceListScreen extends Component {
         <View style={styleServiceListScreen.listWrapper}>
           <FlatList
             data={this.state.serviceList}
-            numColumns={3}
+            numColumns={2}
             columnWrapperStyle={{}}
             keyExtractor={(item, index) => item.id}
             renderItem={({ item }) => (
-              <ServiceListItem
-                item={item}
-                onPress={() =>item.service_shop > 0 ? this.onServiceClick(item.id):null}
-                language={this.props.language}
-              />
+                <Service2 onPress={() =>item.service_shop > 0 ? this.onServiceClick(item.id):null}
+                         language={this.props.language}
+                         title={this.props.language.isArabic == true ? item.arabic_name : item.name } image={IMG_PREFIX_URL + item.image} />
             )}
           />
+          <View></View>
         </View>
       </View>
     );
@@ -121,9 +123,6 @@ export default connect(
 const styleServiceListScreen = StyleSheet.create({
   container: { flex: 1 },
   listWrapper: {
-    flex: 1,
-    justifyContent: "space-evenly",
-    flexWrap: "wrap",
-    flexDirection: "row"
+    flex: 1
   }
 });

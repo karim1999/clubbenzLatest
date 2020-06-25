@@ -7,7 +7,7 @@ import { IMG_PREFIX_URL } from '../../config/constant';
 import { Fonts } from '../../resources/constants/Fonts';
 const SubCategory = ({ Item, onPress, language }) => {
 	return (
-		<TouchableOpacity onPress={onPress} style={[otherCategoryStyle.container, Item.parts <= 0 && {backgroundColor: "#c1c7ca"}]}>
+		<TouchableOpacity onPress={onPress} style={[otherCategoryStyle.container, Item.parts <= 0 && {backgroundColor: "#d2d8db"}]}>
 			<View
 				style={{
 					flex: 1,
@@ -28,8 +28,15 @@ const SubCategory = ({ Item, onPress, language }) => {
 					<Text style={otherCategoryStyle.text}>{language.isArabic == true ? Item.arabic_name : Item.name}</Text>
 				</View>
 				<View style={otherCategoryStyle.rightContainer}>
-					<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.06} color={colors.blueText} />
+					{
+						Item.parts >  0 &&
+						<Icon name={I18nManager.isRTL ? "arrowleft" : "arrowright"} size={width * 0.06} color={colors.blueText} />
+					}
 				</View>
+				{
+					Item.parts <= 0 &&
+					<View style={otherCategoryStyle.filter}></View>
+				}
 			</View>
 		</TouchableOpacity>
 	);
@@ -42,6 +49,14 @@ const otherCategoryStyle = StyleSheet.create({
 		borderColor: colors.disable,
 		marginHorizontal: width * 0.02,
 		borderRadius: width * 0.02,
+	},
+	filter: {
+		position: 'absolute',
+		left: 0,
+		top: 0,
+		bottom: 0,
+		right: 0,
+		backgroundColor: 'rgba(255,255,255,0.47)'
 	},
 	leftContainer: {
 		flex: 1.5,

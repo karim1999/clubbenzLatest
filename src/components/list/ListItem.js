@@ -80,12 +80,12 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 							<View style={{flex: 0.5, backgroundColor: '#FFFFFF', justifyContent: 'center'}}>
 								<View style={{flexDirection: 'row'}}>
 									<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', width: 28, height: 14, marginTop: 5, marginBottom: 5}}>
-										<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{item.part_case}</Text>
+										<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{__(item.part_case, language)}</Text>
 									</View>
 									{
 										item.featured &&
 										<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', height: 14, marginTop: 5, marginBottom: 5, marginHorizontal: 5, paddingHorizontal: 5}}>
-											<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>Featured</Text>
+											<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{__("Featured", language)}</Text>
 										</View>
 									}
 								</View>

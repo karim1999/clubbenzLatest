@@ -307,7 +307,9 @@ class PartShopInfoScreen extends PureComponent {
                   {" "}
                   {this.state.openingHour}
                   {" "}
-                  <Text style={[
+                </Text>
+                <Text>
+                <Text style={[
                     stylePartsInfoScreen.shopTimings,
                     {
                       color: colors.blueText,

@@ -42,7 +42,7 @@ class SearchVinScreen extends Component {
         this.interval = setInterval(() => {
             if (this.state.cameraReady) {
                 if (!this.state.isFound)
-                    Platform.OS === 'android' ? this.detectText() : this.state.movedToManual != true ? this.takePic() : ''
+                    this.takePic()
             }
         }, 1500)
 
@@ -118,8 +118,8 @@ class SearchVinScreen extends Component {
                     }
                 } catch (e) {
                     // debugger
-                    console.warn(e);
-                    console.log(e)
+                    // console.warn(e);
+                    // console.log(e)
                 }
             }
         }
@@ -132,12 +132,12 @@ class SearchVinScreen extends Component {
 
     takePic = async function () {
         const self = this;
-        console.log('Scanning again')
+        // console.log('Scanning again')
         if (!this.state.isFound) {
             const options = { quality: 0.3, base64: true };
             if (!this.state.inProccess) {
                 const data = await this.camera.takePictureAsync(options);
-                console.log(data.uri);
+                // console.log(data.uri);
                 this.detectText(data.base64);
             } else {
                 SimpleToast.show('Processing on picture. Please wait !!', SimpleToast.BOTTOM);
@@ -148,7 +148,7 @@ class SearchVinScreen extends Component {
     detectText = (base64) => {
         // debugger
         this.setState({ inProccess: true });
-        fetch("https://vision.googleapis.com/v1/images:annotate?key=" + "AIzaSyDTCy7NRSlgZLXz3cOs2yO0QpO8cRVpZ60", {
+        fetch("https://vision.googleapis.com/v1/images:annotate?key=" + "AIzaSyCX7hdA5Sj0TeyQuqL-ZyUewyt9GJ1mvZ0", {
             method: 'POST',
             body: JSON.stringify({
                 "requests": [{
@@ -163,31 +163,33 @@ class SearchVinScreen extends Component {
                 return response.json()
             })
             .then(jsonRes => {
-                let text = jsonRes.responses[0].fullTextAnnotation.text
-                text = text.trim('\n');
-                // debugger
-                console.log(text)
-                if (text != 'undefined' && text.length > 0) {
-                    console.log('Text not null and greater than 0')
-                    var textArr = text.split('\n');
-                    console.log(textArr.length)
-                    console.log(textArr[0])
-                    textArr.forEach(item => {
-                        console.log(item)
-                        // item = item.trim(' ');
-                        item = item.replace(/\s/g,'');
-                        if (item.length == 17) {
-                            SimpleToast.show('Scan Vin Number Found !')
-                             console.log('Item is 17')
-                            if (!(/\s/.test(item))) {
-                                console.log(item)
-                                var prefix = item.substring(3, 9);
-                                this.setState({ isFound: true, inProccess: false })
-                                authAction.getCarByVin({ vin_prefix: prefix }).then(res => {
-                                    if (res.success) {
+                console.log(jsonRes)
+                if(jsonRes.responses[0]){
+                    let text = jsonRes.responses[0].fullTextAnnotation.text
+                    text = text.trim('\n');
+                    // debugger
+                    // console.log(text)
+                    if (text != 'undefined' && text.length > 0) {
+                        // console.log('Text not null and greater than 0')
+                        var textArr = text.split('\n');
+                        // console.log(textArr.length)
+                        // console.log(textArr[0])
+                        textArr.forEach(item => {
+                            // console.log(item)
+                            // item = item.trim(' ');
+                            item = item.replace(/\s/g,'');
+                            if (item.length == 17) {
+                                SimpleToast.show('Scan Vin Number Found !')
+                                // console.log('Item is 17')
+                                if (!(/\s/.test(item))) {
+                                    // console.log(item)
+                                    var prefix = item.substring(3, 9);
+                                    this.setState({ isFound: true, inProccess: false })
+                                    authAction.getCarByVin({ vin_prefix: prefix }).then(res => {
+                                        if (res.success) {
                                         debugger
-                                        if (this.props.navigation.state.params && this.props.navigation.state.params.MyProfileScreen != null && this.props.navigation.state.params.MyProfileScreen == true) {
-                                                debugger
+                                            if (this.props.navigation.state.params && this.props.navigation.state.params.MyProfileScreen != null && this.props.navigation.state.params.MyProfileScreen == true) {
+                                            debugger
                                                 store.dispatch({
                                                     type: "UPDATE_SELECTED_CAR",
                                                     data: {
@@ -198,30 +200,32 @@ class SearchVinScreen extends Component {
                                                     }
                                                 });
                                                 NavigationService.navigate('MyProfileScreen', {updateCar: true});
+                                            } else {
+                                                this.props.updateUser({
+                                                    car_vin_prefix: res.data.vin_prefix,
+                                                    car_type_id: res.data.fuel_type,
+                                                    model_id: res.data.model_id,
+                                                    year_id: res.data.year_id,
+                                                })
+                                                NavigationService.navigate('RegisterScreen');
+                                            }
                                         } else {
-                                        this.props.updateUser({
-                                            car_vin_prefix: res.data.vin_prefix,
-                                            car_type_id: res.data.fuel_type,
-                                            model_id: res.data.model_id,
-                                            year_id: res.data.year_id,
-                                        })
-                                        NavigationService.navigate('RegisterScreen');
-                                    }
-                                    } else {
-                                        SimpleToast.show(res.message, SimpleToast.LONG, SimpleToast.BOTTOM)
-                                        this.setState({ inProccess: false, isFound: false })
-                                    }
-                                })
+                                            SimpleToast.show(res.message, SimpleToast.LONG, SimpleToast.BOTTOM)
+                                            this.setState({ inProccess: false, isFound: false })
+                                        }
+                                    })
+                                }
+                            } else {
+                                SimpleToast.show('Please try again !', SimpleToast.BOTTOM);
+                                this.setState({ inProccess: false })
                             }
-                        } else {
-                            SimpleToast.show('Please try again !', SimpleToast.BOTTOM);
-                            this.setState({ inProccess: false })
-                        }
-                    })
+                        })
+                    }
+
                 }
 
             }).catch(err => {
-                console.log('Error', err)
+                // console.log('Error', err)
             })
     }
 
@@ -229,6 +233,11 @@ class SearchVinScreen extends Component {
         // alert('Welcome back');
     }
 
+    detectData = async (text) => {
+        if(text){
+            // alert(text)
+        }
+    }
     render() {
 
         // setTimeout(() => {
@@ -279,6 +288,7 @@ class SearchVinScreen extends Component {
                                 buttonNegative: 'Cancel',
                             }}
                             onCameraReady={() => this.setState({ cameraReady: true })}
+                            // onTextRecognized={this.detectData}
                             // onCameraReady={() => Platform.OS === 'android ' ? this.detectText() : this.takePic()}
 
                             // onCameraReady={() => this.detectText()}

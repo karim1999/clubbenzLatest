@@ -33,11 +33,11 @@ class SlideMenuScreen extends Component {
 	logout = () => {
 		AsyncStorage.clear()
 		authAction.logOut({ token: this.props.user.token })
-		NavigationService.reset('LanguageScreen')
+		NavigationService.reset('LanguageScreen', {restart: true})
 		I18nManager.forceRTL(false)
 		setTimeout(() => {
 			RNRestart.Restart();
-		}, 200)
+		}, 1000)
 
 	}
 
@@ -203,7 +203,215 @@ class SlideMenuScreen extends Component {
                                         </View>
                                     </TouchableOpacity>
                                 </View>
-                                {
+								<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
+									{this.state.selected === 5 ? (
+										<View
+											style={{
+												justifyContent: 'center',
+												alignItems: 'center',
+												position: 'absolute',
+												transform: [{ rotate: '-90deg' }],
+												left: -width * 0.2
+											}}
+										>
+											<Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
+												{model.name}
+											</Text>
+											<View
+												style={{
+													marginVertical: height * 0.005,
+													justifyContent: 'center',
+													alignItems: 'center',
+												}}
+											>
+												<Image
+													resizeMode="contain"
+													style={{ width: width * 0.2, height: width * 0.07 }}
+													source={car_image}
+												/>
+											</View>
+										</View>
+									) : (
+										<View />
+									)}
+									<TouchableOpacity
+										onPress={() => {
+											this.setState({ selected: 5 });
+											this.props.navigation.closeDrawer();
+											this.props.navigation.navigate('NotificationScreen');
+										}}
+									>
+										<View
+											style={{
+												borderLeftWidth: this.state.selected === 5 ? 2 : 0,
+												borderColor: 'white',
+												// paddingHorizontal: width * 0.17,
+												paddingHorizontal: width * 0.1,
+												paddingVertical: height * 0.01,
+											}}
+										>
+											<Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Notifications' , this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+								</View>
+								<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
+									{this.state.selected === 6 ? (
+										<View
+											style={{
+												justifyContent: 'center',
+												alignItems: 'center',
+												position: 'absolute',
+												transform: [{ rotate: '-90deg' }],
+												left: -width * 0.2
+											}}
+										>
+											<Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
+												{model.name}
+											</Text>
+											<View
+												style={{
+													marginVertical: height * 0.005,
+													justifyContent: 'center',
+													alignItems: 'center',
+												}}
+											>
+												<Image
+													resizeMode="contain"
+													style={{ width: width * 0.2, height: width * 0.07 }}
+													source={car_image}
+												/>
+											</View>
+										</View>
+									) : (
+										<View />
+									)}
+									<TouchableOpacity
+										onPress={() => {
+											this.setState({ selected: 6 });
+											this.props.navigation.closeDrawer();
+											this.props.navigation.navigate('BookingScreen');
+										}}
+									>
+										<View
+											style={{
+												borderLeftWidth: this.state.selected === 6 ? 2 : 0,
+												borderColor: 'white',
+												// paddingHorizontal: width * 0.17,
+												paddingHorizontal: width * 0.1,
+												paddingVertical: height * 0.01,
+											}}
+										>
+											<Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('My Bookings' , this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+								</View>
+								{
+									this.props.preferences.activate_part_catalogue &&
+									<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
+										{this.state.selected === 7 ? (
+											<View
+												style={{
+													justifyContent: 'center',
+													alignItems: 'center',
+													position: 'absolute',
+													transform: [{ rotate: '-90deg' }],
+													left: -width * 0.2
+												}}
+											>
+												<Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
+													{model.name}
+												</Text>
+												<View
+													style={{
+														marginVertical: height * 0.005,
+														justifyContent: 'center',
+														alignItems: 'center',
+													}}
+												>
+													<Image
+														resizeMode="contain"
+														style={{ width: width * 0.2, height: width * 0.07 }}
+														source={car_image}
+													/>
+												</View>
+											</View>
+										) : (
+											<View />
+										)}
+										<TouchableOpacity
+											onPress={() => {
+												this.setState({ selected: 7 });
+												this.props.navigation.closeDrawer();
+												this.props.navigation.navigate('FavoritesScreen');
+											}}
+										>
+											<View
+												style={{
+													borderLeftWidth: this.state.selected === 7 ? 2 : 0,
+													borderColor: 'white',
+													// paddingHorizontal: width * 0.17,
+													paddingHorizontal: width * 0.1,
+													paddingVertical: height * 0.01,
+												}}
+											>
+												<Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Favorite Parts' , this.props.language)}</Text>
+											</View>
+										</TouchableOpacity>
+									</View>
+								}
+								<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
+									{this.state.selected === 4 ? (
+										<View
+											style={{
+												justifyContent: 'center',
+												alignItems: 'center',
+												position: 'absolute',
+												transform: [{ rotate: '-90deg' }],
+												left: -width * 0.2
+											}}
+										>
+											<Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
+												{model.name}
+											</Text>
+											<View
+												style={{
+													marginVertical: height * 0.005,
+													justifyContent: 'center',
+													alignItems: 'center',
+												}}
+											>
+												<Image
+													resizeMode="contain"
+													style={{ width: width * 0.2, height: width * 0.07 }}
+													source={car_image}
+												/>
+											</View>
+										</View>
+									) : (
+										<View />
+									)}
+									<TouchableOpacity
+										onPress={() => {
+											this.setState({ selected: 4 });
+											this.props.navigation.closeDrawer();
+											this.props.navigation.navigate('ClubScreen');
+										}}
+									>
+										<View
+											style={{
+												borderLeftWidth: this.state.selected === 4 ? 2 : 0,
+												borderColor: 'white',
+												// paddingHorizontal: width * 0.17,
+												paddingHorizontal: width * 0.1,
+												paddingVertical: height * 0.01,
+											}}
+										>
+											<Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('The Club' , this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+								</View>
+
+								{
                                     this.props.preferences.activate_part_catalogue &&
                                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
                                         {this.state.selected === 2 ? (
@@ -252,223 +460,16 @@ class SlideMenuScreen extends Component {
                                                     paddingVertical: height * 0.01,
                                                 }}
                                             >
-                                                <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Part Catalog' , this.props.language)}</Text>
+                                                <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Part Catalogue' , this.props.language)}</Text>
                                             </View>
                                         </TouchableOpacity>
                                     </View>
                                 }
 
 
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
-                                    {this.state.selected === 4 ? (
-                                        <View
-                                            style={{
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                position: 'absolute',
-                                                transform: [{ rotate: '-90deg' }],
-                                                left: -width * 0.2
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
-                                                {model.name}
-                                            </Text>
-                                            <View
-                                                style={{
-                                                    marginVertical: height * 0.005,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                <Image
-                                                    resizeMode="contain"
-                                                    style={{ width: width * 0.2, height: width * 0.07 }}
-                                                    source={car_image}
-                                                />
-                                            </View>
-                                        </View>
-                                    ) : (
-                                        <View />
-                                    )}
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            this.setState({ selected: 4 });
-                                            this.props.navigation.closeDrawer();
-                                            this.props.navigation.navigate('ClubScreen');
-                                        }}
-                                    >
-                                        <View
-                                            style={{
-                                                borderLeftWidth: this.state.selected === 4 ? 2 : 0,
-                                                borderColor: 'white',
-                                                // paddingHorizontal: width * 0.17,
-                                                paddingHorizontal: width * 0.1,
-                                                paddingVertical: height * 0.01,
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('The Club' , this.props.language)}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
-                                    {this.state.selected === 5 ? (
-                                        <View
-                                            style={{
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                position: 'absolute',
-                                                transform: [{ rotate: '-90deg' }],
-                                                left: -width * 0.2
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
-                                                {model.name}
-                                            </Text>
-                                            <View
-                                                style={{
-                                                    marginVertical: height * 0.005,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                <Image
-                                                    resizeMode="contain"
-                                                    style={{ width: width * 0.2, height: width * 0.07 }}
-                                                    source={car_image}
-                                                />
-                                            </View>
-                                        </View>
-                                    ) : (
-                                        <View />
-                                    )}
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            this.setState({ selected: 5 });
-                                            this.props.navigation.closeDrawer();
-                                            this.props.navigation.navigate('NotificationScreen');
-                                        }}
-                                    >
-                                        <View
-                                            style={{
-                                                borderLeftWidth: this.state.selected === 5 ? 2 : 0,
-                                                borderColor: 'white',
-                                                // paddingHorizontal: width * 0.17,
-                                                paddingHorizontal: width * 0.1,
-                                                paddingVertical: height * 0.01,
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Notifications' , this.props.language)}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
 
 
 
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
-                                    {this.state.selected === 6 ? (
-                                        <View
-                                            style={{
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                position: 'absolute',
-                                                transform: [{ rotate: '-90deg' }],
-                                                left: -width * 0.2
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
-                                                {model.name}
-                                            </Text>
-                                            <View
-                                                style={{
-                                                    marginVertical: height * 0.005,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                <Image
-                                                    resizeMode="contain"
-                                                    style={{ width: width * 0.2, height: width * 0.07 }}
-                                                    source={car_image}
-                                                />
-                                            </View>
-                                        </View>
-                                    ) : (
-                                        <View />
-                                    )}
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            this.setState({ selected: 6 });
-                                            this.props.navigation.closeDrawer();
-                                            this.props.navigation.navigate('BookingScreen');
-                                        }}
-                                    >
-                                        <View
-                                            style={{
-                                                borderLeftWidth: this.state.selected === 6 ? 2 : 0,
-                                                borderColor: 'white',
-                                                // paddingHorizontal: width * 0.17,
-                                                paddingHorizontal: width * 0.1,
-                                                paddingVertical: height * 0.01,
-                                            }}
-                                        >
-                                            <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Booking Info' , this.props.language)}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                {
-                                    this.props.preferences.activate_part_catalogue &&
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
-                                        {this.state.selected === 7 ? (
-                                            <View
-                                                style={{
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    position: 'absolute',
-                                                    transform: [{ rotate: '-90deg' }],
-                                                    left: -width * 0.2
-                                                }}
-                                            >
-                                                <Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
-                                                    {model.name}
-                                                </Text>
-                                                <View
-                                                    style={{
-                                                        marginVertical: height * 0.005,
-                                                        justifyContent: 'center',
-                                                        alignItems: 'center',
-                                                    }}
-                                                >
-                                                    <Image
-                                                        resizeMode="contain"
-                                                        style={{ width: width * 0.2, height: width * 0.07 }}
-                                                        source={car_image}
-                                                    />
-                                                </View>
-                                            </View>
-                                        ) : (
-                                            <View />
-                                        )}
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                this.setState({ selected: 7 });
-                                                this.props.navigation.closeDrawer();
-                                                this.props.navigation.navigate('FavoritesScreen');
-                                            }}
-                                        >
-                                            <View
-                                                style={{
-                                                    borderLeftWidth: this.state.selected === 7 ? 2 : 0,
-                                                    borderColor: 'white',
-                                                    // paddingHorizontal: width * 0.17,
-                                                    paddingHorizontal: width * 0.1,
-                                                    paddingVertical: height * 0.01,
-                                                }}
-                                            >
-                                                <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Favorites' , this.props.language)}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-                                }
 
                             </View>
                         </ScrollView>

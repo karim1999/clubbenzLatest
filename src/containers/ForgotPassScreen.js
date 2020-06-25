@@ -16,6 +16,7 @@ class ForgotPassScreen extends PureComponent {
 	}
 	state={
         mobile: '',
+		wrongPhone: false,
   }
 
     requestPasswordReset = () => {
@@ -41,6 +42,14 @@ class ForgotPassScreen extends PureComponent {
             });
         }
     }
+	checkPhoneNumber(mobile) {
+		this.setState({mobile});
+		if (mobile.includes('+')) {
+			this.setState({wrongPhone: false});
+		} else {
+			this.setState({wrongPhone: true});
+		}
+	}
 
 	render() {
 		return (
@@ -56,6 +65,11 @@ class ForgotPassScreen extends PureComponent {
 					<Text style={[styles.tapButtonStyleTextWhite, {marginTop: 20, fontSize: 20}]}>{__('Forget Password ?', '')}</Text>
 
 					<Text style={[styles.tapButtonStyleTextWhite, {fontFamily: Fonts.CircularBold, marginTop: 40, width: metrics.deviceWidth - 5, fontSize: 16}]}>{__('We just need your registered mobile number to send you password reset instructions.', '')}</Text>
+					{this.state.wrongPhone ? (
+						<Text style={{color: 'red', textAlign: 'center'}}>
+							{__('Please add country code (Ex: +201 2xx xxx xxx)', this.props.language)}
+						</Text>
+					) : null}
 
 					<TextInput
 						style={[styles.inputField, {borderColor: '#FFFFFF', width: metrics.deviceWidth - 20, marginTop: 30, color: '#FFFFFF'}]}
@@ -64,7 +78,7 @@ class ForgotPassScreen extends PureComponent {
 						returnKeyType='done'
 						placeholder={__('Mobile Number', '')}
 						placeholderTextColor='#627d8a'
-						onChangeText={mobile => this.setState({ mobile })}
+						onChangeText={mobile => this.checkPhoneNumber(mobile)}
 						value={this.state.mobile}
 					/>
 

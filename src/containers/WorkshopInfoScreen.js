@@ -230,6 +230,8 @@ class WorkshopInfoScreen extends PureComponent {
                   {" "}
                   {this.state.openingHour}
                   {" "}
+                </Text>
+                <Text>
                   <Text style={[
                     styleWorkshopInfoScreen.shopTimings,
                     {

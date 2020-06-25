@@ -312,7 +312,7 @@ class CarGuideScreen extends PureComponent {
 
 									}}
 								>
-									{this.props.selected_car.model.name ? this.props.selected_car.model.name :''}
+									{this.props.selected_car.model.name ? this.props.language.isArabic ? this.props.selected_car.model.arabic_name : this.props.selected_car.model.name :''}
 								</Text>
 								<View style={{ height: height * 0.05, width: width * 0.3 }}>
 									<Image
@@ -381,7 +381,7 @@ class CarGuideScreen extends PureComponent {
 											this.scrollToFuel(index)
 											this.onChangeCarType(item)
 										} }>
-											{item.name}
+											{this.props.language.isArabic ? item.arabic_name : item.name}
 										</Bubble>
 									)}
 									ListFooterComponent={this._renderFooter}
