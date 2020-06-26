@@ -259,7 +259,7 @@ class CarSelectionScreen extends PureComponent {
 										paddingLeft: width * 0.03,
 									}}
 								>
-									{this.props.selected_car.model.name ? this.props.selected_car.model.name :''}
+									{this.props.selected_car.model.name ? this.props.language.isArabic ? this.props.selected_car.model.arabic_name : this.props.selected_car.model.name :''}
 								</Text>
 								<View style={{ height: height * 0.05, width: width * 0.3 }}>
 									<Image

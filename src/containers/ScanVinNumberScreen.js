@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { store } from "./../redux/create"
-
+import axios from "axios"
 class SearchVinScreen extends Component {
 
     constructor(props) {
@@ -49,6 +49,7 @@ class SearchVinScreen extends Component {
     }
 
     componentWillUnmount() {
+        clearInterval(this.interval)
         if (!this.state.isFound && !this.state.inProccess)
             clearInterval(this.interval)
     }
@@ -137,7 +138,7 @@ class SearchVinScreen extends Component {
             const options = { quality: 0.3, base64: true };
             if (!this.state.inProccess) {
                 const data = await this.camera.takePictureAsync(options);
-                // console.log(data.uri);
+                console.log(data.uri);
                 this.detectText(data.base64);
             } else {
                 SimpleToast.show('Processing on picture. Please wait !!', SimpleToast.BOTTOM);
@@ -148,25 +149,26 @@ class SearchVinScreen extends Component {
     detectText = (base64) => {
         // debugger
         this.setState({ inProccess: true });
-        fetch("https://vision.googleapis.com/v1/images:annotate?key=" + "AIzaSyCX7hdA5Sj0TeyQuqL-ZyUewyt9GJ1mvZ0", {
-            method: 'POST',
-            body: JSON.stringify({
-                "requests": [{
-                    "image": { "content": base64 },
-                    "features": [
-                        { "type": "TEXT_DETECTION" }
-                    ]
-                }]
-            })
+        // console.log(base64)
+        axios.post("https://vision.googleapis.com/v1/images:annotate?key=" + "AIzaSyCX7hdA5Sj0TeyQuqL-ZyUewyt9GJ1mvZ0", {
+            "requests": [{
+                "image": { "content": base64 },
+                "features": [
+                    { "type": "TEXT_DETECTION" }
+                ]
+            }]
         })
             .then(response => {
-                return response.json()
+                // console.log(response.data)
+                // alert(JSON.stringify(response))
+                return response.data
             })
             .then(jsonRes => {
                 console.log(jsonRes)
                 if(jsonRes.responses[0]){
                     let text = jsonRes.responses[0].fullTextAnnotation.text
                     text = text.trim('\n');
+                    // console.log(text)
                     // debugger
                     // console.log(text)
                     if (text != 'undefined' && text.length > 0) {
@@ -185,6 +187,8 @@ class SearchVinScreen extends Component {
                                     // console.log(item)
                                     var prefix = item.substring(3, 9);
                                     this.setState({ isFound: true, inProccess: false })
+                                    // alert(prefix)
+
                                     authAction.getCarByVin({ vin_prefix: prefix }).then(res => {
                                         if (res.success) {
                                         debugger
@@ -216,15 +220,18 @@ class SearchVinScreen extends Component {
                                     })
                                 }
                             } else {
-                                SimpleToast.show('Please try again !', SimpleToast.BOTTOM);
+                                // SimpleToast.show('Please try again !', SimpleToast.BOTTOM);
                                 this.setState({ inProccess: false })
                             }
                         })
                     }
 
+                }else{
+                    this.setState({ inProccess: false, isFound: false })
                 }
 
             }).catch(err => {
+                this.setState({ inProccess: false, isFound: false })
                 // console.log('Error', err)
             })
     }

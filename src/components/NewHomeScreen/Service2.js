@@ -12,6 +12,10 @@ class Service2 extends PureComponent {
                 <TouchableOpacity style={Styles.textContainer} onPress={this.props.onPress}>
                     <Text style={Styles.title}>{this.props.title}</Text>
                 </TouchableOpacity>
+                {
+                    this.props.disable &&
+                    <View style={Styles.filter}></View>
+                }
             </ImageBackground>
         );
     }
@@ -27,6 +31,14 @@ let Styles= StyleSheet.create({
         alignItems: "center",
         height: 150,
         margin: 5,
+    },
+    filter: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        right: 0,
+        backgroundColor: 'rgba(255,255,255,0.47)'
     },
     textContainer: {
         backgroundColor: "rgba(255,255,255,0.39)",

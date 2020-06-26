@@ -92,6 +92,7 @@ class ServiceListScreen extends Component {
             keyExtractor={(item, index) => item.id}
             renderItem={({ item }) => (
                 <Service2 onPress={() =>item.service_shop > 0 ? this.onServiceClick(item.id):null}
+                          disable={item.service_shop <= 0}
                          language={this.props.language}
                          title={this.props.language.isArabic == true ? item.arabic_name : item.name } image={IMG_PREFIX_URL + item.image} />
             )}

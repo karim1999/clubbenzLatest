@@ -43,7 +43,8 @@ class ServiceShopScreen extends Component {
       formBy: "distance",
       formType: "ASC",
       search: "",
-      isSearching: false
+      isSearching: false,
+      finishedLoading: false
 
     };
     // this.serviceShop(0, '');
@@ -54,7 +55,8 @@ class ServiceShopScreen extends Component {
       // this.serviceShop(0, '');
       this.serviceShop(0, '', this.state.sortBy, this.state.sortType).then(res => {
         this.setState({
-          serviceShopList: res
+          serviceShopList: res,
+          finishedLoading: true
         });
       });
     });
@@ -238,7 +240,7 @@ class ServiceShopScreen extends Component {
                   />
               )}
               ListFooterComponent={this._renderFooter}
-            /> : <Text style={styleServiceShopScreen.placeholder}>No Service Shops found</Text>
+            /> : this.state.finishedLoading ? <Text style={styleServiceShopScreen.placeholder}>No Service Shops found</Text> : null
           }
         {this.state.showOverlay ? <View onPress={()=> this.setState({showOverlay: false, showSorting: false})} style={styleServiceShopScreen.overlayLayer} /> : null}
 

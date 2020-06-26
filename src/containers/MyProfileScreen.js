@@ -533,7 +533,7 @@ class MyProfileScreen extends PureComponent {
 						{__('Choose another model', this.props.language)}
 					</Text>
 					<Text style={{ color: '#0e2d3c', textAlign: 'center', fontSize: width * 0.08, fontFamily: Fonts.CircularBold }}>
-						{model.name}
+						{this.props.language.isArabic ? model.arabic_name : model.name}
 					</Text>
 					<TouchableOpacity onPress={() => NavigationService.navigate('CarSelectionScreen', { MyProfileScreen: true, updateSelectedCar: this.updateSelectedCar })}>
 						<View style={{ height: height * 0.1, width: width * 0.4, alignSelf: 'center' }}>
