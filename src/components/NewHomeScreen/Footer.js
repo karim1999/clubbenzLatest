@@ -8,8 +8,8 @@ class Footer extends PureComponent {
         super(props);
     }
 
-    navigate(screen){
-        this.props.navigation.navigate(screen, { fromSlideMenu: true });
+    navigate(screen, params){
+        this.props.navigation.navigate(screen, { fromSlideMenu: true, ...params });
     }
 
     render() {
@@ -22,15 +22,15 @@ class Footer extends PureComponent {
                 {/*    <Icon name="home" size={22} color="#ffffff" />*/}
                 {/*    <Text style={Styles.text}>{__('Home')}</Text>*/}
                 {/*</TouchableOpacity>*/}
-                <TouchableOpacity onPress={this.navigate.bind(this, "CarGuide")} style={Styles.iconContainer}>
+                <TouchableOpacity onPress={this.navigate.bind(this, "MembershipsScreen", {card: true})} style={Styles.iconContainer}>
                     <Icon name="id-card" size={22} color="#ffffff" />
                     <Text style={Styles.text}>{__('My Card')}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this.navigate.bind(this, "MembershipsScreen")} style={Styles.iconContainer}>
+                <TouchableOpacity onPress={this.navigate.bind(this, "MembershipsScreen", {})} style={Styles.iconContainer}>
                     <Icon name="money" size={22} color="#ffffff" />
                     <Text style={Styles.text}>{__('Memberships')}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this.navigate.bind(this, "MyProfileScreen")} style={Styles.iconContainer}>
+                <TouchableOpacity onPress={this.navigate.bind(this, "MyProfileScreen", {})} style={Styles.iconContainer}>
                     <Icon name="cog" size={22} color="#ffffff" />
                     <Text style={Styles.text}>{__('My Profile')}</Text>
                 </TouchableOpacity>

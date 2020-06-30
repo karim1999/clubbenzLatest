@@ -63,6 +63,7 @@ import ProviderScreen from './containers/ProviderScreen'
 import FavoritesScreen from "./containers/FavoritesScreen";
 import MembershipsScreen from "./containers/MembershipsScreen";
 import SubscribeScreen from "./containers/SubscribeScreen";
+import MembershipAddress from './containers/MembershipAddress';
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -82,12 +83,6 @@ const DrawerNavigator = createDrawerNavigator(
     },
     BookingScreen: {
       screen: BookingScreen
-    },
-    MembershipsScreen: {
-      screen: MembershipsScreen
-    },
-    SubscribeScreen: {
-      screen: SubscribeScreen
     },
     FavoritesScreen: {
       screen: FavoritesScreen
@@ -351,6 +346,25 @@ const TopLevelNavigator = createStackNavigator({
       header:null
     }
   },
+  MembershipsScreen: {
+    screen: MembershipsScreen,
+    navigationOptions:{
+      header:null
+    }
+  },
+  MembershipAddress: {
+    screen: MembershipAddress,
+    navigationOptions:{
+      header:null
+    }
+  },
+  SubscribeScreen: {
+    screen: SubscribeScreen,
+    navigationOptions:{
+      header:null
+    }
+  },
+
 });
 
 const AppContainer = createAppContainer(TopLevelNavigator);

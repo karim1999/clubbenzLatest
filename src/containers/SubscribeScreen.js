@@ -8,27 +8,20 @@ import {
     ScrollView,
     TextInput,
     Dimensions,
-    ActivityIndicator,
-    FlatList, AsyncStorage, Alert, Image, Modal,
+    Alert,
+    Image,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {colors, fonts, metrics} from '../themes';
 import * as authAction from './../redux/actions/auth'
-import NavigationComponent from '../components/navigation/navigation';
 import __ from '../resources/copy'
 
-import NavigationService from "../NavigationService";
-import NotificationItem from "../components/list/NotificationItem";
-import {bookingList} from "../redux/actions/workshops";
-import {IMG_PREFIX_URL, REGISTER_ERROR1, REGISTER_ERROR2} from '../config/constant';
 import {NavigationEvents} from 'react-navigation';
 import Header from "../components/NewHomeScreen/Header";
-import {getMemberships, subscribe} from "../redux/actions/membership";
 import ImagePicker from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
 import Toast from 'react-native-simple-toast';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Fonts} from '../resources/constants/Fonts';
 const { width, height } = Dimensions.get('window');
 
@@ -36,10 +29,6 @@ class SubscribeScreen extends PureComponent {
     constructor(props) {
         super(props);
         this.state= {
-            memberships: [],
-            current: null,
-            isDone: false,
-            address: "",
             nid: "",
             idFront: "",
             idBack: "",
@@ -49,16 +38,7 @@ class SubscribeScreen extends PureComponent {
             idBackPhoto: null,
             licenceFrontPhoto: null,
             licenceBackPhoto: null,
-            acceptTerms: false,
-            clickAccept: true,
-            modalVisible: false,
-            isLoading: false,
         }
-    }
-    updateList(){
-        // let memberships= getMemberships(this.props.user.id).then(res => {
-        //     this.setState({memberships: res.memberships, current: res.current, isDone: true})
-        // })
     }
     showImagePicker = async(type) => {
 
@@ -138,161 +118,89 @@ class SubscribeScreen extends PureComponent {
         })
     }
 
-    // onBookingClick(id){
-    //     AsyncStorage.setItem("workshopId", id);
-    //     this.props.navigation.navigate("WorkshopDetailScreen" , {preferences:this.props.preferences, language: this.props.language} );
-    // }
-    isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
-        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
-    }
-
-    subscribe(){
-        // alert(this.props.navigation.state.params.name)
-        if(this.state.address, this.state.idBack, this.state.idFront, this.state.licenceBack, this.state.licenceFront){
-            this.setState({isLoading: true})
-            let idFrontPhoto = {
-                name: this.state.idFrontPhoto.fileName ? this.state.idFrontPhoto.fileName : 'profile_' + Date.now() + '.JPG',
-                type: this.state.idFrontPhoto.type ? this.state.idFrontPhoto.type : "image/jpeg",
-                uri: this.state.idFrontPhoto.uri,
-            }
-            let idBackPhoto = {
-                name: this.state.idBackPhoto.fileName ? this.state.idBackPhoto.fileName : 'profile_' + Date.now() + '.JPG',
-                type: this.state.idBackPhoto.type ? this.state.idBackPhoto.type : "image/jpeg",
-                uri: this.state.idBackPhoto.uri,
-            }
-            let licenseFrontPhoto = {
-                name: this.state.licenceFrontPhoto.fileName ? this.state.licenceFrontPhoto.fileName : 'profile_' + Date.now() + '.JPG',
-                type: this.state.licenceFrontPhoto.type ? this.state.licenceFrontPhoto.type : "image/jpeg",
-                uri: this.state.licenceFrontPhoto.uri,
-            }
-            let licenseBackPhoto = {
-                name: this.state.licenceBackPhoto.fileName ? this.state.licenceBackPhoto.fileName : 'profile_' + Date.now() + '.JPG',
-                type: this.state.licenceBackPhoto.type ? this.state.licenceBackPhoto.type : "image/jpeg",
-                uri: this.state.licenceBackPhoto.uri,
-            }
-
-            subscribe(this.props.user.id, this.props.navigation.state.params.membership.id, this.state.address, idFrontPhoto, idBackPhoto, licenseFrontPhoto, licenseBackPhoto, this.state.nid).then((res) => {
-                // alert(JSON.stringify(res))
-                console.log(res)
-                this.props.navigation.navigate("MembershipsScreen", {msg: "Your have subscribed successfully."})
-            }).catch((err) => {
-                alert(JSON.stringify(err))
-            }).then(() => {
-                this.setState({isLoading: false})
-            })
-
+    subscribeForm(){
+        if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid) {
+            this.props.navigation.navigate("MembershipAddress", {...this.state, membership: this.props.navigation.state.params.membership})
         }else{
             setTimeout(() => {
-                Toast.show("All Fields are required", Toast.LONG)
+                Toast.show(__("All Fields are required", this.props.language), Toast.LONG)
             }, 100)
         }
     }
-
     render() {
         return (
-            <View style={Styles.container}>
-                <NavigationEvents onDidFocus={() => this.updateList()} />
+            <View style={Style.container}>
+                <NavigationEvents/>
                 <StatusBar hidden={false} backgroundColor={"#0e2d3c"} barStyle='light-content' />
                 <Header title={"Subscribe"} navigation={this.props.navigation} goBack={true}/>
                 <ScrollView style={{flex: 1, marginTop: 120}} >
-                    <View style={Styles.card}>
-                        <View style={Styles.cardHeader}>
-                            <Text style={Styles.h1}>{this.props.navigation.state.params.name}</Text>
-                            <Text style={Styles.h1}>${this.props.navigation.state.params.price}</Text>
+                    <View style={Style.card}>
+                        <View style={Style.cardHeader}>
+                            <Text style={Style.h1}>{this.props.navigation.state.params.name}</Text>
+                            <Text style={Style.h1}>${this.props.navigation.state.params.price}</Text>
                         </View>
-                        <View style={Styles.cardContent}>
+                        <View style={Style.cardContent}>
                             {/*{*/}
                             {/*    !this.state.address &&*/}
                             {/*    <Text style={{textAlign: "center", marginTop: 10, color: 'red'}}>All the inputs are required.</Text>*/}
                             {/*}*/}
                             <TextInput
-                                style={{ borderColor: 'gray', borderWidth: 1, marginTop: 20, width: 200 }}
+                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white"}}
                                 onChangeText={text => this.setState({nid: text})}
-                                placeholder={"ID Number"}
+                                placeholder={__("ID Number", this.props.language)}
+                                placeholderTextColor = "#fff"
                                 value={this.state.nid}
                             />
-                            <TextInput
-                                style={{ borderColor: 'gray', borderWidth: 1, marginTop: 20, width: 200 }}
-                                onChangeText={text => this.setState({address: text})}
-                                placeholder={"Address"}
-                                value={this.state.address}
-                            />
-                            <View style={Styles.uploadArea}>
-                                <TouchableOpacity onPress={() => this.showImagePicker("idFront")} style={Styles.staticImages}>
-                                    <View style={{ height: 70, width: 70, borderRadius: 60, overflow: 'hidden', justifyContent: 'center', }}>
+                            <View style={[Style.uploadArea, {alignSelf: 'stretch'}]}>
+                                <TouchableOpacity onPress={() => this.showImagePicker("idFront")} style={Style.staticImages}>
+                                    <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
                                         <Image
                                             resizeMode='cover'
-                                            style={{ width: 70, height: 70, paddingRight: 10 }}
-                                            source={this.state.idFront == '' ? require('../resources/images/ic_menu_userplaceholder.png') : { uri: this.state.idFront }}
+                                            style={{ width: 100, height: 100, paddingRight: 10 }}
+                                            source={this.state.idFront == '' ? require('../resources/images/upload_image.png') : { uri: this.state.idFront }}
                                         />
                                     </View>
-                                    <Text>ID Front</Text>
+                                    <Text style={{color: "white"}}>{__("ID Front", this.props.language)}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.showImagePicker("idBack")} style={Styles.staticImages}>
-                                    <View style={{ height: 70, width: 70, borderRadius: 60, overflow: 'hidden', justifyContent: 'center', }}>
+                                <TouchableOpacity onPress={() => this.showImagePicker("idBack")} style={Style.staticImages}>
+                                    <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
                                         <Image
                                             resizeMode='cover'
-                                            style={{ width: 70, height: 70, paddingRight: 10 }}
-                                            source={this.state.idBack == '' ? require('../resources/images/ic_menu_userplaceholder.png') : { uri: this.state.idBack }}
+                                            style={{ width: 100, height: 100, paddingRight: 10 }}
+                                            source={this.state.idBack == '' ? require('../resources/images/upload_image.png') : { uri: this.state.idBack }}
                                         />
                                     </View>
-                                    <Text>ID Back</Text>
+                                    <Text style={{color: "white"}}>{__("ID Back", this.props.language)}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={Styles.uploadArea}>
-                                <TouchableOpacity onPress={() => this.showImagePicker("licenceFront")} style={Styles.staticImages}>
-                                    <View style={{ height: 70, width: 70, borderRadius: 60, overflow: 'hidden', justifyContent: 'center', }}>
+                            <View style={[Style.uploadArea, {alignSelf: 'stretch'}]}>
+                                <TouchableOpacity onPress={() => this.showImagePicker("licenceFront")} style={Style.staticImages}>
+                                    <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
                                         <Image
                                             resizeMode='cover'
-                                            style={{ width: 70, height: 70, paddingRight: 10 }}
-                                            source={this.state.licenceFront == '' ? require('../resources/images/ic_menu_userplaceholder.png') : { uri: this.state.licenceFront }}
+                                            style={{ width: 100, height: 100, paddingRight: 10 }}
+                                            source={this.state.licenceFront == '' ? require('../resources/images/upload_image.png') : { uri: this.state.licenceFront }}
                                         />
                                     </View>
-                                    <Text>License Front</Text>
+                                    <Text style={{color: "white"}}>{__("License Front", this.props.language)}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.showImagePicker("licenceBack")} style={Styles.staticImages}>
-                                    <View style={{ height: 70, width: 70, borderRadius: 60, overflow: 'hidden', justifyContent: 'center', }}>
+                                <TouchableOpacity onPress={() => this.showImagePicker("licenceBack")} style={Style.staticImages}>
+                                    <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
                                         <Image
-                                            resizeMode='cover'
-                                            style={{ width: 70, height: 70, paddingRight: 10 }}
-                                            source={this.state.licenceBack == '' ? require('../resources/images/ic_menu_userplaceholder.png') : { uri: this.state.licenceBack }}
+                                            resizeMode='contain'
+                                            style={{ width: 100, height: 100, paddingRight: 10 }}
+                                            source={this.state.licenceBack == '' ? require('../resources/images/upload_image.png') : { uri: this.state.licenceBack }}
                                         />
                                     </View>
-                                    <Text>License Back</Text>
+                                    <Text style={{color: "white"}}>{__("License Back", this.props.language)}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
-                                <View style={Styles.agreeToView}>
-                                    <TouchableOpacity onPress={() => this.setState({ modalVisible: true })}>
-                                        <Text style={[Styles.agreeTo]}>
-                                            {__('I agree to', this.props.language)}<Text style={[Styles.termsText]}>{__(' Terms & Conditions', this.props.language)}</Text>
-                                        </Text>
-                                    </TouchableOpacity>
-                                    <View>
-                                        <TouchableOpacity
-
-                                            onPress={() => this.setState({ /*acceptTerms: !this.state.acceptTerms*/ modalVisible: true })}
-                                        >
-                                            <Image
-                                                style={{ width: 35, height: 35 }}
-                                                source={
-                                                    this.state.acceptTerms
-                                                        ? require('../resources/images/checked.png')
-                                                        : require('../resources/images/un-checked.png')
-                                                }
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                            <View>
-                                <TouchableOpacity onPress={() => this.subscribe()}>
-                                    <View style={Styles.btn}>
-                                        <Text style={Styles.h1}>Subscribe</Text>
-                                        {/*{*/}
-                                        {/*    this.state.isLoading &&*/}
-                                        {/*    <ActivityIndicator size="large" color="white" />*/}
-                                        {/*}*/}
+                                <TouchableOpacity onPress={() => this.subscribeForm()}>
+                                    <View style={Style.btn}>
+                                        <Text
+                                            style={{color: "#0e2d3c", fontSize: 15}}
+                                        >{__("Next", this.props.language)}</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -301,74 +209,6 @@ class SubscribeScreen extends PureComponent {
                     </View>
                     <View></View>
                 </ScrollView>
-                <Modal
-                    visible={this.state.modalVisible}
-                    transparent
-                    onRequestClose={() => this.setState({ modalVisible: false })}
-                    animationType="fade"
-                >
-                    <View
-                        style={{
-                            width: width,
-                            height: height,
-
-                            paddingTop: height / 10,
-                            paddingLeft: width / 9,
-                            paddingRight: width / 9,
-                            paddingBottom: height / 11,
-                        }}
-                    >
-
-                        <View
-                            style={{
-                                borderWidth: 2,
-                                flex: 1,
-                                borderColor: 'grey',
-                                backgroundColor: '#FFFFFF',
-                            }}
-                        >
-
-                            {/* <Image
-                  source={{uri:this.props.imageUrl}}
-                  style={{ flex: 1, resizeMode: 'contain' }}
-              /> */}
-                            <ScrollView onScroll={({ nativeEvent }) => {
-                                if (this.isCloseToBottom(nativeEvent)) {
-                                    this.setState({ clickAccept: false, acceptTerms: true })
-                                }
-                            }}>
-                                <Text style={[Styles.termsTextModel, { textAlign: 'center', paddingTop: 3, fontFamily: Fonts.CircularMedium }]}>{__(' Terms & Conditions', this.props.language)}</Text>
-                                <Text style={{ paddingHorizontal: 10, textAlign: 'justify', fontFamily: Fonts.CircularBook }}>{"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a lonLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a lonLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a lonLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a lonLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a lonLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."}</Text>
-                            </ScrollView>
-                            <View
-                                style={{
-                                    borderWidth: 1,
-                                    borderColor: 'grey',
-                                    position: 'absolute',
-                                    top: -15,
-                                    right: -8,
-                                    // backgroundColor: 'white',
-                                    width: 33,
-                                    height: 33,
-                                    borderRadius: 16,
-                                }}
-                            >
-                                <TouchableOpacity
-                                    style={{
-                                        flex: 1,
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                    onPress={() => this.setState({ modalVisible: false })}
-                                >
-                                    {/* <Text >X</Text> */}
-                                    <Image style={{ width: 35, height: 35 }} source={require('../resources/images/cross_image.png')} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-
-                </Modal>
             </View>
 
         );
@@ -389,7 +229,7 @@ mapDispatchToProps = (dispatch) => bindActionCreators(
     },
     dispatch
 );
-const Styles = StyleSheet.create({
+const Style = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#e1e4e6"
@@ -399,47 +239,47 @@ const Styles = StyleSheet.create({
         flexDirection: "row"
     },
     card: {
-        marginTop: 20,
         flex: 1,
         margin: 20,
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-start",
-
+        backgroundColor: "#0e2d3c",
+        borderRadius: 20,
+        padding: 10,
     },
     cardHeader: {
         flex: .5,
         minWidth: 300,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#1e184d",
-        paddingVertical: 20
+        paddingVertical: 20,
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
     },
     h1: {
         color: "white",
-        fontSize: 20
+        fontSize: 25
     },
     h2: {
         fontSize: 18,
-        marginTop: 10
+        marginTop: 10,
+        color: "white",
     },
     cardContent: {
         flex: 3,
-        minWidth: 300,
-        alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "white"
     },
     btn: {
-        backgroundColor: "#1e184d",
-        color: "white",
+        backgroundColor: "white",
         fontSize: 20,
-        borderRadius: 5,
+        borderRadius: 50,
         marginTop: 20,
-        paddingHorizontal: 30,
+        paddingHorizontal: 40,
         paddingVertical: 10,
         marginBottom: 20,
-        flexDirection: "row"
+        flexDirection: "row",
+        alignSelf: 'center'
     },
     staticImages: {
         borderRadius: 40,
@@ -449,8 +289,7 @@ const Styles = StyleSheet.create({
     uploadArea: {
         flexDirection: "row",
         justifyContent: "space-between",
-        width: 200,
-        marginTop: 20
+        marginTop: 20,
     },
     btnStyle: {
         width: metrics.deviceWidth - 40,

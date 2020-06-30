@@ -254,7 +254,28 @@ const es = {
   'My Card': 'بطاقتي',
   'My Bookings': 'حجوزاتي',
   'My Booking': 'حجوزاتي',
-  'Favorite Parts': 'المفضلة'
+  'Favorite Parts': 'المفضلة',
+  'Subscribe': 'اشترك',
+  'ID Number': 'الرقم القومي',
+  'ID Back': 'البطاقة من الخلف',
+  'ID Front': 'البطاقة من الامام',
+  'License Back': 'رخصة السواقة من الخلف',
+  'License Front': 'رخصة السواقة من الامام',
+  'All Fields are required': 'جميع الحقول مطلوبة',
+  'Delivery Info': 'معلومات الشحن',
+  'Payment Info': 'معلومات الدفع',
+  'Select a country': 'اختار دولة',
+  'Select a state': 'اختار مدينة',
+  'Select a city': 'اختار منطقة',
+  'Address': 'العنوان',
+  'Payment Method:': 'طريقة الدفع',
+  'Cash': 'كاش',
+  'Credit': 'كريدت',
+  'This method is not available right now.': 'هذه الطريقة غير متوفرة حاليا.',
+  'Membership:': 'العضوية: ',
+  'Expiring Date:': 'تاريخ الانتهاء:',
+
+
 };
 
 export default function __(k ,language) {
