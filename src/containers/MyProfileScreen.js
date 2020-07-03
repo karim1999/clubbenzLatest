@@ -46,6 +46,7 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 const linkToFB = false;
 
 import Permissions, {request, PERMISSIONS} from 'react-native-permissions';
+import {getMemberships} from '../redux/actions/membership';
 
 class MyProfileScreen extends PureComponent {
 	constructor(props) {
@@ -83,6 +84,7 @@ class MyProfileScreen extends PureComponent {
 			text: '',
 			selected_language: '',
 			fb__pic: '',
+			current: null
 
 		};
 
@@ -450,6 +452,7 @@ class MyProfileScreen extends PureComponent {
 		// 	this.setState({ updated_car: true})
 		// }
 		// this.getFacebookProfileFromFacebook()
+
 		if (this.props.preferences.years != null) {
 			for (i = 0; i < this.props.preferences.years.length; i++) {
 
@@ -464,6 +467,11 @@ class MyProfileScreen extends PureComponent {
 			this.setState({ selected_language: 'العربية' });
 		else
 			this.setState({ selected_language: 'English' });
+
+		let memberships= getMemberships(this.props.user.id).then(res => {
+			this.setState({current: res.current})
+		})
+
 	}
 
 
@@ -552,27 +560,30 @@ class MyProfileScreen extends PureComponent {
 					<View
 						style={{ backgroundColor: '#fff', paddingVertical: height * 0.01, borderRadius: width * 0.05 }}
 					>
-						<View
-							style={{
-								backgroundColor: '#11455f',
-								flexDirection: 'row',
-								alignItems: 'center',
-								borderRadius: width * 0.05,
-								paddingHorizontal: width * 0.02,
-								paddingVertical: width * 0.01,
-								alignSelf: 'center',
-							}}
-						>
-							<Text
+						{
+							this.state.current &&
+							<View
 								style={{
-									color: '#fff',
-									fontSize: width * 0.025,
-									fontFamily: Fonts.CircularBoldItalic,
+									backgroundColor: '#11455f',
+									flexDirection: 'row',
+									alignItems: 'center',
+									borderRadius: width * 0.05,
+									paddingHorizontal: width * 0.02,
+									paddingVertical: width * 0.01,
+									alignSelf: 'center',
 								}}
 							>
-								Classic member
-							</Text>
-						</View>
+								<Text
+									style={{
+										color: '#fff',
+										fontSize: width * 0.025,
+										fontFamily: Fonts.CircularBoldItalic,
+									}}
+								>
+									{this.state.current.name}
+								</Text>
+							</View>
+						}
 						<View style={[styles.center, { flexDirection: 'row', marginTop: 3 }]}>
 							<Text style={{ textAlign: 'center', color: '#8E8E93', fontFamily: Fonts.CircularMediumItalic, fontSize: width * 0.035, }}>
 								{__('Member since', this.props.language)}

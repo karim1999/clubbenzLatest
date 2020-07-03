@@ -4,6 +4,7 @@ import { Text, Image, StyleSheet, View, Dimensions, Platform, TouchableWithoutFe
 import { colors, fonts, metrics, styles } from '../../themes';
 import { Fonts } from '../../resources/constants/Fonts';
 const { width, height } = Dimensions.get('window');
+import Icon from "react-native-vector-icons/AntDesign"
 class Navigation extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -62,9 +63,8 @@ class Navigation extends PureComponent {
 
 					{this.props.rightIcon &&
 					<View style={{flex: 1}}>
-						<View style={navigationStyle.rightContainer}>
-							(this.props.share ? (<TouchableWithoutFeedback onPress={this.props.onSharePress}>
-								<View>
+							{this.props.share ? (<TouchableWithoutFeedback onPress={this.props.onSharePress}>
+								<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
 									<Image
 										style={[styles.navigationMenuButton, {marginBottom: 5}]}
 										source={require('../../resources/icons/ic-share.png')}
@@ -79,24 +79,33 @@ class Navigation extends PureComponent {
 										/>
 									</View>
 								</TouchableWithoutFeedback>
-							))
-						</View>
+							)}
 					</View>
 					}
-					{(!this.props.headerimageIcone && this.props.homeButton != false)?
-					<View style={{flex: 1}}>
-						<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
-							<View style={navigationStyle.leftContainer}>
-								<Image
-									style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-									resizeMode="contain"
-									source={require('../../resources/images/white-logo.png')}
-								/>
-							</View>
-						</TouchableWithoutFeedback>
-					</View> : <View style={{flex: 1}}></View>
+					{
+						this.props.favorite ?
+							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}}>
+								<TouchableWithoutFeedback onPress={this.props.onPressFavorite}>
+									<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
+										<Icon
+											style={[styles.navigationMenuButton, {marginBottom: 5}]}
+											name={this.props.isFavorite ? "star" : "staro"} size={27} color={this.props.isFavorite ? "#F24601": "white"}/>
+									</View>
+								</TouchableWithoutFeedback>
+							</View> :
+							!this.props.headerimageIcone && this.props.homeButton != false?
+								<View style={{flex: 1}}>
+									<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
+										<View style={navigationStyle.leftContainer}>
+											<Image
+												style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
+												resizeMode="contain"
+												source={require('../../resources/images/white-logo.png')}
+											/>
+										</View>
+									</TouchableWithoutFeedback>
+								</View> : <View style={{flex: 1}}></View>
 					}
-
 
 				</View>
 			</View>

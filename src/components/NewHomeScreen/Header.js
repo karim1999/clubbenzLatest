@@ -1,7 +1,20 @@
-import {Text, View, StyleSheet, ImageBackground, Image, TextInput, TouchableWithoutFeedback, I18nManager} from "react-native";
+import {
+    Text,
+    View,
+    StyleSheet,
+    ImageBackground,
+    Image,
+    TextInput,
+    TouchableWithoutFeedback,
+    I18nManager,
+    Platform,
+} from 'react-native';
 import React, {PureComponent} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import __ from "../../resources/copy";
+import {bindActionCreators} from 'redux';
+import * as authAction from '../../redux/actions/auth';
+import {connect} from 'react-redux';
 
 class Header extends PureComponent {
     constructor(props) {
@@ -28,13 +41,22 @@ class Header extends PureComponent {
                 resizeMode= 'stretch'
                 source={require("./../../resources/images/header.png")} style={[Styles.nav, {minHeight: this.props.noSearch ? 80 : 120}]}>
                 <View style={Styles.navContent}>
+                    <View style={[Styles.navMiddle, {alignItems: 'flex-start'}]}>
+
                     {
                         this.props.goBack ?
-                            <Icon onPress={this.goBack} size={23} color={"#FFFFFF"} name={I18nManager.isRTL ? "chevron-right" : "chevron-left"}/>
+                            <TouchableWithoutFeedback onPress={this.goBack}>
+                                <Image
+                                    style={{height:27,width:27, alignItems: 'center', justifyContent: 'center', transform: [{scaleX: I18nManager.isRTL ? -1 : 1}] }}
+                                    resizeMode="contain"
+                                    source={require('../../resources/images/ic-back.png')}
+                                />
+                            </TouchableWithoutFeedback>
                             :
                             <Icon onPress={this.onSlidePress} size={23} color={"#FFFFFF"} name="bars"/>
                     }
-                    <View style={Styles.navMiddle}>
+                    </View>
+                    <View style={[Styles.navMiddle, {flex: 2}]}>
                         {
                             this.props.title ?
                                 <Text style={Styles.title}>{this.props.title}</Text>
@@ -43,7 +65,7 @@ class Header extends PureComponent {
                         }
                         {
                             !this.props.noSearch &&
-                            <View style={Styles.inputContainer}>
+                            <View style={[Styles.inputContainer, this.props.language.isArabic ? {flexDirection: "row-reverse"} : {}]}>
                                 <View styles={Styles.inputIcon}>
                                     <Icon size={16} color={"#FFFFFF"} name="search"/>
                                 </View>
@@ -58,25 +80,30 @@ class Header extends PureComponent {
                             </View>
                         }
                     </View>
-                    {
-                        this.props.homeButton ?
-                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
-                                <Image
-                                    style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-                                    resizeMode="contain"
-                                    source={require('../../resources/images/white-logo.png')}
-                                />
-                            </TouchableWithoutFeedback>
-                            :
+                    <View style={[Styles.navMiddle, {alignItems: 'flex-end'}]}>
+                        {
+                            this.props.homeButton &&
+                            <Icon onPress={() => this.props.navigation.navigate('Home')} size={23} color={"#FFFFFF"} name="home"/>
+                        }
+                        {
+                            this.props.notificationIcon &&
                             <Icon onPress={this.onNotificationIconPress} size={23} color={"#FFFFFF"} name="bell-o"/>
-                    }
+                        }
+
+                    </View>
                 </View>
             </ImageBackground>
         );
     }
 }
 
-export default Header;
+mapStateToProps = (state) => {
+    return {
+        language: state.language,
+    }
+}
+
+export default connect(mapStateToProps, null)(Header)
 
 let Styles= StyleSheet.create({
 
@@ -97,6 +124,7 @@ let Styles= StyleSheet.create({
         zIndex: 2
     },
     navMiddle: {
+        flex: 1,
         justifyContent: "center",
         alignItems: "center"
     },
@@ -126,4 +154,11 @@ let Styles= StyleSheet.create({
     inputIcon: {
         position: "absolute",
     },
+    leftContainer: {
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+
 })

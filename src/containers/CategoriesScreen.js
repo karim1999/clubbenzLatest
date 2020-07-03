@@ -14,6 +14,7 @@ import * as partAction from "./../redux/actions/parts";
 import { connect } from "react-redux";
 import { Fonts } from '../resources/constants/Fonts';
 import __ from '../resources/copy';
+import Header from '../components/NewHomeScreen/Header';
 
 class CategoriesScreen extends Component {
 	state = {
@@ -73,18 +74,26 @@ class CategoriesScreen extends Component {
 			<View style={[styles.columnContainer]}>
 				<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
 				{/* <NavigationComponent title={this.props.navigation.state.params.selected_car.model} subTitle={this.props.navigation.state.params.selected_car.model_text}  goBack={() => this.props.navigation.goBack()} /> */}
-
-				<NavigationComponent
+				<Header
 					homeButton={false}
 					navigation={this.props.navigation}
 					goBack={() => this.props.navigation.goBack()}
 					placeholder={__('Search Part Catalogue', this.props.language)}
 					onSearch={this.onSearch}
 					onSubmitEditing={this.onSearch}
-				// onMapPress={this.onMapPress}
 				/>
 
-				<View style={styles.columnContainer}>
+				{/*<NavigationComponent*/}
+				{/*	homeButton={false}*/}
+				{/*	navigation={this.props.navigation}*/}
+				{/*	goBack={() => this.props.navigation.goBack()}*/}
+				{/*	placeholder={__('Search Part Catalogue', this.props.language)}*/}
+				{/*	onSearch={this.onSearch}*/}
+				{/*	onSubmitEditing={this.onSearch}*/}
+				{/*// onMapPress={this.onMapPress}*/}
+				{/*/>*/}
+
+				<View style={[styles.columnContainer, {marginTop: 120}]}>
 					{this.state.top_products.length > 0 ?
 
 						<View style={{ height: height * 0.20 }}>

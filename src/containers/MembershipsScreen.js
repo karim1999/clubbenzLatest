@@ -24,6 +24,7 @@ import {IMG_PREFIX_URL} from "../config/constant";
 import {NavigationEvents} from 'react-navigation';
 import Header from "../components/NewHomeScreen/Header";
 import {getMemberships, subscribe} from "../redux/actions/membership";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MembershipsScreen extends PureComponent {
     constructor(props) {
@@ -36,7 +37,8 @@ class MembershipsScreen extends PureComponent {
             modal2Visible: false,
             ar_msg: "",
             en_msg: "",
-            cardModal: false
+            cardModal: false,
+            benifits: []
         }
     }
     updateList(){
@@ -62,12 +64,24 @@ class MembershipsScreen extends PureComponent {
         this.props.navigation.navigate("SubscribeScreen", {membership: membership, name: membership.name, price: price})
         // })
     }
+    benifitsToggle(id){
+        let benifits= this.state.benifits.slice()
+        if(this.state.benifits.includes(id)){
+            var index = benifits.indexOf(id);
+            if (index !== -1){
+                benifits.splice(index, 1)
+            }
+        }else {
+            benifits.push(id)
+        }
+        this.setState({benifits})
+    }
 
     render() {
         return (
             <View style={Styles.container}>
                 <NavigationEvents onDidFocus={() => this.updateList()} />
-                <Header title={__('Memberships')} navigation={this.props.navigation} goBack={true}/>
+                <Header noSearch title={__('Memberships')} navigation={this.props.navigation} goBack={true}/>
                 <View style={{flex: 1, marginTop: 120}} >
                     {/*{*/}
                     {/*    (this.props.navigation.state.params && this.props.navigation.state.params.msg) &&*/}
@@ -89,16 +103,24 @@ class MembershipsScreen extends PureComponent {
                                         keyExtractor={(item, index) => item.id}
                                         renderItem={({item}) => (
                                             <View style={{flex: 1, alignItems: 'center', justifyContent: "center"}}>
-                                                {/*<Text style={Styles.h2}>{item.name}</Text>*/}
+                                                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 300, paddingTop: 10}}>
+                                                    <Icon name={this.state.benifits.includes(item.id) ? "minus-circle" : "plus-circle"} size={15} color="white" />
+                                                    <Text onPress={() => this.benifitsToggle(item.id)} style={Styles.h3}>{item.name}</Text>
+                                                </View>
                                                 {
-                                                    item.details.map(info => <Text key={info.id} style={Styles.h3}>{info.details}</Text> )
+                                                    this.state.benifits.includes(item.id) &&
+                                                    <View>
+                                                        {
+                                                            item.details.map(info => <Text key={info.id} style={Styles.h3}>{info.details}</Text> )
+                                                        }
+                                                    </View>
                                                 }
                                             </View>
                                         )}
                                     />
                                     <View>
                                         {
-                                            (!this.state.current || (this.state.current.id && item.id != this.state.current.membership_id && this.state.current.price < item.price) )&&
+                                            (!this.state.current)&&
                                             <TouchableOpacity onPress={() => this.subscribe(item,item.price)}>
                                                 <View style={Styles.btn}>
                                                     <Text style={[Styles.h1, {color: "#0e2d3c"}]}>{__("Subscribe", this.props.language)}</Text>
@@ -121,16 +143,20 @@ class MembershipsScreen extends PureComponent {
                     <View style={Styles.modalContainer}>
                         <View style={Styles.modal}>
                             <View style={Styles.modalTop}>
-                                <TouchableOpacity
-                                    style={{
-                                        flex: 1,
-                                        justifyContent: 'center',
-                                    }}
-                                    onPress={() => this.setState({ modal2Visible: false })}
-                                >
-                                    {/* <Text >X</Text> */}
-                                    <Image style={{ width: 35, height: 35 }} source={require('../resources/images/cross_image.png')} />
-                                </TouchableOpacity>
+                                <View style={{flex: 1, flexDirection: "row"}}>
+                                    <TouchableOpacity
+                                        style={{
+                                            justifyContent: 'center',
+                                        }}
+                                        onPress={() => this.setState({ modal2Visible: false })}
+                                    >
+                                        {/* <Text >X</Text> */}
+                                        <Image style={{ width: 35, height: 35 }} source={require('../resources/images/cross_image.png')} />
+                                    </TouchableOpacity>
+                                    <View style={{alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}}>
+                                        <Text style={{fontSize: 15, color: "white"}}>{__("Confirmation", this.props.language)}</Text>
+                                    </View>
+                                </View>
                             </View>
                             <View style={Styles.modalContent}>
                                 <Text style={Styles.modalContentText}>
@@ -164,14 +190,16 @@ class MembershipsScreen extends PureComponent {
                                 <View style={[Styles.modalContent, {padding: 0}]}>
                                     <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                                         <ImageBackground resizeMode={"contain"} style={{width: 300, height: 150}} source={require('./../resources/images/membership-card.png')}>
+                                            <View style={{justifyContent: 'center', flexDirection: 'row', flex: 1, marginTop: 10}}>
+                                                <Text style={{color: 'white', fontSize: 15}}>{this.state.current ? this.state.current.name : null}</Text>
+                                            </View>
                                         </ImageBackground>
                                         <View style={{justifyContent: 'space-between', flexDirection: 'row', top: -45, width: 220}}>
                                             <Text style={{color: 'white', fontSize: 12}}>{this.props.user.first_name+" "+this.props.user.last_name}</Text>
-                                            <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.nid : null}</Text>
-                                        </View>
-                                        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                                            <Text style={{fontSize: 18}}>{__("Membership:")} <Text style={{fontWeight: 'bold'}}>{this.state.current ? this.state.current.name : null}</Text></Text>
-                                            <Text style={{fontSize: 18}}>{__("Expiring Date:")} <Text style={{fontWeight: 'bold'}}>{this.state.current ? this.state.current.end_date.substring(0, 10) : null}</Text></Text>
+                                            <View style={{flexDirection: 'column'}}>
+                                                <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.nid : null}</Text>
+                                                <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.end_date.substring(0, 10) : null}</Text>
+                                            </View>
                                         </View>
                                         <Image style={{width: 150, height: 150, alignSelf: 'center'}} source={require('./../resources/images/qrcode.png')}/>
                                     </View>
@@ -243,11 +271,10 @@ const Styles = StyleSheet.create({
     },
     h3: {
         fontSize: 18,
-        marginTop: 10,
-        width: 300,
         paddingLeft: 10,
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
+        maxWidth: 280
     },
     cardContent: {
         flex: 3,

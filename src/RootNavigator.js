@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, I18nManager } from "react-native";
 import { connect } from "react-redux";
 import {
   createAppContainer
@@ -90,6 +90,7 @@ const DrawerNavigator = createDrawerNavigator(
   },
   {
     contentComponent: SlideMenuScreen,
+    drawerPosition: I18nManager.isRTL ?'right':'left',
     drawerWidth: Dimensions.get("window").width,
     navigationOptions: {
       header: null

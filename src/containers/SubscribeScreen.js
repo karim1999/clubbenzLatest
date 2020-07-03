@@ -140,6 +140,8 @@ class SubscribeScreen extends PureComponent {
                             <Text style={Style.h1}>${this.props.navigation.state.params.price}</Text>
                         </View>
                         <View style={Style.cardContent}>
+                                <Text style={{textAlign: "center", marginTop: 10, color: 'white'}}>{__("Please enter the following details:", this.props.language)}</Text>
+
                             {/*{*/}
                             {/*    !this.state.address &&*/}
                             {/*    <Text style={{textAlign: "center", marginTop: 10, color: 'red'}}>All the inputs are required.</Text>*/}

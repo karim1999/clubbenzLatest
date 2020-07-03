@@ -305,7 +305,7 @@ class MembershipAddress extends PureComponent {
                                 value={this.state.method}
                                 onValueChange={(value) => this.setMethod(value)}
                                 items={[
-                                    { label: __('Cash', this.props.language), value: 'Cash' },
+                                    { label: __('Cash on Delivery', this.props.language), value: 'Cash' },
                                     { label: __('Credit', this.props.language), value: 'Credit' },
                                 ]}
                             />

@@ -14,7 +14,7 @@ const Styles = {
       flex: 1,
       backgroundColor: colors.background,
     },
-    
+
     title: {
       color: colors.snow,
     },

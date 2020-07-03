@@ -16,6 +16,7 @@ import { Fonts } from '../../resources/constants/Fonts';
 import __ from '../../resources/copy';
 import { returnProfilePicture, returnProfilePictureWithoutPrefix } from '../../components/profile/ProfilePicture';
 import RNRestart from 'react-native-restart';
+import {getMemberships} from '../../redux/actions/membership';
 
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -24,11 +25,15 @@ class SlideMenuScreen extends Component {
 		super(props);
 		this.state = {
 			selected: 1,
+			current: null
 		};
 	}
 	componentDidMount() {
 		const selected = this.props.navigation.getParam('selected', 1);
 		this.setState({ selected: selected });
+		let memberships= getMemberships(this.props.user.id).then(res => {
+			this.setState({current: res.current})
+		})
 	}
 	logout = () => {
 		AsyncStorage.clear()
@@ -487,25 +492,28 @@ class SlideMenuScreen extends Component {
 					</View>
 					<View style={style.midView}>
 						<TouchableOpacity onPress={() => { this.props.navigation.navigate('MyProfileScreen') }}>
-							<View
-								style={{
-									backgroundColor: colors.blueText,
-									borderRadius: width * 0.05,
-									paddingHorizontal: width * 0.02,
-									paddingVertical: width * 0.005,
-									alignSelf: 'flex-start',
-								}}
-							>
-								<Text
+							{
+								this.state.current &&
+								<View
 									style={{
-										color: '#fff',
-										fontSize: width * 0.02,
-										fontStyle: 'italic',
+										backgroundColor: colors.blueText,
+										borderRadius: width * 0.05,
+										paddingHorizontal: width * 0.02,
+										paddingVertical: width * 0.005,
+										alignSelf: 'flex-start',
 									}}
 								>
-									{__('Classic member' , this.props.language)}
-								</Text>
-							</View>
+									<Text
+										style={{
+											color: '#fff',
+											fontSize: width * 0.02,
+											fontStyle: 'italic',
+										}}
+									>
+										{this.state.current.name}
+									</Text>
+								</View>
+							}
 							<Text style={{ color: '#000', fontSize: width * 0.04, fontFamily: Fonts.CircularMedium, alignSelf: 'flex-start' }}>{user.first_name} {user.last_name}</Text>
 							<Text style={{ fontSize: width * 0.025, fontFamily: Fonts.CircularMediumItalic }}>
 							{__('Member since' , this.props.language)} <Text style={{ color: '#000' }}>{member_since}</Text>
@@ -515,7 +523,7 @@ class SlideMenuScreen extends Component {
 					<View style={style.rightView}>
 						<TouchableOpacity onPress={() => this.logout()}>
 							{/* <IconF name="log-out" size={width * 0.07} color={colors.blueText} /> */}
-							<Image style={{ height: 32, width: 32, }} source={require('../../resources/images/ic-logout.png')} />
+							<Image style={{ height: 32, width: 32, transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}} source={require('../../resources/images/ic-logout.png')} />
 						</TouchableOpacity>
 					</View>
 				</View>

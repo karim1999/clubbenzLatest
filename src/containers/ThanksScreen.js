@@ -20,7 +20,7 @@ class ThanksScreen extends PureComponent {
     }
 
     state = {
-        
+
         userName: this.props.navigation.state.params.user.username ? this.props.navigation.state.params.user.username : "No Name",
         userFirstName: this.props.navigation.state.params.user.first_name ? this.props.navigation.state.params.user.first_name : '',
         userLastName: this.props.navigation.state.params.user.last_name ? this.props.navigation.state.params.user.last_name : '',
@@ -38,7 +38,7 @@ class ThanksScreen extends PureComponent {
         const profile_picture = returnProfilePicture(this.props.navigation.state.params.user) != '' ? {uri: returnProfilePicture(this.props.navigation.state.params.user)} : require('../resources/images/ic_menu_userplaceholder.png');
         return (
             <View style={[styles.center, thanksScreenStyle.container]}>
-                <StatusBar 
+                <StatusBar
                     hidden={false}
                     backgroundColor={colors.navgationBar}
                 />
@@ -53,7 +53,7 @@ class ThanksScreen extends PureComponent {
 
                 <Image style={thanksScreenStyle.image}
                     source={profile_picture} />
-                    
+
                 <Text style={[thanksScreenStyle.textStyle,
                 {
                     textAlign: "center",
@@ -61,7 +61,7 @@ class ThanksScreen extends PureComponent {
                     fontSize: 17,
                     fontFamily: Fonts.CircularMedium,
                 }]}>
-                {this.state.isBooking == true ? __('Your request sent successfully, our agent will call you shortly' , this.props.language) : (this.state.isSolution == true ? __('Your solution has been submitted successfully', this.props.language) : __('Your voice matters and helps other members' , this.props.language))}</Text>
+                {this.state.isBooking == true ? __('Your request sent successfully, our agent will call you shortly' , this.props.language) : (this.state.isSolution == true ? __('Your solution has been submitted successfully', this.props.language) : __('Thank you for your feedback-your message is under review' , this.props.language))}</Text>
 
                 <TouchableOpacity style={[thanksScreenStyle.button, {fontFamily: Fonts.CircularMedium}]} onPress={this.onDonePress}>
                     <Text style={thanksScreenStyle.textStyle}>{__('Continue' , this.props.language)}

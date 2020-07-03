@@ -269,11 +269,14 @@ const es = {
   'Select a city': 'اختار منطقة',
   'Address': 'العنوان',
   'Payment Method:': 'طريقة الدفع',
-  'Cash': 'كاش',
+  'Cash on Delivery': 'الدفع عند الاستلام',
   'Credit': 'كريدت',
   'This method is not available right now.': 'هذه الطريقة غير متوفرة حاليا.',
   'Membership:': 'العضوية: ',
   'Expiring Date:': 'تاريخ الانتهاء:',
+  'Please enter the following details:': 'من فضلك ادحل جميع البيانات التالية:',
+  'Confirmation': 'رسالة تأكيدية',
+  'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك'
 
 
 };

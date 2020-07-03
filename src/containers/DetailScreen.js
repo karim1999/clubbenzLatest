@@ -40,6 +40,8 @@ import { ShareDialog } from 'react-native-fbsdk';
 import SendSMS from 'react-native-sms';
 import {addToFavorite, checkIsFavorite, removeFromFavorite} from "../redux/actions/favorite";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import NavigationComponent from '../components/navigation/navigation';
+import NavigationService from '../NavigationService';
 
 const navigationOptions = {
 	header: null,
@@ -352,66 +354,84 @@ class DetailScreen extends PureComponent {
 
 				{/* <View style={{aspectRatio: 1.77, width: metrics.deviceWidth, paddingTop: 20, backgroundColor: 'black'}}> */}
 
-				<View style={{ flex: 600, height: 280, width: metrics.deviceWidth, }}>
-					<View
-						style={{
-							justifyContent: 'space-between',
-							flexDirection: 'row',
-							alignItems: 'center',
-							paddingHorizontal: 18,
-							zIndex: 1,
-							height: 62,
-							paddingTop: Platform.OS === 'ios' ? 25 : 0
-							// backgroundColor: 'black'
+				<View style={{ flex: 600, height: 280, width: metrics.deviceWidth }}>
+					<NavigationComponent
+						homeButton={false}
+						navigation={this.props.navigation}
+						goBack={this.goToBackScreen}
+						title={""}
+						subTitle={""}
+						rightIcon
+						share
+						favorite
+						isFavorite={this.state.isFavorite}
+						onSharePress={this.showShare}
+						onPressFavorite={() => {
+							if(this.state.isFavorite)
+								this.removeFromFavorite()
+							else
+								this.addToFavorite()
 						}}
-					>
-						<View style={{flex: 1}}>
-							<TouchableWithoutFeedback onPress={this.goToBackScreen}>
-								<Image
-									resizeMode="contain"
-									style={{ width: 32, height: 32, transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]  }}
-									source={require('../resources/images/ic-back.png')}
-								/>
-							</TouchableWithoutFeedback>
-						</View>
-						<View style={{flex: 1, flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end"}}>
-							<TouchableWithoutFeedback onPress={this.showShare}>
-								<Image
-									style={{ width: 32, height: 32 }}
-									source={require('../resources/icons/ic-share.png')}
-								/>
-							</TouchableWithoutFeedback>
-							<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>
-								<View style={{marginLeft: 10}}>
-									<Image
-										style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-										resizeMode="contain"
-										source={require('../resources/images/white-logo.png')}
-									/>
-								</View>
-							</TouchableWithoutFeedback>
-							{
-								this.state.loadingFavorite ?
-									<TouchableWithoutFeedback>
-										<View style={{marginLeft: 10}}>
-											<ActivityIndicator size={30} color="white" />
-										</View>
-									</TouchableWithoutFeedback> :
-								this.state.isFavorite ?
-									<TouchableWithoutFeedback onPress={() => this.removeFromFavorite()}>
-										<View style={{marginLeft: 10}}>
-											<Icon name="heart" size={30} color="#F24601"/>
-										</View>
-									</TouchableWithoutFeedback>
-									:
-									<TouchableWithoutFeedback onPress={() => this.addToFavorite()}>
-										<View style={{marginLeft: 10}}>
-											<Icon name="heart-o" size={30} color="white"/>
-										</View>
-									</TouchableWithoutFeedback>
-							}
-						</View>
-					</View>
+					/>
+					{/*<View*/}
+					{/*	style={{*/}
+					{/*		justifyContent: 'space-between',*/}
+					{/*		flexDirection: 'row',*/}
+					{/*		alignItems: 'center',*/}
+					{/*		paddingHorizontal: 18,*/}
+					{/*		zIndex: 1,*/}
+					{/*		height: 62,*/}
+					{/*		paddingTop: Platform.OS === 'ios' ? 25 : 0*/}
+					{/*		// backgroundColor: 'black'*/}
+					{/*	}}*/}
+					{/*>*/}
+					{/*	<View style={{flex: 1}}>*/}
+					{/*		<TouchableWithoutFeedback onPress={this.goToBackScreen}>*/}
+					{/*			<Image*/}
+					{/*				resizeMode="contain"*/}
+					{/*				style={{ width: 32, height: 32, transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]  }}*/}
+					{/*				source={require('../resources/images/ic-back.png')}*/}
+					{/*			/>*/}
+					{/*		</TouchableWithoutFeedback>*/}
+					{/*	</View>*/}
+					{/*	<View style={{flex: 1, flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end"}}>*/}
+					{/*		<TouchableWithoutFeedback onPress={this.showShare}>*/}
+					{/*			<Image*/}
+					{/*				style={{ width: 32, height: 32 }}*/}
+					{/*				source={require('../resources/icons/ic-share.png')}*/}
+					{/*			/>*/}
+					{/*		</TouchableWithoutFeedback>*/}
+					{/*		<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>*/}
+					{/*			<View style={{marginLeft: 10}}>*/}
+					{/*				<Image*/}
+					{/*					style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}*/}
+					{/*					resizeMode="contain"*/}
+					{/*					source={require('../resources/images/white-logo.png')}*/}
+					{/*				/>*/}
+					{/*			</View>*/}
+					{/*		</TouchableWithoutFeedback>*/}
+					{/*		{*/}
+					{/*			this.state.loadingFavorite ?*/}
+					{/*				<TouchableWithoutFeedback>*/}
+					{/*					<View style={{marginLeft: 10}}>*/}
+					{/*						<ActivityIndicator size={30} color="white" />*/}
+					{/*					</View>*/}
+					{/*				</TouchableWithoutFeedback> :*/}
+					{/*			this.state.isFavorite ?*/}
+					{/*				<TouchableWithoutFeedback onPress={() => this.removeFromFavorite()}>*/}
+					{/*					<View style={{marginLeft: 10}}>*/}
+					{/*						<Icon name="heart" size={30} color="#F24601"/>*/}
+					{/*					</View>*/}
+					{/*				</TouchableWithoutFeedback>*/}
+					{/*				:*/}
+					{/*				<TouchableWithoutFeedback onPress={() => this.addToFavorite()}>*/}
+					{/*					<View style={{marginLeft: 10}}>*/}
+					{/*						<Icon name="heart-o" size={30} color="white"/>*/}
+					{/*					</View>*/}
+					{/*				</TouchableWithoutFeedback>*/}
+					{/*		}*/}
+					{/*	</View>*/}
+					{/*</View>*/}
 					<View style={{ zIndex: -1, marginTop: -62, }}>
 						<Slideshow
 							height={280}
@@ -490,26 +510,43 @@ class DetailScreen extends PureComponent {
 										>
 											{this.state.partDetail.title ? this.state.partDetail.title : ""}
 										</Text>
+										<View style={{
+											backgroundColor: 'white',
+											borderColor: '#2eac6d',
+											justifyContent: 'center',
+											alignItems: 'center',
+											width: 40,
+											height: 20,
+											borderRadius: 4,
+											borderWidth: 1,
+											marginLeft: 5,
+											marginBottom: 10,
+										}}>
+											<Text style={{ color: '#2eac6d', fontSize: 11, fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.part_case ? this.state.partDetail.part_case : ""}</Text>
+										</View>
 									</View>
 
 									<Text style={{ fontSize: 14, fontFamily: Fonts.CircularMedium, color: '#8E8E93', alignSelf: 'flex-start' }}>{__('Part Number', this.props.language)}</Text>
 									<Text style={{ color: colors.blueText, fontSize: 24, fontFamily: Fonts.CircularBook, alignSelf: 'flex-start' }}>{this.state.partDetail.part_number ? this.state.partDetail.part_number : ""}</Text>
 								</View>
 								<View style={{ flex: 2, alignItems: 'flex-end', marginTop: 10, marginBottom: 10, maxWidth: 150, flexGrow: 1.8, }}>
-									<View style={{
-										backgroundColor: 'white',
-										borderColor: '#2eac6d',
-										justifyContent: 'center',
-										alignItems: 'center',
-										width: 40,
-										height: 20,
-										borderRadius: 4,
-										borderWidth: 1,
-										marginLeft: 5,
-										marginBottom: 10,
-									}}>
-										<Text style={{ color: '#2eac6d', fontSize: 11, fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.part_case ? this.state.partDetail.part_case : ""}</Text>
-									</View>
+									{
+										this.state.partDetail.featured &&
+										<View style={{
+											backgroundColor: '#2eac6d',
+											borderColor: '#2eac6d',
+											justifyContent: 'center',
+											alignItems: 'center',
+											borderRadius: 20,
+											paddingVertical: 5,
+											paddingHorizontal: 10,
+											borderWidth: 1,
+											marginLeft: 5,
+											marginBottom: 10,
+										}}>
+											<Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold', fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.featured ? __("Featured", this.props.language) : ""}</Text>
+										</View>
+									}
 
 									<Text style={{ color: colors.blueText, fontSize: 26, fontFamily: Fonts.CircularBook, }}>	{this.state.partDetail.price ? this.state.partDetail.price : "0"} {__('EGP', this.props.language)}</Text>
 									{/* {this.state.partDetail.discount > 10 ? <View style={{ flexDirection: 'row' }}> */}
@@ -554,10 +591,16 @@ class DetailScreen extends PureComponent {
 										paddingBottom: 10,
 									}}
 								>
-									<View style={{ flex: 2, justifyContent: 'center' }}>
-										<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, alignSelf: 'flex-start'}}>
-											{this.state.partDetail.description ? this.state.partDetail.description : __("No Description Available")}
-										</Text>
+									<View style={{ flex: 2, justifyContent: 'center', flexDirection: 'column' }}>
+										<View style={{flex: 1, alignItems: 'center', justifyContent: "center"}}>
+											<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, alignSelf: 'flex-start', flex: 1}}>
+												{this.state.partDetail.description ? this.state.partDetail.description : __("No Description Available")}
+											</Text>
+											<Text ellipsizeMode="tail" numberOfLines={8} style={{ color: colors.blueText, fontFamily: Fonts.circular_medium, fontSize: 14, alignSelf: 'flex-start'}}>
+												ID: <Text>{this.state.partDetail.id}</Text>
+											</Text>
+
+										</View>
 									</View>
 									<View
 										style={{
