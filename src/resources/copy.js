@@ -276,7 +276,8 @@ const es = {
   'Expiring Date:': 'تاريخ الانتهاء:',
   'Please enter the following details:': 'من فضلك ادحل جميع البيانات التالية:',
   'Confirmation': 'رسالة تأكيدية',
-  'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك'
+  'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك',
+  'Special Service Centers': 'الخدمات',
 
 
 };

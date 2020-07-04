@@ -72,7 +72,7 @@ class NewHomeScreen extends Component {
                 Location: true
             },
             {
-                serviceName: 'Services',
+                serviceName: 'Special Service Centers',
                 arabic_serviceName: 'الخدمات',
                 serviceUrl: require("./../resources/images/service3.png"),
                 path: 'ServiceListScreen',
@@ -81,14 +81,14 @@ class NewHomeScreen extends Component {
             {
                 serviceName: 'Part Catalogue',
                 arabic_serviceName: 'كتالوج قطع الغيار',
-                serviceUrl: require("./../resources/images/service5.png"),
+                serviceUrl: require("./../resources/images/service4.png"),
                 // path: 'PartListScreen',
                 path: 'CategoriesScreen',
             },
             {
                 serviceName: 'Cluster Error',
                 arabic_serviceName: 'اخطاء العداد',
-                serviceUrl: require("./../resources/images/service4.png"),
+                serviceUrl: require("./../resources/images/service5.png"),
                 path: 'SpecificationScreen',
             },
             // {
