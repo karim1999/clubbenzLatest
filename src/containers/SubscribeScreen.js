@@ -137,7 +137,7 @@ class SubscribeScreen extends PureComponent {
                     <View style={Style.card}>
                         <View style={Style.cardHeader}>
                             <Text style={Style.h1}>{this.props.navigation.state.params.name}</Text>
-                            <Text style={Style.h1}>${this.props.navigation.state.params.price}</Text>
+                            <Text style={Style.h1}>{this.props.navigation.state.params.price}{__('EGP', this.props.language)}</Text>
                         </View>
                         <View style={Style.cardContent}>
                                 <Text style={{textAlign: "center", marginTop: 10, color: 'white'}}>{__("Please enter the following details:", this.props.language)}</Text>

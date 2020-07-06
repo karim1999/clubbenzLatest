@@ -671,7 +671,7 @@ class NewHomeScreen extends Component {
                     <View style={Styles.social}>
                         <Title title={__("Spread the Word", this.props.language)} />
                         {this.props.preferences.profile_pictures ? <StaticUsersView home={true} profile_picture={profile_picture} profile_pictures={this.props.preferences.profile_pictures} /> : null}
-                        <Text style={{fontSize: 16, fontWeight: 'bold', textAlign: 'center', padding: 10}}>” Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et ”</Text>
+                        <Text style={{fontSize: 16, fontWeight: 'bold', textAlign: 'center', padding: 10}}>”{__("Expanding the network supports getting the best services", this.props.language)}”</Text>
                         <ShareButton onPress={this.onInviteOwnerPress.bind(this)} icon="check-square-o" title={__("Invite Owners", this.props.language)} />
                     </View>
                     {this.renderAds()}

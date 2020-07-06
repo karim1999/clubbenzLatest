@@ -278,7 +278,7 @@ const es = {
   'Confirmation': 'رسالة تأكيدية',
   'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك',
   'Special Service Centers': 'الخدمات',
-
+  'Expanding the network supports getting the best services': 'مشاركة الاخرين تدعم الحصول علي افضل الخدمات و العروض',
 
 };
 

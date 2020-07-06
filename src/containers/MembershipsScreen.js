@@ -96,7 +96,7 @@ class MembershipsScreen extends PureComponent {
                             <View style={Styles.card}>
                                 <View style={Styles.cardHeader}>
                                     <Text style={Styles.h1}>{item.name}</Text>
-                                    <Text style={Styles.h1}>${item.price}</Text>
+                                    <Text style={Styles.h1}>{item.price}{__('EGP', this.props.language)}</Text>
                                 </View>
                                 <View style={Styles.cardContent}>
                                     <FlatList
