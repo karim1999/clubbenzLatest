@@ -526,7 +526,7 @@ class MyProfileScreen extends PureComponent {
 		return (
 			<View style={[styleMyProfileScreen.container]}>
 				<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
-				<NavigationComponent	navigation={this.props.navigation}
+				<NavigationComponent homeButton={false}	navigation={this.props.navigation}
 														title={__('My Profile', this.props.language)} goBack={() => NavigationService.goBack()} />
 				<ScrollView>
 					<Text

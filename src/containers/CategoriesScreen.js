@@ -78,6 +78,7 @@ class CategoriesScreen extends Component {
 					homeButton={false}
 					navigation={this.props.navigation}
 					goBack={() => this.props.navigation.goBack()}
+					title={__('Part Catalogue', this.props.language)}
 					placeholder={__('Search Part Catalogue', this.props.language)}
 					onSearch={this.onSearch}
 					onSubmitEditing={this.onSearch}

@@ -336,6 +336,7 @@ class CarSelectionScreen extends PureComponent {
 			<View style={[styles.columnContainer]}>
 				<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
 				<NavigationComponent
+					homeButton={false}
 					navigation={this.props.navigation}
 					goBack={() => this.props.navigation.pop()} title={__("What's your Benz" , this.props.language)} subTitle={__("It’s super quick" , this.props.language)}/>
 

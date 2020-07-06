@@ -169,6 +169,9 @@ class DetailScreen extends PureComponent {
 			}
 
 		}).then(res => {
+			if(this.state.partDetail && this.state.partDetail.part_brand && this.state.partDetail.part_brand.length > 0){
+				// alert("hi")
+			}
 			if(res) {
 				this.setState({loadingFavorite: true})
 				let provider_id = res.provider_id
@@ -465,6 +468,12 @@ class DetailScreen extends PureComponent {
 						height: metrics.deviceHeight / 1.7,
 					}}
 				/> */}
+				{
+					this.state.partDetail && this.state.partDetail.part_brand && this.state.partDetail.part_brand.length > 0 &&
+					<View style={{top: -180, left: 120, flex: 1, alignSelf:'stretch'}}>
+						<Image style={{height: 25, resizeMode: 'contain'}} source={{uri: IMG_PREFIX_URL+this.state.partDetail.part_brand[0].image}} />
+					</View>
+				}
 
 				<View
 					style={{
@@ -481,6 +490,7 @@ class DetailScreen extends PureComponent {
 					}}
 				>
 					<ScrollView nestedScrollEnabled={true}>
+
 						<View style={{ flex: 2.5, marginTop: 14, width: width}}>
 
 							<View

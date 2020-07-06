@@ -6,6 +6,8 @@ const { height, width } = Dimensions.get('window');
 import NavigationService from "../NavigationService";
 import NavigationComponent from '../components/navigation/navWIthInput';
 import * as partAction from "./../redux/actions/parts";
+import Header from '../components/NewHomeScreen/Header';
+import __ from '../resources/copy';
 
 class PartSearchListScreen extends Component {
 
@@ -53,17 +55,26 @@ class PartSearchListScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <NavigationComponent
+        <Header
+            homeButton={true}
             navigation={this.props.navigation}
-            goBack={() => NavigationService.goBack()}
-          placeholder={this.props.navigation.state.params.search}
-          onSearch={this.onSearch}
-          onSubmitEditing={this.onSearch}
-          showText={true}
-          notClear={true}
-        // onMapPress={this.onMapPress}
+            goBack={() => this.props.navigation.goBack()}
+            title={__('Search', this.props.language)}
+            placeholder={this.props.navigation.state.params.search}
+            onSearch={this.onSearch}
+            onSubmitEditing={this.onSearch}
         />
-        <View>
+        {/*<NavigationComponent*/}
+        {/*    navigation={this.props.navigation}*/}
+        {/*    goBack={() => NavigationService.goBack()}*/}
+        {/*  placeholder={this.props.navigation.state.params.search}*/}
+        {/*  onSearch={this.onSearch}*/}
+        {/*  onSubmitEditing={this.onSearch}*/}
+        {/*  showText={true}*/}
+        {/*  notClear={true}*/}
+        {/*// onMapPress={this.onMapPress}*/}
+        {/*/>*/}
+        <View style={{marginTop: 120}}>
           <FlatList
             data={this.state.ItemList}
             keyExtractor={(item, index) => item.id}

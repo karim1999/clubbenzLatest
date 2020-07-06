@@ -22,6 +22,9 @@ class HowToScreen extends Component {
 			active_index:1
 		};
 	}
+	scrollToEnd = () => this.carousel.scrollToEnd({ animated: false });
+	scrollToEnd2 = () => this.carousel2.scrollToEnd({ animated: false });
+
 	__changeView=(event: Object)=>{
 		  if (event.nativeEvent.contentOffset.x == 0) {
 			 this.setState({ active_index: 1 })
@@ -104,41 +107,82 @@ class HowToScreen extends Component {
 						top: Height(20),
 					}}
 				>
-					
-					<View
-						style={[
-							{
-								 position: 'absolute',
-								 top: Height(-15),
-							}
-						]}
-					>
-						{this.state.active_index==1?<Image
-							source={howto_full_service}
-							style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
-							resizeMode="cover"
-						/>:null}
-						{this.state.active_index==2?<Image
-							source={howto_shops}
-							style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
-							resizeMode="cover"
-						/>:null}
-						{this.state.active_index==3?<Image
-							source={howto_ratings}
-							style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
-							resizeMode="cover"
-						/>:null}
-						{this.state.active_index==4?<Image
-							source={howto_cluster_error}
-							style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
-							resizeMode="cover"
-						/>:null}
-						{this.state.active_index==5?<Image
-							source={howto_car_parts}
-							style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
-							resizeMode="cover"
-						/>:null}
-					</View>
+
+					{
+						this.props.language.isArabic ?
+							<View
+								style={[
+									{
+										position: 'absolute',
+										top: Height(-15),
+									}
+								]}
+							>
+
+								{this.state.active_index==5?<Image
+									source={howto_full_service}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==4?<Image
+									source={howto_shops}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==3?<Image
+									source={howto_ratings}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==2?<Image
+									source={howto_cluster_error}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==1?<Image
+									source={howto_car_parts}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+							</View>
+							:
+							<View
+								style={[
+									{
+										position: 'absolute',
+										top: Height(-15),
+									}
+								]}
+							>
+
+								{this.state.active_index==1?<Image
+									source={howto_full_service}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==2?<Image
+									source={howto_shops}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==3?<Image
+									source={howto_ratings}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==4?<Image
+									source={howto_cluster_error}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+								{this.state.active_index==5?<Image
+									source={howto_car_parts}
+									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
+									resizeMode="cover"
+								/>:null}
+							</View>
+					}
+
 
 					<View style={{ position: 'absolute', justifyContent: 'flex-end', height: '100%' }}>
 						<View
@@ -160,270 +204,548 @@ class HowToScreen extends Component {
 							width: width,
 							height: Platform.OS === 'ios' ? 70 : 60,
 							// height: 60,
-							
+
 							flexDirection: 'row',
 							alignItems: 'center',
 							justifyContent: 'center',
 							zIndex:999,
 						}}
-					>	
-						<ScrollView
-						overScrollMode="never"
-						style={{ flex: 1 }}
-						pagingEnabled
-						horizontal
-						scrollEventThrottle={16}
-						onScroll={Animated.event([
-							{
-								nativeEvent: {
-									contentOffset: {
-										x: this.state.animation,
-									},
-								},
-							},
-						])}
 					>
-						<View style={{ width: width, height: '100%', justifyContent: 'center',flexDirection:'row' }}>
-						{this.state.active_index!=5?<View
-								style={{
-									height: width * 0.01,
-									borderRadius: width * 0.01,
-									width: width * 0.05,
-									backgroundColor: this.state.active_index==1?'#11455F':'#e6eff9',
-								}}
-							/>:null}
-							{this.state.active_index!=5?<View
-								style={{
-									height: width * 0.01,
-									borderRadius: width * 0.01,
-									width: width * 0.05,
-									marginLeft: width * 0.02,
-									backgroundColor: this.state.active_index==2?'#11455F':'#e6eff9',
-								}}
-							/>:null}
-							{this.state.active_index!=5?<View
-								style={{
-									height: width * 0.01,
-									borderRadius: width * 0.01,
-									width: width * 0.05,
-									marginLeft: width * 0.02,
-									backgroundColor: this.state.active_index==3?'#11455F':'#e6eff9',
-								}}
-							/>:null}
-							{this.state.active_index!=5?<View
-								style={{
-									height: width * 0.01,
-									borderRadius: width * 0.01,
-									width: width * 0.05,
-									marginLeft: width * 0.02,
-									backgroundColor: this.state.active_index==4?'#11455F':'#e6eff9',
-								}}
-							/>:null}
-							{this.state.active_index==5?
-						<TouchableOpacity style={styles.center} activeOpacity={0.8} onPress={() => this.props.navigation.navigate('LoginScreen')}>
-						<View
-							style={[
-								styles.center,
-								{
-									justifyContent: 'center',
-									alignItems: 'center',
-									backgroundColor: '#11455f',
-									zIndex: 1,
-									// alignSelf: 'center',
-									// borderRadius: width * 0.15,
-									borderRadius: 50,
-									borderWidth: 1,
-									borderColor: '#11455f',
-									height: 60,
-									width: metrics.deviceWidth - 40,
-									fontFamily: Fonts.CircularMedium,
-								}
-								
-							]}>
-							<Text
-								style={{ color: '#FFFFFF',
-										// height: 60,
-										// paddingVertical: height * 0.01,
-										// paddingHorizontal: width * 0.32,
-										fontSize: fonts.size.h11,
-										fontFamily: Fonts.circular_medium,
-										textAlignVertical: 'center'}}>
-								{__('Get Started' , this.props.language)}
-							</Text>
-						</View>
-					</TouchableOpacity>:<View
-								style={{
-									height: width * 0.01,
-									borderRadius: width * 0.01,
-									width: width * 0.05,
-									marginLeft: width * 0.02,
-									backgroundColor: '#e6eff9',
-								}}
-							/>}
-						</View>
-						</ScrollView>
+						{
+							this.props.language.isArabic ?
+								<ScrollView
+									ref={it => {
+										this.carousel2 = it;
+									}}
+									onContentSizeChange={this.scrollToEnd2}
+									overScrollMode="never"
+									style={{ flex: 1 }}
+									pagingEnabled
+									horizontal
+									scrollEventThrottle={16}
+									onScroll={Animated.event([
+										{
+											nativeEvent: {
+												contentOffset: {
+													x: this.state.animation,
+												},
+											},
+										},
+									])}
+								>
+									<View style={{ width: width, height: '100%', justifyContent: 'center',flexDirection:'row' }}>
+										{this.state.active_index!=1?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												backgroundColor: this.state.active_index==1?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=1?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==2?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=1?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==3?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=1?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==4?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=1?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==5?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index==1?
+											<TouchableOpacity style={styles.center} activeOpacity={0.8} onPress={() => this.props.navigation.navigate('LoginScreen')}>
+												<View
+													style={[
+														styles.center,
+														{
+															justifyContent: 'center',
+															alignItems: 'center',
+															backgroundColor: '#11455f',
+															zIndex: 1,
+															// alignSelf: 'center',
+															// borderRadius: width * 0.15,
+															borderRadius: 50,
+															borderWidth: 1,
+															borderColor: '#11455f',
+															height: 60,
+															width: metrics.deviceWidth - 40,
+															fontFamily: Fonts.CircularMedium,
+														}
+
+													]}>
+													<Text
+														style={{ color: '#FFFFFF',
+															// height: 60,
+															// paddingVertical: height * 0.01,
+															// paddingHorizontal: width * 0.32,
+															fontSize: fonts.size.h11,
+															fontFamily: Fonts.circular_medium,
+															textAlignVertical: 'center'}}>
+														{__('Get Started' , this.props.language)}
+													</Text>
+												</View>
+											</TouchableOpacity>:<View
+												style={{
+													height: width * 0.01,
+													borderRadius: width * 0.01,
+												}}
+											/>}
+									</View>
+								</ScrollView>
+								:
+								<ScrollView
+									overScrollMode="never"
+									style={{ flex: 1 }}
+									pagingEnabled
+									horizontal
+									scrollEventThrottle={16}
+									onScroll={Animated.event([
+										{
+											nativeEvent: {
+												contentOffset: {
+													x: this.state.animation,
+												},
+											},
+										},
+									])}
+								>
+									<View style={{ width: width, height: '100%', justifyContent: 'center',flexDirection:'row' }}>
+										{this.state.active_index!=5?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												backgroundColor: this.state.active_index==1?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=5?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==2?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=5?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==3?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index!=5?<View
+											style={{
+												height: width * 0.01,
+												borderRadius: width * 0.01,
+												width: width * 0.05,
+												marginLeft: width * 0.02,
+												backgroundColor: this.state.active_index==4?'#11455F':'#e6eff9',
+											}}
+										/>:null}
+										{this.state.active_index==5?
+											<TouchableOpacity style={styles.center} activeOpacity={0.8} onPress={() => this.props.navigation.navigate('LoginScreen')}>
+												<View
+													style={[
+														styles.center,
+														{
+															justifyContent: 'center',
+															alignItems: 'center',
+															backgroundColor: '#11455f',
+															zIndex: 1,
+															// alignSelf: 'center',
+															// borderRadius: width * 0.15,
+															borderRadius: 50,
+															borderWidth: 1,
+															borderColor: '#11455f',
+															height: 60,
+															width: metrics.deviceWidth - 40,
+															fontFamily: Fonts.CircularMedium,
+														}
+
+													]}>
+													<Text
+														style={{ color: '#FFFFFF',
+															// height: 60,
+															// paddingVertical: height * 0.01,
+															// paddingHorizontal: width * 0.32,
+															fontSize: fonts.size.h11,
+															fontFamily: Fonts.circular_medium,
+															textAlignVertical: 'center'}}>
+														{__('Get Started' , this.props.language)}
+													</Text>
+												</View>
+											</TouchableOpacity>:<View
+												style={{
+													height: width * 0.01,
+													borderRadius: width * 0.01,
+													width: width * 0.05,
+													marginLeft: width * 0.02,
+													backgroundColor: '#e6eff9',
+												}}
+											/>}
+									</View>
+								</ScrollView>
+						}
 					</View>
-					<ScrollView
-						overScrollMode="never"
-						style={{ flex: 1 }}
-						pagingEnabled
-						horizontal
-						scrollEventThrottle={16}
-						onScroll={this.__changeView}
-					>
-						<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
-							<Text
-								style={[
-									{
-										fontSize: width * 0.055,
-										color: '#11455F',
-										textAlign: 'center',
-										paddingHorizontal: width * 0.2,
-										// marginTop: width * 0.125,
-										marginTop: width * 0.07,
-										fontFamily: Fonts.circular_black,
-									},
-								]}
-							>
-								{__('Enjoy your ride' , this.props.language)}
-							</Text>
-							<Text
-								style={{
-									textAlign: 'center',
-									// paddingHorizontal: width * 0.05,
-									paddingHorizontal: Width(2.9),
-									marginTop: width * 0.04,
-									fontSize: width * 0.038,
-									// fontSize: 16,
-									color: '#000000',
-									fontFamily: Fonts.circular_book,
+					{
+						this.props.language.isArabic ?
+							<ScrollView
+								ref={it => {
+									this.carousel = it;
 								}}
+								onContentSizeChange={this.scrollToEnd}
+								overScrollMode="never"
+								style={{ flex: 1 }}
+								pagingEnabled
+								horizontal
+								scrollEventThrottle={16}
+								onScroll={this.__changeView}
 							>
-								{__('enabling your location and notifications shall give you access to nearst providers and latest promotions.' , this.props.language)}</Text>
-						</View>
+								<View style={{ width: width, justifyContent: 'center'  }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												// marginTop: width * 0.05,
+												marginTop: width * 0.01,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Parts hub' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Get access to the largest spare parts store with simple clicks' , this.props.language)}
+									</Text>
+								</View>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: colors.blueText,
+												textAlign: 'center',
+												marginTop: width * 0.1,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Learn more' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too' , this.props.language)}
+									</Text>
+								</View>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												// fontWeight: 'bold',
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												marginTop: width * 0.12,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Your opinion matters' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers' , this.props.language)}
+									</Text>
+								</View>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												// fontWeight: 'bold',
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												marginTop: width * 0.15,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Discover more.' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.' , this.props.language)}</Text>
+								</View>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: '#11455F',
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												// marginTop: width * 0.125,
+												marginTop: width * 0.07,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Enjoy your ride' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											// fontSize: 16,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('enabling your location and notifications shall give you access to nearst providers and latest promotions.' , this.props.language)}</Text>
+								</View>
 
-						<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
-							<Text
-								style={[
-									{
-										fontSize: width * 0.055,
-										// fontWeight: 'bold',
-										color: colors.blueText,
-										textAlign: 'center',
-										paddingHorizontal: width * 0.2,
-										marginTop: width * 0.15,
-										fontFamily: Fonts.circular_black,
-									},
-								]}
-							>
-								{__('Discover more.' , this.props.language)}
-							</Text>
-							<Text
-								style={{
-									textAlign: 'center',
-									// paddingHorizontal: width * 0.05,
-									paddingHorizontal: Width(2.9),
-									marginTop: width * 0.04,
-									fontSize: width * 0.038,
-									color: '#000000',
-									fontFamily: Fonts.circular_book,
-								}}
-							>
-								{__('Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.' , this.props.language)}</Text>
-						</View>
 
-						<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
-							<Text
-								style={[
-									{
-										fontSize: width * 0.055,
-										// fontWeight: 'bold',
-										color: colors.blueText,
-										textAlign: 'center',
-										paddingHorizontal: width * 0.2,
-										marginTop: width * 0.12,
-										fontFamily: Fonts.circular_black,
-									},
-								]}
-							>
-								{__('Your opinion matters' , this.props.language)}
-							</Text>
-							<Text
-								style={{
-									textAlign: 'center',
-									// paddingHorizontal: width * 0.05,
-									paddingHorizontal: Width(2.9),
-									marginTop: width * 0.04,
-									fontSize: width * 0.038,
-									color: '#000000',
-									fontFamily: Fonts.circular_book,
-								}}
-							>
-								{__('Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers' , this.props.language)}
-							</Text>
-						</View>
-						<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
-							<Text
-								style={[
-									{
-										fontSize: width * 0.055,
-										color: colors.blueText,
-										textAlign: 'center',
-										marginTop: width * 0.1,
-										fontFamily: Fonts.circular_black,
-									},
-								]}
-							>
-								{__('Learn more' , this.props.language)}
-							</Text>
-							<Text
-								style={{
-									textAlign: 'center',
-									// paddingHorizontal: width * 0.05,
-									paddingHorizontal: Width(2.9),
-									marginTop: width * 0.04,
-									fontSize: width * 0.038,
-									color: '#000000',
-									fontFamily: Fonts.circular_book,
-								}}
-							>
-								{__('Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too' , this.props.language)}
-							</Text>
-						</View>
 
-						<View style={{ width: width, justifyContent: 'center'  }}>
-							<Text
-								style={[
-									{
-										fontSize: width * 0.055,
-										color: colors.blueText,
-										textAlign: 'center',
-										paddingHorizontal: width * 0.2,
-										// marginTop: width * 0.05,
-										marginTop: width * 0.01,
-										fontFamily: Fonts.circular_black,
-									},
-								]}
+							</ScrollView>
+							:
+							<ScrollView
+								overScrollMode="never"
+								style={{ flex: 1 }}
+								pagingEnabled
+								horizontal
+								scrollEventThrottle={16}
+								onScroll={this.__changeView}
 							>
-								{__('Parts hub' , this.props.language)}
-							</Text>
-							<Text
-								style={{
-									textAlign: 'center',
-									// paddingHorizontal: width * 0.05,
-									paddingHorizontal: Width(2.9),
-									marginTop: width * 0.04,
-									fontSize: width * 0.038,
-									color: '#000000',
-									fontFamily: Fonts.circular_book,
-								}}
-							>
-								{__('Get access to the largest spare parts store with simple clicks' , this.props.language)}
-							</Text>
-						</View>
-					</ScrollView>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: '#11455F',
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												// marginTop: width * 0.125,
+												marginTop: width * 0.07,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Enjoy your ride' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											// fontSize: 16,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('enabling your location and notifications shall give you access to nearst providers and latest promotions.' , this.props.language)}</Text>
+								</View>
+
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												// fontWeight: 'bold',
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												marginTop: width * 0.15,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Discover more.' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.' , this.props.language)}</Text>
+								</View>
+
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												// fontWeight: 'bold',
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												marginTop: width * 0.12,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Your opinion matters' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers' , this.props.language)}
+									</Text>
+								</View>
+								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: colors.blueText,
+												textAlign: 'center',
+												marginTop: width * 0.1,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Learn more' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too' , this.props.language)}
+									</Text>
+								</View>
+
+								<View style={{ width: width, justifyContent: 'center'  }}>
+									<Text
+										style={[
+											{
+												fontSize: width * 0.055,
+												color: colors.blueText,
+												textAlign: 'center',
+												paddingHorizontal: width * 0.2,
+												// marginTop: width * 0.05,
+												marginTop: width * 0.01,
+												fontFamily: Fonts.circular_black,
+											},
+										]}
+									>
+										{__('Parts hub' , this.props.language)}
+									</Text>
+									<Text
+										style={{
+											textAlign: 'center',
+											// paddingHorizontal: width * 0.05,
+											paddingHorizontal: Width(2.9),
+											marginTop: width * 0.04,
+											fontSize: width * 0.038,
+											color: '#000000',
+											fontFamily: Fonts.circular_book,
+										}}
+									>
+										{__('Get access to the largest spare parts store with simple clicks' , this.props.language)}
+									</Text>
+								</View>
+							</ScrollView>
+
+
+					}
 				</View>
-				
+
 			</View>
 		);
 	}

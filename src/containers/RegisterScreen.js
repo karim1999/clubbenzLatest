@@ -433,7 +433,9 @@ class RegisterScreen extends PureComponent {
     return (
       <View style={[styleRegisterScreen.container]}>
         <StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content' />
-        <NavigationComponent	navigation={this.props.navigation}
+        <NavigationComponent
+            homeButton={false}
+            navigation={this.props.navigation}
                                                 title={__('Create your account', this.props.language)} subTitle={__('One step away', this.props.language)} goBack={this.goBack} />
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <TouchableOpacity onPress={this.fillFacebookInfo}>

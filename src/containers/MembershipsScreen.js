@@ -38,12 +38,13 @@ class MembershipsScreen extends PureComponent {
             ar_msg: "",
             en_msg: "",
             cardModal: false,
-            benifits: []
+            benifits: [],
+            all: {}
         }
     }
     updateList(){
         let memberships= getMemberships(this.props.user.id).then(res => {
-            this.setState({memberships: res.memberships, current: res.current, isDone: true, cardModal: (res.current && this.props.navigation.state.params.card != undefined)})
+            this.setState({all: res, memberships: res.memberships, current: res.current, isDone: true, cardModal: (res.current && this.props.navigation.state.params.card != undefined)})
             // alert(JSON.stringify(res))
             if(res.current)
                 this.setState({ar_msg: res.current.msg_ar, en_msg: res.current.msg_en})
@@ -105,13 +106,13 @@ class MembershipsScreen extends PureComponent {
                                             <View style={{flex: 1, alignItems: 'center', justifyContent: "center"}}>
                                                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 300, paddingTop: 10}}>
                                                     <Icon name={this.state.benifits.includes(item.id) ? "minus-circle" : "plus-circle"} size={15} color="white" />
-                                                    <Text onPress={() => this.benifitsToggle(item.id)} style={Styles.h3}>{item.name}</Text>
+                                                    <Text onPress={() => this.benifitsToggle(item.id)} style={Styles.h3}>{item.name_ar ? this.props.language.isArabic ? item.name_ar : item.name : item.name}</Text>
                                                 </View>
                                                 {
                                                     this.state.benifits.includes(item.id) &&
                                                     <View>
                                                         {
-                                                            item.details.map(info => <Text key={info.id} style={Styles.h3}>{info.details}</Text> )
+                                                            item.details.map(info => <Text key={info.id} style={Styles.h3}>{info.details_ar ? this.props.language.isArabic ? info.details_ar: info.details: info.details}</Text> )
                                                         }
                                                     </View>
                                                 }
@@ -120,7 +121,7 @@ class MembershipsScreen extends PureComponent {
                                     />
                                     <View>
                                         {
-                                            (!this.state.current)&&
+                                            (!this.state.current || this.state.allow)&&
                                             <TouchableOpacity onPress={() => this.subscribe(item,item.price)}>
                                                 <View style={Styles.btn}>
                                                     <Text style={[Styles.h1, {color: "#0e2d3c"}]}>{__("Subscribe", this.props.language)}</Text>
@@ -159,7 +160,7 @@ class MembershipsScreen extends PureComponent {
                                 </View>
                             </View>
                             <View style={Styles.modalContent}>
-                                <Text style={Styles.modalContentText}>
+                                <Text style={[Styles.modalContentText, {paddingBottom: 40}]}>
                                     {this.props.language.isArabic ? this.state.ar_msg : this.state.en_msg}
                                 </Text>
                             </View>
@@ -189,12 +190,12 @@ class MembershipsScreen extends PureComponent {
                             <View style={Styles.modalContent}>
                                 <View style={[Styles.modalContent, {padding: 0}]}>
                                     <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                                        <ImageBackground resizeMode={"contain"} style={{width: 300, height: 150}} source={require('./../resources/images/membership-card.png')}>
-                                            <View style={{justifyContent: 'center', flexDirection: 'row', flex: 1, marginTop: 10}}>
+                                        <ImageBackground resizeMode={"contain"} style={{width: 320, height: 180}} source={require('./../resources/images/membership-card.png')}>
+                                            <View style={{justifyContent: 'center', flexDirection: 'row', flex: 1, marginTop: 20}}>
                                                 <Text style={{color: 'white', fontSize: 15}}>{this.state.current ? this.state.current.name : null}</Text>
                                             </View>
                                         </ImageBackground>
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', top: -45, width: 220}}>
+                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', top: -55, width: 220}}>
                                             <Text style={{color: 'white', fontSize: 12}}>{this.props.user.first_name+" "+this.props.user.last_name}</Text>
                                             <View style={{flexDirection: 'column'}}>
                                                 <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.nid : null}</Text>

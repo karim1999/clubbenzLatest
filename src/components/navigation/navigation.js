@@ -5,6 +5,7 @@ import { colors, fonts, metrics, styles } from '../../themes';
 import { Fonts } from '../../resources/constants/Fonts';
 const { width, height } = Dimensions.get('window');
 import Icon from "react-native-vector-icons/AntDesign"
+import Icon2 from "react-native-vector-icons/FontAwesome"
 class Navigation extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -97,11 +98,7 @@ class Navigation extends PureComponent {
 								<View style={{flex: 1}}>
 									<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
 										<View style={navigationStyle.leftContainer}>
-											<Image
-												style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-												resizeMode="contain"
-												source={require('../../resources/images/white-logo.png')}
-											/>
+											<Icon2 name={"home"} style={[styles.navigationMenuButton, {marginBottom: 5}]} size={27} color={"white"}/>
 										</View>
 									</TouchableWithoutFeedback>
 								</View> : <View style={{flex: 1}}></View>
