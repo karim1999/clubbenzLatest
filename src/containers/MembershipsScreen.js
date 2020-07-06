@@ -96,23 +96,23 @@ class MembershipsScreen extends PureComponent {
                             <View style={Styles.card}>
                                 <View style={Styles.cardHeader}>
                                     <Text style={Styles.h1}>{item.name}</Text>
-                                    <Text style={Styles.h1}>{item.price}{__('EGP', this.props.language)}</Text>
+                                    <Text style={Styles.h1}>{item.price} {__('EGP', this.props.language)}</Text>
                                 </View>
                                 <View style={Styles.cardContent}>
                                     <FlatList
                                         data={item.benefits}
                                         keyExtractor={(item, index) => item.id}
                                         renderItem={({item}) => (
-                                            <View style={{flex: 1, alignItems: 'center', justifyContent: "center"}}>
+                                            <View style={{flex: 1, alignItems: 'flex-start', justifyContent: "center"}}>
                                                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 300, paddingTop: 10}}>
-                                                    <Icon name={this.state.benifits.includes(item.id) ? "minus-circle" : "plus-circle"} size={15} color="white" />
+                                                    <Icon style={{marginHorizontal: 5}} name={this.state.benifits.includes(item.id) ? "minus-circle" : "plus-circle"} size={15} color="white" />
                                                     <Text onPress={() => this.benifitsToggle(item.id)} style={Styles.h3}>{item.name_ar ? this.props.language.isArabic ? item.name_ar : item.name : item.name}</Text>
                                                 </View>
                                                 {
                                                     this.state.benifits.includes(item.id) &&
                                                     <View>
                                                         {
-                                                            item.details.map(info => <Text key={info.id} style={Styles.h3}>{info.details_ar ? this.props.language.isArabic ? info.details_ar: info.details: info.details}</Text> )
+                                                            item.details.map(info => <Text key={info.id} style={Styles.h3}> {info.details_ar ? this.props.language.isArabic ? info.details_ar: info.details: info.details}</Text> )
                                                         }
                                                     </View>
                                                 }
@@ -121,7 +121,7 @@ class MembershipsScreen extends PureComponent {
                                     />
                                     <View>
                                         {
-                                            (!this.state.current || this.state.allow)&&
+                                            (!this.state.current || this.state.all.allow)&&
                                             <TouchableOpacity onPress={() => this.subscribe(item,item.price)}>
                                                 <View style={Styles.btn}>
                                                     <Text style={[Styles.h1, {color: "#0e2d3c"}]}>{__("Subscribe", this.props.language)}</Text>
@@ -274,13 +274,11 @@ const Styles = StyleSheet.create({
         fontSize: 18,
         paddingLeft: 10,
         color: "white",
-        textAlign: "center",
         maxWidth: 280
     },
     cardContent: {
         flex: 3,
         minWidth: 300,
-        alignItems: "center",
         justifyContent: "space-between",
     },
     btn: {
