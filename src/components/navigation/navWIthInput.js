@@ -4,6 +4,7 @@ import { I18nManager, Text, Image, StyleSheet, View, Dimensions, TouchableWithou
 import { colors, fonts, metrics, styles } from '../../themes';
 import moduleName from 'react-native-vector-icons/';
 import Icon from "react-native-vector-icons/EvilIcons";
+import Icon2 from "react-native-vector-icons/FontAwesome";
 import { Fonts } from '../../resources/constants/Fonts';
 
 const { height, width } = Dimensions.get('window');
@@ -100,11 +101,7 @@ class NavInput extends PureComponent {
 						<View style={{flex: 1}}>
 							<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>
 								<View style={navigationStyle.leftContainer}>
-									<Image
-										style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-										resizeMode="contain"
-										source={require('../../resources/images/white-logo.png')}
-									/>
+									<Icon2 name={"home"} size={27} color={"white"} />
 								</View>
 							</TouchableWithoutFeedback>
 						</View>

@@ -28,6 +28,7 @@ import __ from '../resources/copy';
 import SimpleToast from 'react-native-simple-toast';
 import { store } from './../redux/create';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class SpecificationScreen extends Component {
 
@@ -118,11 +119,12 @@ class SpecificationScreen extends Component {
 									this.props.navigation.state.params.homeButton != false &&
 										<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>
 											<View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-												<Image
-													style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}
-													resizeMode="contain"
-													source={require('../resources/images/white-logo.png')}
-												/>
+												<Icon name={"home"} size={27} color={"white"} />
+												{/*<Image*/}
+												{/*	style={{height:27,width:27, alignItems: 'center', justifyContent: 'center'}}*/}
+												{/*	resizeMode="contain"*/}
+												{/*	source={require('../resources/images/white-logo.png')}*/}
+												{/*/>*/}
 											</View>
 										</TouchableWithoutFeedback>
 

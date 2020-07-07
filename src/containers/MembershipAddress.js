@@ -252,7 +252,7 @@ class MembershipAddress extends PureComponent {
             <View style={Style.container}>
                 <NavigationEvents onDidFocus={() => this.updateList()} />
                 <Header noSearch navigation={this.props.navigation} goBack={true}/>
-                <View style={{flex: 1, marginTop: 80}} >
+                <ScrollView style={{flex: 1, marginTop: 80}} >
                     <View style={Style.tab}>
                         <TouchableOpacity onPress={() => this.setState({tab: 1})} style={[Style.tabHeader, this.state.tab==1? Style.active: {}]}>
                             <Text style={[Style.tabHeaderText]}>{__("Delivery Info", this.props.language)}</Text>
@@ -287,7 +287,9 @@ class MembershipAddress extends PureComponent {
                                 items={this.state.cities}
                             />
                             <TextInput
-                                style={{borderColor: 'gray', borderBottomWidth: 1, marginTop: 20}}
+                                multiline={true}
+                                numberOfLines={3}
+                                style={{borderColor: 'gray', borderWidth: 1, marginTop: 20}}
                                 onChangeText={text => this.setState({address: text})}
                                 placeholder={__("Address", this.props.language)}
                                 value={this.state.address}
@@ -339,7 +341,7 @@ class MembershipAddress extends PureComponent {
                             </TouchableOpacity>
                         </View>
                     }
-                </View>
+                </ScrollView>
 
                 <Modal
                     visible={this.state.modalVisible}

@@ -104,10 +104,10 @@ class MembershipsScreen extends PureComponent {
                                         keyExtractor={(item, index) => item.id}
                                         renderItem={({item}) => (
                                             <View style={{flex: 1, alignItems: 'flex-start', justifyContent: "center"}}>
-                                                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 300, paddingTop: 10}}>
+                                                <TouchableOpacity onPress={() => this.benifitsToggle(item.id)} style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', maxWidth: 300, paddingTop: 20}}>
                                                     <Icon style={{marginHorizontal: 5}} name={this.state.benifits.includes(item.id) ? "minus-circle" : "plus-circle"} size={15} color="white" />
-                                                    <Text onPress={() => this.benifitsToggle(item.id)} style={Styles.h3}>{item.name_ar ? this.props.language.isArabic ? item.name_ar : item.name : item.name}</Text>
-                                                </View>
+                                                    <Text style={Styles.h3}>{item.name_ar ? this.props.language.isArabic ? item.name_ar : item.name : item.name}</Text>
+                                                </TouchableOpacity>
                                                 {
                                                     this.state.benifits.includes(item.id) &&
                                                     <View>
@@ -123,8 +123,8 @@ class MembershipsScreen extends PureComponent {
                                         {
                                             (!this.state.current || this.state.all.allow)&&
                                             <TouchableOpacity onPress={() => this.subscribe(item,item.price)}>
-                                                <View style={Styles.btn}>
-                                                    <Text style={[Styles.h1, {color: "#0e2d3c"}]}>{__("Subscribe", this.props.language)}</Text>
+                                                <View style={[Styles.btn, {marginHorizontal: 20}]}>
+                                                    <Text style={[Styles.h1, {color: "#0e2d3c", textAlign: 'center'}]}>{__("Subscribe", this.props.language)}</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         }

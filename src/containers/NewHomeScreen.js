@@ -677,7 +677,9 @@ class NewHomeScreen extends Component {
                     {this.renderAds()}
                 </ScrollView>
                 <Footer navigation={this.props.navigation}/>
-                <Header onSearch={this.onSeachSubmit} navigation={this.props.navigation}/>
+                <Header
+                    notificationIcon
+                    onSearch={this.onSeachSubmit} navigation={this.props.navigation}/>
             </View>
         )
     }
