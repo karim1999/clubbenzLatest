@@ -19,11 +19,13 @@
 #import "RNFirebaseLinks.h"
 #import "RNFirebaseNotifications.h"
 #import "RNFirebaseMessaging.h"
-
+#import <TSBackgroundFetch/TSBackgroundFetch.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [RNFirebaseNotifications configure];
+    [[TSBackgroundFetch sharedInstance] didFinishLaunching];
   [FIROptions defaultOptions].deepLinkURLScheme = @"clubenz.page.link";
   [FIRApp configure];
   
@@ -61,5 +63,16 @@
 continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray *))restorationHandler {
      return [[RNFirebaseLinks instance] application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+}
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [[RNFirebaseNotifications instance] didReceiveLocalNotification:notification];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+                                                       fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+  [[RNFirebaseNotifications instance] didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+  [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
 }
 @end

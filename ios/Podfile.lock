@@ -333,6 +333,8 @@ PODS:
     - React
   - react-native-netinfo (5.9.2):
     - React
+  - react-native-restart (0.0.17):
+    - React
   - react-native-simple-toast (1.1.2):
     - React
     - Toast (~> 4.0.0)
@@ -379,7 +381,7 @@ PODS:
     - React
   - ReactNativePermissions (1.2.1):
     - React
-  - RNBackgroundFetch (2.8.0):
+  - RNBackgroundFetch (3.0.6):
     - React
   - RNCAsyncStorage (1.11.0):
     - React
@@ -443,6 +445,7 @@ DEPENDENCIES:
   - react-native-immediate-phone-call (from `../node_modules/react-native-immediate-phone-call`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-sms (from `../node_modules/react-native-sms`)
   - "react-native-viewpager (from `../node_modules/@react-native-community/viewpager`)"
@@ -549,6 +552,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-restart:
+    :path: "../node_modules/react-native-restart"
   react-native-simple-toast:
     :path: "../node_modules/react-native-simple-toast"
   react-native-sms:
@@ -652,6 +657,7 @@ SPEC CHECKSUMS:
   react-native-immediate-phone-call: eb8a86325478db6c066eac6ecf8fa9ba3fbf66c5
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-netinfo: cb74e17062b2af5a16a4b137f32495f241df1a8e
+  react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-simple-toast: 58b71ef003f01d2c0bf5dcd2fdccc75861dabade
   react-native-sms: 31fbb9d6ebb565ad32e409eaf9dc70329936a129
   react-native-viewpager: 859f14262726819ab9bc993838511289edec46f2
@@ -667,7 +673,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeExceptionHandler: 8025d98049c25f186835a3af732dd7c9974d6dce
   ReactNativePermissions: 7cfad56d13c8961cd2a1005b4955b1400c79ef3e
-  RNBackgroundFetch: 8de4251d9c0b47e18b6d78052ade58c68bec6fd5
+  RNBackgroundFetch: 9adf01bb51658fc205a3dc8802cf38dd7cd9be09
   RNCAsyncStorage: d059c3ee71738c39834a627476322a5a8cd5bf36
   RNFirebase: 37daa9a346d070f9f6ee1f3b4aaf4c8e3b1d5d1c
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
