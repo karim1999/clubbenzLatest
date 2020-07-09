@@ -154,6 +154,62 @@ export default class App extends React.Component {
 		this.checkPermission();
 		this.createNotificationListeners();
 
+        BackgroundFetch.configure({
+            minimumFetchInterval: 15,     // <-- minutes (15 is minimum allowed)
+            // Android options
+			enableHeadless: true,
+			forceAlarmManager: false,     // <-- Set true to bypass JobScheduler.
+            stopOnTerminate: false,
+            startOnBoot: true,
+            requiredNetworkType: BackgroundFetch.NETWORK_TYPE_ANY, // Default
+            requiresCharging: false,      // Default
+            requiresDeviceIdle: false,    // Default
+            requiresBatteryNotLow: false, // Default
+            requiresStorageNotLow: false  // Default
+        }, async (taskId) => {
+            // Required: Signal completion of your task to native code
+            // If you fail to do this, the OS can terminate your app
+            // or assign battery-blame for consuming too much background-time
+            Geolocation.getCurrentPosition(
+                (position) => {
+                	console.log(position)
+					AsyncStorage.getItem('user').then(userString => {
+						let user= JSON.parse(userString)
+						// console.log(user.id)
+						scheduleNotification(user.id, position).then(res => {
+							// console.log(res);
+						}).catch(err => {
+							console.log(err)
+						})
+					}).catch(err => {
+					});
+                },
+                (error) => {
+                    // See error code charts below.
+                    console.log(error.code, error.message);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+            );
+
+            BackgroundFetch.finish(taskId);
+        }, (error) => {
+            console.log("[js] RNBackgroundFetch failed to start");
+        });
+        // Optional: Query the authorization status.
+        BackgroundFetch.status((status) => {
+            switch(status) {
+                case BackgroundFetch.STATUS_RESTRICTED:
+                    console.log("BackgroundFetch restricted");
+                    break;
+                case BackgroundFetch.STATUS_DENIED:
+                    console.log("BackgroundFetch denied");
+                    break;
+                case BackgroundFetch.STATUS_AVAILABLE:
+                    console.log("BackgroundFetch is enabled");
+                    break;
+            }
+        });
+
 	}
 
 	returnShopOrCluster = (url) => {

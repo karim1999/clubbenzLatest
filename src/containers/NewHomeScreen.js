@@ -127,59 +127,7 @@ class NewHomeScreen extends Component {
                 // alert(JSON.stringify(data))
             })
         })
-        console.log(this.props.user)
-        if(this.props.user.id){
-            BackgroundFetch.configure({
-                minimumFetchInterval: 15,     // <-- minutes (15 is minimum allowed)
-                // Android options
-                forceAlarmManager: false,     // <-- Set true to bypass JobScheduler.
-                stopOnTerminate: false,
-                startOnBoot: true,
-                requiredNetworkType: BackgroundFetch.NETWORK_TYPE_ANY, // Default
-                requiresCharging: false,      // Default
-                requiresDeviceIdle: false,    // Default
-                requiresBatteryNotLow: false, // Default
-                requiresStorageNotLow: false  // Default
-            }, async (taskId) => {
-                // Required: Signal completion of your task to native code
-                // If you fail to do this, the OS can terminate your app
-                // or assign battery-blame for consuming too much background-time
-                Geolocation.getCurrentPosition(
-                    (position) => {
-                        console.log(position)
-                        scheduleNotification(this.props.user.id, position).then(res => {
-                            console.log(res);
-                        }).catch(err => {
-                            console.log("error")
-                        })
-                    },
-                    (error) => {
-                        // See error code charts below.
-                        console.log(error.code, error.message);
-                    },
-                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-                );
-
-                BackgroundFetch.finish(taskId);
-            }, (error) => {
-                console.log("[js] RNBackgroundFetch failed to start");
-            });
-            // Optional: Query the authorization status.
-            BackgroundFetch.status((status) => {
-                switch(status) {
-                    case BackgroundFetch.STATUS_RESTRICTED:
-                        console.log("BackgroundFetch restricted");
-                        break;
-                    case BackgroundFetch.STATUS_DENIED:
-                        console.log("BackgroundFetch denied");
-                        break;
-                    case BackgroundFetch.STATUS_AVAILABLE:
-                        console.log("BackgroundFetch is enabled");
-                        break;
-                }
-            });
-
-        }
+        // console.log(this.props.user)
 
 
     }
@@ -318,7 +266,7 @@ class NewHomeScreen extends Component {
     getLocationAndNavigate = (data) => {
         Geolocation.getCurrentPosition(
             (position) => {
-                console.log(position)
+                // console.log(position)
                 const pos = {
                     coords: {
                         accuracy: 17.291000366210938,
@@ -333,7 +281,7 @@ class NewHomeScreen extends Component {
                     mocked: false,
                     timestamp: 1564646352931
                 }
-                console.log(pos)
+                // console.log(pos)
 
                 var value = this.props.user.enableLocation == 'true' ? position : pos;
 

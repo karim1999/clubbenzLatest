@@ -1,6 +1,7 @@
 import { API_ROOT } from "../../config/constant";
 import RequestService from "../../services/RequestService";
 import { AsyncStorage } from "react-native";
+import axios from "axios";
 
 export const workshopList = async (start, search , position, sortBy= "distance", sortType= "ASC") => {
   // debugger
@@ -22,14 +23,19 @@ export const notificationList = async (id) => {
   let response = await new RequestService(params).callShow();
   return response;
 };
-export const scheduleNotification = async (user_id) => {
-  let body= {
+export const scheduleNotification = async (user_id, position) => {
+  let data= {
     user_id,
     position
   }
   let params = { url: API_ROOT + "User/schedule_notifications", body: data};
-  let response = await new RequestService(params).callCreate();
-  return response;
+  // let response = await new RequestService(params).callCreate();
+  axios.post(API_ROOT + "User/schedule_notifications", data).then(res => {
+    return res
+  }).catch(err => {
+    console.log(err)
+  })
+  // return response;
 };
 
 export const getValue = async () => {
