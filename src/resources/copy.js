@@ -283,7 +283,6 @@ const es = {
 };
 
 export default function __(k ,language) {
-  console.log('This is store')
   // return k in es && !language.isArabic ? es[k] : k;
   return k in es && (store.getState().language.isArabic == true ? es[k] : k)
 

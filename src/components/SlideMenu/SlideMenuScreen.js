@@ -73,7 +73,7 @@ class SlideMenuScreen extends Component {
 		const [y, m, d] = member_since != null ? member_since.split('-') : [1, 1, 1970];
 		member_since = months[m-1] + '-' + y;
 
-		console.log({member_since})
+		// console.log({member_since})
 
 
 		// const profile_picture = user.profile_picture != '' ? PROFILE_PIC_PREFIX + user.profile_picture : ( user.fb_picture != '' ? user.fb_picture : undefined)

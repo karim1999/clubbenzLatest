@@ -10,6 +10,9 @@ import { Alert, AsyncStorage, Platform, Linking, AppState } from 'react-native';
 
 import * as carAction from "./redux/actions/car_guide";
 import NewHomeScreen from "./containers/NewHomeScreen";
+import BackgroundFetch from "react-native-background-fetch";
+import Geolocation from "react-native-geolocation-service";
+import {scheduleNotification} from './redux/actions/workshops';
 
 export default class App extends React.Component {
 

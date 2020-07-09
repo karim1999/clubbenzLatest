@@ -39,6 +39,9 @@ import ServiceItem from "../components/services/Service";
 import RoundedButton from "../components/common/RoundedButton";
 const { width, height } = Dimensions.get('window');
 import __ from '../resources/copy';
+import BackgroundFetch from "react-native-background-fetch";
+import {scheduleNotification} from '../redux/actions/workshops';
+import {store} from '../redux/create';
 
 class NewHomeScreen extends Component {
     constructor(props){
@@ -104,7 +107,7 @@ class NewHomeScreen extends Component {
         slider_images: [],
     };
     componentDidMount() {
-        console.log(this.props.preferences)
+        // console.log(this.props.preferences)
         if(this.props.language.isArabic)
             I18nManager.forceRTL(true)
         else
@@ -124,6 +127,61 @@ class NewHomeScreen extends Component {
                 // alert(JSON.stringify(data))
             })
         })
+        console.log(this.props.user)
+        if(this.props.user.id){
+            BackgroundFetch.configure({
+                minimumFetchInterval: 15,     // <-- minutes (15 is minimum allowed)
+                // Android options
+                forceAlarmManager: false,     // <-- Set true to bypass JobScheduler.
+                stopOnTerminate: false,
+                startOnBoot: true,
+                requiredNetworkType: BackgroundFetch.NETWORK_TYPE_ANY, // Default
+                requiresCharging: false,      // Default
+                requiresDeviceIdle: false,    // Default
+                requiresBatteryNotLow: false, // Default
+                requiresStorageNotLow: false  // Default
+            }, async (taskId) => {
+                // Required: Signal completion of your task to native code
+                // If you fail to do this, the OS can terminate your app
+                // or assign battery-blame for consuming too much background-time
+                Geolocation.getCurrentPosition(
+                    (position) => {
+                        console.log(position)
+                        scheduleNotification(this.props.user.id, position).then(res => {
+                            console.log(res);
+                        }).catch(err => {
+                            console.log("error")
+                        })
+                    },
+                    (error) => {
+                        // See error code charts below.
+                        console.log(error.code, error.message);
+                    },
+                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+                );
+
+                BackgroundFetch.finish(taskId);
+            }, (error) => {
+                console.log("[js] RNBackgroundFetch failed to start");
+            });
+            // Optional: Query the authorization status.
+            BackgroundFetch.status((status) => {
+                switch(status) {
+                    case BackgroundFetch.STATUS_RESTRICTED:
+                        console.log("BackgroundFetch restricted");
+                        break;
+                    case BackgroundFetch.STATUS_DENIED:
+                        console.log("BackgroundFetch denied");
+                        break;
+                    case BackgroundFetch.STATUS_AVAILABLE:
+                        console.log("BackgroundFetch is enabled");
+                        break;
+                }
+            });
+
+        }
+
+
     }
 
     getAdvertisement = () => {
@@ -367,7 +425,7 @@ class NewHomeScreen extends Component {
             if (data.path === "SpecificationScreen") {
                 NavigationService.navigate(data.path, { selected_car: this.props.selected_car.car, selected_car_model: this.props.selected_car.model, selected_car_year: this.props.selected_car.year, user: this.props.user, preferences: this.props.preferences, homeButton: false });
             } else if (data.path === "CategoriesScreen") {
-                console.log(this.props.auth)
+                // console.log(this.props.auth)
                 // debugger
                 // alert(JSON.stringify(this.props.user))
                 NavigationService.navigate(data.path, { chassis: this.props.selected_car.car.chassis, selected_car: this.props.selected_car.car, preferences: this.props.preferences, homeButton: false });
@@ -435,8 +493,8 @@ class NewHomeScreen extends Component {
     };
 
     renderItem = ({ item, index }) => {
-        console.log('The length of data is ' + this.state.data.length);
-        console.log(this.state.data);
+        // console.log('The length of data is ' + this.state.data.length);
+        // console.log(this.state.data);
         return <Service onPress={this.onMenuPress.bind(this, item)} language={this.props.language} title={__(item.serviceName, this.props.language)} image={item.serviceUrl} />
         // return <ServiceItem data={item} navigate={this.onMenuPress} language={this.props.language} />;
     };
@@ -452,7 +510,7 @@ class NewHomeScreen extends Component {
         // 	alert(this.props.preferences.home_ads[i].type)
         // }
 
-        console.log(JSON.stringify(this.props.preferences))
+        // console.log(JSON.stringify(this.props.preferences))
     };
 
     onDismissPress = async () => {

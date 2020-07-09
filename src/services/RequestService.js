@@ -136,7 +136,7 @@ export class RequestService {
 
       form_data.append(file, photo);
     }
-    console.log(form_data)
+    // console.log(form_data)
 
     return form_data
   }

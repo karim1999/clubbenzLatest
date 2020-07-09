@@ -22,6 +22,15 @@ export const notificationList = async (id) => {
   let response = await new RequestService(params).callShow();
   return response;
 };
+export const scheduleNotification = async (user_id) => {
+  let body= {
+    user_id,
+    position
+  }
+  let params = { url: API_ROOT + "User/schedule_notifications", body: data};
+  let response = await new RequestService(params).callCreate();
+  return response;
+};
 
 export const getValue = async () => {
   return AsyncStorage.getItem("workshopId").then(value => {
