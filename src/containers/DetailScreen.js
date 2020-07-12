@@ -348,6 +348,12 @@ class DetailScreen extends PureComponent {
 	}
 
 	render() {
+		let finalPrice= this.state.partDetail.price;
+		if(this.state.partDetail.discount && this.state.partDetail.discount > 0){
+			let finalPricePercent= 100 - this.state.partDetail.discount;
+			finalPrice= finalPrice * finalPricePercent/100
+		}
+
 		return (
 			<View style={{ flex: 1 }}>
 				<StatusBar
@@ -558,7 +564,7 @@ class DetailScreen extends PureComponent {
 										</View>
 									}
 
-									<Text style={{ color: colors.blueText, fontSize: 26, fontFamily: Fonts.CircularBook, }}>	{this.state.partDetail.price ? this.state.partDetail.price : "0"} {__('EGP', this.props.language)}</Text>
+									<Text style={{ color: colors.blueText, fontSize: 26, fontFamily: Fonts.CircularBook, }}>	{finalPrice ? finalPrice : "0"} {__('EGP', this.props.language)}</Text>
 									{/* {this.state.partDetail.discount > 10 ? <View style={{ flexDirection: 'row' }}> */}
 									{this.state.partDetail.discount && this.state.partDetail.discount > 0 ? <View style={{ flexDirection: 'row' }}>
 										<View
@@ -582,7 +588,7 @@ class DetailScreen extends PureComponent {
 												fontFamily: Fonts.CircularMedium,
 											}}
 										>
-											{this.state.partDetail.discount && this.state.partDetail.discount > 0 ? Math.round(this.state.partDetail.price / (parseFloat(this.state.partDetail.discount / 100) ) , 2) + __('EGP', this.props.language) : ''}
+											{this.state.partDetail.price ? this.state.partDetail.price : "0"} {__('EGP', this.props.language)}
 										</Text>
 									</View> : null}
 								</View>

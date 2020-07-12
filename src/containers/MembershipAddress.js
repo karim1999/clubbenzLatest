@@ -179,10 +179,10 @@ class MembershipAddress extends PureComponent {
                 uri: this.state.licenceBackPhoto.uri,
             }
 
-            subscribe(this.props.user.id, this.props.navigation.state.params.membership.id, this.state.address, idFrontPhoto, idBackPhoto, licenseFrontPhoto, licenseBackPhoto, this.state.nid, this.state.country,this.state.state,this.state.city, this.state.method).then((res) => {
+            subscribe(this.props.user.id, this.props.navigation.state.params.membership.id, this.state.address, idFrontPhoto, idBackPhoto, licenseFrontPhoto, licenseBackPhoto, this.state.nid, this.state.country,this.state.state,this.state.city, this.state.method, this.state.licenseID).then((res) => {
                 // alert(JSON.stringify(res))
                 console.log(res)
-                this.props.navigation.navigate("MembershipsScreen", {msg: "Your have subscribed successfully."})
+                this.props.navigation.navigate("MembershipsThanksScreen", {user: this.props.user})
             }).catch((err) => {
                 alert(JSON.stringify(err))
             }).then(() => {

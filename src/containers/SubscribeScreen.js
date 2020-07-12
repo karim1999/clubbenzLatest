@@ -30,6 +30,7 @@ class SubscribeScreen extends PureComponent {
         super(props);
         this.state= {
             nid: "",
+            licenseID: "",
             idFront: "",
             idBack: "",
             licenceFront: "",
@@ -119,7 +120,7 @@ class SubscribeScreen extends PureComponent {
     }
 
     subscribeForm(){
-        if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid) {
+        if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid && this.state.licenseID) {
             this.props.navigation.navigate("MembershipAddress", {...this.state, membership: this.props.navigation.state.params.membership})
         }else{
             setTimeout(() => {
@@ -152,6 +153,13 @@ class SubscribeScreen extends PureComponent {
                                 placeholder={__("ID Number", this.props.language)}
                                 placeholderTextColor = "#fff"
                                 value={this.state.nid}
+                            />
+                            <TextInput
+                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white"}}
+                                onChangeText={text => this.setState({licenseID: text})}
+                                placeholder={__("License ID", this.props.language)}
+                                placeholderTextColor = "#fff"
+                                value={this.state.licenseID}
                             />
                             <View style={[Style.uploadArea, {alignSelf: 'stretch'}]}>
                                 <TouchableOpacity onPress={() => this.showImagePicker("idFront")} style={Style.staticImages}>

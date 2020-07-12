@@ -190,16 +190,19 @@ class MembershipsScreen extends PureComponent {
                             <View style={Styles.modalContent}>
                                 <View style={[Styles.modalContent, {padding: 0}]}>
                                     <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                                        <ImageBackground resizeMode={"contain"} style={{width: 320, height: 180}} source={require('./../resources/images/membership-card.png')}>
+                                        <ImageBackground resizeMode={"stretch"} style={{width: '100%', minHeight: 200}} source={require('./../resources/images/membership-card.png')}>
                                             <View style={{justifyContent: 'center', flexDirection: 'row', flex: 1, marginTop: 20}}>
                                                 <Text style={{color: 'white', fontSize: 15}}>{this.state.current ? this.state.current.name : null}</Text>
                                             </View>
                                         </ImageBackground>
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', top: -55, width: 220}}>
-                                            <Text style={{color: 'white', fontSize: 12}}>{this.props.user.first_name+" "+this.props.user.last_name}</Text>
+                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', top: -55, width: '100%', paddingHorizontal : 30}}>
                                             <View style={{flexDirection: 'column'}}>
-                                                <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.nid : null}</Text>
-                                                <Text style={{color: 'white', fontSize: 12}}>{this.state.current ? this.state.current.end_date.substring(0, 10) : null}</Text>
+                                                <Text style={{color: 'white', fontSize: 10}}>{this.props.user.first_name+" "+this.props.user.last_name}</Text>
+                                                <Text style={{color: 'white', fontSize: 10}}>{__('License ID:', this.props.language)} {this.state.current ? this.state.current.license_id : null}</Text>
+                                            </View>
+                                            <View style={{flexDirection: 'column'}}>
+                                                <Text style={{color: 'white', fontSize: 10}}>{__('ID Number:', this.props.language)} {this.state.current ? this.state.current.nid : null}</Text>
+                                                <Text style={{color: 'white', fontSize: 10}}>{__('Expiring Date:', this.props.language)} {this.state.current ? this.state.current.end_date.substring(0, 10) : null}</Text>
                                             </View>
                                         </View>
                                         <Image style={{width: 150, height: 150, alignSelf: 'center'}} source={require('./../resources/images/qrcode.png')}/>
@@ -292,7 +295,7 @@ const Styles = StyleSheet.create({
     },
     modalContainer: {
         paddingVertical: 50,
-        paddingHorizontal: 40,
+        paddingHorizontal: 10,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: "rgba(142,142,142,0.32)"
@@ -318,7 +321,6 @@ const Styles = StyleSheet.create({
     },
     modalContent: {
         backgroundColor: 'white',
-        padding: 5,
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
     },

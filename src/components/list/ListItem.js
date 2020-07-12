@@ -47,6 +47,11 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 		myDate = myDate.split("-");
 		var newDate = myDate[1]+"/"+myDate[2]+"/"+myDate[0];
 	}
+	let finalPrice= item.price;
+	if(item.discount && item.discount > 0){
+		let finalPricePercent= 100 - item.discount;
+		finalPrice= finalPrice * finalPricePercent/100
+	}
 
 	return (
 		<View>
@@ -96,7 +101,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 						</View>
 
 						<View style={{ alignItems: 'flex-end', flex: 1 }}>
-							<Text style={{ color: colors.blueText, fontSize: width * 0.04, fontFamily: Fonts.CircularBook }}>{item.price ?item.price:'' } {__('EGP' , language)}</Text>
+							<Text style={{ color: colors.blueText, fontSize: width * 0.04, fontFamily: Fonts.CircularBook }}>{finalPrice ? finalPrice : "0"} {__('EGP', language)}</Text>
 							<View style={{ flexDirection: 'row' }}>
 							{item.discount >0 ?	<View
 									style={{
@@ -119,7 +124,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 										fontFamily: Fonts.CircularMedium,
 									}}
 								>
-								{item.discount >0 ? Math.round((item.price /parseFloat(item.discount/100)) ,2)+ 'EGP':''}
+								{item.price ? item.price : '0'} {__('EGP', language)}
 								</Text>
 							</View>
 						</View>

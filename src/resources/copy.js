@@ -274,11 +274,14 @@ const es = {
   'This method is not available right now.': 'هذه الطريقة غير متوفرة حاليا.',
   'Membership:': 'العضوية: ',
   'Expiring Date:': 'تاريخ الانتهاء:',
+  'ID Number:': 'الرقم القومي:',
+  'License ID:': 'رقم الرخصة:',
   'Please enter the following details:': 'من فضلك ادحل جميع البيانات التالية:',
   'Confirmation': 'رسالة تأكيدية',
   'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك',
   'Special Service Centers': 'الخدمات',
   'Expanding the network supports getting the best services': 'مشاركة الاخرين تدعم الحصول علي افضل الخدمات و العروض',
+  'License ID': 'رقم الرخصة',
 
 };
 

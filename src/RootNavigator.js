@@ -64,6 +64,7 @@ import FavoritesScreen from "./containers/FavoritesScreen";
 import MembershipsScreen from "./containers/MembershipsScreen";
 import SubscribeScreen from "./containers/SubscribeScreen";
 import MembershipAddress from './containers/MembershipAddress';
+import MembershipsThanksScreen from './containers/MembershipsThanksScreen';
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -306,6 +307,12 @@ const TopLevelNavigator = createStackNavigator({
 
   ThanksScreen: {
     screen: ThanksScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
+  MembershipsThanksScreen: {
+    screen: MembershipsThanksScreen,
     navigationOptions: {
       header: null
     }
