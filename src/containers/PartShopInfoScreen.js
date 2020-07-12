@@ -316,7 +316,17 @@ class PartShopInfoScreen extends PureComponent {
                       fontFamily: Fonts.circular_black,
                     }
                   ]}>{__('to', this.props.language)}</Text>
-                  {this.state.closingHour}
+                  <Text
+                      style={[
+                        stylePartsInfoScreen.shopTimings,
+                        {
+                          color: colors.grey93,
+                          fontFamily: Fonts.CircularBold,
+                        }
+                      ]}
+                  >
+                    {this.state.closingHour}
+                  </Text>
                 </Text>
               </View>
               {this.state.off_day ? <View style={[styles.row]}>
