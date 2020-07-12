@@ -239,7 +239,17 @@ class WorkshopInfoScreen extends PureComponent {
                       fontFamily: Fonts.circular_black,
                     }
                   ]}>{__('to', this.props.language)}</Text>
-                  {this.state.closingHour}
+                  <Text
+                      style={[
+                        styleWorkshopInfoScreen.shopTimings,
+                        {
+                          color: colors.grey93,
+                          fontFamily: Fonts.CircularBold,
+                        }
+                      ]}
+                  >
+                    {this.state.closingHour}
+                  </Text>
                 </Text>
               </View>
               {this.state.day_off ?   <View style={[styles.row]}>
