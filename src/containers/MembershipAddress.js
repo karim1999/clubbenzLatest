@@ -58,7 +58,7 @@ class MembershipAddress extends PureComponent {
             cities: [],
             country: {
                 "key": "64",
-                "label": "EG",
+                "label": "Egypt",
                 "value": "Egypt",
             },
             state: null,
