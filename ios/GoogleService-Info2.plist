@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>87668279587-i9tpdngae4hdd7nafkj6o7ekncuqar8c.apps.googleusercontent.com</string>
+	<string>138270877606-k731a2rqpa084t97setfg4nflbhju3qg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.87668279587-i9tpdngae4hdd7nafkj6o7ekncuqar8c</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>87668279587-0ha6e22bt7v96df0vktmm7835dnvtjbu.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.138270877606-k731a2rqpa084t97setfg4nflbhju3qg</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCqumPY9fT3-86hJItXScSfy0nUsjXcDQY</string>
+	<string>AIzaSyBsu_7TWvMFJtQiac-EdSPYw1KfTA4hfoA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>87668279587</string>
+	<string>138270877606</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.ClubBenz</string>
+	<string>org.reactjs.native.example.ClubBenz</string>
 	<key>PROJECT_ID</key>
-	<string>clubenz-261106</string>
+	<string>clubenz-232206</string>
 	<key>STORAGE_BUCKET</key>
-	<string>clubenz-261106.appspot.com</string>
+	<string>clubenz-232206.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:87668279587:ios:839ac92316e55c90376496</string>
+	<string>1:138270877606:ios:398491ca7c7a087d</string>
 	<key>DATABASE_URL</key>
-	<string>https://clubenz-261106.firebaseio.com</string>
+	<string>https://clubenz-232206.firebaseio.com</string>
 </dict>
 </plist>
