@@ -538,7 +538,7 @@ class DetailScreen extends PureComponent {
 											marginLeft: 5,
 											marginBottom: 10,
 										}}>
-											<Text style={{ color: '#2eac6d', fontSize: 11, fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.part_case ? this.state.partDetail.part_case : ""}</Text>
+											<Text style={{ color: '#2eac6d', fontSize: 11, fontFamily: Fonts.CircularBlack }}>{this.state.partDetail.part_case ? __(this.state.partDetail.part_case, this.props.language) : ""}</Text>
 										</View>
 									</View>
 

@@ -130,7 +130,7 @@ let Styles= StyleSheet.create({
     },
     logo: {
         width: 140,
-        height: 30,
+        height: 43,
         marginBottom: 10,
         resizeMode: "stretch"
     },

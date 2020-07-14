@@ -39,19 +39,19 @@ class SearchVinScreen extends Component {
             this.setState({ isFound: false, movedToManual: false })
         });
 
-        this.interval = setInterval(() => {
-            if (this.state.cameraReady) {
-                if (!this.state.isFound)
-                    this.takePic()
-            }
-        }, 1500)
+        // this.interval = setInterval(() => {
+        //     if (this.state.cameraReady) {
+        //         // if (!this.state.isFound)
+        //         //     this.takePic()
+        //     }
+        // }, 1500)
 
     }
 
     componentWillUnmount() {
-        clearInterval(this.interval)
-        if (!this.state.isFound && !this.state.inProccess)
-            clearInterval(this.interval)
+        // clearInterval(this.interval)
+        // if (!this.state.isFound && !this.state.inProccess)
+        //     clearInterval(this.interval)
     }
 
     detectText = async () => {
@@ -177,7 +177,7 @@ class SearchVinScreen extends Component {
                         // console.log(textArr.length)
                         // console.log(textArr[0])
                         textArr.forEach(item => {
-                            // console.log(item)
+                            console.log(item)
                             // item = item.trim(' ');
                             item = item.replace(/\s/g,'');
                             if (item.length == 17) {
@@ -220,19 +220,19 @@ class SearchVinScreen extends Component {
                                     })
                                 }
                             } else {
-                                // SimpleToast.show('Please try again !', SimpleToast.BOTTOM);
                                 this.setState({ inProccess: false })
                             }
                         })
                     }
 
                 }else{
+                    console.log("No response")
                     this.setState({ inProccess: false, isFound: false })
                 }
 
             }).catch(err => {
                 this.setState({ inProccess: false, isFound: false })
-                // console.log('Error', err)
+                console.log('Error', err)
             })
     }
 
@@ -260,7 +260,7 @@ class SearchVinScreen extends Component {
                 <View style={{ flex: 0.1, justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Text style={{ textAlign: "center", color: 'white', fontFamily: Fonts.CircularMedium, fontSize: 14, }}>{__("17 character alpha/numeric serial number", this.props.language)} {"\n"} {__("unique to each vehicle", this.props.language)}</Text>
                 </View>
-                <View style={{ flex: 0.75, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 0.6, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{
                         width: metrics.deviceWidth - 24,
                         height: metrics.deviceWidth * 0.5,
@@ -317,9 +317,16 @@ class SearchVinScreen extends Component {
                     </View>
                 </View>
                 <View style={{ flex: 0.15, marginBottom: 30, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => this.takePic()}>
+                        <View style={styleSearchVinScreen.btnStyle}>
+                            <Text style={styles.tapButtonStyleTextWhite}>{__("Check Vin Number", this.props.language)}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 0.15, marginBottom: 30, alignItems: 'center' }}>
                     <TouchableOpacity onPress={this.noVinNumber}>
                         <View style={styleSearchVinScreen.btnStyle}>
-                            <Text style={styles.tapButtonStyleTextWhite}>{__("Can’t Locate your Vin", this.props.language)}</Text>
+                            <Text style={styles.tapButtonStyleTextWhite}>{__("Can’t locate your Vin", this.props.language)}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

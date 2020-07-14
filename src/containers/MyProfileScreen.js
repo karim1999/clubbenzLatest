@@ -58,7 +58,7 @@ class MyProfileScreen extends PureComponent {
 			language: 'English',
 			email: user.email,
 			mobile: user.phone,
-			password: user.password,
+			password: "",
 			last_name: user.last_name,
 			first_name: user.first_name,
 			acceptTerms: false,
@@ -330,7 +330,6 @@ class MyProfileScreen extends PureComponent {
 			last_name: this.state.last_name,
 			email: this.state.email,
 			mobile: this.state.mobile,
-
 			fb_picture: this.state.fb_picture,
 			enablePushNotification: this.state.enablePushNotification,
 			enableLocation: this.state.enableLocation,
@@ -375,6 +374,7 @@ class MyProfileScreen extends PureComponent {
 			first_name: this.state.first_name,
 			last_name: this.state.last_name,
 			email: this.state.email,
+			password: this.state.password,
 			mobile: this.state.mobile,
 			profile_picture: this.state.fromPicker ? {
 				name: this.state.photo.fileName ? this.state.photo.fileName : 'profile_' + Date.now() + '.JPG',
@@ -650,14 +650,12 @@ class MyProfileScreen extends PureComponent {
 							<View style={{ marginTop: 60 }}>
 								<TextInput
 									style={styles.inputField}
-									editable={false}
+									editable={true}
 									textInputStyle={{ textAlign: 'center', fontFamily: Fonts.CircularMedium, marginTop: 10 }}
 									secureTextEntry={true}
 									label={__('Password', this.props.language)}
 									onChangeText={password => this.setState({ password })}
-									// value={this.state.password}
-									value='........'
-									maxLength={8}
+									value={this.state.password}
 									placeholderColor='rgba(0,0,0, 0.4)'
 									underlineColor='#E5E5EA'
 								/>

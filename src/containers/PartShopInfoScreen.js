@@ -415,7 +415,7 @@ class PartShopInfoScreen extends PureComponent {
                       style={stylePartsInfoScreen.tickImage}
                       source={require("../resources/icons/tick.png")}
                     />
-                    <Text style={stylePartsInfoScreen.serviceTitle}>{this.state.part_type != '' ? this.state.part_type + ' parts' : this.state.part_type}</Text>
+                    <Text style={stylePartsInfoScreen.serviceTitle}>{this.state.part_type != '' ? __(this.state.part_type, this.props.language) : this.state.part_type}</Text>
                   </View>
                   :
                   <View style={styles.row}>
@@ -425,7 +425,7 @@ class PartShopInfoScreen extends PureComponent {
                         style={stylePartsInfoScreen.tickImage}
                         source={require("../resources/icons/tick.png")}
                       />
-                      <Text style={stylePartsInfoScreen.serviceTitle}>{this.state.part_type_arr[0]}</Text>
+                      <Text style={stylePartsInfoScreen.serviceTitle}>{__(this.state.part_type_arr[0], this.props.language)}</Text>
 
                     </View>
 
@@ -435,7 +435,7 @@ class PartShopInfoScreen extends PureComponent {
                         style={stylePartsInfoScreen.tickImage}
                         source={require("../resources/icons/tick.png")}
                       />
-                      <Text style={stylePartsInfoScreen.serviceTitle}>{this.state.part_type_arr[1]}</Text>
+                      <Text style={stylePartsInfoScreen.serviceTitle}>{__(this.state.part_type_arr[1], this.props.language)}</Text>
 
                     </View>
                   </View>
