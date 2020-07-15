@@ -47,20 +47,17 @@ class MembershipAddress extends PureComponent {
             modalVisible: false,
             modal2Visible: false,
             isLoading: false,
-            countries: csc.getAllCountries().map(country => {
-                return {
-                    key: country.id,
-                    label: country.name,
-                    value: country.id
+            countries: [
+                {
+                    key: "Egypt",
+                    label: this.props.language.isArabic ? "مصر": "Egypt",
+                    value: "Egypt"
                 }
-            }),
+            ],
             states: [],
+            allCities: [],
             cities: [],
-            country: {
-                "key": "64",
-                "label": "Egypt",
-                "value": "Egypt",
-            },
+            country: "Egypt",
             state: null,
             city: null,
             method: "Cash",
@@ -69,8 +66,32 @@ class MembershipAddress extends PureComponent {
     }
     updateList(){
         if(this.props.navigation.state.params){
-            this.setState({...this.props.navigation.state.params }, () => {
-                console.log(this.state)
+            let states= this.props.navigation.state.params.states;
+            let cities= this.props.navigation.state.params.cities;
+            if(states){
+                states= states.map(state => {
+                    let name= state.name_ar ? this.props.language.isArabic ? state.name_ar : state.name : state.name
+                    return {
+                        key: state.id,
+                        label: name,
+                        value: state.id
+                    }
+                })
+            }
+            console.log(cities)
+            if(cities){
+                cities= cities.map(city => {
+                    let name= city.name_ar ? this.props.language.isArabic ? city.name_ar : city.name : city.name
+                    return {
+                        key: city.id,
+                        label: name,
+                        state: city.state_id,
+                        value: city.id
+                    }
+                })
+            }
+            this.setState({...this.props.navigation.state.params, cities, states, allCities: cities }, () => {
+                // console.log(this.state)
             })
         }
     }
@@ -212,24 +233,21 @@ class MembershipAddress extends PureComponent {
     setCountry(country){
         this.setState({country})
         if(country){
-            let states= csc.getStatesOfCountry(country).map(state => {
-                return {
-                    key: state.id,
-                    label: state.name,
-                    value: state.id
-                }
-            })
-            this.setState({states})
+            // let states= csc.getStatesOfCountry(country).map(state => {
+            //     return {
+            //         key: state.id,
+            //         label: state.name,
+            //         value: state.id
+            //     }
+            // })
+            // this.setState({states})
         }
     }
     setCountryState(state){
         this.setState({state})
-        let cities= csc.getCitiesOfState(state).map(city => {
-            return {
-                key: city.id,
-                label: city.name,
-                value: city.id
-            }
+        let cities= this.state.allCities.filter(city => {
+            console.log(city)
+            return state == city.state
         })
         this.setState({cities})
     }
@@ -271,21 +289,21 @@ class MembershipAddress extends PureComponent {
                             <Text style={Style.tabHeaderText}>{__("Address:", this.props.language)} </Text>
                             <RNPickerSelect
                                 value={this.state.country}
-                                style={{inputIOS: {color: "#0e2d3c"}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a country", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCountry(value)}
                                 items={this.state.countries}
                             />
                             <RNPickerSelect
                                 value={this.state.state}
-                                style={{inputIOS: {color: "#0e2d3c"}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a state", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCountryState(value)}
                                 items={this.state.states}
                             />
                             <RNPickerSelect
                                 value={this.state.city}
-                                style={{inputIOS: {color: "#0e2d3c"}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a city", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCity(value)}
                                 items={this.state.cities}
@@ -293,6 +311,7 @@ class MembershipAddress extends PureComponent {
                             <TextInput
                                 multiline={true}
                                 numberOfLines={3}
+                                minHeight={(Platform.OS === 'ios') ? (20 * 3) : null}
                                 style={{borderColor: 'gray', borderWidth: 1, marginTop: 20}}
                                 onChangeText={text => this.setState({address: text})}
                                 placeholder={__("Address", this.props.language)}

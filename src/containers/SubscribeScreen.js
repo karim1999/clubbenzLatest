@@ -121,7 +121,8 @@ class SubscribeScreen extends PureComponent {
 
     subscribeForm(){
         if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid && this.state.licenseID) {
-            this.props.navigation.navigate("MembershipAddress", {...this.state, membership: this.props.navigation.state.params.membership})
+        console.log(this.props.navigation.state.params.cities)
+            this.props.navigation.navigate("MembershipAddress", {...this.state, membership: this.props.navigation.state.params.membership, states: this.props.navigation.state.params.states, cities: this.props.navigation.state.params.cities})
         }else{
             setTimeout(() => {
                 Toast.show(__("All Fields are required", this.props.language), Toast.LONG)

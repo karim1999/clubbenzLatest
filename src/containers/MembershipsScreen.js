@@ -31,6 +31,8 @@ class MembershipsScreen extends PureComponent {
         super(props);
         this.state= {
             memberships: [],
+            states: [],
+            cities: [],
             current: null,
             isDone: false,
             address: "",
@@ -44,7 +46,8 @@ class MembershipsScreen extends PureComponent {
     }
     updateList(){
         let memberships= getMemberships(this.props.user.id).then(res => {
-            this.setState({all: res, memberships: res.memberships, current: res.current, isDone: true, cardModal: (res.current && this.props.navigation.state.params.card != undefined)})
+            console.log(res.cities)
+            this.setState({all: res, states: res.states, cities: res.cities, memberships: res.memberships, current: res.current, isDone: true, cardModal: (res.current && this.props.navigation.state.params.card != undefined)})
             // alert(JSON.stringify(res))
             if(res.current)
                 this.setState({ar_msg: res.current.msg_ar, en_msg: res.current.msg_en})
@@ -62,7 +65,7 @@ class MembershipsScreen extends PureComponent {
 
     subscribe(membership, price){
         // subscribe(this.props.user.id, membership, this.state.address).then(() => {
-        this.props.navigation.navigate("SubscribeScreen", {membership: membership, name: membership.name, price: price})
+        this.props.navigation.navigate("SubscribeScreen", {membership: membership, name: membership.name, price: price, cities: this.state.cities, states: this.state.states})
         // })
     }
     benifitsToggle(id){
