@@ -224,7 +224,7 @@ const es = {
   'FIND A SERVICE PROVIDER': 'ادخل اسم مقدم خدمة',
   'The provider is not available during that time': 'مقدم الخدمة غير متوفر في هذا الوقت',
   'Booking is not available': 'مقدم الخدمة غير متوفر في هذا الوقت',
-  'Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link': 'لا تفوت الفرصة و ابدأ الان في الحصول علي جميع المزايا و العروض المقدمة، استمتع يقيادتك و حافظ علي سيارتك من خلال تنزيل ابليكيشن ClubBenz.  لتنزيل الابليكيشن اضغط علي الرابط التالي',
+  'Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link': 'لا تفوت الفرصة و ابدأ الان في الحصول علي جميع المزايا و العروض المقدمة، استمتع بقيادتك و حافظ علي سيارتك من خلال تنزيل ابليكيشن ClubBenz.  لتنزيل الابليكيشن اضغط علي الرابط التالي',
   'Enter Solution...': 'اكتب الحل....',
   'Submit': 'ارسل',
   'Please add country code (Ex: +201 2xx xxx xxx)': 'من فضلك ادخل كود الدولة (مثال: 20x xxxx xxxx+)',
@@ -276,7 +276,7 @@ const es = {
   'Expiring Date:': 'تاريخ الانتهاء:',
   'ID Number:': 'الرقم القومي:',
   'License ID:': 'رقم الرخصة:',
-  'Please enter the following details:': 'من فضلك ادحل جميع البيانات التالية:',
+  'Please enter the following details:': 'من فضلك ادخل جميع البيانات التالية:',
   'Confirmation': 'رسالة تأكيدية',
   'Thank you for your feedback-your message is under review': 'شكراً ، سيتم مراجعة رسالتك',
   'Special Service Centers': 'الخدمات',
@@ -285,7 +285,7 @@ const es = {
   'New & Used': 'جديد و مستخدم',
   'New Parts': 'جديد',
   'Used Parts': 'مستخدم',
-  'Check Vin Number': 'اقرأ رقم تعريف سيارتك'
+  'Check Vin Number': 'اقرأ رقم تعريف سيارتك',
 
 };
 

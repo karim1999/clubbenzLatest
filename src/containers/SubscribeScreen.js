@@ -120,21 +120,21 @@ class SubscribeScreen extends PureComponent {
     }
 
     subscribeForm(){
-        if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid && this.state.licenseID) {
-        console.log(this.props.navigation.state.params.cities)
+        // if(this.state.idBack && this.state.idFront && this.state.licenceBack && this.state.licenceFront && this.state.nid && this.state.licenseID) {
+        // console.log(this.props.navigation.state.params.cities)
             this.props.navigation.navigate("MembershipAddress", {...this.state, membership: this.props.navigation.state.params.membership, states: this.props.navigation.state.params.states, cities: this.props.navigation.state.params.cities})
-        }else{
-            setTimeout(() => {
-                Toast.show(__("All Fields are required", this.props.language), Toast.LONG)
-            }, 100)
-        }
+        // }else{
+        //     setTimeout(() => {
+        //         Toast.show(__("All Fields are required", this.props.language), Toast.LONG)
+        //     }, 100)
+        // }
     }
     render() {
         return (
             <View style={Style.container}>
                 <NavigationEvents/>
                 <StatusBar hidden={false} backgroundColor={"#0e2d3c"} barStyle='light-content' />
-                <Header noSearch title={"Subscribe"} navigation={this.props.navigation} goBack={true}/>
+                <Header noSearch title={__("Subscribe", this.props.language)} navigation={this.props.navigation} goBack={true}/>
                 <ScrollView style={{flex: 1, marginTop: 120}} >
                     <View style={Style.card}>
                         <View style={Style.cardHeader}>
@@ -149,14 +149,14 @@ class SubscribeScreen extends PureComponent {
                             {/*    <Text style={{textAlign: "center", marginTop: 10, color: 'red'}}>All the inputs are required.</Text>*/}
                             {/*}*/}
                             <TextInput
-                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white"}}
+                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white", textAlign: this.props.language.isArabic? 'right' : 'left'}}
                                 onChangeText={text => this.setState({nid: text})}
                                 placeholder={__("ID Number", this.props.language)}
                                 placeholderTextColor = "#fff"
                                 value={this.state.nid}
                             />
                             <TextInput
-                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white"}}
+                                style={{borderColor: 'white', borderBottomWidth: 1, marginTop: 20, color: "white", textAlign: this.props.language.isArabic? 'right' : 'left'}}
                                 onChangeText={text => this.setState({licenseID: text})}
                                 placeholder={__("License ID", this.props.language)}
                                 placeholderTextColor = "#fff"
@@ -171,7 +171,7 @@ class SubscribeScreen extends PureComponent {
                                             source={this.state.idFront == '' ? require('../resources/images/upload_image.png') : { uri: this.state.idFront }}
                                         />
                                     </View>
-                                    <Text style={{color: "white"}}>{__("ID Front", this.props.language)}</Text>
+                                    <Text style={{color: "white", width: 100, textAlign: 'center'}}>{__("ID Front", this.props.language)}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.showImagePicker("idBack")} style={Style.staticImages}>
                                     <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
@@ -181,7 +181,7 @@ class SubscribeScreen extends PureComponent {
                                             source={this.state.idBack == '' ? require('../resources/images/upload_image.png') : { uri: this.state.idBack }}
                                         />
                                     </View>
-                                    <Text style={{color: "white"}}>{__("ID Back", this.props.language)}</Text>
+                                    <Text style={{color: "white", width: 100, textAlign: 'center'}}>{__("ID Back", this.props.language)}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={[Style.uploadArea, {alignSelf: 'stretch'}]}>
@@ -193,7 +193,7 @@ class SubscribeScreen extends PureComponent {
                                             source={this.state.licenceFront == '' ? require('../resources/images/upload_image.png') : { uri: this.state.licenceFront }}
                                         />
                                     </View>
-                                    <Text style={{color: "white"}}>{__("License Front", this.props.language)}</Text>
+                                    <Text style={{color: "white", width: 100, textAlign: 'center'}}>{__("License Front", this.props.language)}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.showImagePicker("licenceBack")} style={Style.staticImages}>
                                     <View style={{ height: 100, width: 100, overflow: 'hidden', justifyContent: 'center', }}>
@@ -203,7 +203,7 @@ class SubscribeScreen extends PureComponent {
                                             source={this.state.licenceBack == '' ? require('../resources/images/upload_image.png') : { uri: this.state.licenceBack }}
                                         />
                                     </View>
-                                    <Text style={{color: "white"}}>{__("License Back", this.props.language)}</Text>
+                                    <Text style={{color: "white", width: 100, textAlign: 'center'}}>{__("License Back", this.props.language)}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
