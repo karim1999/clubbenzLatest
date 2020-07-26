@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Dimensions, Image, ImageBackground,AsyncStorage } from 'react-native';
+import { BackHandler, View, StyleSheet, TextInput, Text, TouchableOpacity, Dimensions, Image, ImageBackground,AsyncStorage } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -58,6 +58,17 @@ class ForgotPasswordScreen extends PureComponent {
 			})
 		}
 	};
+	componentDidMount(): void {
+		BackHandler.addEventListener('hardwareBackPress', () => {
+			axios.post(API_ROOT + 'user/remove_user', {phone: this.state.user.phone}).then(res => {
+				console.log("done")
+			}).catch(err => {
+				console.log("error")
+			});
+			this.props.navigation.pop()
+			return true
+		})
+	}
 
 	handleKeyPress=(nativeEvent,ref) =>{
         if (nativeEvent.nativeEvent.key === 'Backspace') {

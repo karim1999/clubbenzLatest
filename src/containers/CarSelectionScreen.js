@@ -93,8 +93,10 @@ class CarSelectionScreen extends PureComponent {
 					this._alertForCameraPermission();
 				} else {
 					if (this.props.navigation.state.params.MyProfileScreen && this.props.navigation.state.params.MyProfileScreen == true) {
+						console.log("profileScreen1")
 						NavigationService.navigate('ScanVinNumberScreen', {MyProfileScreen: true});
 					} else {
+						console.log("not profileScreen1")
 						NavigationService.navigate('ScanVinNumberScreen');
 					}
 				}
@@ -109,7 +111,13 @@ class CarSelectionScreen extends PureComponent {
 				]
 			).then((result) => {
 					if ((result['android.permission.CAMERA'] === 'granted') && (result['android.permission.RECORD_AUDIO'] === 'granted')) {
-						NavigationService.navigate('ScanVinNumberScreen');
+						if (this.props.navigation.state.params.MyProfileScreen && this.props.navigation.state.params.MyProfileScreen == true) {
+							console.log("profileScreen1")
+							NavigationService.navigate('ScanVinNumberScreen', {MyProfileScreen: true});
+						} else {
+							console.log("not profileScreen1")
+							NavigationService.navigate('ScanVinNumberScreen');
+						}
 					} else {
 						SimpleToast.show('Request not granted!', SimpleToast.SHORT);
 					}
