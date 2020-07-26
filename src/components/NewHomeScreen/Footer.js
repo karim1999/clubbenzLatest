@@ -2,6 +2,7 @@ import {Text, View, StyleSheet, ImageBackground, TouchableOpacity} from "react-n
 import React, {PureComponent} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import __ from "../../resources/copy";
+import MyCardScreen from '../../containers/MyCardScreen';
 
 class Footer extends PureComponent {
     constructor(props) {
@@ -22,7 +23,7 @@ class Footer extends PureComponent {
                 {/*    <Icon name="home" size={22} color="#ffffff" />*/}
                 {/*    <Text style={Styles.text}>{__('Home')}</Text>*/}
                 {/*</TouchableOpacity>*/}
-                <TouchableOpacity onPress={this.navigate.bind(this, "MembershipsScreen", {card: true})} style={Styles.iconContainer}>
+                <TouchableOpacity onPress={this.navigate.bind(this, "MyCardScreen", {card: true})} style={Styles.iconContainer}>
                     <Icon name="id-card" size={22} color="#ffffff" />
                     <Text style={Styles.text}>{__('My Card')}</Text>
                 </TouchableOpacity>

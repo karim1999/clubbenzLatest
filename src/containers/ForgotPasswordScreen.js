@@ -10,9 +10,9 @@ import NavigationService from '../NavigationService';
 import NavigationComponent from '../components/navigation/navigation';
 import * as authAction from './../redux/actions/auth'
 import Toast from 'react-native-simple-toast';
-import { VERIFICATION_CODE_WARNING } from '../config/constant';
+import {API_ROOT, VERIFICATION_CODE_WARNING} from '../config/constant';
 import { Fonts } from '../resources/constants/Fonts';
-
+import axios from 'axios'
 const navigationOptions = {
 	header: null,
 };
@@ -75,13 +75,23 @@ class ForgotPasswordScreen extends PureComponent {
 		})
 	}
 	actionNoCode() {}
+	goBack(){
+		axios.post(API_ROOT + 'user/remove_user', {phone: this.state.user.phone}).then(res => {
+			console.log("done")
+		}).catch(err => {
+			console.log("error")
+		});
+		this.props.navigation.pop()
+	}
 	// debugger;
 	render() {
 		const {code1,code2,code3,code4,code5,code6} = this.state
 		return (
 			<View style={[styles.columnContainer]}>
-				<NavigationComponent					navigation={this.props.navigation}
-														goBack={() => this.props.navigation.pop()} title="Verify your account" />
+				<NavigationComponent
+					homeButton={false}
+					navigation={this.props.navigation}
+					goBack={() => this.goBack()} title="Verify your account" />
 				<View style={styles.columnContainer}>
 					<Text style={FPStyle.title}>Enter the code that we sent to</Text>
 					<Text style={FPStyle.code}>{this.props.navigation.state.params.mobile ? this.props.navigation.state.params.mobile :''}</Text>

@@ -38,7 +38,7 @@ import Slideshow from 'react-native-image-slider-show';
 import OpenMap from "react-native-open-map";
 import { ShareDialog } from 'react-native-fbsdk';
 import SendSMS from 'react-native-sms';
-import {addToFavorite, checkIsFavorite, removeFromFavorite} from "../redux/actions/favorite";
+import {addToFavorite, checkIsFavorite, getFavorites, removeFromFavorite} from '../redux/actions/favorite';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationComponent from '../components/navigation/navigation';
 import NavigationService from '../NavigationService';
@@ -63,10 +63,15 @@ class DetailScreen extends PureComponent {
 		phoneArray: [],
 		provider: {},
 		isFavorite: false,
-		loadingFavorite: false
+		loadingFavorite: false,
+		favorites: [],
+		isDone: false,
 	}
 	componentDidMount() {
 		this.partDetail();
+		let favorites= getFavorites(this.props.user.id).then(res => {
+			this.setState({favorites: res, isDone: true})
+		})
 	}
 
 	componentWillMount() {
@@ -178,7 +183,7 @@ class DetailScreen extends PureComponent {
 				getProviderDetails(provider_id).then(provider => {
 					this.setState({provider});
 				}).then(() => {
-					checkIsFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+					checkIsFavorite(this.props.user.id, res.id).then(isFavorite => {
 						this.setState({isFavorite});
 					})
 				}).then(()=> {
@@ -189,7 +194,7 @@ class DetailScreen extends PureComponent {
 	}
 	addToFavorite= () => {
 		this.setState({loadingFavorite: true})
-		return addToFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+		return addToFavorite(this.props.user.id, this.state.partDetail.id).then(isFavorite => {
 			if(isFavorite)
 				this.setState({isFavorite: true});
 		}).then(() => {
@@ -198,7 +203,7 @@ class DetailScreen extends PureComponent {
 	}
 	removeFromFavorite= () => {
 		this.setState({loadingFavorite: true})
-		return removeFromFavorite(this.props.user.id, this.props.navigation.state.params.partItem.id).then(isFavorite => {
+		return removeFromFavorite(this.props.user.id, this.state.partDetail.id).then(isFavorite => {
 			if(isFavorite)
 				this.setState({isFavorite: false});
 		}).then(() => {
@@ -443,7 +448,7 @@ class DetailScreen extends PureComponent {
 					{/*</View>*/}
 					<View style={{ zIndex: -1, marginTop: -62, }}>
 						<Slideshow
-							height={280}
+							height={340}
 							arrowLeft={I18nManager.isRTL ? <Image source={require('../resources/icons/right_arrow.png')} /> : <Image source={require('../resources/icons/left_arrow.png')} />}
 							arrowRight={I18nManager.isRTL ? <Image source={require('../resources/icons/left_arrow.png')} /> : <Image source={require('../resources/icons/right_arrow.png')} />}
 							dataSource={this.state.images}
@@ -474,12 +479,6 @@ class DetailScreen extends PureComponent {
 						height: metrics.deviceHeight / 1.7,
 					}}
 				/> */}
-				{
-					this.state.partDetail && this.state.partDetail.part_brand && this.state.partDetail.part_brand.length > 0 &&
-					<View style={{top: -180, left: 120, flex: 1, alignSelf:'stretch'}}>
-						<Image style={{height: 25, resizeMode: 'contain'}} source={{uri: IMG_PREFIX_URL+this.state.partDetail.part_brand[0].image}} />
-					</View>
-				}
 
 				<View
 					style={{
@@ -492,7 +491,7 @@ class DetailScreen extends PureComponent {
 						left: 0,
 						right: 0,
 						zIndex: 10,
-						top: -15,
+						top: 50,
 					}}
 				>
 					<ScrollView nestedScrollEnabled={true}>
@@ -617,6 +616,12 @@ class DetailScreen extends PureComponent {
 											</Text>
 
 										</View>
+										{
+											this.state.partDetail && this.state.partDetail.part_brand && this.state.partDetail.part_brand.length > 0 &&
+											<View style={{alignSelf:'flex-start', width: 50}}>
+												<Image style={{width: 100, height: 25, resizeMode: 'stretch'}} source={{uri: IMG_PREFIX_URL+this.state.partDetail.part_brand[0].image}} />
+											</View>
+										}
 									</View>
 									<View
 										style={{
@@ -729,8 +734,11 @@ class DetailScreen extends PureComponent {
 								style={{ height: 160, }}
 								data={this.state.similer_parts}
 								keyExtractor={(item, index) => item.id}
-								renderItem={({ item, index }) => <ListItem item={item} index={index} onPress={this.opnItem} language={this.props.language} preferences={this.props.preferences} />}
-							// ListFooterComponent={this._renderFooter}
+								renderItem={({ item, index }) => <ListItem favorite={this.state.favorites.filter(value => {
+									console.log(value.part_id, " , ", item.id, " , " ,value.part_id == item.id)
+									return value.part_id == item.id
+								}).length > 0} item={item} index={index} onPress={this.opnItem} language={this.props.language} preferences={this.props.preferences} />}
+								// ListFooterComponent={this._renderFooter}
 							/>
 						</View>
 					</ScrollView>

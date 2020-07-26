@@ -117,7 +117,7 @@ class SpecificationScreen extends Component {
 								<View style={{ flex: 1 }} >
 								{
 									this.props.navigation.state.params.homeButton != false &&
-										<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomeScreen')}>
+										<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
 											<View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
 												<Icon name={"home"} size={27} color={"white"} />
 												{/*<Image*/}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, Dimensions, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import Icon2 from "react-native-vector-icons/AntDesign"
+
 import { colors } from '../../themes';
 const { width, height } = Dimensions.get('window');
 import { IMG_PREFIX_URL } from '../../config/constant';
@@ -29,8 +31,8 @@ renderAds = (preferences) => {
 
 }
 
-const ListItem = ({ item, index, onPress, language, length, preferences }) => {
-	const arr_temp = " (جزء اسم)";
+const ListItem = ({ item, index, onPress, language, length, preferences, favorite }) => {
+	const arr_temp = "";
 	console.log(item);
 	// alert(JSON.stringify(item))
 	// debugger;
@@ -63,6 +65,12 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 							// source={{uri:IMG_PREFIX_URL+item.image}}
 							source={{uri:IMG_PREFIX_URL+item.main_image}}
 						/>
+						{
+							favorite &&
+							<Icon2
+								style={{position: 'absolute'}}
+								name={"star"} size={15} color={"#0e2d3c"}/>
+						}
 					</View>
 					{/* <View style={{ position: 'absolute', bottom: height * 0.08, left: width * 0.03 }}>
 						<View
@@ -84,7 +92,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 						<View style={{ flex: 1, flexDirection: 'column' }}>
 							<View style={{flex: 0.5, backgroundColor: '#FFFFFF', justifyContent: 'center'}}>
 								<View style={{flexDirection: 'row'}}>
-									<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', width: 28, height: 14, marginTop: 5, marginBottom: 5}}>
+									<View style={{ borderColor: '#2eac6d', borderRadius: 4, borderWidth: 1, alignItems: 'center', height: 14, marginTop: 5, marginBottom: 5, paddingHorizontal: 5}}>
 										<Text style={{ color: '#2eac6d', fontSize: width * 0.02, fontFamily: Fonts.circular_black }}>{__(item.part_case, language)}</Text>
 									</View>
 									{
@@ -103,7 +111,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 						<View style={{ alignItems: 'flex-end', flex: 1 }}>
 							<Text style={{ color: colors.blueText, fontSize: width * 0.04, fontFamily: Fonts.CircularBook }}>{finalPrice ? finalPrice : "0"} {__('EGP', language)}</Text>
 							<View style={{ flexDirection: 'row' }}>
-							{item.discount >0 ?	<View
+							{item.discount && item.discount >0 ?	<View
 									style={{
 										backgroundColor: colors.badge,
 										flexDirection: 'row',
@@ -115,6 +123,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 								>
 								<Text style={{ color: '#fff', fontSize: width * 0.015, fontFamily: Fonts.CircularMedium }}>{item.discount ?item.discount: '' }%</Text>
 								</View>:null}
+								{item.discount && item.discount >0 ?
 								<Text
 									style={{
 										color: colors.gray50,
@@ -126,6 +135,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences }) => {
 								>
 								{item.price ? item.price : '0'} {__('EGP', language)}
 								</Text>
+									:null}
 							</View>
 						</View>
 					</View>

@@ -137,6 +137,7 @@ class SearchVinScreen extends Component {
         if (!this.state.isFound) {
             const options = { quality: 0.3, base64: true };
             if (!this.state.inProccess) {
+                SimpleToast.show('Loading....', SimpleToast.BOTTOM);
                 const data = await this.camera.takePictureAsync(options);
                 console.log(data.uri);
                 this.detectText(data.base64);
@@ -227,11 +228,13 @@ class SearchVinScreen extends Component {
 
                 }else{
                     console.log("No response")
+                    SimpleToast.show('No Vin Number was found !!', SimpleToast.BOTTOM);
                     this.setState({ inProccess: false, isFound: false })
                 }
 
             }).catch(err => {
-                this.setState({ inProccess: false, isFound: false })
+            SimpleToast.show('No Vin Number was found !!', SimpleToast.BOTTOM);
+            this.setState({ inProccess: false, isFound: false })
                 console.log('Error', err)
             })
     }

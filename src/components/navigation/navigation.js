@@ -62,27 +62,6 @@ class Navigation extends PureComponent {
 						</View>
 					}
 
-					{this.props.rightIcon &&
-					<View style={{flex: 1}}>
-							{this.props.share ? (<TouchableWithoutFeedback onPress={this.props.onSharePress}>
-								<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
-									<Image
-										style={[styles.navigationMenuButton, {marginBottom: 5}]}
-										source={require('../../resources/icons/ic-share.png')}
-									/>
-								</View>
-							</TouchableWithoutFeedback>) : (
-								<TouchableWithoutFeedback onPress={this.props.onMenuPress}>
-									<View>
-										<Image
-											style={styles.navigationMenuButton}
-											source={require('../../resources/icons/search.png')}
-										/>
-									</View>
-								</TouchableWithoutFeedback>
-							)}
-					</View>
-					}
 					{
 						this.props.favorite ?
 							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}}>
@@ -102,6 +81,27 @@ class Navigation extends PureComponent {
 										</View>
 									</TouchableWithoutFeedback>
 								</View> : <View style={{flex: 1}}></View>
+					}
+					{this.props.rightIcon &&
+					<View style={{flex: 1}}>
+						{this.props.share ? (<TouchableWithoutFeedback onPress={this.props.onSharePress}>
+							<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
+								<Image
+									style={[styles.navigationMenuButton, {marginBottom: 5}]}
+									source={require('../../resources/icons/ic-share.png')}
+								/>
+							</View>
+						</TouchableWithoutFeedback>) : (
+							<TouchableWithoutFeedback onPress={this.props.onMenuPress}>
+								<View>
+									<Image
+										style={styles.navigationMenuButton}
+										source={require('../../resources/icons/search.png')}
+									/>
+								</View>
+							</TouchableWithoutFeedback>
+						)}
+					</View>
 					}
 
 				</View>
