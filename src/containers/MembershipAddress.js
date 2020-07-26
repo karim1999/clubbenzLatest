@@ -289,21 +289,21 @@ class MembershipAddress extends PureComponent {
                             <Text style={Style.tabHeaderText}>{__("Address:", this.props.language)} </Text>
                             <RNPickerSelect
                                 value={this.state.country}
-                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a country", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCountry(value)}
                                 items={this.state.countries}
                             />
                             <RNPickerSelect
                                 value={this.state.state}
-                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a state", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCountryState(value)}
                                 items={this.state.states}
                             />
                             <RNPickerSelect
                                 value={this.state.city}
-                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20}, inputAndroid: {color: "#0e2d3c"}}}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}
                                 placeholder={{label: __("Select a city", this.props.language), value: null}}
                                 onValueChange={(value) => this.setCity(value)}
                                 items={this.state.cities}
@@ -312,7 +312,7 @@ class MembershipAddress extends PureComponent {
                                 multiline={true}
                                 numberOfLines={3}
                                 minHeight={(Platform.OS === 'ios') ? (20 * 3) : null}
-                                style={{borderColor: 'gray', borderWidth: 1, marginTop: 20}}
+                                style={{borderColor: 'gray', borderWidth: 1, marginTop: 20, alignSelf: 'stretch', textAlign: this.props.language.isArabic ? 'right' : 'left'}}
                                 onChangeText={text => this.setState({address: text})}
                                 placeholder={__("Address", this.props.language)}
                                 value={this.state.address}
@@ -328,6 +328,7 @@ class MembershipAddress extends PureComponent {
                             <Text style={Style.tabHeaderText}>{__("Payment Method:", this.props.language)} </Text>
                             <RNPickerSelect
                                 value={this.state.method}
+                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}
                                 onValueChange={(value) => this.setMethod(value)}
                                 items={[
                                     { label: __('Cash on Delivery', this.props.language), value: 'Cash' },
@@ -340,7 +341,7 @@ class MembershipAddress extends PureComponent {
                             <View style={Style.agreeToView}>
                                 <TouchableOpacity onPress={() => this.setState({ modalVisible: true })}>
                                     <Text style={[Style.agreeTo]}>
-                                        {__('I agree to', this.props.language)}<Text style={[Style.termsText]}>{__(' Terms & Conditions', this.props.language)}</Text>
+                                        {__('I agree to', this.props.language)} <Text style={[Style.termsText]}>{__(' Terms & Conditions', this.props.language)}</Text>
                                     </Text>
                                 </TouchableOpacity>
                                 <View>
@@ -522,6 +523,8 @@ const Style = StyleSheet.create({
     singleContainer: {
         padding: 50,
         fontWeight: "normal",
+        alignItems: 'flex-start',
+
     },
     button: {
         paddingHorizontal: 80,

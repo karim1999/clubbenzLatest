@@ -25,6 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [RNFirebaseNotifications configure];
+    [application registerForRemoteNotifications];
     [[TSBackgroundFetch sharedInstance] didFinishLaunching];
   [FIROptions defaultOptions].deepLinkURLScheme = @"clubenz.page.link";
   [FIRApp configure];

@@ -104,7 +104,7 @@ class SearchVinScreen extends Component {
                                             NavigationService.navigate('RegisterScreen');
                                             // debugger
                                         } else {
-                                            SimpleToast.show(res.message, SimpleToast.LONG, SimpleToast.BOTTOM)
+                                            SimpleToast.show(res.message, SimpleToast.LONG)
                                         }
                                     })
                                 } else {
@@ -137,12 +137,12 @@ class SearchVinScreen extends Component {
         if (!this.state.isFound) {
             const options = { quality: 0.3, base64: true };
             if (!this.state.inProccess) {
-                SimpleToast.show('Loading....', SimpleToast.BOTTOM);
+                SimpleToast.show('Loading....');
                 const data = await this.camera.takePictureAsync(options);
                 console.log(data.uri);
                 this.detectText(data.base64);
             } else {
-                SimpleToast.show('Processing on picture. Please wait !!', SimpleToast.BOTTOM);
+                SimpleToast.show('Processing on picture. Please wait !!');
             }
         }
     }
@@ -215,7 +215,7 @@ class SearchVinScreen extends Component {
                                                 NavigationService.navigate('RegisterScreen');
                                             }
                                         } else {
-                                            SimpleToast.show(res.message, SimpleToast.LONG, SimpleToast.BOTTOM)
+                                            SimpleToast.show(res.message, SimpleToast.LONG)
                                             this.setState({ inProccess: false, isFound: false })
                                         }
                                     })
@@ -228,12 +228,12 @@ class SearchVinScreen extends Component {
 
                 }else{
                     console.log("No response")
-                    SimpleToast.show('No Vin Number was found !!', SimpleToast.BOTTOM);
+                    SimpleToast.show('No Vin Number was found !!');
                     this.setState({ inProccess: false, isFound: false })
                 }
 
             }).catch(err => {
-            SimpleToast.show('No Vin Number was found !!', SimpleToast.BOTTOM);
+            SimpleToast.show('No Vin Number was found !!');
             this.setState({ inProccess: false, isFound: false })
                 console.log('Error', err)
             })
