@@ -282,9 +282,9 @@ const es = {
   'Special Service Centers': 'الخدمات',
   'Expanding the network supports getting the best services': 'مشاركة الاخرين تدعم الحصول علي افضل الخدمات و العروض',
   'License ID': 'رقم الرخصة',
-  'New & Used': 'جديد و مستخدم',
+  'New & Used': 'جديد و مستعمل',
   'New Parts': 'جديد',
-  'Used Parts': 'مستخدم',
+  'Used Parts': 'مستعمل',
   'Check Vin Number': 'اقرأ رقم تعريف سيارتك',
 
 };
