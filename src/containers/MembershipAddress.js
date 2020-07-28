@@ -54,12 +54,18 @@ class MembershipAddress extends PureComponent {
                     value: "Egypt"
                 }
             ],
-            states: [],
+            states: csc.getStatesOfCountry(64).map(state => {
+                return {
+                    key: state.id,
+                    label: state.name,
+                    value: state.name
+                }
+            }),
             allCities: [],
             cities: [],
             country: "Egypt",
             state: null,
-            city: null,
+            city: "city",
             method: "Cash",
             methodError: false
         }
@@ -301,13 +307,13 @@ class MembershipAddress extends PureComponent {
                                 onValueChange={(value) => this.setCountryState(value)}
                                 items={this.state.states}
                             />
-                            <RNPickerSelect
-                                value={this.state.city}
-                                style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}
-                                placeholder={{label: __("Select a city", this.props.language), value: null}}
-                                onValueChange={(value) => this.setCity(value)}
-                                items={this.state.cities}
-                            />
+                            {/*<RNPickerSelect*/}
+                            {/*    value={this.state.city}*/}
+                            {/*    style={{inputIOS: {color: "#0e2d3c", marginVertical: 20, alignSelf: 'flex-start'}, inputAndroid: {color: "#0e2d3c"}}}*/}
+                            {/*    placeholder={{label: __("Select a city", this.props.language), value: null}}*/}
+                            {/*    onValueChange={(value) => this.setCity(value)}*/}
+                            {/*    items={this.state.cities}*/}
+                            {/*/>*/}
                             <TextInput
                                 multiline={true}
                                 numberOfLines={3}
