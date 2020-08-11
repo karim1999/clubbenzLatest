@@ -41,7 +41,8 @@ class MembershipsScreen extends PureComponent {
             en_msg: "",
             cardModal: false,
             benifits: [],
-            all: {}
+            all: {},
+            isLoading: true
         }
     }
     updateList(){
@@ -51,6 +52,7 @@ class MembershipsScreen extends PureComponent {
             // alert(JSON.stringify(res))
             if(res.current)
                 this.setState({ar_msg: res.current.msg_ar, en_msg: res.current.msg_en})
+            this.setState({isLoading: false})
         })
         if(this.props.navigation.state.params && this.props.navigation.state.params.msg)
             this.setState({modal2Visible: true})
@@ -91,6 +93,10 @@ class MembershipsScreen extends PureComponent {
                     {/*    (this.props.navigation.state.params && this.props.navigation.state.params.msg) &&*/}
                     {/*    <Text style={{textAlign: "center", marginTop: 10, color: 'green'}}>Your have subscribed successfully.</Text>*/}
                     {/*}*/}
+                    {
+                        !this.state.isLoading && this.state.memberships && this.state.memberships.length == 0 &&
+                            <Text style={{textAlign: 'center', fontSize: 18}}>{__('Coming Soon', this.props.language)}</Text>
+                    }
                     <FlatList
                         horizontal={true}
                         data={this.state.memberships}

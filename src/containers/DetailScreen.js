@@ -716,7 +716,7 @@ class DetailScreen extends PureComponent {
 						<View
 							style={{
 								// flex: 1,
-								height: 200,
+								height: 300,
 								backgroundColor: colors.grayLight,
 								// marignTop: height * 0.02,
 								borderTopLeftRadius: width * 0.05,
@@ -731,7 +731,7 @@ class DetailScreen extends PureComponent {
 							/>
 							<FlatList
 								nestedScrollEnabled={true}
-								style={{ height: 160, }}
+								style={{ height: 260, }}
 								data={this.state.similer_parts}
 								keyExtractor={(item, index) => item.id}
 								renderItem={({ item, index }) => <ListItem favorite={this.state.favorites.filter(value => {

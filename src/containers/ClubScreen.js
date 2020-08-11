@@ -31,24 +31,24 @@ const data = [
 		link: 'https://www.facebook.com/Clubenz/',
 		color:"#003F8D"
 	},
-	{
-		id: '2',
-		name: 'twitter',
-		link: '#',
-		color:"#00A1ED"
-	},
+	// {
+	// 	id: '2',
+	// 	name: 'twitter',
+	// 	link: '#',
+	// 	color:"#00A1ED"
+	// },
 	{
 		id: '3',
 		name: 'Instagram',
 		link: '#',
 		color:"#FFFFFF"
 	},
-	{
-		id: '4',
-		name: 'Youtube',
-		link: 'https://www.youtube.com/channel/UCuEcmI6SK4J1EinwoO07_1g/www.Clubenz.com',
-		color:"#CD0C24"
-	},
+	// {
+	// 	id: '4',
+	// 	name: 'Youtube',
+	// 	link: 'https://www.youtube.com/channel/UCuEcmI6SK4J1EinwoO07_1g/www.Clubenz.com',
+	// 	color:"#CD0C24"
+	// },
 	{
 		id: '5',
 		name: 'Clubenz',

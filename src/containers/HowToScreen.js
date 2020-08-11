@@ -457,7 +457,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Get access to the largest spare parts store with simple clicks' , this.props.language)}
+										{__('Get access to the largest spare parts store through simple clicks with verified reviews and feedback from other members.' , this.props.language)}
 									</Text>
 								</View>
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -472,7 +472,7 @@ class HowToScreen extends Component {
 											},
 										]}
 									>
-										{__('Learn more' , this.props.language)}
+										{__('Learn about' , this.props.language)}
 									</Text>
 									<Text
 										style={{
@@ -485,7 +485,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too' , this.props.language)}
+										{__(' About your cluster errors & messages with reasons & recommendations, you can also review others\' experience & add yours.' , this.props.language)}
 									</Text>
 								</View>
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -515,7 +515,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers' , this.props.language)}
+										{__('Support your Benz community by rating your experience with the service provider.' , this.props.language)}
 									</Text>
 								</View>
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -545,7 +545,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.' , this.props.language)}</Text>
+										{__('Quick and easy access to all the services around you, with verified & accredited reviews from other owners.' , this.props.language)}</Text>
 								</View>
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
 									<Text
@@ -561,7 +561,7 @@ class HowToScreen extends Component {
 											},
 										]}
 									>
-										{__('Enjoy your ride' , this.props.language)}
+										{__('Enjoy a new experience' , this.props.language)}
 									</Text>
 									<Text
 										style={{
@@ -575,7 +575,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('enabling your location and notifications shall give you access to nearst providers and latest promotions.' , this.props.language)}</Text>
+										{__('Please enable your location & notifications to get access to the nearest providers & promotions.' , this.props.language)}</Text>
 								</View>
 
 
@@ -604,7 +604,7 @@ class HowToScreen extends Component {
 											},
 										]}
 									>
-										{__('Enjoy your ride' , this.props.language)}
+										{__('Enjoy a new experience' , this.props.language)}
 									</Text>
 									<Text
 										style={{
@@ -618,7 +618,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('enabling your location and notifications shall give you access to nearst providers and latest promotions.' , this.props.language)}</Text>
+										{__('Please enable your location & notifications to get access to the nearest providers & promotions.' , this.props.language)}</Text>
 								</View>
 
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -648,7 +648,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.' , this.props.language)}</Text>
+										{__('Quick and easy access to all the services around you, with verified & accredited reviews from other owners.' , this.props.language)}</Text>
 								</View>
 
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -678,7 +678,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers' , this.props.language)}
+										{__('Support your Benz community by rating your experience with the service provider.' , this.props.language)}
 									</Text>
 								</View>
 								<View style={{ width: width, height: '95%', justifyContent: 'center' }}>
@@ -693,7 +693,7 @@ class HowToScreen extends Component {
 											},
 										]}
 									>
-										{__('Learn more' , this.props.language)}
+										{__('Learn about' , this.props.language)}
 									</Text>
 									<Text
 										style={{
@@ -706,7 +706,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too' , this.props.language)}
+										{__(' About your cluster errors & messages with reasons & recommendations, you can also review others\' experience & add yours.' , this.props.language)}
 									</Text>
 								</View>
 
@@ -737,7 +737,7 @@ class HowToScreen extends Component {
 											fontFamily: Fonts.circular_book,
 										}}
 									>
-										{__('Get access to the largest spare parts store with simple clicks' , this.props.language)}
+										{__('Get access to the largest spare parts store through simple clicks with verified reviews and feedback from other members.' , this.props.language)}
 									</Text>
 								</View>
 							</ScrollView>

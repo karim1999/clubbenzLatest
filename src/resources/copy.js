@@ -5,15 +5,15 @@ import {Text} from 'react-native';
 import React from 'react';
 
 const es = {
-  'Enjoy your ride': 'استمتع بقيادتك',
-  'enabling your location and notifications shall give you access to nearst providers and latest promotions.': 'تفعيل موقعك و الاشعارات تمكنك من الوصول إلى أقرب مقدم خدمة وأحدث العروض الترويجية',
+  'Enjoy a new experience': 'استمتع بتجربة جديدة',
+  'Please enable your location & notifications to get access to the nearest providers & promotions.': 'رجاء تفعيل خدمة تحديد الموقع و خدمة الاشعارات لضمان معرفة اقرب مقدم خدمة و تلقي العروض.',
   'Discover more.': 'اكتشف المزيد',
-  'Easily access all services related to your Mercedes around you with accredited reviews from your community experience and get to know important tips and other useful hidden options for more comfort with your ride.': 'احصل و اوصل بسهولة حولك الى كل الخدمات المتعلقة بمرسيدس من خلال اراء وتجارب الاعضاء الاخرين و تعرف على نصائح هامة وخيارات أخرى تفيدك لمزيد من الراحة أثناء رحلتك.',
-  'Support your Benz community by rating your experience with rendered services for appropriate and fair ranking to all service providers': 'قيم تجربتك مع مقدم الخدمة لتدعم مجتمع بنز الخاص بك للحصول على التصنيف المناسب والعادل لجميع مقدمى الخدمات',
-  'Learn more': 'أعرف اكتر',
-  'Know common cluster errors related to your Mercedes including severity, common reasons from others experience and you can add yours too': 'تعرف على أخطاء العداد الشائعة المتعلقة بموديل سيارتك متضمنا مستوى الخطورة والأسباب الشائعة من تجربة الآخرين كما يمكنك إضافة تجربتك مع نفس الخطأ',
+  'Quick and easy access to all the services around you, with verified & accredited reviews from other owners.': 'الوصول  بسهولة لمقدمي الخدمات القريبين منك و اراء و تقييم مستخدميين اخرين عن مستوي الخدمة.',
+  'Support your Benz community by rating your experience with the service provider.': 'ادعم مجتمع بنز عن طريق تقييم تجربتك مع مقدم الخدمة.',
+  'Learn about': 'تعرف على',
+  ' About your cluster errors & messages with reasons & recommendations, you can also review others\' experience & add yours.': 'تعرف على رسائل عداد سيارتك الشائعة, الاسباب و الارشدات مع الاطلاع علي تجارب الآخرين المماثلة كما يمكنك إضافة تجربتك الشخصية.',
   'Parts hub': 'سوق قطع الغيار',
-  'Get access to the largest spare parts store with simple clicks': 'تمتع بالراحة ووفر وقتك عند البحث عن أي قطعه غيار فلديك الآن أكبر متجر لقطع الغيار بين يديك و بخطوات بسيطة سيمكنك بسهولة الوصول إلى ما تريد وشرائه و يمكنك قراءة تجارب الاخرين مع التجار العارضة لقطع الغيار',
+  'Get access to the largest spare parts store through simple clicks with verified reviews and feedback from other members.': ' بخطوات بسيطة تسوق عبر أكبر متجر لقطع الغيار و يمكنك ايضا الاطلاع علي تجارب الاخرين.',
   'Get Started': ' ابدأالآن',
   'Continue with Facebook': 'استمر من خلال فيسبوك',
   'Or': 'أو',
@@ -286,7 +286,8 @@ const es = {
   'New Parts': 'جديد',
   'Used Parts': 'مستعمل',
   'Check Vin Number': 'اقرأ رقم تعريف سيارتك',
-
+  'Pick your choice': 'اختار من القائمة',
+  'Coming Soon': 'قريبا مزايا خاصة للعضوية',
 };
 
 export default function __(k ,language) {

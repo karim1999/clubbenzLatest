@@ -17,6 +17,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome"
 import {bindActionCreators} from "redux";
 import * as authAction from "../redux/actions/auth";
+import * as initAction from "../redux/actions/init";
 import {connect} from "react-redux";
 import Advertisement from "../components/advertisement/advertisement";
 import moment from "moment";
@@ -42,6 +43,7 @@ import __ from '../resources/copy';
 import BackgroundFetch from "react-native-background-fetch";
 import {scheduleNotification} from '../redux/actions/workshops';
 import {store} from '../redux/create';
+import {UPDATE_INDICATOR_FLAG} from '../redux/actions/types';
 
 class NewHomeScreen extends Component {
     constructor(props){
@@ -76,7 +78,7 @@ class NewHomeScreen extends Component {
             },
             {
                 serviceName: 'Special Service Centers',
-                arabic_serviceName: 'الخدمات',
+                arabic_serviceName: 'خدمات متخصصة',
                 serviceUrl: require("./../resources/images/service3.png"),
                 path: 'ServiceListScreen',
                 Location: true
@@ -264,6 +266,8 @@ class NewHomeScreen extends Component {
     };
 
     getLocationAndNavigate = (data) => {
+        console.log('start')
+        store.dispatch({type:UPDATE_INDICATOR_FLAG,data:true})
         Geolocation.getCurrentPosition(
             (position) => {
                 // console.log(position)
@@ -284,11 +288,14 @@ class NewHomeScreen extends Component {
                 // console.log(pos)
 
                 var value = this.props.user.enableLocation == 'true' ? position : pos;
+                console.log('end')
+                store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false})
 
                 NavigationService.navigate(data.path, { position: value, preferences: this.props.preferences, homeButton: false });
             },
             (error) => {
                 // See error code charts below.
+                store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false})
                 console.log(error.code, error.message);
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
@@ -665,7 +672,7 @@ class NewHomeScreen extends Component {
                         </View>
                     </View>
                     <View style={Styles.services}>
-                        <Title title={__("Services Clubbenz", this.props.language)} />
+                        <Title title={__("Pick your choice", this.props.language)} />
                         <FlatList
                             style={{ backgroundColor: colors.white }}
                             data={this.state.data}
@@ -745,7 +752,8 @@ mapStateToProps = (state) => {
 }
 mapDispatchToProps = (dispatch) => bindActionCreators(
     {
-        updateUser: authAction.updateUser
+        updateUser: authAction.updateUser,
+        updateIndicator: initAction.updateIndicator
     },
     dispatch
 );

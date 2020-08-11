@@ -15,7 +15,7 @@ class Navigation extends PureComponent {
 		return (
 			<View>
 				<View style={styles.navigationComponent}>
-					<View style={{flex: 1}}>
+					<View style={{flex: 1, justifyContent: 'center'}}>
 						{this.props.menuIcon ? (
 							<TouchableWithoutFeedback onPress={this.props.onMenuPress}>
 								<View style={navigationStyle.leftContainer}>
@@ -26,15 +26,15 @@ class Navigation extends PureComponent {
 								</View>
 							</TouchableWithoutFeedback>
 						) : (
-							<TouchableWithoutFeedback onPress={this.props.goBack}>
-								<View style={[navigationStyle.leftContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
+							<TouchableWithoutFeedback style={{justifyContent: 'center'}} onPress={this.props.goBack}>
+								{/*<View style={[navigationStyle.leftContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>*/}
 									<Image
 										resizeMode="contain"
-										style={{height:32,width:32, marginLeft: 15,}}
+										style={{height:32,width:32, marginLeft: 15, transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}
 										source={require('../../resources/images/ic-back.png')}
 									/>
 
-								</View>
+								{/*</View>*/}
 							</TouchableWithoutFeedback>
 						)}
 					</View>
@@ -64,13 +64,13 @@ class Navigation extends PureComponent {
 
 					{
 						this.props.favorite ?
-							<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}}>
+							<View style={{flex: 1}}>
 								<TouchableWithoutFeedback onPress={this.props.onPressFavorite}>
-									<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
+									{/*<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>*/}
 										<Icon
-											style={[styles.navigationMenuButton, {marginBottom: 5}]}
+											style={[styles.navigationMenuButton]}
 											name={this.props.isFavorite ? "star" : "staro"} size={27} color={this.props.isFavorite ? "#F24601": "white"}/>
-									</View>
+									{/*</View>*/}
 								</TouchableWithoutFeedback>
 							</View> :
 							!this.props.headerimageIcone && this.props.homeButton != false?
@@ -85,20 +85,20 @@ class Navigation extends PureComponent {
 					{this.props.rightIcon &&
 					<View style={{flex: 1}}>
 						{this.props.share ? (<TouchableWithoutFeedback onPress={this.props.onSharePress}>
-							<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>
+							{/*<View style={[navigationStyle.leftContainer, {alignItems: 'center', justifyContent: 'center', alignSelf: 'center'}]}>*/}
 								<Image
 									style={[styles.navigationMenuButton, {marginBottom: 5}]}
 									source={require('../../resources/icons/ic-share.png')}
 								/>
-							</View>
+							{/*</View>*/}
 						</TouchableWithoutFeedback>) : (
 							<TouchableWithoutFeedback onPress={this.props.onMenuPress}>
-								<View>
+								{/*<View>*/}
 									<Image
 										style={styles.navigationMenuButton}
 										source={require('../../resources/icons/search.png')}
 									/>
-								</View>
+								{/*</View>*/}
 							</TouchableWithoutFeedback>
 						)}
 					</View>
