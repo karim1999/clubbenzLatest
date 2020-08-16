@@ -19,8 +19,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* clubbenzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* clubbenzTests.m */; };
 		B4BC386C37D3A88D2F026AF1 /* libPods-clubbenz-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E06F5DB86AA457F6F5FCA3 /* libPods-clubbenz-tvOS.a */; };
-		B60DE27224B7410400B5C3CB /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B60DE27124B7410400B5C3CB /* RNBackgroundFetch+AppDelegate.m */; };
 		B6102C48248828FB00993602 /* splash_screen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6102C47248828FB00993602 /* splash_screen.mp3 */; };
+		B612EC5724E926F000FB69E5 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B612EC5624E926F000FB69E5 /* RNBackgroundFetch+AppDelegate.m */; };
 		B693B7492487FFB600563EA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B693B7482487FFB600563EA7 /* GoogleService-Info.plist */; };
 		B6C13BA02487F2E8000A564D /* circular_medium_italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6C13B952487F2E8000A564D /* circular_medium_italic.otf */; };
 		B6C13BA12487F2E8000A564D /* circular_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6C13B962487F2E8000A564D /* circular_medium.ttf */; };
@@ -78,9 +78,9 @@
 		96735A358CBA03E8D607F346 /* Pods-clubbenz-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clubbenz-tvOS.release.xcconfig"; path = "Target Support Files/Pods-clubbenz-tvOS/Pods-clubbenz-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		9B2178D1A256BDDAB2DAE5E3 /* Pods-clubbenz-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clubbenz-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-clubbenz-tvOS/Pods-clubbenz-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AE74CAC6409853993742F326 /* Pods-clubbenzTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clubbenzTests.release.xcconfig"; path = "Target Support Files/Pods-clubbenzTests/Pods-clubbenzTests.release.xcconfig"; sourceTree = "<group>"; };
-		B60DE27124B7410400B5C3CB /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		B6102C47248828FB00993602 /* splash_screen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash_screen.mp3; sourceTree = "<group>"; };
 		B6102C622488339600993602 /* ClubBenz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ClubBenz.entitlements; path = clubbenz/ClubBenz.entitlements; sourceTree = "<group>"; };
+		B612EC5624E926F000FB69E5 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		B693B7482487FFB600563EA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6C13B952487F2E8000A564D /* circular_medium_italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = circular_medium_italic.otf; sourceTree = "<group>"; };
 		B6C13B962487F2E8000A564D /* circular_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = circular_medium.ttf; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 		13B07FAE1A68108700A75B9A /* clubbenz */ = {
 			isa = PBXGroup;
 			children = (
+				B612EC5624E926F000FB69E5 /* RNBackgroundFetch+AppDelegate.m */,
 				B6C207F124B744AA00164666 /* ClubBenzRelease.entitlements */,
-				B60DE27124B7410400B5C3CB /* RNBackgroundFetch+AppDelegate.m */,
 				B6102C622488339600993602 /* ClubBenz.entitlements */,
 				B693B7482487FFB600563EA7 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -349,6 +349,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 27AMR8KH6W;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -658,7 +659,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				B6C13BAF2487F596000A564D /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				B60DE27224B7410400B5C3CB /* RNBackgroundFetch+AppDelegate.m in Sources */,
+				B612EC5724E926F000FB69E5 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +714,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -737,7 +740,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				INFOPLIST_FILE = clubbenzTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -759,13 +764,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = clubbenz/ClubBenz.entitlements;
-				CURRENT_PROJECT_VERSION = 6.4;
+				CURRENT_PROJECT_VERSION = 6.8;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = clubbenz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 6.4;
+				MARKETING_VERSION = 6.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -787,12 +792,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = clubbenz/ClubBenzRelease.entitlements;
-				CURRENT_PROJECT_VERSION = 6.4;
+				CURRENT_PROJECT_VERSION = 6.8;
 				DEVELOPMENT_TEAM = 27AMR8KH6W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = clubbenz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 6.4;
+				MARKETING_VERSION = 6.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

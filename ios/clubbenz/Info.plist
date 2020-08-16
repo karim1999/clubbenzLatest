@@ -80,8 +80,6 @@
 	<string>Clubbenz needs Location Access</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Clubbenz needs Location Access</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Clubbenz need Microphone Access</string>
 	<key>NSMotionUsageDescription</key>
@@ -90,6 +88,12 @@
 	<string>Clubbenz need Gallery Access</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Clubbenz needs Speech Recognition Access</string>
+	<key>Privacy - Location When In Use Usage Descript</key>
+	<string>Clubbenz needs Location Access</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Clubbenz needs Location Access</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Clubbenz needs Location Access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>oswald.ttf</string>
@@ -123,7 +127,6 @@
 	<array>
 		<string>fetch</string>
 		<string>location</string>
-		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

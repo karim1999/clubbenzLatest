@@ -24,12 +24,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[TSBackgroundFetch sharedInstance] didFinishLaunching];
     [RNFirebaseNotifications configure];
     [application registerForRemoteNotifications];
-    [[TSBackgroundFetch sharedInstance] didFinishLaunching];
   [FIROptions defaultOptions].deepLinkURLScheme = @"clubenz.page.link";
   [FIRApp configure];
-  
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                 moduleName:@"clubbenz"

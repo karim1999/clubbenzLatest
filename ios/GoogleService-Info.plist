@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:87668279587:ios:839ac92316e55c90376496</string>
+	<string>1:87668279587:ios:d2416aec70b087a2376496</string>
 	<key>DATABASE_URL</key>
 	<string>https://clubenz-261106.firebaseio.com</string>
 </dict>

@@ -153,7 +153,7 @@ export default class App extends React.Component {
 
 		this.checkPermission();
 		this.createNotificationListeners();
-
+		Geolocation.requestAuthorization("always")
         BackgroundFetch.configure({
             minimumFetchInterval: 15,     // <-- minutes (15 is minimum allowed)
             // Android options
@@ -170,14 +170,15 @@ export default class App extends React.Component {
             // Required: Signal completion of your task to native code
             // If you fail to do this, the OS can terminate your app
             // or assign battery-blame for consuming too much background-time
-            Geolocation.getCurrentPosition(
+						console.log("fetching......")
+            Geolocation.watchPosition(
                 (position) => {
                 	console.log(position)
 					AsyncStorage.getItem('user').then(userString => {
 						let user= JSON.parse(userString)
 						// console.log(user.id)
 						scheduleNotification(user.id, position).then(res => {
-							// console.log(res);
+							console.log(res);
 						}).catch(err => {
 							console.log(err)
 						})
