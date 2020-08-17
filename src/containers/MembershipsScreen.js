@@ -96,7 +96,7 @@ class MembershipsScreen extends PureComponent {
                     {
                         !this.state.isLoading && this.state.memberships && this.state.memberships.length == 0 &&
                             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{textAlign: 'center', fontSize: 24, alignSelf: 'center'}}>{__('Coming Soon', this.props.language)}</Text>
+                                <Text style={{textAlign: 'center', fontSize: 24, alignSelf: 'center'}}>{__('Coming Soon Membership plans', this.props.language)}</Text>
                             </View>
                     }
                     <FlatList

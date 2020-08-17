@@ -288,6 +288,8 @@ const es = {
   'Check Vin Number': 'اقرأ رقم تعريف سيارتك',
   'Pick your choice': 'اختار من القائمة',
   'Coming Soon': 'قريبا مزايا خاصة للعضوية',
+  'Coming Soon Membership plans': 'قريبا مزايا خاصة للعضوية',
+  'Check your internet connection': 'تأكد من خدمة الانترنت على جهازك',
 };
 
 export default function __(k ,language) {

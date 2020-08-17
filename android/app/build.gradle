@@ -219,6 +219,7 @@ implementation project(':react-native-view-pdf')
     implementation 'com.android.support:customtabs:28.0.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation project(':@mauron85_react-native-background-geolocation')
     compile ('com.google.firebase:firebase-ml-vision:18.0.2') {
         force = true
     }
