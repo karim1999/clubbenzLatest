@@ -290,6 +290,7 @@ const es = {
   'Coming Soon': 'قريبا مزايا خاصة للعضوية',
   'Coming Soon Membership plans': 'قريبا مزايا خاصة للعضوية',
   'Check your internet connection': 'تأكد من خدمة الانترنت على جهازك',
+  'The code was sent to your email.': 'تم ارسال الكود الي بريدك الالكتروني.',
 };
 
 export default function __(k ,language) {

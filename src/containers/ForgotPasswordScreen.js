@@ -13,6 +13,7 @@ import Toast from 'react-native-simple-toast';
 import {API_ROOT, VERIFICATION_CODE_WARNING} from '../config/constant';
 import { Fonts } from '../resources/constants/Fonts';
 import axios from 'axios'
+import {sendCodeEmail} from '../redux/actions/auth';
 const navigationOptions = {
 	header: null,
 };
@@ -29,7 +30,8 @@ class ForgotPasswordScreen extends PureComponent {
 			code3:'',
 			code4:'',
 			code5:'',
-			code6:''
+			code6:'',
+			verifyWithEmail: false,
 		}
 	}
 	verifyNumber = () => {
@@ -68,6 +70,7 @@ class ForgotPasswordScreen extends PureComponent {
 			this.props.navigation.pop()
 			return true
 		})
+		setTimeout(() => {this.setState({verifyWithEmail: true})}, 15000)
 	}
 
 	handleKeyPress=(nativeEvent,ref) =>{
@@ -85,7 +88,17 @@ class ForgotPasswordScreen extends PureComponent {
             return prev;
 		})
 	}
-	actionNoCode() {}
+	actionNoCode() {
+		// alert(this.props.navigation.state.params.verification_code)
+		sendCodeEmail({
+			phone: this.state.user.phone,
+			code: this.props.navigation.state.params.verification_code,
+		}).then(res => {
+			Toast.show("The code was sent to your email.")
+		}).catch(err => {
+			console.log(err)
+		})
+	}
 	goBack(){
 		axios.post(API_ROOT + 'user/remove_user', {phone: this.state.user.phone}).then(res => {
 			console.log("done")
@@ -121,11 +134,14 @@ class ForgotPasswordScreen extends PureComponent {
 						</View>
 					</TouchableOpacity>
 
-					<TouchableOpacity onPress={this.actionNoCode}>
-						<Text style={[styles.tapButtonStyleTextUnderLine, FPStyle.noCodeText]}>
-							Didn't recieve the code
-						</Text>
-					</TouchableOpacity>
+					{
+						this.state.verifyWithEmail &&
+						<TouchableOpacity onPress={this.actionNoCode}>
+							<Text style={[styles.tapButtonStyleTextUnderLine, FPStyle.noCodeText]}>
+								Didn't recieve the code, send it via email
+							</Text>
+						</TouchableOpacity>
+					}
 				</View>
 			</View>
 		);

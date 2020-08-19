@@ -289,7 +289,7 @@ class RegisterScreen extends PureComponent {
           if (res.success) {
             // debugger
             self.props.updateUser(Object.assign(res.user, { verification_code: res.verification_code }))
-            self.props.navigation.navigate('ForgotPasswordScreen', { fromscreen: 'Register', mobile });
+            self.props.navigation.navigate('ForgotPasswordScreen', { fromscreen: 'Register', mobile, verification_code: res.verification_code });
           }
           else {
             // debugger
