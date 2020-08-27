@@ -30,7 +30,7 @@ export const scheduleNotification = async (user_id, position) => {
   }
   let params = { url: API_ROOT + "User/schedule_notifications", body: data};
   // let response = await new RequestService(params).callCreate();
-  axios.post(API_ROOT + "User/schedule_notifications", data).then(res => {
+  return axios.post(API_ROOT + "User/schedule_notifications", data).then(res => {
     return res
   }).catch(err => {
     console.log(err)

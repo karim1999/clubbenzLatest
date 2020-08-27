@@ -138,7 +138,7 @@ class ForgotPasswordScreen extends PureComponent {
 						this.state.verifyWithEmail &&
 						<TouchableOpacity onPress={this.actionNoCode}>
 							<Text style={[styles.tapButtonStyleTextUnderLine, FPStyle.noCodeText]}>
-								Didn't recieve the code, send it via email
+								Didn't receive the code, send it via email
 							</Text>
 						</TouchableOpacity>
 					}
