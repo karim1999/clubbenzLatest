@@ -170,7 +170,7 @@ export default class App extends React.Component {
         BackgroundFetch.configure({
             minimumFetchInterval: 15,     // <-- minutes (15 is minimum allowed)
             // Android options
-			enableHeadless: true,
+			enableHeadless: false,
 			forceAlarmManager: false,     // <-- Set true to bypass JobScheduler.
             stopOnTerminate: false,
             startOnBoot: true,
