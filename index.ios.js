@@ -7,5 +7,5 @@ import App from './src/App';
 import {name as appName} from './app.json';
 import bgmessaging from './src/bgmessaging'
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent('clubbenz', () => App);
 AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgmessaging);
