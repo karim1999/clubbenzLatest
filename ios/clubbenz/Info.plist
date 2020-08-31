@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ClubBenz</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -76,9 +76,13 @@
 	<string>Clubbenz need Camera Access</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Clubbenz need to access your contacts</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Clubbenz needs Location Access</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Clubbenz needs Location Access</string>
 	<key>NSLocationUsageDescription</key>
+	<string>Clubbenz needs Location Access</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Clubbenz needs Location Access</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Clubbenz need Microphone Access</string>
@@ -89,10 +93,6 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Clubbenz needs Speech Recognition Access</string>
 	<key>Privacy - Location When In Use Usage Descript</key>
-	<string>Clubbenz needs Location Access</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Clubbenz needs Location Access</string>
 	<key>UIAppFonts</key>
 	<array>
