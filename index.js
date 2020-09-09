@@ -46,5 +46,5 @@ let MyHeadlessTask = async (event) => {
 }
 
 // Register your BackgroundFetch HeadlessTask
-BackgroundFetch.registerHeadlessTask(MyHeadlessTask);
+// BackgroundFetch.registerHeadlessTask(MyHeadlessTask);
 AppRegistry.registerComponent(appName, () => App);

@@ -331,7 +331,8 @@ class RegisterScreen extends PureComponent {
       .then(res => {
         if (res.success) {
           self.props.updateUser(Object.assign(res.user, { verification_code: res.verification_code }))
-          self.props.navigation.navigate('ForgotPasswordScreen');
+          Toast.show(__("You have registered successfully", this.props.language), Toast.LONG)
+          // self.props.navigation.navigate('ForgotPasswordScreen');
         }
         else {
           setTimeout(() => {
