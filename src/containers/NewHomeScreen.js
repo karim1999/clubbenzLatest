@@ -59,7 +59,7 @@ class NewHomeScreen extends Component {
         computationDone: false,
         searchText: '',
         locationPermission: '',
-        shareText: __('Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link', this.props.language),
+        shareText: __('Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – Clubenz application will help you pamper your car. To download, click on the below link', this.props.language),
         data: [
             {
                 serviceName: 'Workshops',
@@ -240,8 +240,8 @@ class NewHomeScreen extends Component {
 
     _alertForLocationPermission() {
         Alert.alert(
-            'Clubbenz Location Permission',
-            'Clubbenz need to access your current location' +
+            'Clubenz Location Permission',
+            'Clubenz need to access your current location' +
             "to locate the nearest shops.",
             [
                 {
@@ -339,7 +339,7 @@ class NewHomeScreen extends Component {
                             // asking for permission using Permissions dialog.
                             Alert.alert(
                                 'Location Access',
-                                'Clubbenz needs access to your location',
+                                'Clubenz needs access to your location',
                                 [
                                     {
                                         text: 'Cancel',
@@ -596,7 +596,7 @@ class NewHomeScreen extends Component {
                         // asking for permission using Permissions dialog.
                         Alert.alert(
                             'Location Access',
-                            'Clubbenz needs access to your location',
+                            'Clubenz needs access to your location',
                             [
                                 {
                                     text: 'Cancel',

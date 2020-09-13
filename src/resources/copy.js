@@ -83,6 +83,7 @@ const es = {
   'Book Now': 'احجز الان',
   'Booking': 'احجز الان',
   'Contacts': 'الاتصال',
+  'Tel': 'الاتصال',
   'Offers': 'العروض',
   'Contact now': 'اتصل الان',
   'Be the first to rate this service': 'كن اول مقيم للخدمة',
@@ -224,7 +225,7 @@ const es = {
   'FIND A SERVICE PROVIDER': 'ادخل اسم مقدم خدمة',
   'The provider is not available during that time': 'مقدم الخدمة غير متوفر في هذا الوقت',
   'Booking is not available': 'مقدم الخدمة غير متوفر في هذا الوقت',
-  'Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – ClubBenz application will help you pamper your car. To download, click on the below link': 'لا تفوت الفرصة و ابدأ الان في الحصول علي جميع المزايا و العروض المقدمة، استمتع بقيادتك و حافظ علي سيارتك من خلال تنزيل ابليكيشن ClubBenz.  لتنزيل الابليكيشن اضغط علي الرابط التالي',
+  'Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – Clubenz application will help you pamper your car. To download, click on the below link': 'لا تفوت الفرصة و ابدأ الان في الحصول علي جميع المزايا و العروض المقدمة، استمتع بقيادتك و حافظ علي سيارتك من خلال تنزيل ابليكيشن Clubenz.  لتنزيل الابليكيشن اضغط علي الرابط التالي',
   'Enter Solution...': 'اكتب الحل....',
   'Submit': 'ارسل',
   'Please add country code (Ex: +201 2xx xxx xxx)': 'من فضلك ادخل كود الدولة (مثال: 20x xxxx xxxx+)',
@@ -233,7 +234,7 @@ const es = {
   'Please fill up all details': 'من فضلك قم بملئ كل البيانات',
   'Share Your Opinion': 'شارك برأيك',
   'Share With Friends': 'شارك مع اصدقائك',
-  'Services Clubbenz': 'خدمات Clubbenz',
+  'Services Clubenz': 'خدمات Clubenz',
   'Cluster Error': 'اخطاء العداد',
   'Booking Info': 'تفاصيل الحجز',
   'Overall:': 'شامل:',
@@ -243,7 +244,7 @@ const es = {
   'Competency:': 'الكفائة:',
   'Ok': 'موافق',
   'Ask Me Later': 'اسألني لاحقا',
-  'Clubbenz needs the permission to call so you can reach the provider you want.': 'التطبيق يحتاج الي التصريح لبدء المكالمات',
+  'Clubenz needs the permission to call so you can reach the provider you want.': 'التطبيق يحتاج الي التصريح لبدء المكالمات',
   'Get permission to call Providers': 'السماح للتطبيق بادارة المكالمات',
   'Address:': 'العنوان',
   'City:': 'المدينة',
@@ -291,20 +292,7 @@ const es = {
   'Coming Soon Membership plans': 'قريبا مزايا خاصة للعضوية',
   'Check your internet connection': 'تأكد من خدمة الانترنت على جهازك',
   'The code was sent to your email.': 'تم ارسال الكود الي بريدك الالكتروني.',
-  'Clubenz logo and application is fully owned by Trade & Ship Poland and all intellectual property of Clubenz application is Copyrighted in the European Union and subject to EU laws. Any abuse or inappropriate usage of Clubenz shall put users under immediate termination to their account on Clubenz application, website and other properties. By accepting Clubenz terms and conditions users are clearly informed and aware of Clubenz application, website and other properties terms and conditions and all disputes (if any) are subject to Polish Law and EU intellectual property and reserved copyrights. Clubenz aims at excellence in services provided to its customers, those are Clubenz tips to help you enjoy providers services even better. Contracting Clubenz service provider outside the app voids your grantee and keeps you without any quality or cost control, so always use Clubenz for your aimed service needs. We always make sure our service providers are honest and all whilst building our providers network, our criteria of provider’s selection came out of car owners’ recommendations and sound reputation. The aim of the network is improving the quality of services rendered through providers; thus, your opinion really matters to help us to communicate with service providers on your experience to help them to improve and reach your competence. All offers and discounts can be found in the offers and/ or notifications tabs are authenticated through providers, please review offers validity carefully. Advanced booking option is made to ease your car maintenance visit and save your time, thus make sure whilst booking to select dates that suits your availability to serve you and other customers best. Cancelling & No show isn’t welcome at Clubenz. Please note that all data received through Clubenz customers are only and strictly used by Clubenz to help us to render our services appropriately. Any disclosed data are treated as top confidential and wont be disclosed to a third party or used for any marketing purposes through a third party without your consent. Make the most of Clubenz….': 'برجاء العلم بان شعار وتطبيق و العلامة التجارية الخاصةب Clubenz مملوكة بالكامل لشركة Trade & Ship Poland وجميع حقوق الملكية الفكرية و العلامة التجارية الخاصة بتطبيق Clubenz محفوظة الحقوق وتخضع لحماية و قوانين الاتحاد الأوروبي.\n' +
-      '\n' +
-      'برجاء تجنب أي إساءة أو استخدام غير مناسب لتطبيق Clubenz لكى لا يضع مستخدمى التطبيق للانهاء و الحذف الفوري لحسابهم على تطبيق Clubenz وموقع الويب والممتلكات الأخرى الخاصة ب Clubenz.\n' +
-      '\n' +
-      'فورقبول الشروط والأحكام الخاصة بتطبيق Clubenz يعتبر مستخدمى التطبيق موافقين و على اتم العلم و بوضوح وإدراك الشروط و الاحكام الخاصة بتطبيق Clubenz وموقع الويب الخاص بالعلامة التجارية Clubenzوتخضع جميع النزاعات (إن وجدت) للقانون البولندي وقوانين الملكية الفكرية للاتحاد الأوروبي.\n' +
-      'تهدف Clubenz إلى التميز في الخدمات المقدمة لعملائها ، وهذه نصائح Clubenz لمساعدتك على الاستمتاع بخدمات مقدمي الخدمات بشكل أفضل.\n' +
-      'للعميل كل الحق فى التعمل مع مقدمى الخدمات خارج تطبيق Clubenz دون الرجوع على التطبيق و تحت مسئولية العميل و نفضل الاستفادة القصوى للعملاء عن طريق التوصيات و الخصومات المتوفرةعن طريق التطبيق للمحافظة على معايير الجودة و تقليل التكلفة على العملاء من خلال العروض و الخصومات المقدمة من مقدمى الخدمة داخل التطبيق، لذلك استخدم Clubenz دائمًا لتلبية احتياجات الخدمة.\n' +
-      'نسعى دائما للتأكد أن مقدمى الخدمات بالتطبيق صادقين وذوى سمعة طيبة و يتم ادراج مقدمى الخدمة بالتطبيق من خلال توصيات مالكي السيارات والسمعة جيدةلمدمى الخدمات.\n' +
-      'يهدف التطبيق إلى تحسين جودة الخدمات المقدمة من خلال مقدمي الخدمة ؛ وبالتالي ، فإن رأيك يهمنا حقًا و يساعدتنا على التواصل مع مقدمي الخدمات حول تجربتك لمساعدتهم على تحسين مستوى الخدمة دائما.\n' +
-      'يمكن العثور على جميع العروض والخصومات في علامات تبويب العروض و / أو الإشعارات مصادق عليها من خلال مقدمي الخدمة ، يرجى مراجعة صلاحية العروض بعناية.\n' +
-      'يتم إجراء خيار الحجز لتسهيل زيارة صيانة سيارتك وتوفير وقتك ، وبالتالي تأكد أثناء الحجز تحديد التواريخ التي تناسب وقتك لخدمتك ولعملائك الآخرين بشكل أفضل. الإلغاء وعدم الحضور بعد الحجز المسبق للصيانة غير مرحب به في Clubenz.\n' +
-      'يرجى العلم بأن جميع البيانات التي يتم تلقيها من خلال عملاء Clubenz يتم استخدامها فقط وبشكل صارم من قبل Clubenz لمساعدتنا على تقديم خدماتنا بشكل أفضل ويتم التعامل مع  بيانات الاعضاء بسرية تامة وانه لن يتم التعامل على بيانات الاعضاء او الافصاح عنها لطرف ثالث أو استخدامها لأي أغراض تسويقية من خلال طرف ثالث دون موافقتك.\n' +
-      '\n' +
-      'أستفد أكثر مع Clubenz\n',
+  'Clubenz terms & conditions Clubenz logo and application is fully owned by Trade & Ship Poland and all intellectual property of Clubenz application is Copyrighted in the European Union and subject to EU laws. Any abuse or inappropriate usage of Clubenz shall put users under immediate termination to their account on Clubenz application, website and other properties. By accepting Clubenz terms and conditions users are clearly informed and aware of Clubenz application, website and other properties terms and conditions and all disputes (if any) are subject to Polish Law and EU intellectual property and reserved copyrights. Clubenz aims at excellence in services provided to its customers, those are Clubenz tips to help you enjoy providers services even better. Contracting Clubenz service provider outside the app voids your grantee and keeps you without any quality or cost control, so always use Clubenz for your aimed service needs. We always make sure our service providers are honest and all whilst building our providers network, our criteria of provider’s selection came out of car owners’ recommendations and sound reputation. The aim of the network is improving the quality of services rendered through providers; thus, your opinion really matters to help us to communicate with service providers on your experience to help them to improve and reach your competence. All offers and discounts can be found in the offers and/ or notifications tabs are authenticated through providers, please review offers validity carefully. Advanced booking option is made to ease your car maintenance visit and save your time, thus make sure whilst booking to select dates that suits your availability to serve you and other customers best. Cancelling & No show isn’t welcome at Clubenz. Please note that all data received through Clubenz customers are only and strictly used by Clubenz to help us to render our services appropriately. Any disclosed data are treated as top confidential and wont be disclosed to a third party or used for any marketing purposes through a third party without your consent. Make the most of Clubenz….': 'شروط وأحكام Clubenz شعار وتطبيق Clubenz مملوك بالكامل لشركة Trade & Ship Poland وجميع حقوق الملكية الفكرية لتطبيق Clubenz محمية بحقوق الطبع والنشر في الاتحاد الأوروبي وتخضع لقوانين الاتحاد الأوروبي. إن أي إساءة استخدام أو استخدام غير مناسب لـ Clubenz ستضع المستخدمين تحت الإنهاء الفوري لحساباتهم على تطبيق Clubenz والموقع الإلكتروني والممتلكات الأخرى. من خلال قبول شروط وأحكام Clubenz ، يتم إبلاغ المستخدمين بشكل واضح وعلى علم بشروط وأحكام تطبيق Clubenz وموقع الويب والممتلكات الأخرى وجميع النزاعات (إن وجدت) تخضع للقانون البولندي والملكية الفكرية للاتحاد الأوروبي وحقوق النشر محفوظة. تهدف Clubenz إلى التميز في الخدمات المقدمة لعملائها ، تلك هي نصائح Clubenz لمساعدتك على الاستمتاع بخدمات مقدمي الخدمة بشكل أفضل. يقوم موفر خدمة التعاقد من Clubenz خارج التطبيق بإلغاء الحاصل على المنحة الخاصة بك ويبقيك دون أي رقابة على الجودة أو التكلفة ، لذلك استخدم دائمًا Clubenz لتلبية احتياجات الخدمة المستهدفة. نحن نتأكد دائمًا من أن مزودي الخدمة لدينا صادقون ، وأثناء بناء شبكة مزودينا ، جاءت معايير اختيار المزود من توصيات مالكي السيارات وسمعتهم السليمة. الهدف من الشبكة هو تحسين جودة الخدمات المقدمة من خلال مقدمي الخدمات ؛ وبالتالي ، فإن رأيك مهم حقًا لمساعدتنا على التواصل مع مزودي الخدمة بشأن تجربتك لمساعدتهم على تحسين الكفاءة والوصول إليها. يمكن العثور على جميع العروض والخصومات في العروض و / أو يتم توثيق علامات تبويب الإشعارات من خلال مقدمي الخدمات ، يرجى مراجعة صلاحية العروض بعناية. تم إجراء خيار الحجز المتقدم لتسهيل زيارة صيانة سيارتك وتوفير وقتك ، وبالتالي تأكد أثناء الحجز من تحديد التواريخ التي تناسب مدى توفرك لخدمتك أنت والعملاء الآخرين بشكل أفضل. الإلغاء وعدم الحضور غير مرحب به في Clubenz. يرجى ملاحظة أن جميع البيانات التي يتم تلقيها من خلال عملاء Clubenz يتم استخدامها فقط وبشكل صارم من قبل Clubenz لمساعدتنا على تقديم خدماتنا بشكل مناسب. يتم التعامل مع أي بيانات تم الكشف عنها على أنها سرية للغاية ولن يتم الكشف عنها لطرف ثالث أو استخدامها لأية أغراض تسويقية من خلال طرف ثالث دون موافقتك. حقق أقصى استفادة من Clubenz….',
   "You have registered successfully": "تم التسجيل بنجاح",
 };
 

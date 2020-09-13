@@ -96,11 +96,12 @@ class LoginScreen extends PureComponent {
       authAction
         .loginUser({email, password, fcm_token})
         .then(res => {
+        console.log(res);
           if (res.success) {
-            this.checkNumberVerified(res.user);
-            // AsyncStorage.setItem("user", JSON.stringify(res.user));
+            //this.checkNumberVerified(res.user);
+             AsyncStorage.setItem("user", JSON.stringify(res.user));
             // // debugger
-            // NavigationService.reset("HomeScreen");
+             NavigationService.reset("HomeScreen");
           } else {
             setTimeout(() => {
               if(__(res.message, this.props.language)){

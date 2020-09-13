@@ -80,7 +80,7 @@ class HomeScreen extends PureComponent {
 		computationDone: false,
 		searchText: '',
 		locationPermission: '',
-		shareText: 'Hey! Downlaod ClubBenz App now at https://www.google.com/',
+		shareText: 'Hey! Downlaod Clubenz App now at https://www.google.com/',
 		data: [
 			{
 				serviceName: 'Workshops',
@@ -294,8 +294,8 @@ class HomeScreen extends PureComponent {
 
 	_alertForLocationPermission() {
 		Alert.alert(
-			'Clubbenz Location Permission',
-			'Clubbenz need to access your current location' +
+			'Clubenz Location Permission',
+			'Clubenz need to access your current location' +
 			"to locate the nearest shops.",
 			[
 				{
@@ -388,7 +388,7 @@ class HomeScreen extends PureComponent {
 							// asking for permission using Permissions dialog.
 							Alert.alert(
 								'Location Access',
-								'Clubbenz needs access to your location',
+								'Clubenz needs access to your location',
 								[
 									{
 										text: 'Cancel',
@@ -638,7 +638,7 @@ class HomeScreen extends PureComponent {
 						// asking for permission using Permissions dialog.
 						Alert.alert(
 							'Location Access',
-							'Clubbenz needs access to your location',
+							'Clubenz needs access to your location',
 							[
 								{
 									text: 'Cancel',

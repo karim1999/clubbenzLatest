@@ -56,8 +56,8 @@ class SubscribeScreen extends PureComponent {
         Permissions.checkMultiple(['camera', 'photo']).then(response => {
             if (response.camera === 'denied' || response.photo === 'denied') {
                 Alert.alert(
-                    'Clubbenz needs camera and photos access',
-                    'Clubbenz Camera and Photos Permission',
+                    'Clubenz needs camera and photos access',
+                    'Clubenz Camera and Photos Permission',
                     [
                         {
                             text: 'Cancel',

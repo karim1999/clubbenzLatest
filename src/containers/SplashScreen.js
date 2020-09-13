@@ -64,7 +64,7 @@ class SplashScreen extends PureComponent {
 	checkNumberVerified(value) {
 		
 				// debugger
-				var ver_num = JSON.parse(value).verification_phone;
+				/*var ver_num = JSON.parse(value).verification_phone;
 				var mobile = JSON.parse(value).phone;
 				const data = {
 					phone: mobile,
@@ -90,8 +90,9 @@ class SplashScreen extends PureComponent {
 					// 		SimpleToast.show('Not connected to internet', SimpleToast.SHORT)
 					// })
 					this.props.navigation.replace('HomeScreen');
-				}
-			
+				}*/
+
+					this.props.navigation.replace('HomeScreen');
 	}
 
 	componentDidMount() {

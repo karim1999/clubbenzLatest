@@ -479,7 +479,7 @@ export default class App extends React.Component {
 				.android.setAutoCancel(true);
 
 			// Build a channel
-			const channelId = new firebase.notifications.Android.Channel(notification.notificationId + '', 'Clubbenz Notification', firebase.notifications.Android.Importance.Max);
+			const channelId = new firebase.notifications.Android.Channel(notification.notificationId + '', 'Clubenz Notification', firebase.notifications.Android.Importance.Max);
 
 			// Create the channel
 			firebase.notifications().android.createChannel(channelId);

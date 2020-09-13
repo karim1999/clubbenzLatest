@@ -34,7 +34,7 @@ class ProviderContactScreen extends PureComponent {
                 {
                     title: __("Get permission to call Providers", this.props.language),
                     message:
-                        __("Clubbenz needs the permission to call so you can reach the provider you want.", this.props.language),
+                        __("Clubenz needs the permission to call so you can reach the provider you want.", this.props.language),
                     buttonNeutral: __("Ask Me Later", this.props.language),
                     buttonNegative: __("Cancel", this.props.language),
                     buttonPositive: __("OK", this.props.language)

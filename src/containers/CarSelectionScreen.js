@@ -128,8 +128,8 @@ class CarSelectionScreen extends PureComponent {
 
 	_alertForCameraPermission = () => {
     Alert.alert(
-			'Clubbenz needs to access your camera',
-			'Clubbenz Camera Permission',
+			'Clubenz needs to access your camera',
+			'Clubenz Camera Permission',
       [
         {
           text: 'Cancel',

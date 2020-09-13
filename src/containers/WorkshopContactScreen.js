@@ -27,7 +27,7 @@ import __ from '../resources/copy';
 class WorkshopContactScreen extends PureComponent {
 
     static navigationOptions = ({ navigation }) => ({
-        title: __('Contacts', '')
+        title: __('Tel', '')
     });
 
     constructor(props) {
@@ -203,7 +203,7 @@ class WorkshopContactScreen extends PureComponent {
                 {
                     title: "Get permission to call Providers",
                     message:
-                        "Clubbenz needs the permission to call" +
+                        "Clubenz needs the permission to call" +
                         "so you can reach the provider you want.",
                     buttonNeutral: "Ask Me Later",
                     buttonNegative: "Cancel",
