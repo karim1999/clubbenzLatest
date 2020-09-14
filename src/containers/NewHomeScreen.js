@@ -184,6 +184,7 @@ class NewHomeScreen extends Component {
     }
 
     navigate(screen){
+    console.log(screen);
         this.props.navigation.navigate(screen);
     }
 

@@ -16,11 +16,6 @@ import en from 'javascript-time-ago/locale/en'
 import ar from 'javascript-time-ago/locale/ar'
 
 renderAds = (preferences) => {
-	// for (i = 0; i < preferences.home_ads.length; i++) {
-	// 	if(preferences.home_ads[i].type === "Listing"){
-	// 	  return   <ListingAd home_ads={preferences.home_ads[i]} /> ;
-	// 	}
-	// }
 
 	if (preferences.banner[1] != null && preferences.banner[1].status === 'active' && preferences.banner[1].type == 'Provider Listing') {
 		// debugger
@@ -33,7 +28,7 @@ renderAds = (preferences) => {
 
 const ListItem = ({ item, index, onPress, language, length, preferences, favorite }) => {
 	const arr_temp = "";
-	console.log(item);
+	//console.log(item);
 	// alert(JSON.stringify(item))
 	// debugger;
 	TimeAgo.addLocale(ar)

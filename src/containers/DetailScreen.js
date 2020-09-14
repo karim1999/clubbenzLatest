@@ -137,8 +137,8 @@ class DetailScreen extends PureComponent {
 
 	partDetail = (a) => {
 		partAction.partDetail1(a ? a : this.props.navigation.state.params.partItem.id).then(res => {
+		console.log(res);
 			if (res) {
-				console.log("res",res);
 				let phone = JSON.stringify(res.shop_detail.phone);
 				phone = phone.replace("/g", "");
 				var phoneArray = phone.split(",");
@@ -162,6 +162,7 @@ class DetailScreen extends PureComponent {
 				this.setState({loadingFavorite: true})
 				let provider_id = res.provider_id
 				getProviderDetails(provider_id).then(provider => {
+				console.log(provider);
 					this.setState({provider});
 				}).then(() => {
 					checkIsFavorite(this.props.user.id, res.id).then(isFavorite => {
@@ -195,7 +196,6 @@ class DetailScreen extends PureComponent {
 	}
 
 	renderAds = () => {
-	    console.log(this.props.preferences);
 		if (this.props.preferences != null && this.props.preferences.banner[2] != null && this.props.preferences.banner[2].status === 'active' && this.props.preferences.banner[2].type === 'Company Profile') {
 			return <CustomAd home_ads={this.props.preferences.banner[2]} />;
 		} else {
@@ -305,17 +305,18 @@ class DetailScreen extends PureComponent {
 	};
 
 	onMapIconPress = () => {
-
-		OpenMap.show({
-			// latitude: this.state.partDetail.location_latitude,
-			// longitude: this.state.partDetail.location_longitude,
-			latitude: this.state.provider.governorate,
-			longitude: this.state.provider.country,
-			title: this.state.partDetail.name,
-			cancelText: 'Close',
-			actionSheetTitle: 'Chose app',
-			actionSheetMessage: 'Available applications '
-		});
+        if(this.state.provider.governorate.Latitude && this.state.provider.governorate.Longitude){
+            OpenMap.show({
+                //latitude: this.state.partDetail.location_latitude,
+                //longitude: this.state.partDetail.location_longitude,
+                latitude: this.state.provider.governorate.Latitude,
+                longitude: this.state.provider.governorate.Longitude,
+                title: this.state.partDetail.name,
+                cancelText: 'Close',
+                actionSheetTitle: 'Chose app',
+                actionSheetMessage: 'Available applications '
+            });
+		}
 	}
 
 	sendSMS = () => {
@@ -327,7 +328,7 @@ class DetailScreen extends PureComponent {
 			allowAndroidSendWithoutReadPermission: false
 		}, (completed, cancelled, error) => {
 			this.setState({ shareModalVisible: false })
-			console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error);
+			//console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error);
 
 		});
 	}
@@ -603,26 +604,16 @@ class DetailScreen extends PureComponent {
 											</View>
 										}
 									</View>
-									<View
-										style={{
-											flex: 1,
-											justifyContent: 'center',
-											alignItems: 'center',
-										}}
-									>
+									{
+									this.state.provider.governorate && this.state.provider.governorate.Latitude && this.state.provider.governorate.Longitude ?
+									<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}} >
 										<TouchableWithoutFeedback onPress={this.onMapIconPress}>
 											<View style={styles.center}>
-												<View
-													style={{
+												<View style={{
 														height: width * 0.2,
 														width: width * 0.2,
 														borderRadius: width * 0.2,
-													}}
-												>
-													{/*<Image*/}
-													{/*	source={require('../resources/icons/mask_group.png')}*/}
-													{/*	style={{ flex: 1, height: null, width: null }}*/}
-													{/*/>*/}
+													}}>
 												</View>
 												<View style={{ position: 'absolute', height: width * 0.1, width: width * 0.1 }}>
 													<Image
@@ -637,6 +628,7 @@ class DetailScreen extends PureComponent {
 											</View>
 										</TouchableWithoutFeedback>
 									</View>
+									: null }
 								</View>
 							</View>
 							<View style={{ flex: 1 }}>
@@ -715,7 +707,7 @@ class DetailScreen extends PureComponent {
 								data={this.state.similer_parts}
 								keyExtractor={(item, index) => item.id}
 								renderItem={({ item, index }) => <ListItem favorite={this.state.favorites.filter(value => {
-									console.log(value.part_id, " , ", item.id, " , " ,value.part_id == item.id)
+									//console.log(value.part_id, " , ", item.id, " , " ,value.part_id == item.id)
 									return value.part_id == item.id
 								}).length > 0} item={item} index={index} onPress={this.opnItem} language={this.props.language} preferences={this.props.preferences} />}
 								// ListFooterComponent={this._renderFooter}

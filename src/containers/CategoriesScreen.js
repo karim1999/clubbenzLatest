@@ -27,19 +27,16 @@ class CategoriesScreen extends Component {
 
 	}
 	partCategories = () => {
-
 		this.setState({ categories: [] });
 		this.setState({ top_products: [] });
-		// debugger
-		//  Toast.show("chassis = " +this.props.navigation.state.params.chassis, Toast.LONG);
+		//console.log("chassis",this.props.navigation.state.params.chassis);
 		partAction.partCategories({ chassis: this.props.navigation.state.params.chassis, search: '' })
 			.then(res => {
 				if (res.success) {
-
-					this.setState({ categories: res.data });
-					this.setState({ top_products: res.top_products });
-
-
+				    if(res.data)
+					    this.setState({ categories: res.data });
+				    if(res.top_products)
+					    this.setState({ top_products: res.top_products });
 				}
 			})
 
