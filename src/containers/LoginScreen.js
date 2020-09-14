@@ -99,8 +99,9 @@ class LoginScreen extends PureComponent {
         console.log(res);
           if (res.success) {
             //this.checkNumberVerified(res.user);
-             AsyncStorage.setItem("user", JSON.stringify(res.user));
-            // // debugger
+			 res.user.verification_phone = 1;
+			 AsyncStorage.setItem('user', JSON.stringify(res.user))
+			 self.props.navigation.reset([NavigationActions.navigate({ routeName: 'EnableNotificationScreen' })], 0);
              NavigationService.reset("HomeScreen");
           } else {
             setTimeout(() => {

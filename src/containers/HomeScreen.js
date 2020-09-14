@@ -75,7 +75,6 @@ class HomeScreen extends PureComponent {
 
 	}
 
-
 	state = {
 		computationDone: false,
 		searchText: '',
@@ -131,7 +130,7 @@ class HomeScreen extends PureComponent {
 	};
 
 	componentDidMount() {
-		console.log(this.props.preferences)
+		//console.log("preferences",this.props.preferences);
 		if(!this.props.preferences.activate_part_catalogue){
 			let newData= [...this.state.data]
 			newData.splice(3,1)
@@ -172,36 +171,16 @@ class HomeScreen extends PureComponent {
 	}
 
 	getTimer = () => {
-		// debugger
 		if (this.props.preferences && this.props.preferences.timeDisplay && this.props.preferences.timeDisplay[0] != null) {
-			// debugger
 			return this.compareAndReturnTime(this.props.preferences.timeDisplay[0].time_out);
 		}
 	}
 
-	// getTimer = () => {
-	// 	if (this.props.preferences.home_ads != null) {
-	// 		for (i = 0; i < this.props.preferences.home_ads.length; i++) {
-	// 			if (this.props.preferences.home_ads[i].type === "Walk Out") {
-	// 				return this.compareAndReturnTime(this.props.preferences.home_ads[i].time_out)
-
-	// 			}
-	// 		}
-	// 	}
-	// }
-
 	compareAndReturnTime = (time) => {
 		var now = moment.utc();
 		var then = moment(time);
-
 		var duration = moment.duration(then.diff(now));
-
-		// debugger
-
 		var arr = [];
-
-		// alert(duration)
-
 		if (duration > 0) {
 			arr.push(Math.floor(duration.asHours()));
 			arr.push(Math.floor((duration.asMinutes() % 60)));
@@ -209,10 +188,7 @@ class HomeScreen extends PureComponent {
 			arr.push(Math.floor(duration));
 			return arr;
 		}
-		// debugger
-
 		return false;
-
 	}
 
 	// getSliderImages = () => {
@@ -263,6 +239,7 @@ class HomeScreen extends PureComponent {
 		homeAction
 			.homeService()
 			.then(res => {
+				//console.log("homeService" , res);
 				if (res.home_page_services === "Home page Services Not Available") {
 
 				} else {
@@ -271,12 +248,11 @@ class HomeScreen extends PureComponent {
 
 			})
 			.catch(err => {
-				console.log("error" + JSON.stringify(err));
+				//console.log("error" , JSON.stringify(err));
 			});
 	}
 
 	displayOverlay = async () => {
-
 		AsyncStorage.getItem("displayOverlays").then(value => {
 			if (value != null) {
 
@@ -300,7 +276,7 @@ class HomeScreen extends PureComponent {
 			[
 				{
 					text: 'Cancel',
-					onPress: () => console.log('Permission denied'),
+					onPress: () => {},
 					style: 'cancel',
 				},
 				this.state.locationPermission == 'undetermined'
@@ -322,7 +298,7 @@ class HomeScreen extends PureComponent {
 	getLocationAndNavigate = (data) => {
 		Geolocation.getCurrentPosition(
 			(position) => {
-				console.log(position)
+				//console.log(position)
 				const pos = {
 					coords: {
 						accuracy: 17.291000366210938,
@@ -337,7 +313,7 @@ class HomeScreen extends PureComponent {
 					mocked: false,
 					timestamp: 1564646352931
 				}
-				console.log(pos)
+				//console.log(pos)
 
 				var value = this.props.user.enableLocation == 'true' ? position : pos;
 
@@ -345,7 +321,7 @@ class HomeScreen extends PureComponent {
 			},
 			(error) => {
 				// See error code charts below.
-				console.log(error.code, error.message);
+				//console.log(error.code, error.message);
 			},
 			{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
 		);
@@ -380,7 +356,7 @@ class HomeScreen extends PureComponent {
 						// Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 
 						if (response === 'authorized') {
-							console.log('authorized')
+							//console.log('authorized')
 
 							this.getLocationAndNavigate(data)
 
@@ -392,14 +368,13 @@ class HomeScreen extends PureComponent {
 								[
 									{
 										text: 'Cancel',
-										onPress: () => console.log('Permission denied'),
+										onPress: () => {},
 										style: 'cancel',
 									},
 									{ text: 'Open Settings', onPress: Permissions.openSettings },
 								],
 							);
 
-							console.log('denied')
 						}
 					});
 
@@ -429,7 +404,7 @@ class HomeScreen extends PureComponent {
 			if (data.path === "SpecificationScreen") {
 				NavigationService.navigate(data.path, { selected_car: this.props.selected_car.car, selected_car_model: this.props.selected_car.model, selected_car_year: this.props.selected_car.year, user: this.props.user, preferences: this.props.preferences, homeButton: false });
 			} else if (data.path === "CategoriesScreen") {
-				console.log(this.props.auth)
+				//console.log(this.props.auth)
 				// debugger
 				// alert(JSON.stringify(this.props.user))
 				NavigationService.navigate(data.path, { chassis: this.props.selected_car.car.chassis, selected_car: this.props.selected_car.car, preferences: this.props.preferences, homeButton: false });
@@ -457,7 +432,7 @@ class HomeScreen extends PureComponent {
 								},
 								(error) => {
 									// See error code charts below.
-									console.log(error.code, error.message);
+									//console.log(error.code, error.message);
 								},
 								{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
 							);
@@ -465,7 +440,7 @@ class HomeScreen extends PureComponent {
 							alert(granted);
 						}
 					} else {
-						console.log('IOS')
+						//console.log('IOS')
 					}
 
 				} else {
@@ -497,23 +472,21 @@ class HomeScreen extends PureComponent {
 	};
 
 	renderItem = ({ item, index }) => {
-		console.log('The length of data is ' + this.state.data.length);
-		console.log(this.state.data);
+		//console.log("data",this.state.data);
 		return <ServiceItem data={item} navigate={this.onMenuPress} language={this.props.language} />;
 	};
 
 	onInviteOwnerPress = () => {
-		// alert('Invite Owner');
 
 		Share.share({
 			message: this.state.shareText.toString()
-		}).then(result => console.log(result)).catch(errorMsg => console.log(errorMsg));
+		}).then(result => {
+		//console.log(result);
+		}).catch(errorMsg => {
+		//console.log(errorMsg);
+		});
 
-		// for (var i=0; i<this.props.preferences.home_ads.length; i++) {
-		// 	alert(this.props.preferences.home_ads[i].type)
-		// }
-
-		console.log(JSON.stringify(this.props.preferences))
+		//console.log(JSON.stringify(this.props.preferences))
 	};
 
 	onDismissPress = async () => {
@@ -525,9 +498,11 @@ class HomeScreen extends PureComponent {
 		AsyncStorage.setItem("displayOverlays", "Hide");
 		// we will set state to hide the overlay view
 	};
+
 	onSlidePress = () => {
 		this.props.navigation.openDrawer();
 	};
+
 	onNextPress = async (val) => {
 		if (val == 'fromSearch') {
 			this.setState({
@@ -542,6 +517,7 @@ class HomeScreen extends PureComponent {
 		}
 		AsyncStorage.setItem("displayOverlays", "Hide");
 	};
+
 	gotoPrevious = () => {
 		let active_index = this.state.active_index
 		active_index = active_index - 1
@@ -549,6 +525,7 @@ class HomeScreen extends PureComponent {
 			this.refs.car_slider.scrollTo({ x: width * (active_index - 1), y: 0, animated: true })
 		}
 	}
+
 	gotoNext = () => {
 		let active_index = this.state.active_index
 		active_index = active_index + 1
@@ -571,19 +548,20 @@ class HomeScreen extends PureComponent {
 			this.setState({ active_index: 4 })
 		}
 	}
+
 	onPressAd = (link) => {
 		// Linking.openURL(link).catch((err) => console.error('An error occurred', err));
 		if (link !== '') {
 			Linking.canOpenURL(link)
 				.then((supported) => {
 					if (!supported) {
-						console.log("Can't handle url: " + link);
+						//console.log("Can't handle url: " + link);
 					} else {
 						return Linking.openURL(link);
 					}
 				})
 				.catch((err) => {
-					console.log('An error occurred', err)
+					//console.log('An error occurred', err)
 				});
 		}
 	}
@@ -597,7 +575,7 @@ class HomeScreen extends PureComponent {
 			},
 			(error) => {
 				// See error code charts below.
-				console.log(error.code, error.message);
+				//console.log(error.code, error.message);
 			},
 			{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
 		);
@@ -630,7 +608,7 @@ class HomeScreen extends PureComponent {
 				Permissions.request('location').then(response => {
 
 					if (response === 'authorized') {
-						console.log('authorized')
+						//console.log('authorized')
 
 						this.navigateToHomeListScreen()
 
@@ -642,13 +620,13 @@ class HomeScreen extends PureComponent {
 							[
 								{
 									text: 'Cancel',
-									onPress: () => console.log('Permission denied'),
+									onPress: () => {},
 									style: 'cancel',
 								},
 								{ text: 'Open Settings', onPress: Permissions.openSettings },
 							],
 						);
-						console.log('denied')
+						//console.log('denied')
 					}
 				});
 

@@ -51,6 +51,7 @@ class DetailScreen extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
+
 	state = {
 		partDetail: [],
 		ler_parts: [],
@@ -67,6 +68,7 @@ class DetailScreen extends PureComponent {
 		favorites: [],
 		isDone: false,
 	}
+
 	componentDidMount() {
 		this.partDetail();
 		let favorites= getFavorites(this.props.user.id).then(res => {
@@ -135,44 +137,23 @@ class DetailScreen extends PureComponent {
 
 	partDetail = (a) => {
 		partAction.partDetail1(a ? a : this.props.navigation.state.params.partItem.id).then(res => {
-			// alert(JSON.stringify(res))
 			if (res) {
-				// alert(JSON.stringify(res.shop_detail))
-				console.log(res)
-			debugger
-				let phone = JSON.stringify(res.shop_detail.phone)
-				phone = phone.replace(/"/g, "");
-
+				console.log("res",res);
+				let phone = JSON.stringify(res.shop_detail.phone);
+				phone = phone.replace("/g", "");
 				var phoneArray = phone.split(",");
-
 				this.setState({ partDetail: res.shop_detail, phoneArray: phoneArray });
 				this.setState({ similer_parts: res.similer_parts });
-
-				// alert(JSON.stringify(res.shop_detail))
-
 				var imgs = res.images;
-
 				var prod_imgs = [];
-
 				if (imgs != null) {
-					// debugger
 					imgs.forEach(function (item) {
 						prod_imgs.push({ url: IMG_PREFIX_URL + item.photo_name });
 					});
 				}
-
-				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.image })
-				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_category[0].image })
-				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_sub_category[0].image })
-				// imgs.push({ url: IMG_PREFIX_URL + res.shop_detail.part_brand[0].image })
-
-				// console.log('This is url')
-				// console.log(IMG_PREFIX_URL + res.shop_detail.part_brand[0].image)
-
 				this.setState({ images: prod_imgs })
 				return res.shop_detail;
 			}
-
 		}).then(res => {
 			if(this.state.partDetail && this.state.partDetail.part_brand && this.state.partDetail.part_brand.length > 0){
 				// alert("hi")
@@ -192,6 +173,7 @@ class DetailScreen extends PureComponent {
 			}
 		})
 	}
+
 	addToFavorite= () => {
 		this.setState({loadingFavorite: true})
 		return addToFavorite(this.props.user.id, this.state.partDetail.id).then(isFavorite => {
@@ -201,6 +183,7 @@ class DetailScreen extends PureComponent {
 			this.setState({loadingFavorite: false})
 		})
 	}
+
 	removeFromFavorite= () => {
 		this.setState({loadingFavorite: true})
 		return removeFromFavorite(this.props.user.id, this.state.partDetail.id).then(isFavorite => {
@@ -210,18 +193,10 @@ class DetailScreen extends PureComponent {
 			this.setState({loadingFavorite: false})
 		})
 	}
-	// renderAds = () => {
-
-	// 	for (i = 0; i < this.props.preferences.home_ads.length; i++) {
-	// 		if (this.props.preferences.home_ads[i].type === "Detail page") {
-	// 			return <CustomAd home_ads={this.props.preferences.home_ads[i]} />;
-	// 		}
-	// 	}
-
-	// }
 
 	renderAds = () => {
-		if (this.props.preferences.banner[2] != null && this.props.preferences.banner[2].status === 'active' && this.props.preferences.banner[2].type === 'Company Profile') {
+	    console.log(this.props.preferences);
+		if (this.props.preferences != null && this.props.preferences.banner[2] != null && this.props.preferences.banner[2].status === 'active' && this.props.preferences.banner[2].type === 'Company Profile') {
 			return <CustomAd home_ads={this.props.preferences.banner[2]} />;
 		} else {
 			return null;
@@ -231,11 +206,11 @@ class DetailScreen extends PureComponent {
 	goToBackScreen = () => {
 		this.props.navigation.goBack();
 	};
+
 	opnItem = (partItem) => {
-
 		this.partDetail(partItem.id);
-
 	}
+
 	showContact = async () => {
 		if (Platform.OS === 'android') {
 			const granted = await PermissionsAndroid.request(
@@ -265,9 +240,11 @@ class DetailScreen extends PureComponent {
 		}
 
 	}
+
 	showShare = () => {
 		this.setState({ shareModalVisible: !this.state.shareModalVisible });
 	};
+
 	shareWHATSAPP = (a) => {
 		const shareOptions = {
 			title: 'Share via',
@@ -276,6 +253,7 @@ class DetailScreen extends PureComponent {
 		};
 		Share.shareSingle(shareOptions);
 	}
+
 	shareFACEBOOK = () => {
 		const shareOptions = {
 			title: 'Share via',
@@ -284,6 +262,7 @@ class DetailScreen extends PureComponent {
 		};
 		Share.shareSingle(shareOptions);
 	}
+
 	copyLink = () => {
 		if (Platform.OS == 'android') {
 			Clipboard.setString('https://clubbenz.app.link/parts/' + this.state.partDetail.id);
@@ -295,6 +274,7 @@ class DetailScreen extends PureComponent {
 			Toast.show('Coppied Content Successfully', Toast.LONG);
 		}, 100)
 	}
+
 	_renderFooter = () => {
 		return (
 			<View
@@ -844,6 +824,7 @@ class DetailScreen extends PureComponent {
 			</View>
 		);
 	}
+
 }
 
 mapStateToProps = state => {
