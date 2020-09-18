@@ -210,7 +210,7 @@ export default class App extends React.Component {
             console.log("[js] RNBackgroundFetch failed to start");
         });
         // Optional: Query the authorization status.
-		if(Platform.OS === "ios"){
+		if(Platform.OS === "ios2"){
 			BackgroundFetch.status((status) => {
 				switch(status) {
 					case BackgroundFetch.STATUS_RESTRICTED:
