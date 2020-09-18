@@ -136,16 +136,11 @@ class RegisterScreen extends PureComponent {
 
   afterLoginComplete = async (token) => {
     let self = this;
-    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`)
-      .then(responJson => responJson.json()).then(function (response) {
-
+    fetch("https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}")
+      .then(responseJson => responseJson.json()).then(function (response) {
         let full_name = response.name.split(' ')
         let id = response.id;
         self.setState({ first_name: full_name[0], last_name: full_name[1], email: response.email, social_id: response.id }, () => {
-
-          // commenting right now, we just need date to be set in the fields
-          // self.registerUserWithFb()
-
           const infoRequest = new GraphRequest(id,
             {
               parameters: {
@@ -156,9 +151,7 @@ class RegisterScreen extends PureComponent {
             },
             self._responseInfoCallback,
           )
-
           new GraphRequestManager().addRequest(infoRequest).start();
-
         })
       }).catch(err => [
         alert(err)
@@ -440,7 +433,7 @@ class RegisterScreen extends PureComponent {
             homeButton={false}
             navigation={this.props.navigation}
                                                 title={__('Create your account', this.props.language)} subTitle={__('One step away', this.props.language)} goBack={this.goBack} />
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+        <ScrollView keyboardShouldPersistTaps="always">
           <TouchableOpacity onPress={this.fillFacebookInfo}>
             <View style={[styles.fbLoginButton, styleRegisterScreen.btnStyle]}>
               <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
@@ -619,7 +612,7 @@ class RegisterScreen extends PureComponent {
               <Text style={styles.tapButtonStyleTextWhite}>{__('Register', this.props.language)}</Text>
             </View>
           </TouchableOpacity>
-        </KeyboardAwareScrollView>
+        </ScrollView>
         <Modal
           visible={this.state.modalVisible}
           transparent
@@ -691,6 +684,7 @@ class RegisterScreen extends PureComponent {
       </View>
     );
   }
+
 }
 
 //export default RegisterScreen;
@@ -701,6 +695,7 @@ mapStateToProps = (state) => {
     language: state.language,
   }
 }
+
 mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     updateUser: authAction.updateUser
@@ -709,6 +704,7 @@ mapDispatchToProps = (dispatch) => bindActionCreators(
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen)
+
 const styleRegisterScreen = StyleSheet.create({
   container: {
     flex: 1,

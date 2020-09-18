@@ -120,7 +120,7 @@ class WorkshopBooknowsScreen extends PureComponent {
 			)
 		else
 		return (
-			<KeyboardAwareScrollView>
+			<ScrollView>
 			<View
 				style={[
 					styleWorkshopBooknowsScreen.container,
@@ -188,7 +188,7 @@ class WorkshopBooknowsScreen extends PureComponent {
 					</TouchableOpacity>
 				</View>
 			</View>
-			</KeyboardAwareScrollView>
+			</ScrollView>
 		);
 	}
 }

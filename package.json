@@ -16,6 +16,7 @@
     "@react-native-community/viewpager": "^4.0.0",
     "add": "^2.0.6",
     "axios": "^0.19.2",
+    "cocoapods": "^0.0.0",
     "country-state-city": "^1.0.5",
     "image-downloader": "^3.5.0",
     "javascript-time-ago": "^2.0.7",
@@ -23,16 +24,17 @@
     "moment": "^2.24.0",
     "or": "^0.2.0",
     "prop-types": "^15.6.2",
-    "react": "16.9.0",
+    "react": "16.13.1",
     "react-dom": "^16.8.1",
     "react-magic-slider-dots": "^1.1.2",
-    "react-native": "0.61.5",
+    "react-native": "0.63.2",
     "react-native-background-fetch": "3.0.6",
     "react-native-branch": "^3.1.1",
     "react-native-camera": "^3.26.0",
     "react-native-date-picker": "^2.3.0",
     "react-native-deep-link": "^0.2.9",
     "react-native-dropdown-menu": "^2.0.0",
+    "react-native-eject": "^0.1.2",
     "react-native-exception-handler": "^2.10.8",
     "react-native-fbsdk": "^2.0.0",
     "react-native-firebase": "^5.5.4",
@@ -96,10 +98,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts/"
-    ]
   }
 }

@@ -43,22 +43,21 @@ class SplashScreen extends PureComponent {
 			}
 			// loaded successfully
 			console.log('duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
-			
 			// Play the sound with an onEnd callback
-		  whoosh.play((success) => {
-			if (success) {
-			  console.log('successfully finished playing');
-			} else {
-			  console.log('playback failed due to audio decoding errors');
-			}
-		  });
-		  });
+            whoosh.play((success) => {
+                if (success) {
+                  console.log('successfully finished playing');
+                } else {
+                  console.log('playback failed due to audio decoding errors');
+                }
+            });
+		});
 
 		Animated.timing(this.state.opacity, {
 			toValue: 0,
 			duration: 2000,
 			useNativeDriver: true,
-		}).start()
+		}).start();
 	}
 
 	checkNumberVerified(value) {

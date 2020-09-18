@@ -9,6 +9,7 @@ import {
   AsyncStorage,
   TextInput,
   Platform, I18nManager,
+  ScrollView
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -30,11 +31,13 @@ import __ from '../resources/copy';
 import firebase from 'react-native-firebase';
 import RNRestart from 'react-native-restart';
 
-class LoginScreen extends PureComponent {
+class LoginScreen extends React.Component {
+
   constructor(props) {
     super(props);
     // this.onChangePassword();
   }
+
   state = {
     email: '',
     password: '',
@@ -126,32 +129,6 @@ class LoginScreen extends PureComponent {
     );
   };
 
-  // code used for older version of react-native-fbsdk
-
-  // continueWithFb = () => {
-  //   const self = this;
-  //   LoginManager.logInWithReadPermissions(["public_profile", "email"])
-  //     .then(result => {
-  //       if (result.isCancelled) {
-  //         alert('cancelled');
-  //         throw null;
-  //       }
-  //       AccessToken.getCurrentAccessToken()
-  //         .then(data => {
-  //           if (!data) {
-  //             throw new Error("Something wen't wrong. Try Again.");
-  //           } else {
-
-  //             self.afterLoginComplete(data.accessToken);
-  //           }
-  //         })
-  //         .catch(error => console.log(error));
-  //     })
-  //     .catch(
-  //       error => console.log(error)
-  //       );
-  // };
-
   continueWithFb = () => {
     const self = this;
     // LoginManager.logOut();
@@ -226,23 +203,6 @@ class LoginScreen extends PureComponent {
 
   onForgotPassword = () => {
     this.props.navigation.navigate('ForgotPassScreen');
-
-    // let email = this.state.email;
-    // this.props.navigation.navigate("ForgotPasswordScreen", {fromScreen: 'LoginScreen', mobile: '12345'});
-
-    // authAction
-    //   .forgotPassword({ email })
-    //   .then(res => {
-    //     alert(JSON.stringify(res));
-    //     if (res.success) {
-    //       this.props.navigation.navigate("ForgotPasswordScreen");
-    //     } else {
-    //       Toast.show(res.message, Toast.LONG);
-    //     }
-    //   })
-    //   .catch(err => {
-    //     alert(JSON.stringify(err));
-    //   });
   };
 
   onChangePassword = () => {
@@ -290,6 +250,7 @@ class LoginScreen extends PureComponent {
       },
     );
   };
+
   checkPhoneNumber(email) {
     this.setState({email});
     if (email.includes('+')) {
@@ -301,7 +262,8 @@ class LoginScreen extends PureComponent {
 
   render() {
     return (
-      <KeyboardAwareScrollView
+
+    <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{minHeight: height}}>
         <View style={[styleLoginScreen.container, styles.center]}>
@@ -335,30 +297,6 @@ class LoginScreen extends PureComponent {
                 fontFamily: Fonts.CircularMedium,
               }}
             />
-
-            {/* <View style={styleLoginScreen.innerContainer}>
-              <TextInput
-                style={styles.inputField}
-                textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, }}
-                type={"email"}
-                // need to uncomment this 'KeyboardType' and comment the type{"email"} because is just a temporary workaround to make the login working untill it has been changed from login with email to login with mobile on server side
-                // keyboardType={'phone-pad'}
-                label={__('Mobile Number' , this.props.language)}
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-              />
-            </View>
-
-            <View style={[styleLoginScreen.innerContainer, {marginTop: 10}]}>
-              <TextInput
-                style={styles.inputField}
-                textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, }}
-                secureTextEntry={true}
-                label={__('Password' , this.props.language)}
-                onChangeText={password => this.setState({ password })}
-                value={this.state.password}
-              />
-            </View> */}
 
             {this.state.wrongPhone ? (
               <Text style={{color: 'red', textAlign: 'center'}}>
@@ -445,9 +383,11 @@ class LoginScreen extends PureComponent {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAwareScrollView>
+    </ScrollView>
+
     );
   }
+
 }
 
 mapStateToProps = state => {

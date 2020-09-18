@@ -53,14 +53,14 @@ const Bubble = props => {
 		</TouchableOpacity>
 	);
 };
+
 const navigationOptions = {
 	header: null,
 };
 
-
-
 class CarSelectionScreen extends PureComponent {
-	constructor(props){
+
+    constructor(props){
 		super(props)
 		this.state = {
 			modalVisible: false,
@@ -85,7 +85,7 @@ class CarSelectionScreen extends PureComponent {
 		this.actionNoCode = this.actionNoCode.bind(this);
 	}
 
-  async scanVinNumber () {
+    async scanVinNumber () {
 
 		if (Platform.OS === 'ios') {
 
@@ -160,7 +160,8 @@ class CarSelectionScreen extends PureComponent {
 		let {years, fuel_types, models, selected1, selected2, selected3} = this.state
 		let data= {model_id:this.state.selected_models,fuel_type:this.state.selected_fuel_types,year  :this.state.selected_years}
 		getCarsInformation(data).then(res=>{
-			if(res.cars_information.length!=0){
+		console.log(res);
+			if(res.success && res.cars_information && res.cars_information.length != 0){
 				self.setModalVisible(true);
 				self.setState({cars_information:res.cars_information,carModel:this.state.selected_fuel_types_name+' '+this.state.selected_years,carClass:models[selected1].name})
 			}
@@ -221,7 +222,8 @@ class CarSelectionScreen extends PureComponent {
 		/>
 		)
 	  }
-	  onChangeModel = (item) => {
+
+	onChangeModel = (item) => {
 		const self = this;
 		var index = 0;
 		var temp = -1;
@@ -254,7 +256,7 @@ class CarSelectionScreen extends PureComponent {
 
 		}
 
-	  onChangeCarType = (item) => {
+	onChangeCarType = (item) => {
 		const self = this;
 		var index = 0;
 		var temp = -1;
@@ -290,7 +292,7 @@ class CarSelectionScreen extends PureComponent {
 
 	  }
 
-	  onChangeCarYear = (item) => {
+	onChangeCarYear = (item) => {
 		const self = this;
 		var index = 0;
 		var temp = -1;
@@ -322,7 +324,7 @@ class CarSelectionScreen extends PureComponent {
 	   this.setState({years});
 		}
 
-		fuelScrollToIndex = (index) => {
+	fuelScrollToIndex = (index) => {
 			let randomIndex = index;
 			this.fuelListRef.scrollToIndex({animated: true, index: randomIndex});
 		}
@@ -330,9 +332,11 @@ class CarSelectionScreen extends PureComponent {
 	scrollToCar = (index) => {
 		this.carListRef.scrollToIndex({animated: true, index: index});
 	}
+
 	scrollToFuel = (index) => {
 		this.fuelListRef.scrollToIndex({animated: true, index: index});
 	}
+
 	scrollToYear = (index) => {
 		this.yearListRef.scrollToIndex({animated: true, index: index});
 	}
@@ -495,7 +499,9 @@ class CarSelectionScreen extends PureComponent {
 			</View>
 		);
 	}
+
 }
+
 mapStateToProps = (state) => {
 	return {
 		services: state.init.services,
@@ -505,7 +511,8 @@ mapStateToProps = (state) => {
 		language: state.language,
 	}
   }
-  mapDispatchToProps = (dispatch) => bindActionCreators(
+
+mapDispatchToProps = (dispatch) => bindActionCreators(
     {
 		updateUser:updateUser
     },

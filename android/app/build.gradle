@@ -76,8 +76,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+        entryFile   : "index.js",
+        enableHermes: false,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -131,8 +131,8 @@ android {
         applicationId "com.clubbenz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.2"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
     }
@@ -187,6 +187,14 @@ android {
 
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+
 }
 
 dependencies {
@@ -203,11 +211,11 @@ dependencies {
 //    implementation project(':react-native-notifications')
 
     implementation "com.google.android.gms:play-services-base:16.1.0"
-  implementation "com.google.firebase:firebase-invites:16.1.0"
-    implementation ("com.google.firebase:firebase-core:16.0.9") {
+    implementation "com.google.firebase:firebase-invites:16.1.0"
+    implementation("com.google.firebase:firebase-core:16.0.9") {
         force = true
     }
-implementation project(':react-native-view-pdf')
+    implementation project(':react-native-view-pdf')
 
     implementation project(':react-native-share')
     implementation project(':react-native-immediate-phone-call')
@@ -229,7 +237,7 @@ implementation project(':react-native-view-pdf')
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation project(':@mauron85_react-native-background-geolocation')
-    compile ('com.google.firebase:firebase-ml-vision:18.0.2') {
+    compile('com.google.firebase:firebase-ml-vision:18.0.2') {
         force = true
     }
 
