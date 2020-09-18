@@ -56,8 +56,6 @@ class SearchVinScreen extends Component {
 
     detectText = async () => {
 
-        console.log('Entered')
-        console.log(this.camera.state)
         if (this.camera.state.isAuthorized) {
             if (!this.state.isFound) {
                 try {
@@ -258,8 +256,11 @@ class SearchVinScreen extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: '#0E2D3C' }}>
                 <StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
-                <NavigationComponent    navigation={this.props.navigation}
-                                                        goBack={() => {this.setState({ movedToManual: true }); this.props.navigation.goBack()}} title={__("Scan your Vin", this.props.language)} />
+                <NavigationComponent navigation={this.props.navigation}
+					homeButton={false}
+                     goBack={() => {
+                     this.setState({ movedToManual: true });
+                     this.props.navigation.goBack()}} title={__("Scan your Vin", this.props.language)} />
                 <View style={{ flex: 0.1, justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Text style={{ textAlign: "center", color: 'white', fontFamily: Fonts.CircularMedium, fontSize: 14, }}>{__("17 character alpha/numeric serial number", this.props.language)} {"\n"} {__("unique to each vehicle", this.props.language)}</Text>
                 </View>

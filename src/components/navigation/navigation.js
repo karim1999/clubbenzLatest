@@ -9,6 +9,7 @@ import Icon2 from "react-native-vector-icons/FontAwesome"
 class Navigation extends PureComponent {
 	constructor(props) {
 		super(props);
+		console.log(this.props.homeButton);
 	}
 
 	render() {
@@ -73,7 +74,7 @@ class Navigation extends PureComponent {
 									{/*</View>*/}
 								</TouchableWithoutFeedback>
 							</View> :
-							!this.props.headerimageIcone && this.props.homeButton != false?
+							!this.props.headerimageIcone && this.props.homeButton != false ?
 								<View style={{flex: 1}}>
 									<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
 										<View style={navigationStyle.leftContainer}>

@@ -153,7 +153,7 @@ export class RequestService {
         this.params.headers
       )
     }
-
+    //console.log(mountedHeaders);
     return mountedHeaders
   }
   mountFiles=()=>{

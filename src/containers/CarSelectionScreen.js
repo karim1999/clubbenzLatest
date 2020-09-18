@@ -70,7 +70,7 @@ class CarSelectionScreen extends PureComponent {
 			selected1: 1,
 			selected2: 0,
 			selected3: 0,
-			selectedCar:this.props.preferences.models[0],
+			selectedCar:this.props.preferences.models ? this.props.preferences.models[0] : {},
 			years:this.props.preferences.years,
 			fuel_types:this.props.preferences.fuel_types,
 			selected_fuel_types_name:'',
@@ -161,7 +161,7 @@ class CarSelectionScreen extends PureComponent {
 		let data= {model_id:this.state.selected_models,fuel_type:this.state.selected_fuel_types,year  :this.state.selected_years}
 		getCarsInformation(data).then(res=>{
 		console.log(res);
-			if(res.success && res.cars_information && res.cars_information.length != 0){
+			if(res.cars_information && res.cars_information.length != 0){
 				self.setModalVisible(true);
 				self.setState({cars_information:res.cars_information,carModel:this.state.selected_fuel_types_name+' '+this.state.selected_years,carClass:models[selected1].name})
 			}

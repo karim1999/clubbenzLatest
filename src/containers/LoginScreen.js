@@ -99,7 +99,7 @@ class LoginScreen extends React.Component {
       authAction
         .loginUser({email, password, fcm_token})
         .then(res => {
-        console.log(res);
+          console.log(res);
           if (res.success) {
             //this.checkNumberVerified(res.user);
 			 res.user.verification_phone = 1;

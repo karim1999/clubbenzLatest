@@ -8,6 +8,7 @@ import {
 } from '../actions/types';
 
 export const registerUser = async data => {
+console.log(data);
   let params = {
     url: API_ROOT + 'user/register_user',
     body: data,
@@ -125,10 +126,11 @@ export const userVerification = async data => {
 };
 
 export const loginUser = async data => {
-  console.log(API_ROOT)
+  console.log(data);
   let params = {url: API_ROOT + 'user/login', body: data};
-  // alert(JSON.stringify(params))
+  console.log(JSON.stringify(params));
   let response = await new RequestService(params).callCreate();
+  console.log(response);
   if (response.success) {
     store.dispatch({type: UPDATE_USER, data: response.user});
     store.dispatch({
