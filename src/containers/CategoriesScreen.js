@@ -32,6 +32,7 @@ class CategoriesScreen extends Component {
 		//console.log("chassis",this.props.navigation.state.params.chassis);
 		partAction.partCategories({ chassis: this.props.navigation.state.params.chassis, search: '' })
 			.then(res => {
+			    console.log(res);
 				if (res.success) {
 				    if(res.data)
 					    this.setState({ categories: res.data });

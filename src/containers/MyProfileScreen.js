@@ -68,7 +68,7 @@ class MyProfileScreen extends PureComponent {
 			enableLocation: user.enableLocation == "true" ? true : false,
 			enablePushNotification: user.enablePushNotification == "true" ? true : false,
 			enableFacebook: user.enableFacebook == "true" ? true : false,
-
+            social_id: "",
 			enableLinkToFacebook: false,
 			fromPicker: false,
 			fromPicker_uri: '',
@@ -93,12 +93,8 @@ class MyProfileScreen extends PureComponent {
 	// for getting user's profile image from facebook
 
 	getFacebookProfileFromFacebook = async() => {
-		// debugger
 		const self = this;
-		if (self.state.enableFacebook) {
-			// here get the user profile image
-
-			AccessToken.getCurrentAccessToken().then((data) => {
+		AccessToken.getCurrentAccessToken().then((data) => {
 				if (data == null) {
 					if (Platform.OS === "android") {
 						LoginManager.setLoginBehavior("web_only")
@@ -140,24 +136,20 @@ class MyProfileScreen extends PureComponent {
 			// 	}
 			// })
 
-		}
+
 	}
 
 	callFetchApi = (token) => {
 		const self = this;
 		fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`)
-		.then(responJson=>responJson.json()).then(function(response){
-
-			// debugger
-
+		.then(responseJson=>responseJson.json()).then(function(response){
 			let full_name = response.name.split(' ')
 			let id = response.id;
-
 			const first_name = full_name[0];
 			const last_name = full_name[1];
 			const email = response.email;
 			const social_id = response.id;
-
+			self.setState({ social_id: social_id });
 			const infoRequest = new GraphRequest(id,
 			  {
 				parameters: {
@@ -325,7 +317,6 @@ class MyProfileScreen extends PureComponent {
 
 	updateUserProfilePic = () => {
 		const payload = {
-
 			first_name: this.state.first_name,
 			last_name: this.state.last_name,
 			email: this.state.email,
@@ -339,6 +330,7 @@ class MyProfileScreen extends PureComponent {
 			car_type_id: this.state.car_type_id,
 			car_vin_prefix: this.state.car_vin_prefix,
 			year_id: this.state.year_id,
+			social_id: this.state.social_id,
 		}
 
 		if (this.state.updated_car) {
@@ -367,10 +359,8 @@ class MyProfileScreen extends PureComponent {
 			})
 	}
 
-	udpateProfile = async() => {
-
+	updateProfile = async() => {
 		const payload = {
-
 			first_name: this.state.first_name,
 			last_name: this.state.last_name,
 			email: this.state.email,
@@ -389,6 +379,7 @@ class MyProfileScreen extends PureComponent {
 			car_type_id: this.state.car_type_id,
 			car_vin_prefix: this.state.car_vin_prefix,
 			year_id: this.state.year_id,
+			social_id: this.state.social_id
 		}
 
 		if (this.state.updated_car) {
@@ -403,7 +394,6 @@ class MyProfileScreen extends PureComponent {
 				}
 			});
 		}
-
 		// debugger
 		updateProfile(payload)
 			.then((res) => {
@@ -434,8 +424,8 @@ class MyProfileScreen extends PureComponent {
 					// debugger
 					// alert(JSON.stringify(res.data))
 					store.dispatch({ type: UPDATE_USER, data: res.data });
-					// if (res.data.enableFacebook == 'true')
-					// 	this.getFacebookProfileFromFacebook();
+					 //if (res.data.enableFacebook == 'true')
+					 	//this.getFacebookProfileFromFacebook();
 					console.log(store.getState());
 				} else {
 					SimpleToast.show(res.message, SimpleToast.LONG)
@@ -451,7 +441,7 @@ class MyProfileScreen extends PureComponent {
 		// if (this.props.navigation.state.params.updateCar != null && this.props.navigation.state.params.updateCar == true) {
 		// 	this.setState({ updated_car: true})
 		// }
-		// this.getFacebookProfileFromFacebook()
+		 //this.getFacebookProfileFromFacebook()
 
 		if (this.props.preferences.years != null) {
 			for (i = 0; i < this.props.preferences.years.length; i++) {
@@ -495,6 +485,14 @@ class MyProfileScreen extends PureComponent {
 		console.log(store.getState());
 
 	}
+
+    changeEnableFB = (value) => {
+        this.setState({ enableFacebook: value });
+        if (value)
+        	this.getFacebookProfileFromFacebook();
+        else
+			this.setState({ social_id: "" });
+    }
 
 	render() {
 
@@ -662,7 +660,7 @@ class MyProfileScreen extends PureComponent {
 							</View>
 						</View>
 
-						<TouchableOpacity onPress={this.udpateProfile}>
+						<TouchableOpacity onPress={this.updateProfile}>
 							<View style={[styles.tapableButton, styleMyProfileScreen.btnStyle]}>
 								<Text style={styles.tapButtonStyleTextWhite}>{__('Update Changes', this.props.language)}</Text>
 							</View>
@@ -727,7 +725,7 @@ class MyProfileScreen extends PureComponent {
 						>
 							<ToggleView text={__('Enable Notifications', this.props.language)} value={this.state.enablePushNotification} onChange={(val) => this.setState({ enablePushNotification: val })} />
 							<ToggleView text={__('Enable Location', this.props.language)} value={this.state.enableLocation} onChange={(val) => this.setState({ enableLocation: val })} />
-							<ToggleView text={__('Link to Facebook', this.props.language)} value={this.state.enableFacebook} facebook onChange={(val) => this.setState({ enableFacebook: val })} />
+							<ToggleView text={__('Link to Facebook', this.props.language)} value={this.state.enableFacebook} facebook onChange={(val) => this.changeEnableFB(val)} />
 						</View>
 
 					</View>

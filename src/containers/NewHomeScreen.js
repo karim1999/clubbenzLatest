@@ -46,6 +46,7 @@ import {store} from '../redux/create';
 import {UPDATE_INDICATOR_FLAG} from '../redux/actions/types';
 
 class NewHomeScreen extends Component {
+
     constructor(props){
         super(props)
         NetInfo.fetch().then(isConnected => {
@@ -55,6 +56,7 @@ class NewHomeScreen extends Component {
                 SimpleToast.show('Not connected to internet', SimpleToast.BOTTOM)
         })
     }
+
     state = {
         computationDone: false,
         searchText: '',
@@ -108,6 +110,7 @@ class NewHomeScreen extends Component {
         active_index: 1,
         slider_images: [],
     };
+
     componentDidMount() {
         // console.log(this.props.preferences)
         if(this.props.language.isArabic)
@@ -149,6 +152,7 @@ class NewHomeScreen extends Component {
             return this.compareAndReturnTime(this.props.preferences.timeDisplay[0].time_out);
         }
     }
+
     compareAndReturnTime = (time) => {
         var now = moment.utc();
         var then = moment(time);
@@ -173,6 +177,7 @@ class NewHomeScreen extends Component {
         return false;
 
     }
+
     renderAds = () => {
         // debugger
         if (this.props.preferences && this.props.preferences.banner && this.props.preferences.banner[0] != null && this.props.preferences.banner[0].status === 'active' && this.props.preferences.banner[0].type === 'Home Page Bottom') {
@@ -256,7 +261,6 @@ class NewHomeScreen extends Component {
             ],
         );
     }
-
 
     _requestPermission = () => {
         Permissions.request('location').then(response => {
@@ -478,9 +482,11 @@ class NewHomeScreen extends Component {
         AsyncStorage.setItem("displayOverlays", "Hide");
         // we will set state to hide the overlay view
     };
+
     onSlidePress = () => {
         this.props.navigation.openDrawer();
     };
+
     onNextPress = async (val) => {
         if (val == 'fromSearch') {
             this.setState({
@@ -495,6 +501,7 @@ class NewHomeScreen extends Component {
         }
         AsyncStorage.setItem("displayOverlays", "Hide");
     };
+
     gotoPrevious = () => {
         let active_index = this.state.active_index
         active_index = active_index - 1
@@ -502,6 +509,7 @@ class NewHomeScreen extends Component {
             this.refs.car_slider.scrollTo({ x: width * (active_index - 1), y: 0, animated: true })
         }
     }
+
     gotoNext = () => {
         let active_index = this.state.active_index
         active_index = active_index + 1
@@ -509,6 +517,7 @@ class NewHomeScreen extends Component {
             this.refs.car_slider.scrollTo({ x: width * (active_index - 1), y: 0, animated: true })
         }
     }
+
     gotToSlider(num){
         let active_index = this.state.active_index
         active_index = active_index + (num - active_index)
@@ -531,6 +540,7 @@ class NewHomeScreen extends Component {
             this.setState({ active_index: 4 })
         }
     }
+
     onPressAd = (link) => {
         // Linking.openURL(link).catch((err) => console.error('An error occurred', err));
         if (link !== '') {
@@ -656,11 +666,8 @@ class NewHomeScreen extends Component {
                             </TouchableOpacity> : null}
                     </ScrollView>
                     {
-
                         this.props.preferences && this.props.preferences.timeDisplay && this.props.preferences.timeDisplay[0] != null && this.props.preferences.timeDisplay[0].status === "active" && this.getTimer()?
                             <Advertisement ad={this.getAdvertisement()} time={this.getTimer()} /> : null
-
-
                     }
 
                     <View style={[Styles.controlsContainer, {transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
@@ -742,6 +749,7 @@ const Styles= StyleSheet.create({
         zIndex: -10,
     },
 })
+
 mapStateToProps = (state) => {
     return {
         user: state.auth.user,
@@ -751,6 +759,7 @@ mapStateToProps = (state) => {
         auth: state.auth,
     }
 }
+
 mapDispatchToProps = (dispatch) => bindActionCreators(
     {
         updateUser: authAction.updateUser,

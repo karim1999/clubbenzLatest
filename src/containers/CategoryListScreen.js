@@ -25,6 +25,7 @@ class CategoryListScreen extends PureComponent {
 	partSubCategories = () =>{
 		partAction.partSubCategories({id:this.props.navigation.state.params.categoryId, chassis_id: this.props.navigation.state.params.chassis_id, phone: this.props.user.phone})
 		.then(res => {
+			    console.log(res);
 			if (res.success) {
 
                this.setState({subCategories:res.data});

@@ -45,6 +45,7 @@ export const verifiyNumber = async data => {
   let response = await new RequestService(params).callCreate();
   return response;
 };
+
 export const sendCodeEmail = async data => {
   let params = {
     url: API_ROOT + 'user/resend_code_email',

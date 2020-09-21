@@ -166,11 +166,10 @@ class LoginScreen extends React.Component {
   afterLoginComplete = async token => {
     let self = this;
     let {fcm_token} = this.state;
-    fetch(
-      `https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`,
-    )
-      .then(responJson => responJson.json())
+    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`)
+      .then(responseJson => responseJson.json())
       .then(function(response) {
+            console.log(response);
         authAction
           .loginWithFbUser({fcm_token: fcm_token, social_id: response.id})
           .then(res => {
