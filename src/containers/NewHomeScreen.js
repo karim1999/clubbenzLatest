@@ -44,6 +44,7 @@ import BackgroundFetch from "react-native-background-fetch";
 import {scheduleNotification} from '../redux/actions/workshops';
 import {store} from '../redux/create';
 import {UPDATE_INDICATOR_FLAG} from '../redux/actions/types';
+import firebase from 'react-native-firebase';
 
 class NewHomeScreen extends Component {
 
@@ -460,17 +461,18 @@ class NewHomeScreen extends Component {
     };
 
     onInviteOwnerPress = () => {
-        // alert('Invite Owner');
+        const link =
+          new firebase.links.DynamicLink('https://example.com/', 'https://clubenzz.page.link')
+            .android.setPackageName('com.clubbenz')
+            .ios.setBundleId('org.reactjs.native.example.ClubBenz')
+            .ios.setFallbackUrl('https://apps.apple.com/us/app/onlinersv-com/id1466838884')
+            .android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
 
-        Share.share({
-            message: this.state.shareText.toString()
-        }).then(result => console.log(result)).catch(errorMsg => console.log(errorMsg));
-
-        // for (var i=0; i<this.props.preferences.home_ads.length; i++) {
-        // 	alert(this.props.preferences.home_ads[i].type)
-        // }
-
-        // console.log(JSON.stringify(this.props.preferences))
+        firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
+          Share.share({ message: this.state.shareText.toString() +". "+ url }).then(result => console.log(result)).catch(errorMsg => console.log(errorMsg));
+        }).catch((err) => {
+          console.log(err)
+        })
     };
 
     onDismissPress = async () => {

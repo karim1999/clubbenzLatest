@@ -121,8 +121,10 @@ class RegisterScreen extends PureComponent {
   _responseInfoCallback(error, result) {
     let self = this;
     if (error) {
+            console.log(error);
       // alert('Error fetching image: ' + error.toString());
     } else {
+            console.log(result);
       // alert('Success fetching image: ' + result.toString());
       var url = result.picture.data.url;
 
@@ -135,27 +137,34 @@ class RegisterScreen extends PureComponent {
   }
 
   afterLoginComplete = async (token) => {
+            console.log("afterLoginComplete: " + token);
     let self = this;
-    fetch("https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}")
+    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`)
       .then(responseJson => responseJson.json()).then(function (response) {
-        let full_name = response.name.split(' ')
-        let id = response.id;
-        self.setState({ first_name: full_name[0], last_name: full_name[1], email: response.email, social_id: response.id }, () => {
-          const infoRequest = new GraphRequest(id,
-            {
-              parameters: {
-                fields: {
-                  string: 'picture.type(large)'
-                }
-              }
-            },
-            self._responseInfoCallback,
-          )
-          new GraphRequestManager().addRequest(infoRequest).start();
-        })
-      }).catch(err => [
-        alert(err)
-      ])
+        if(response.name){
+            let full_name = response.name.split(' ')
+            let id = response.id;
+            self.setState({ first_name: full_name[0], last_name: full_name[1], email: response.email, social_id: response.id }, () => {
+              const infoRequest = new GraphRequest(id,
+                {
+                  parameters: {
+                    fields: {
+                      string: 'picture.type(large)'
+                    }
+                  }
+                },
+                self._responseInfoCallback,
+              )
+              new GraphRequestManager().addRequest(infoRequest).start();
+            })
+        }
+        else if(response.error){
+            alert(response.error.message);
+        }
+      }).catch(err => {
+            console.log(err);
+            alert(err);
+      })
   }
 
   registerUser = () => {

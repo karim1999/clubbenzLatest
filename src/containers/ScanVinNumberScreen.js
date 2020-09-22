@@ -148,7 +148,7 @@ class SearchVinScreen extends Component {
     detectText = (base64) => {
         // debugger
         this.setState({ inProccess: true });
-        // console.log(base64)
+        //console.log(base64);
         axios.post("https://vision.googleapis.com/v1/images:annotate?key=" + "AIzaSyCX7hdA5Sj0TeyQuqL-ZyUewyt9GJ1mvZ0", {
             "requests": [{
                 "image": { "content": base64 },
@@ -158,41 +158,25 @@ class SearchVinScreen extends Component {
             }]
         })
             .then(response => {
-                // console.log(response.data)
-                // alert(JSON.stringify(response))
                 return response.data
             })
             .then(jsonRes => {
                 console.log(jsonRes)
-                if(jsonRes.responses[0]){
+                if(jsonRes.responses[0] && jsonRes.responses[0].fullTextAnnotation){
                     let text = jsonRes.responses[0].fullTextAnnotation.text
                     text = text.trim('\n');
-                    // console.log(text)
-                    // debugger
-                    // console.log(text)
                     if (text != 'undefined' && text.length > 0) {
-                        // console.log('Text not null and greater than 0')
                         var textArr = text.split('\n');
-                        // console.log(textArr.length)
-                        // console.log(textArr[0])
                         textArr.forEach(item => {
-                            console.log(item)
-                            // item = item.trim(' ');
                             item = item.replace(/\s/g,'');
                             if (item.length == 17) {
                                 SimpleToast.show('Scan Vin Number Found !')
-                                // console.log('Item is 17')
                                 if (!(/\s/.test(item))) {
-                                    // console.log(item)
                                     var prefix = item.substring(3, 9);
                                     this.setState({ isFound: true, inProccess: false })
-                                    // alert(prefix)
-
                                     authAction.getCarByVin({ vin_prefix: prefix }).then(res => {
                                         if (res.success) {
-                                        debugger
                                             if (this.props.navigation.state.params && this.props.navigation.state.params.MyProfileScreen != null && this.props.navigation.state.params.MyProfileScreen == true) {
-                                            debugger
                                                 store.dispatch({
                                                     type: "UPDATE_SELECTED_CAR",
                                                     data: {
@@ -223,17 +207,15 @@ class SearchVinScreen extends Component {
                             }
                         })
                     }
-
                 }else{
                     console.log("No response")
                     SimpleToast.show('No Vin Number was found !!');
                     this.setState({ inProccess: false, isFound: false })
                 }
-
             }).catch(err => {
-            SimpleToast.show('No Vin Number was found !!');
-            this.setState({ inProccess: false, isFound: false })
-                console.log('Error', err)
+                SimpleToast.show('No Vin Number was found !!');
+                this.setState({ inProccess: false, isFound: false });
+                console.log('Error', err);
             })
     }
 
@@ -246,6 +228,7 @@ class SearchVinScreen extends Component {
             // alert(text)
         }
     }
+
     render() {
 
         // setTimeout(() => {

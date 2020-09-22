@@ -40,7 +40,7 @@ const data = [
 	{
 		id: '3',
 		name: 'Instagram',
-		link: '#',
+		link: 'https://instagram.com/clubenz?igshid=yft3o8e09dng',
 		color:"#FFFFFF"
 	},
 	// {

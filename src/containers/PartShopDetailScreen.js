@@ -92,7 +92,7 @@ class PartShopDetailScreen extends PureComponent {
   createURL = () => {
 
     const link =
-      new firebase.links.DynamicLink('https://example.com/partshop/' + this.state.shopId, 'https://clubenz.page.link')
+      new firebase.links.DynamicLink('https://example.com/partshop/' + this.state.shopId, 'https://clubenzz.page.link')
         .android.setPackageName('com.clubbenz')
         .ios.setBundleId('org.reactjs.native.example.ClubBenz')
         .ios.setFallbackUrl('https://twitter.com')
