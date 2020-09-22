@@ -80,7 +80,19 @@ class Header extends PureComponent {
                             </View>
                         }
                     </View>
+
                     <View style={[Styles.navMiddle, {alignItems: 'flex-end'}]}>
+                        {
+                            this.props.onMapPress &&
+                            <TouchableWithoutFeedback onPress={this.props.onMapPress}>
+                                <View>
+                                    <Image
+                                        style={{height: 32, width: 32, alignItems: 'center', justifyContent: 'center',}}
+                                        source={require('../../resources/icons/ic_mapview.png')}
+                                    />
+                                </View>
+                            </TouchableWithoutFeedback>
+                        }
                         {
                             this.props.homeButton &&
                             <Icon onPress={() => this.props.navigation.navigate('Home')} size={23} color={"#FFFFFF"} name="home"/>

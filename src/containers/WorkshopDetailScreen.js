@@ -165,7 +165,7 @@ class WorkshopDetailScreen extends PureComponent {
   }
 
   sendSMS = () => {
-    // debugger
+    console.log("SMS Callback");
     SendSMS.send({
       body: this.state.shopShareURL,
       recipients: [''],
