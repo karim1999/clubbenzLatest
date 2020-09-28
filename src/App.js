@@ -45,6 +45,8 @@ export default class App extends React.Component {
 					const routeName = route.split('/')[0];
 
 					console.log(url)
+					console.log("routeName")
+					console.log(routeName)
 
 					if (routeName === 'workshop') {
 						AsyncStorage.setItem("workshopId", id);
@@ -337,7 +339,7 @@ export default class App extends React.Component {
 			if (value != null) {
 				const tokenizd = url.split('/');
 				debugger
-				if (tokenizd[3] && (tokenizd[3] === 'serviceshop' || tokenizd[3] === 'partshop' || tokenizd[3] === 'workshop')) {
+				if (tokenizd[3] && (tokenizd[3] === 'serviceshop' || tokenizd[3] === 'partshop' || tokenizd[3] === 'workshop' || tokenizd[3] === 'parts')) {
 					// this is a shop
 					this.navigateToShop(tokenizd[3], tokenizd[4]);
 				} else if (tokenizd[3] === 'cluster') {
@@ -367,7 +369,14 @@ export default class App extends React.Component {
 				NavigationService.navigate("ServicesDetailScreen", { preferences: this.props.preferences, language: this.props.language });
 			else
 				window.navigation.navigate("ServicesDetailScreen", { preferences: this.props.preferences, language: this.props.language });
-		}
+		} else if (shop === 'parts') {
+		    var partItem = { id: id };
+			AsyncStorage.setItem("partItem", partItem);
+            if (NavigationService && NavigationService.navigate)
+                NavigationService.navigate("DetailScreen", { partItem: partItem, preferences: this.props.preferences, language: this.props.language });
+            else
+                window.navigation.navigate("DetailScreen", { partItem: partItem, preferences: this.props.preferences, language: this.props.language });
+        }
 	}
 
 	getClusterErrors = (error_id, chassis, value) => {

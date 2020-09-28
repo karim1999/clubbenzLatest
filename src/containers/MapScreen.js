@@ -444,27 +444,27 @@ class MapScreen extends Component {
 		const data = this.state.data;
 		var marginTop= 0;
 		if (data.length != 0) {
-		if(data[0].detail){
-			marginTop = 16;
-		}
-	}
+            if(data[0].detail){
+                marginTop = 16;
+            }
+	    }
 		return (
 			<View style={styles.container}>
 			<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
 
 			<View style={{ marginTop:marginTop , backgroundColor: "transparent",}}>
-			<NavigationComponent
-				navigation={this.props.navigation}
-
-				goBack={() => this.props.navigation.goBack()}
-					title={__('Map' , this.props.language)}
-					rightIcon={true}
-				/>
-				<View style={styles.secondHeader}>
-          <TouchableOpacity style={styles.button} onPress={()=> this.OpenNow() }>
-            <Text style={styles.buttonText}>{__('Open Now' , this.props.language)}</Text>
-          </TouchableOpacity>
-        </View>
+                <NavigationComponent
+                    navigation={this.props.navigation}
+                    goBack={() => this.props.navigation.goBack()}
+                        title={__('Map' , this.props.language)}
+                        rightIcon={true}
+                    />
+                <View style={styles.secondHeader}>
+                    <TouchableOpacity style={styles.button} onPress={()=> this.OpenNow() }>
+                        <Text style={styles.buttonText}>{__('Open Now' , this.props.language)}</Text>
+                        <Image style={{width: 25, height: 25}} source={require('../resources/icons/Filter.png')} />
+                    </TouchableOpacity>
+                </View>
 			</View>
 				
 				<View style={styles.container}>
@@ -558,7 +558,7 @@ const styles = StyleSheet.create({
     top: -12,
     zIndex: -1
   },
-  button: {
+  button232: {
     borderWidth: 1,
     borderColor: "#717171",
     height: height * 0.04,
@@ -567,6 +567,14 @@ const styles = StyleSheet.create({
     borderRadius: width * 0.05,
 	marginLeft: width * 0.03,
 	marginTop: 7
+  },
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: width * 0.02,
+    marginLeft: width * 0.03,
+    marginRight: width * 0.03,
   },
   buttonText: {
     color: "#717171",

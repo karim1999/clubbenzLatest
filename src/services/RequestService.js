@@ -36,6 +36,11 @@ export class RequestService {
     return this.call()
   }
 
+  callShowWithoutLoader=()=> {
+    this.params.method = 'GET';
+    return this.callWithoutLoader();
+  }
+
   callUpdate=()=> {
     this.params.method = 'PUT'
     return this.call()

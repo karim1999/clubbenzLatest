@@ -14,7 +14,7 @@ import {
 	Clipboard,
 	PermissionsAndroid,
 	ActivityIndicator,
-	Platform, I18nManager,
+	Platform, I18nManager, Linking
 } from 'react-native';
 
 import { IMG_PREFIX_URL } from '../config/constant';
@@ -42,6 +42,7 @@ import {addToFavorite, checkIsFavorite, getFavorites, removeFromFavorite} from '
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationComponent from '../components/navigation/navigation';
 import NavigationService from '../NavigationService';
+import firebase from 'react-native-firebase';
 
 const navigationOptions = {
 	header: null,
@@ -67,6 +68,7 @@ class DetailScreen extends PureComponent {
 		loadingFavorite: false,
 		favorites: [],
 		isDone: false,
+        partShareURL: ''
 	}
 
 	componentDidMount() {
@@ -91,27 +93,27 @@ class DetailScreen extends PureComponent {
 		clearInterval(this.state.interval);
 	}
 
-	shareFACEBOOK = () => {
+	/*shareFACEBOOK = () => {
 		const shareOptions = {
 
 			title: "Share Via",
 			message: "Facebook",
-			url: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			url: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
 			subject: "Share Link" //  for email
 		};
 
 		const shareLinkContent = {
 			contentType: 'link',
 
-			contentUrl: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
-			contentTitle: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			contentUrl: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
+			contentTitle: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
 
-			contentDescription: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
-			setQuote: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			contentDescription: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
+			setQuote: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
 		};
 
 		this.shareLinkWithShareDialog(shareLinkContent);
-	}
+	}*/
 
 	shareLinkWithShareDialog(shareLinkContent) {
 		var tmp = this;
@@ -162,11 +164,12 @@ class DetailScreen extends PureComponent {
 				this.setState({loadingFavorite: true})
 				let provider_id = res.provider_id
 				getProviderDetails(provider_id).then(provider => {
-				console.log(provider);
+					this.setState({loadingFavorite: false})
 					this.setState({provider});
 				}).then(() => {
 					checkIsFavorite(this.props.user.id, res.id).then(isFavorite => {
 						this.setState({isFavorite});
+					    this.setState({loadingFavorite: false})
 					})
 				}).then(()=> {
 					this.setState({loadingFavorite: false})
@@ -243,21 +246,37 @@ class DetailScreen extends PureComponent {
 
 	showShare = () => {
 		this.setState({ shareModalVisible: !this.state.shareModalVisible });
+        this.createURL();
 	};
 
+    createURL = () => {
+        const link = new firebase.links.DynamicLink('https://example.com/parts/' + this.state.partDetail.id, 'https://clubenzz.page.link')
+            .android.setPackageName('com.clubbenz')
+            .ios.setBundleId('org.reactjs.native.example.ClubBenz')
+            .ios.setFallbackUrl('https://twitter.com')
+            .android.setFallbackUrl('https://twitter.com');
+        firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
+            console.log(url);
+            this.setState({ partShareURL: url })
+        }).catch((err) => {
+          console.log(err)
+        })
+  }
+
 	shareWHATSAPP = (a) => {
-		const shareOptions = {
+		/*const shareOptions = {
 			title: 'Share via',
-			url: Platform.OS == 'android' ? 'https://clubbenz.app.link/parts/' + this.state.partDetail.id : 'clubbenz.app.link://parts/' + this.state.partDetail.id,
+			url: this.state.partShareURL ,
 			social: Share.Social.WHATSAPP
 		};
-		Share.shareSingle(shareOptions);
+		Share.shareSingle(shareOptions);*/
+        Linking.openURL(`whatsapp://send?text=${this.state.partShareURL}`);
 	}
 
 	shareFACEBOOK = () => {
 		const shareOptions = {
 			title: 'Share via',
-			url: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			url: this.state.shopShareURL,
 			social: Share.Social.FACEBOOK
 		};
 		Share.shareSingle(shareOptions);
@@ -265,9 +284,9 @@ class DetailScreen extends PureComponent {
 
 	copyLink = () => {
 		if (Platform.OS == 'android') {
-			Clipboard.setString('https://clubbenz.app.link/parts/' + this.state.partDetail.id);
+			Clipboard.setString('https://clubenzz.app.link/parts/' + this.state.partDetail.id);
 		} else {
-			Clipboard.setString('clubbenz.app.link://parts/' + this.state.partDetail.id);
+			Clipboard.setString('clubenzz.app.link://parts/' + this.state.partDetail.id);
 		}
 		this.showShare();
 		setTimeout(() => {
@@ -322,7 +341,7 @@ class DetailScreen extends PureComponent {
 	sendSMS = () => {
 		// debugger
 		SendSMS.send({
-			body: 'https://clubbenz.app.link/parts/' + this.state.partDetail.id,
+			body: 'https://clubenzz.app.link/parts/' + this.state.partDetail.id,
 			recipients: [''],
 			successTypes: ['sent', 'queued'],
 			allowAndroidSendWithoutReadPermission: false

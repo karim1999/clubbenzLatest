@@ -5,7 +5,7 @@ import RequestService from "./../../services/RequestService";
 export const getProviderDetails = async (id )=> {
     let params = { url: API_ROOT + "provider/get_provider_by_id?provider_id="+id };
     console.log(params);
-    let response = await new RequestService(params).callShow();
+    let response = await new RequestService(params).callShowWithoutLoader();
     return response;
 };
 export const getProviderReviews = async (id )=> {

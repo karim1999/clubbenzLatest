@@ -149,7 +149,7 @@ class ClusterErrorSolutionsScreen extends Component {
 	// 	shareWHATSAPP = (a) => {
 	//     const shareOptions = {
 	//      title: 'Share via',
-	//      url: Platform.OS == 'android' ? 'https://clubbenz.app.link/cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis : 'clubbenz.app.link://cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis,
+	//      url: Platform.OS == 'android' ? 'https://clubenzz.app.link/cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis : 'clubbenz.app.link://cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis,
 	//      social: Share.Social.WHATSAPP
 	//    };
 	//    Share.shareSingle(shareOptions);
