@@ -274,21 +274,35 @@ class DetailScreen extends PureComponent {
 	}
 
 	shareFACEBOOK = () => {
-		const shareOptions = {
-			title: 'Share via',
-			url: this.state.shopShareURL,
-			social: Share.Social.FACEBOOK
-		};
-		Share.shareSingle(shareOptions);
-	}
+        const shareLinkContent = {
+              contentType: 'link',
+              contentUrl: this.state.partShareURL,
+              href:this.state.partShareURL,
+              contentDescription: 'Wow, check out this part!',
+        };
+
+        ShareDialog.canShow(shareLinkContent).then(
+          function (canShow) {
+            return ShareDialog.show(shareLinkContent);
+          }
+        ).then(
+          function (result) {
+            if (result.isCancelled) {
+              console.log('Share cancelled');
+            } else {
+              console.log('Share success with postId: '
+                + result.postId);
+            }
+          },
+          function (error) {
+            console.log('Share fail with error: ' + error);
+          }
+        );
+  }
 
 	copyLink = () => {
-		if (Platform.OS == 'android') {
-			Clipboard.setString('https://clubenzz.app.link/parts/' + this.state.partDetail.id);
-		} else {
-			Clipboard.setString('clubenzz.app.link://parts/' + this.state.partDetail.id);
-		}
-		this.showShare();
+        Clipboard.setString(this.state.partShareURL + '');
+		this.setState({ shareModalVisible: !this.state.shareModalVisible });
 		setTimeout(() => {
 			Toast.show('Coppied Content Successfully', Toast.LONG);
 		}, 100)

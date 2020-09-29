@@ -415,6 +415,57 @@ class SlideMenuScreen extends Component {
 										</View>
 									</TouchableOpacity>
 								</View>
+								<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: height * 0.048, marginLeft: width * 0.2 }}>
+									{this.state.selected === 8 ? (
+										<View
+											style={{
+												justifyContent: 'center',
+												alignItems: 'center',
+												position: 'absolute',
+												transform: [{ rotate: '-90deg' }],
+												left: -width * 0.2
+											}}
+										>
+											<Text style={{ color: 'white', fontFamily: Fonts.CircularBold, fontSize: 18/*fontSize: width * 0.04*/, fontFamily: Fonts.CircularBold }}>
+												{model.name}
+											</Text>
+											<View
+												style={{
+													marginVertical: height * 0.005,
+													justifyContent: 'center',
+													alignItems: 'center',
+												}}
+											>
+												<Image
+													resizeMode="contain"
+													style={{ width: width * 0.2, height: width * 0.07 }}
+													source={car_image}
+												/>
+											</View>
+										</View>
+									) : (
+										<View />
+									)}
+									<TouchableOpacity
+										onPress={() => {
+											this.setState({ selected: 8 });
+											this.props.navigation.closeDrawer();
+											this.props.navigation.navigate('PrivacyScreen');
+										}}
+									>
+										<View
+											style={{
+												borderLeftWidth: this.state.selected === 8 ? 2 : 0,
+												borderColor: 'white',
+												// paddingHorizontal: width * 0.17,
+												paddingHorizontal: width * 0.1,
+												paddingVertical: height * 0.01,
+											}}
+										>
+											<Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Data Privacy' , this.props.language)}</Text>
+										</View>
+									</TouchableOpacity>
+								</View>
 
 								{
                                     this.props.preferences.activate_part_catalogue &&

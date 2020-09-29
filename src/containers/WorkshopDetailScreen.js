@@ -127,14 +127,13 @@ class WorkshopDetailScreen extends PureComponent {
   }
 
   openShareDialog = () => {
-
-      console.log("this.state.shopShareURL");
-      console.log(this.state.shopShareURL);
+    console.log("this.state.shopShareURL");
+    console.log(this.state.shopShareURL);
     const shareLinkContent = {
-      contentType: 'link',
-      contentUrl: this.state.shopShareURL,
-      href:this.state.shopShareURL,
-      contentDescription: 'Wow, check out this work shop!',
+          contentType: 'link',
+          contentUrl: this.state.shopShareURL,
+          href:this.state.shopShareURL,
+          contentDescription: 'Wow, check out this work shop!',
     };
 
     ShareDialog.canShow(shareLinkContent).then(

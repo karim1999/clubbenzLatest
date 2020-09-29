@@ -49,6 +49,7 @@ import ClusterErrorScreen from "./containers/ClusterErrorScreen";
 import ClusterErrorSolutionsScreen from "./containers/ClusterErrorSolutionsScreen";
 import SlideMenuScreen from "./components/SlideMenu/SlideMenuScreen";
 import ClubScreen from "./containers/ClubScreen";
+import PrivacyScreen from "./containers/PrivacyScreen";
 import ServiceShopScreen from "./containers/SerivceShopScreen";
 import CarGuideScreen from "./containers/CarGuideScreen";
 import LoadingIndicator from "./../src/components/common/loadingIndicator";
@@ -79,6 +80,9 @@ const DrawerNavigator = createDrawerNavigator(
     },
     ClubScreen: {
       screen: ClubScreen
+    },
+    PrivacyScreen:{
+      screen: PrivacyScreen
     },
     NotificationScreen: {
       screen: NotificationScreen

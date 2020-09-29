@@ -25,3 +25,11 @@ export const HomeSearchList = async (start, search , position) => {
   let response = await new RequestService(params).callShow();
   return response;
 };
+
+export const privacyService = async () => {
+  let params = {
+    url: API_ROOT + "/Dataprivacy/data_privacy"
+  };
+  let response = await new RequestService(params).callShow();
+  return response;
+};
