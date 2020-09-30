@@ -278,7 +278,7 @@ class LoginScreen extends React.Component {
             headerimageIcone={true}
           />
           <View style={styleLoginScreen.containerTop}>
-            <TouchableOpacity onPress={this.continueWithFb}>
+            {/*<TouchableOpacity onPress={this.continueWithFb}>
               <View style={[styles.fbLoginButton, styleLoginScreen.btnStyle]}>
                 <Text style={styles.tapButtonStyleTextWhite}>
                   {__('Continue with Facebook', this.props.language)}
@@ -295,7 +295,7 @@ class LoginScreen extends React.Component {
                 fontSize: fonts.size.h13,
                 fontFamily: Fonts.CircularMedium,
               }}
-            />
+            />*/}
 
             {this.state.wrongPhone ? (
               <Text style={{color: 'red', textAlign: 'center'}}>
