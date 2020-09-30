@@ -725,7 +725,7 @@ class MyProfileScreen extends PureComponent {
 						>
 							<ToggleView text={__('Enable Notifications', this.props.language)} value={this.state.enablePushNotification} onChange={(val) => this.setState({ enablePushNotification: val })} />
 							<ToggleView text={__('Enable Location', this.props.language)} value={this.state.enableLocation} onChange={(val) => this.setState({ enableLocation: val })} />
-							{/*<ToggleView text={__('Link to Facebook', this.props.language)} value={this.state.enableFacebook} facebook onChange={(val) => this.changeEnableFB(val)} />*/}
+							<ToggleView text={__('Link to Facebook', this.props.language)} value={this.state.enableFacebook} facebook onChange={(val) => this.changeEnableFB(val)} />
 						</View>
 
 					</View>

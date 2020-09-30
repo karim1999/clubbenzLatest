@@ -443,11 +443,11 @@ class RegisterScreen extends PureComponent {
             navigation={this.props.navigation}
                                                 title={__('Create your account', this.props.language)} subTitle={__('One step away', this.props.language)} goBack={this.goBack} />
         <ScrollView keyboardShouldPersistTaps="always">
-          {/*<TouchableOpacity onPress={this.fillFacebookInfo}>
+          <TouchableOpacity onPress={this.fillFacebookInfo}>
             <View style={[styles.fbLoginButton, styleRegisterScreen.btnStyle]}>
               <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
             </View>
-          </TouchableOpacity>*/}
+          </TouchableOpacity>
 
           <SplitHeading
             text={__('Welcome to our Community', this.props.language)}

@@ -9,7 +9,7 @@ import {
   AsyncStorage,
   TextInput,
   Platform, I18nManager,
-  ScrollView
+  ScrollView,ActivityIndicator
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -30,20 +30,28 @@ import {connect} from 'react-redux';
 import __ from '../resources/copy';
 import firebase from 'react-native-firebase';
 import RNRestart from 'react-native-restart';
+import appleAuth, {
+  AppleButton,
+  AppleAuthRequestScope,
+  AppleAuthRequestOperation,
+  AppleAuthError,
+  AppleAuthCredentialState,
+} from '@invertase/react-native-apple-authentication';
+import {StreamChat} from 'stream-chat';
 
 class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.onChangePassword();
+    this.chatClient = new StreamChat('3u7xqdx6e9m3');
   }
 
   state = {
     email: '',
     password: '',
-    // fcm_token: global.android_token
     fcm_token: '',
     wrongPhone: false,
+    hideSigninButton: false
   };
 
   checkNumberVerified(value) {
@@ -127,6 +135,75 @@ class LoginScreen extends React.Component {
       [NavigationActions.navigate({routeName: 'HomeScreen'})],
       0,
     );
+  };
+
+  onAppleButtonPress = async () => {
+    this.setState({
+      hideSigninButton: true,
+    });
+
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: AppleAuthRequestOperation.LOGIN,
+        requestedScopes: [
+          AppleAuthRequestScope.EMAIL,
+          AppleAuthRequestScope.FULL_NAME,
+        ],
+      });
+
+      // get current authentication state for user
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user
+      );
+
+      if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
+        console.log('User apple sign in auth authorized');
+        axios
+          .post('https://NGROK_URL/auth', {
+            username: appleAuthRequestResponse.user,
+            code: appleAuthRequestResponse.authorizationCode,
+          })
+          .then(res => {
+            console.log(res.data);
+            if (res.data.status) {
+              this.chatClient.setUser(
+                {
+                  id: res.data.username,
+                  username: res.data.username,
+                  image:
+                    'https://stepupandlive.files.wordpress.com/2014/09/3d-animated-frog-image.jpg',
+                },
+                res.data.token
+              );
+              this.props.cb(this.chatClient);
+            }
+          })
+          .catch(err => {
+            this.setState({
+              hideSigninButton: false,
+            });
+
+            Alert.alert('Auth', 'could not set up Stream chat');
+            console.log('Could not authenticate user.. ', err);
+          });
+
+        return;
+      }
+
+      Alert.alert('Auth', 'Could not authenticate you');
+    } catch (err) {
+      if (err === AppleAuthError.CANCELED) {
+        this.setState({
+          hideSigninButton: false,
+        });
+        Alert.alert(
+          'Authentication',
+          'You canceled the authentication process'
+        );
+      }
+
+      console.log(err);
+    }
   };
 
   continueWithFb = () => {
@@ -228,6 +305,9 @@ class LoginScreen extends React.Component {
     if (fcmtoken) {
       this.setState({fcm_token: fcmtoken});
     }
+    appleAuth.onCredentialRevoked(() => {
+      console.log('User auth has been revoked');
+    });
   }
 
   testFB = () => {
@@ -278,13 +358,27 @@ class LoginScreen extends React.Component {
             headerimageIcone={true}
           />
           <View style={styleLoginScreen.containerTop}>
-            {/*<TouchableOpacity onPress={this.continueWithFb}>
+            <TouchableOpacity onPress={this.continueWithFb}>
               <View style={[styles.fbLoginButton, styleLoginScreen.btnStyle]}>
                 <Text style={styles.tapButtonStyleTextWhite}>
                   {__('Continue with Facebook', this.props.language)}
                 </Text>
               </View>
             </TouchableOpacity>
+
+            { this.state.hideSigninButton ? (
+              <ActivityIndicator size="large" />
+            ) : (
+              <AppleButton
+                buttonStyle={AppleButton.Style.WHITE}
+                buttonType={AppleButton.Type.SIGN_IN}
+                style={{
+                  width: 160,
+                  height: 45,
+                }}
+                onPress={() => this.onAppleButtonPress()}
+              />
+            )}
 
             <SplitHeading
               text={__('Or', this.props.language)}
@@ -295,11 +389,11 @@ class LoginScreen extends React.Component {
                 fontSize: fonts.size.h13,
                 fontFamily: Fonts.CircularMedium,
               }}
-            />*/}
+            />
 
             {this.state.wrongPhone ? (
               <Text style={{color: 'red', textAlign: 'center'}}>
-                {__('Please add country code (Ex: +201 2xx xxx xxx)', this.props.language)}
+                {__('Please add country code (Ex: +201 xxx xxx xxx)', this.props.language)}
               </Text>
             ) : null}
 

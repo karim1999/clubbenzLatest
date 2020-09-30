@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@invertase/react-native-apple-authentication": "^2.0.2",
     "@mauron85/react-native-background-geolocation": "^0.6.3",
     "@react-native-community/async-storage": "^1.6.1",
     "@react-native-community/netinfo": "^5.9.2",
@@ -82,6 +83,7 @@
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
+    "stream-chat": "^2.4.0",
     "yarn": "^1.17.3"
   },
   "devDependencies": {
