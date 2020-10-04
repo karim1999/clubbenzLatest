@@ -91,6 +91,14 @@ const Styles = {
     fontFamily: Fonts.CircularMedium,
 
   },
+  appleLoginButton: {
+    height: 60,
+    justifyContent: 'center',
+    backgroundColor: colors.darkGray,
+    alignSelf: 'center',
+    borderRadius: metrics.radius40,
+    fontFamily: Fonts.CircularMedium
+  },
   toggleButtonContainer: {
     height: 55,
     flexDirection: "row",

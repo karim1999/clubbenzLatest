@@ -465,7 +465,7 @@ class NewHomeScreen extends Component {
           new firebase.links.DynamicLink('https://example.com/', 'https://clubenzz.page.link')
             .android.setPackageName('com.clubbenz')
             .ios.setBundleId('org.reactjs.native.example.ClubBenz')
-            .ios.setFallbackUrl('https://apps.apple.com/us/app/onlinersv-com/id1466838884')
+            .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
             .android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
 
         firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {

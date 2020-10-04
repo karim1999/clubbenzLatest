@@ -34,6 +34,14 @@ import firebase from 'react-native-firebase';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Permissions, {request, PERMISSIONS} from 'react-native-permissions';
+import appleAuth, {
+  AppleButton,
+  AppleAuthRequestScope,
+  AppleAuthRequestOperation,
+  AppleAuthError,
+  AppleAuthCredentialState,
+} from '@invertase/react-native-apple-authentication';
+import axios from 'axios';
 
 class RegisterScreen extends PureComponent {
 
@@ -68,6 +76,50 @@ class RegisterScreen extends PureComponent {
   goBack() {
     NavigationService.goBack();
   }
+
+  fillAppleInfo = async () => {
+    const self = this;
+    try {
+      const performResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [
+          appleAuth.Scope.EMAIL,
+          appleAuth.Scope.FULL_NAME,
+        ],
+      });
+      self.setState({ first_name: performResponse.fullName.givenName, last_name: performResponse.fullName.familyName, email: performResponse.email, social_id: performResponse.user.toString() });
+      /*const credentialState = await appleAuth.getCredentialStateForUser(performResponse.user);
+      console.log(credentialState);
+
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        console.log('User apple sign in auth authorized');
+        axios
+          .post('https://NGROK_URL/auth', {
+            username: performResponse.user,
+            code: performResponse.authorizationCode,
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status) {
+              self.setState({ first_name: res.data.username, last_name: res.data.username, email: res.data.username, social_id: res.data.username });
+            }
+          })
+          .catch(err => {
+            console.log('Could not authenticate user.. ', err);
+          });
+        return;
+      }
+      Alert.alert('Auth', 'Could not authenticate you');*/
+    } catch (err) {
+      if (err === appleAuth.Error.CANCELED) {
+        Alert.alert(
+          'Authentication',
+          'You canceled the authentication process'
+        );
+      }
+      console.log(err);
+    }
+  };
 
   fillFacebookInfo = () => {
     LoginManager.logOut();
@@ -446,6 +498,11 @@ class RegisterScreen extends PureComponent {
           <TouchableOpacity onPress={this.fillFacebookInfo}>
             <View style={[styles.fbLoginButton, styleRegisterScreen.btnStyle]}>
               <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.fillAppleInfo}>
+            <View style={[styles.appleLoginButton, styleRegisterScreen.btnStyle]}>
+              <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Apple', this.props.language)}</Text>
             </View>
           </TouchableOpacity>
 

@@ -470,7 +470,6 @@ class MapScreen extends Component {
 				<View style={styles.container}>
 				<MapView
 				  ref={ref => { this.mapView = ref; }}
-					provider={PROVIDER_GOOGLE} // remove if not using Google Maps
 					style={styles.map}
 				>
 

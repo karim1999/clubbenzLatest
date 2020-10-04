@@ -383,6 +383,8 @@ PODS:
     - React
   - ReactNativePermissions (1.2.1):
     - React
+  - RNAppleAuthentication (2.0.2):
+    - React-Core
   - RNBackgroundFetch (3.0.6):
     - React
   - RNCAsyncStorage (1.11.0):
@@ -465,6 +467,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeExceptionHandler (from `../node_modules/react-native-exception-handler`)
   - ReactNativePermissions (from `../node_modules/react-native-permissions`)
+  - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
@@ -589,6 +592,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-exception-handler"
   ReactNativePermissions:
     :path: "../node_modules/react-native-permissions"
+  RNAppleAuthentication:
+    :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNBackgroundFetch:
     :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
@@ -679,6 +684,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeExceptionHandler: 8025d98049c25f186835a3af732dd7c9974d6dce
   ReactNativePermissions: 7cfad56d13c8961cd2a1005b4955b1400c79ef3e
+  RNAppleAuthentication: 09bf9752c73e1a19ba71b27538bc76cb4f8441a6
   RNBackgroundFetch: 9adf01bb51658fc205a3dc8802cf38dd7cd9be09
   RNCAsyncStorage: d059c3ee71738c39834a627476322a5a8cd5bf36
   RNFirebase: 37daa9a346d070f9f6ee1f3b4aaf4c8e3b1d5d1c
@@ -692,6 +698,6 @@ SPEC CHECKSUMS:
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: df35e361eac3f3b0759b755e3eff3606d37fb9e0
+PODFILE CHECKSUM: 5ff8b1a43a7a0c56c66479b0d2588bc4727b6c7c
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

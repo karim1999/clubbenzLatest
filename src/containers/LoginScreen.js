@@ -37,6 +37,7 @@ import appleAuth, {
   AppleAuthError,
   AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication';
+import axios from 'axios';
 import {StreamChat} from 'stream-chat';
 
 class LoginScreen extends React.Component {
@@ -50,8 +51,7 @@ class LoginScreen extends React.Component {
     email: '',
     password: '',
     fcm_token: '',
-    wrongPhone: false,
-    hideSigninButton: false
+    wrongPhone: false
   };
 
   checkNumberVerified(value) {
@@ -138,21 +138,16 @@ class LoginScreen extends React.Component {
   };
 
   onAppleButtonPress = async () => {
-    this.setState({
-      hideSigninButton: true,
-    });
-
+    let self = this;
     try {
       const appleAuthRequestResponse = await appleAuth.performRequest({
-        requestedOperation: AppleAuthRequestOperation.LOGIN,
+        requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [
-          AppleAuthRequestScope.EMAIL,
-          AppleAuthRequestScope.FULL_NAME,
-        ],
+          appleAuth.Scope.FULL_NAME
+        ]
       });
-
-      // get current authentication state for user
-      const credentialState = await appleAuth.getCredentialStateForUser(
+      self.loginWithSocialMedia(appleAuthRequestResponse.user.toString());
+      /*const credentialState = await appleAuth.getCredentialStateForUser(
         appleAuthRequestResponse.user
       );
 
@@ -166,42 +161,25 @@ class LoginScreen extends React.Component {
           .then(res => {
             console.log(res.data);
             if (res.data.status) {
-              this.chatClient.setUser(
-                {
-                  id: res.data.username,
-                  username: res.data.username,
-                  image:
-                    'https://stepupandlive.files.wordpress.com/2014/09/3d-animated-frog-image.jpg',
-                },
-                res.data.token
-              );
-              this.props.cb(this.chatClient);
+              self.loginWithSocialMedia(res.data.username);
             }
           })
           .catch(err => {
             this.setState({
               hideSigninButton: false,
             });
-
-            Alert.alert('Auth', 'could not set up Stream chat');
             console.log('Could not authenticate user.. ', err);
           });
-
         return;
       }
-
-      Alert.alert('Auth', 'Could not authenticate you');
+      Alert.alert('Auth', 'Could not authenticate you');*/
     } catch (err) {
-      if (err === AppleAuthError.CANCELED) {
-        this.setState({
-          hideSigninButton: false,
-        });
+      if (err === appleAuth.Error.CANCELED) {
         Alert.alert(
           'Authentication',
           'You canceled the authentication process'
         );
       }
-
       console.log(err);
     }
   };
@@ -247,8 +225,16 @@ class LoginScreen extends React.Component {
       .then(responseJson => responseJson.json())
       .then(function(response) {
             console.log(response);
+            self.loginWithSocialMedia(response.id);
+        
+      });
+  };
+
+  loginWithSocialMedia = async socialId => {
+    let self = this;
+    let {fcm_token} = this.state;
         authAction
-          .loginWithFbUser({fcm_token: fcm_token, social_id: response.id})
+          .loginWithFbUser({fcm_token: fcm_token, social_id: socialId})
           .then(res => {
             if (res.success) {
               AsyncStorage.setItem('user', JSON.stringify(res.user));
@@ -262,7 +248,6 @@ class LoginScreen extends React.Component {
           .catch(err => {
             alert(JSON.stringify(err));
           });
-      });
   };
 
   register = () => {
@@ -365,20 +350,13 @@ class LoginScreen extends React.Component {
                 </Text>
               </View>
             </TouchableOpacity>
-
-            { this.state.hideSigninButton ? (
-              <ActivityIndicator size="large" />
-            ) : (
-              <AppleButton
-                buttonStyle={AppleButton.Style.WHITE}
-                buttonType={AppleButton.Type.SIGN_IN}
-                style={{
-                  width: 160,
-                  height: 45,
-                }}
-                onPress={() => this.onAppleButtonPress()}
-              />
-            )}
+            <TouchableOpacity onPress={this.onAppleButtonPress}>
+              <View style={[styles.appleLoginButton, styleLoginScreen.btnStyle]}>
+                <Text style={styles.tapButtonStyleTextWhite}>
+                  {__('Sign in with Apple', this.props.language)}
+                </Text>
+              </View>
+            </TouchableOpacity>
 
             <SplitHeading
               text={__('Or', this.props.language)}

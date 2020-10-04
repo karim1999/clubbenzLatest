@@ -65,35 +65,35 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Clubbenz needs to play music while using the app</string>
+	<string>Clubenz needs to play music while using the app</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Clubbenz needs Bluetooth Access</string>
+	<string>Clubenz needs Bluetooth Access</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Clubbenz needs Bluetooth Access</string>
+	<string>Clubenz needs Bluetooth Access</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Clubbenz needs to access your calendar</string>
+	<string>Clubenz needs to access your calendar</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Clubbenz need Camera Access</string>
+	<string>Clubenz need to access your camera to be able to take images in your profile</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Clubbenz need to access your contacts</string>
+	<string>Clubenz need to access your contacts</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
+	<string>Your current location will be detected and displayed on the map, and used for nearby search results,and send you notifications.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
+	<string>Your current location will be detected and displayed on the map, and used for nearby search results,and send you notifications.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
+	<string>Your current location will be detected and displayed on the map, and used for nearby search results,and send you notifications.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Clubbenz needs Location Access</string>
+	<string>Your current location will be detected and displayed on the map, and used for nearby search results,and send you notifications.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Clubbenz need Microphone Access</string>
+	<string>Clubenz need to access your microphone to send voice notes</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Clubbenz needs to access motions</string>
+	<string>Clubenz needs to access motions</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Clubbenz need Gallery Access</string>
+	<string>Clubenz need to access your photo gallery to be able to take images in your profile</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Clubbenz needs Speech Recognition Access</string>
+	<string>Clubenz needs Speech Recognition Access</string>
 	<key>Privacy - Location When In Use Usage Descript</key>
-	<string>Clubbenz needs Location Access</string>
+	<string>Your current location will be detected and displayed on the map, and used for nearby search results,and send you notifications.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>oswald.ttf</string>

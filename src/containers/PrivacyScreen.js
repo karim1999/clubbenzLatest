@@ -37,7 +37,7 @@ class PrivacyScreen extends Component {
 	componentDidMount() {
 		homeAction.privacyService().then(res => {
             if (res && res.data_privacy) {
-                this.setState({ text: this.props.language == 'ar' ? res.data_privacy[0].name_ar : res.data_privacy[0].name_en });
+                this.setState({ text: this.props.language.isArabic ? res.data_privacy[0].name_ar : res.data_privacy[0].name_en });
             }
         })
 	}
@@ -80,10 +80,8 @@ class PrivacyScreen extends Component {
                                         paddingTop: 20}}>
                         <View style={{marginBottom: 20}}>
                             <Text style={{
-                                    textAlign: 'center',
-                                    // paddingHorizontal: width * 0.01,
+                                    textAlign: 'left',
                                     marginTop: width * 0.025,
-                                    // fontSize: width * 0.043,
                                     fontSize: 16,
                                     color: '#000000',
                                     fontFamily: Fonts.circular_book,

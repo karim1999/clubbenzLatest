@@ -417,8 +417,8 @@ class ClusterErrorSolutionsScreen extends Component {
 			new firebase.links.DynamicLink('https://example.com/cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis, 'https://clubenzz.page.link')
 				.android.setPackageName('com.clubbenz')
 				.ios.setBundleId('org.reactjs.native.example.ClubBenz')
-				.ios.setFallbackUrl('https://twitter.com')
-				.android.setFallbackUrl('https://twitter.com');
+				.ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
+				.android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
 		debugger
 		firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
 			this.setState({ errorShareURL: url })

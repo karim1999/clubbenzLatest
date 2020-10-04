@@ -96,8 +96,8 @@ class WorkshopDetailScreen extends PureComponent {
       new firebase.links.DynamicLink('https://example.com/workshop/' + this.state.shopId, 'https://clubenzz.page.link')
         .android.setPackageName('com.clubbenz')
         .ios.setBundleId('org.reactjs.native.example.ClubBenz')
-        .ios.setFallbackUrl('https://twitter.com')
-        .android.setFallbackUrl('https://twitter.com');
+        .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
+        .android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
 
     firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
       console.log("url");
