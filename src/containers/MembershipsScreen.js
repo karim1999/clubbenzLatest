@@ -27,6 +27,7 @@ import {getMemberships, subscribe} from "../redux/actions/membership";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MembershipsScreen extends PureComponent {
+
     constructor(props) {
         super(props);
         this.state= {
@@ -45,6 +46,7 @@ class MembershipsScreen extends PureComponent {
             isLoading: true
         }
     }
+
     updateList(){
         let memberships= getMemberships(this.props.user.id).then(res => {
             console.log(res.cities)
@@ -57,6 +59,7 @@ class MembershipsScreen extends PureComponent {
         if(this.props.navigation.state.params && this.props.navigation.state.params.msg)
             this.setState({modal2Visible: true})
     }
+
     componentDidMount(){
     }
 
@@ -70,6 +73,7 @@ class MembershipsScreen extends PureComponent {
         this.props.navigation.navigate("SubscribeScreen", {membership: membership, name: membership.name, price: price, cities: this.state.cities, states: this.state.states})
         // })
     }
+
     benifitsToggle(id){
         let benifits= this.state.benifits.slice()
         if(this.state.benifits.includes(id)){
@@ -227,6 +231,7 @@ class MembershipsScreen extends PureComponent {
 
         );
     }
+
 }
 
 mapStateToProps = (state) => {
@@ -243,6 +248,7 @@ mapDispatchToProps = (dispatch) => bindActionCreators(
     },
     dispatch
 );
+
 const Styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -341,6 +347,5 @@ const Styles = StyleSheet.create({
     },
 
 });
-
 
 export default connect(mapStateToProps, null)(MembershipsScreen)

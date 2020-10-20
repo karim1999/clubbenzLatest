@@ -80,15 +80,22 @@ class WorkshopBooknowsScreen extends PureComponent {
             }, 100)
 		}
 	};
+
 	setDate(date){
 		// alert(date)
 		this.setState({ date, isValid: true }, ()=> {
-			let dateObject= new Date(date)
-			let invalidDay= this.state.weekDays[this.props.workshop.day_off]
-			let invalidFrom= parseInt(this.props.workshop.closing_hour.split(":")[0])
-			let invalidTo= parseInt(this.props.workshop.opening_hour.split(":")[0])
-			if(invalidDay == dateObject.getUTCDay() || dateObject.getHours() >= invalidFrom || dateObject.getHours() < invalidTo){
-				this.setState({ isValid: false })
+			let dateObject= new Date(date);
+			let invalidDay= this.state.weekDays[this.props.workshop.day_off];
+			let invalidFrom= parseInt(this.props.workshop.closing_hour.split(":")[0]);
+			var invalidTo= parseInt(this.props.workshop.opening_hour.split(":")[0]);
+			if(invalidFrom == 0)
+			    invalidFrom = 24;
+			console.log(this.props.workshop.day_off);
+			console.log(invalidFrom);
+			console.log(invalidTo);
+			console.log(dateObject.getHours());
+			if(invalidDay == dateObject.getUTCDay() ||( dateObject.getHours() >= invalidFrom || dateObject.getHours() < invalidTo)){
+				this.setState({ isValid: false });
 				return
 			}
 		})

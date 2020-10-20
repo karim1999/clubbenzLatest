@@ -153,7 +153,8 @@ class ItemsScreen extends PureComponent {
 			this.setState({usedBrands})
 		});
 	}
-		partCategoriesList = (text) =>{
+
+	partCategoriesList = (text) =>{
 			// debugger
 		   //var sub_category = 22;
 			//alert(this.props.navigation.state.params.SubCategoryId);
@@ -187,7 +188,8 @@ class ItemsScreen extends PureComponent {
 					 return res;
 			  })
 		}
-		onLoadMore = () => {
+
+	onLoadMore = () => {
 			const self = this;
 			this.setState(prevState => ({start: parseInt(prevState.start)+ parseInt(10)}),() => {
 				// if(parseInt(self.state.start) > parseInt(self.state.totalCount)){
@@ -209,10 +211,9 @@ class ItemsScreen extends PureComponent {
 			});
 
 		}
-	  onChangeBrand = (item) => {
 
+	onChangeBrand = (item) => {
 		const self = this;
-
 		var parts_brand = this.state.parts_brand.map(function(el) {
 			var BrandItem = Object.assign({}, el);
 				if(BrandItem.id == item.id ){
@@ -226,7 +227,6 @@ class ItemsScreen extends PureComponent {
 
 			return BrandItem;
 			})
-
 			if (item.id == 2) {
 				this.setState({ selectBrand: '' });
 				this.setState({parts_brand});
@@ -236,13 +236,12 @@ class ItemsScreen extends PureComponent {
 				this.setState({parts_brand});
 				setTimeout(function(){ self.partCategoriesList(''); }, 500);
 			}
-
-
-	  }
+	}
 
 	opnItem = (partItem) => {
 		this.props.navigation.navigate('DetailScreen' , {partItem:partItem})
 	}
+
 	selectedOption = (option) => {
 		const self = this;
 		self.setState({ItemList:[] , totalCount:0 , selectBrand:'', start:0});
@@ -265,6 +264,7 @@ class ItemsScreen extends PureComponent {
 		this.setState({ focus: option });
 		setTimeout(function(){ self.partCategoriesList(''); }, 500);
 	};
+
 	renderScreen() {
 		if (this.state.focus === 1) {
 			return <AllItemScreen navigation={this}  ItemList={this.state.ItemList} onPress={(val) => this.opnItem(val)}  onLoadMore={this.onLoadMore.bind(this)}  loadMoreEnable={this.state.loadMoreEnable} language={this.props.language} preferences={this.props.preferences} />;

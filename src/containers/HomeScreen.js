@@ -104,7 +104,7 @@ class HomeScreen extends PureComponent {
 				Location: true
 			},
 			{
-				serviceName: 'Part Catalog',
+				serviceName: 'Parts Catalog',
 				arabic_serviceName: 'كتالوج قطع الغيار',
 				serviceUrl: require('../resources/icons/pistons.png'),
 				// path: 'PartListScreen',

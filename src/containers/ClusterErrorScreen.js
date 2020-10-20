@@ -42,6 +42,7 @@ class ClusterErrorScreen extends Component {
 	// carAction.get_Cluster_error({chassis:211})
 	carAction.get_Cluster_error({chassis:this.props.navigation.state.params.selected_car.chassis})
 		.then(res => {
+		    //console.log(res);
 			if (res.success) {
 				//  alert(JSON.stringify(res))
 				// debugger

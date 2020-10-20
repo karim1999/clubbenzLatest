@@ -43,19 +43,18 @@ const data = [
 		link: 'https://instagram.com/clubenz?igshid=yft3o8e09dng',
 		color:"#FFFFFF"
 	},
-	// {
-	// 	id: '4',
-	// 	name: 'Youtube',
-	// 	link: 'https://www.youtube.com/channel/UCuEcmI6SK4J1EinwoO07_1g/www.Clubenz.com',
-	// 	color:"#CD0C24"
-	// },
+	 {
+	 	id: '4',
+	 	name: 'Youtube',
+	 	link: 'https://www.youtube.com/channel/UCuEcmI6SK4J1EinwoO07_1g/www.Clubenz.com',
+	 	color:"#CD0C24"
+	 },
 	{
 		id: '5',
 		name: 'Clubenz',
 		link: 'https://www.clubenz.com',
 		color:"#0E2D3C"
 	},
-
 	{
 		id: '6',
 		name: 'Support@clubenz.com',

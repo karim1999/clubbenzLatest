@@ -76,8 +76,8 @@ class CategoriesScreen extends Component {
 					homeButton={false}
 					navigation={this.props.navigation}
 					goBack={() => this.props.navigation.goBack()}
-					title={__('Part Catalogue', this.props.language)}
-					placeholder={__('Search Part Catalogue', this.props.language)}
+					title={__('Parts Catalogue', this.props.language)}
+					placeholder={__('Search Parts Catalogue', this.props.language)}
 					onSearch={this.onSearch}
 					onSubmitEditing={this.onSearch}
 				/>
@@ -86,7 +86,7 @@ class CategoriesScreen extends Component {
 				{/*	homeButton={false}*/}
 				{/*	navigation={this.props.navigation}*/}
 				{/*	goBack={() => this.props.navigation.goBack()}*/}
-				{/*	placeholder={__('Search Part Catalogue', this.props.language)}*/}
+				{/*	placeholder={__('Search Parts Catalogue', this.props.language)}*/}
 				{/*	onSearch={this.onSearch}*/}
 				{/*	onSubmitEditing={this.onSearch}*/}
 				{/*// onMapPress={this.onMapPress}*/}

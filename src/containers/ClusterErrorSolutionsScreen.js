@@ -39,9 +39,7 @@ import { ShareDialog } from 'react-native-fbsdk';
 import SendSMS from 'react-native-sms';
 import Spinner from 'react-native-loading-spinner-overlay';
 import SimpleToast from 'react-native-simple-toast';
-
 import Permissions, { request, PERMISSIONS } from 'react-native-permissions';
-
 import firebase from 'react-native-firebase';
 
 class ClusterErrorSolutionsScreen extends Component {
@@ -505,7 +503,7 @@ class ClusterErrorSolutionsScreen extends Component {
 							{this.props.navigation.state.params.errorDetail ? this.props.navigation.state.params.errorDetail.title : "Dummy Tittle Stop vechile Shifts to p Leave "}
 						</Text>
 
-						<Text numberOfLines={6} style={styleClusterErrorScreen.problemStatement}>
+						<Text numberOfLines={7} style={styleClusterErrorScreen.problemStatement}>
 							{/* What i am trying to suggest solution to you guyz. I am just testing the solution for the development purposes. Making sure that the text fields are been precised accurately. Just make sure this works fine. This is a sample text to determine the length of the view should be working fine, nothing else */}
 							{this.props.navigation.state.params.errorDetail ? (this.props.language.isArabic == true ? this.props.navigation.state.params.errorDetail.description_arabic : this.props.navigation.state.params.errorDetail.description) : "Dummy Description Stop vechile Shifts to p Leave "}
 						</Text>
@@ -541,101 +539,16 @@ class ClusterErrorSolutionsScreen extends Component {
 				</View>
 
 
-				<Modal
-					animationType="fade"
-					transparent={true}
-					visible={this.state.addSolModalVisible}
-					onRequestClose={() => {
-						this.setState({ addSolModalVisible: false });
-					}}
-				>
+				<Modal animationType="fade" transparent={true} visible={this.state.addSolModalVisible} onRequestClose={() => { this.setState({ addSolModalVisible: false }); }}>
 					<ScrollView>
-						{/* <View
-						style={{
-							width: width,
-							height: height / 2,
-
-							paddingTop: height / 10,
-							paddingLeft: width / 9,
-							paddingRight: width / 9,
-							paddingBottom: height / 11,
-
-							// backgroundColor: 'black',
-							flexDirection: 'row',
-							justifyContent: 'flex-end',
-							alignItems: 'flex-end',
-							// opacity: 0.1,
-						}}
-					>
-					</View> */}
-
-						<View
-							style={{
-								width: width,
-								height: height,
-								zIndex: -3,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-
-							<View style={{
-								width: width / 1.1,
-								height: 100,
-								backgroundColor: '#EFEFF4',
-								flexDirection: 'row',
-								justifyContent: 'center',
-								alignItems: 'center',
-								borderTopLeftRadius: 10,
-								borderTopRightRadius: 10,
-							}}>
-
-								<View
-									style={[{
-										borderWidth: 1,
-										borderColor: 'grey',
-										position: 'absolute',
-										top: -15,
-										right: -8,
-										width: 33,
-										height: 33,
-										borderRadius: 16,
-									}, styles.center]}
-								>
-									<TouchableOpacity
-										style={{
-											flex: 1,
-											justifyContent: 'center',
-											alignItems: 'center'
-										}}
-										onPress={() => this.setState({ addSolModalVisible: false })}
-									>
+						<View style={{ width: width, height: height, zIndex: -3, justifyContent: 'center', alignItems: 'center', }} >
+							<View style={{ width: width / 1.1, height: 200, backgroundColor: '#EFEFF4', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, }}>
+								<View style={[{ borderWidth: 1, borderColor: 'grey', position: 'absolute', top: -15, right: -8, width: 33, height: 33, borderRadius: 16, }, styles.center]} >
+									<TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.setState({ addSolModalVisible: false })} >
 										<Image style={{ width: 33, height: 33 }} source={require('../resources/images/cross_image.png')} />
-										{/* <Text >X</Text> */}
 									</TouchableOpacity>
 								</View>
-
-
-								<TextInput
-
-									// style={[{
-									// 	flex: 0.9,
-									// 	height: 50,
-									// 	borderWidth: 0.5,
-									// 	borderColor: 'black',
-									// 	marginLeft: 10,
-									// 	marginRight: 10,
-									// }]}
-
-									style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10, flex: 0.9, textAlign: this.props.language.isArabic ? 'right' : 'left' }]}
-
-									placeholder={__('Enter Solution...', this.props.language)}
-									placeholderTextColor='rgba(0, 0, 0, 0.5)'
-									value={this.state.solution}
-									textInputStyle={{ fontFamily: Fonts.CircularMedium, color: '#000000' }}
-									onChangeText={solution => this.setState({ solution: solution })}
-								/>
-
+								<TextInput style={[styles.inputField, { borderColor: '#E5E5EA', height: 100,marginTop: 10, flex: 0.9, textAlign: this.props.language.isArabic ? 'right' : 'left' }]} multiline={true} numberOfLines={5} placeholder={__('Enter Solution...', this.props.language)} placeholderTextColor='rgba(0, 0, 0, 0.5)' value={this.state.solution} textInputStyle={{ fontFamily: Fonts.CircularMedium, color: '#000000' }} onChangeText={solution => this.setState({ solution: solution })} />
 								<TouchableOpacity onPress={() => this.showImagePicker()} style={styleClusterErrorScreen.staticImages}>
 									<View style={{ height: 60, width: 60, borderRadius: 50, overflow: 'hidden', justifyContent: 'flex-end' }}>
 										<Image

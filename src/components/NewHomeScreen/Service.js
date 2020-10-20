@@ -8,11 +8,13 @@ class Service extends PureComponent {
 
     render() {
         return (
-            <ImageBackground style={Styles.container} source={this.props.image}>
-                <TouchableOpacity style={Styles.textContainer} onPress={this.props.onPress}>
-                    <Text style={Styles.title}>{this.props.title}</Text>
+                <TouchableOpacity onPress={this.props.onPress}>
+                    <ImageBackground style={Styles.container} source={this.props.image}>
+                        <TouchableOpacity style={Styles.textContainer} onPress={this.props.onPress}>
+                            <Text style={Styles.title}>{this.props.title}</Text>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </TouchableOpacity>
-            </ImageBackground>
         );
     }
 }

@@ -283,6 +283,7 @@ class CarGuideScreen extends PureComponent {
 	render() {
 		let self = this
 		const { selected1, selected2, selected3, years, fuel_types, models,cars_information   } = this.state;
+		console.log(this.props.selected_car.car);
 		return (
 			<View style={[styles.columnContainer]}>
 				<StatusBar hidden={false} backgroundColor={colors.navgationBar} barStyle='light-content'/>
@@ -564,3 +565,6 @@ const CarSelectionStyle = StyleSheet.create({
 		justifyContent:'flex-end'
 	}
 });
+
+
+

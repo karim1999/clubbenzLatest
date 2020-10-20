@@ -56,7 +56,7 @@ class SpecificationScreen extends Component {
 		carAction.get_Carguide({ chassis: this.props.navigation.state.params.selected_car.chassis })
 			.then(res => {
 				if (res.success) {
-
+				console.log(res);
 					this.setState({ car_data: res.data, spinner: false });
 
 				} else {

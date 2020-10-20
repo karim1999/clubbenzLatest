@@ -516,7 +516,7 @@ class SlideMenuScreen extends Component {
                                                     paddingVertical: height * 0.01,
                                                 }}
                                             >
-                                                <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Part Catalogue' , this.props.language)}</Text>
+                                                <Text style={{ color: 'white', fontSize: 22/*fontSize: width * 0.06*/, fontFamily: Fonts.CircularBook }}>{__('Parts Catalogue' , this.props.language)}</Text>
                                             </View>
                                         </TouchableOpacity>
                                     </View>

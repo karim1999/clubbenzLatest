@@ -10,6 +10,7 @@ import StarRating from "react-native-star-rating";
 
 const ReviewItem = ({ item, key, index, preferences, length }) => {
 
+console.log(item);
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
@@ -50,7 +51,7 @@ const ReviewItem = ({ item, key, index, preferences, length }) => {
                                 borderRadius:60 / 2,
                                 overflow:'hidden',
                             }}
-                                source={{ uri: PROFILE_PIC_PREFIX + item.user_picture }}
+                                source={{ uri: item.user_picture }}
                                  />
                         :
                         // <Icon name="comment-o" size={60} color='#11455F' />

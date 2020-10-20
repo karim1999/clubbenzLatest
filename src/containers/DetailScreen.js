@@ -139,7 +139,6 @@ class DetailScreen extends PureComponent {
 
 	partDetail = (a) => {
 		partAction.partDetail1(a ? a : this.props.navigation.state.params.partItem.id).then(res => {
-		console.log(res);
 			if (res) {
 				let phone = JSON.stringify(res.shop_detail.phone);
 				phone = phone.replace("/g", "");
@@ -161,10 +160,12 @@ class DetailScreen extends PureComponent {
 				// alert("hi")
 			}
 			if(res) {
-				this.setState({loadingFavorite: true})
-				let provider_id = res.provider_id
+				this.setState({loadingFavorite: true});
+				let provider_id = res.provider_id;
+				console.log("provider_id",provider_id);
 				getProviderDetails(provider_id).then(provider => {
 					this.setState({loadingFavorite: false})
+					console.log("provider",provider);
 					this.setState({provider});
 				}).then(() => {
 					checkIsFavorite(this.props.user.id, res.id).then(isFavorite => {
@@ -256,10 +257,10 @@ class DetailScreen extends PureComponent {
             .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
             .android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
         firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
-            console.log(url);
+            //console.log(url);
             this.setState({ partShareURL: url })
         }).catch((err) => {
-          console.log(err)
+          //console.log(err)
         })
   }
 
@@ -288,14 +289,13 @@ class DetailScreen extends PureComponent {
         ).then(
           function (result) {
             if (result.isCancelled) {
-              console.log('Share cancelled');
+              //console.log('Share cancelled');
             } else {
-              console.log('Share success with postId: '
-                + result.postId);
+              //console.log('Share success with postId: ' + result.postId);
             }
           },
           function (error) {
-            console.log('Share fail with error: ' + error);
+            //console.log('Share fail with error: ' + error);
           }
         );
   }

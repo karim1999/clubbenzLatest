@@ -61,7 +61,7 @@ export const partCategoriesList = async (sub_category,search, type ,brand_id,sta
 
 export const partCategoriesListData = async (search,chassis_id) => {
 
-  let params = { url: API_ROOT + "Parts/parts?"+"&search="+search+"&chassis="+chassis_id };
+  let params = { url: API_ROOT + "Parts/parts?search="+search+"&chassis="+chassis_id };
 
   let response = await new RequestService(params).callShow();
   return response;

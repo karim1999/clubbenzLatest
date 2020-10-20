@@ -342,10 +342,11 @@ class RegisterScreen extends PureComponent {
         .then(res => {
           console.log(res)
           if (res.success) {
-            // debugger
-            self.props.updateUser(Object.assign(res.user, { verification_code: res.verification_code }))
-            Toast.show(__("You have registered successfully", this.props.language), Toast.LONG)
-            self.props.navigation.navigate('LoginScreen');
+            Toast.show(__("You have registered successfully", this.props.language), Toast.LONG);
+            setTimeout(() => {
+              self.props.updateUser(Object.assign(res.user, { verification_code: res.verification_code }));
+              self.props.navigation.navigate('LoginScreen');
+            }, 3000);
           }
           else {
             // debugger
@@ -497,14 +498,32 @@ class RegisterScreen extends PureComponent {
         <ScrollView keyboardShouldPersistTaps="always">
           <TouchableOpacity onPress={this.fillFacebookInfo}>
             <View style={[styles.fbLoginButton, styleRegisterScreen.btnStyle]}>
-              <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
+                <View style={{alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
+                    <Image
+                        style={{height:20,width:20, alignItems: 'center', marginHorizontal: 10 }}
+                        resizeMode="contain"
+                        source={require('../resources/icons/icon_facebook.png')}
+                    />
+                    <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
+                </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.fillAppleInfo}>
-            <View style={[styles.appleLoginButton, styleRegisterScreen.btnStyle]}>
-              <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Apple', this.props.language)}</Text>
-            </View>
-          </TouchableOpacity>
+           {/*
+           <AppleButton
+                         buttonStyle={AppleButton.Style.BLACK}
+                         buttonType={AppleButton.Type.SIGN_UP}
+                         cornerRadius="20"
+                         style={{
+                           height: 60,
+                           width: 360,
+                         justifyContent: 'center',
+                         alignSelf: 'center',
+                         borderRadius: metrics.radius40,
+                         fontFamily: Fonts.CircularMedium
+                       }}
+                       onPress={() => this.fillAppleInfo()}
+                     />
+                    */}
 
           <SplitHeading
             text={__('Welcome to our Community', this.props.language)}
@@ -576,7 +595,7 @@ class RegisterScreen extends PureComponent {
                 <TextInput
                   style={[styles.inputField, { borderColor: '#E5E5EA' }]}
                   placeholder={__('First name', this.props.language)}
-                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#FFFFFF' }}
+                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#000000' }}
                   placeholderTextColor='#999999'
                   value={this.state.first_name}
                   onChangeText={first_name => this.setState({ first_name })}
@@ -586,7 +605,7 @@ class RegisterScreen extends PureComponent {
                 <TextInput
                   style={[styles.inputField, { borderColor: '#E5E5EA' }]}
                   placeholder={__('Surname', this.props.language)}
-                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#FFFFFF' }}
+                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#000000' }}
                   placeholderTextColor='#999999'
                   value={this.state.last_name}
                   onChangeText={last_name => this.setState({ last_name })}
@@ -596,7 +615,7 @@ class RegisterScreen extends PureComponent {
             <TextInput
               style={[styles.inputField, { borderColor: '#E5E5EA' }]}
               placeholder={__('Email Address', this.props.language)}
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#FFFFFF' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
@@ -607,7 +626,7 @@ class RegisterScreen extends PureComponent {
               placeholder={__('Mobile Number', this.props.language)}
               keyboardType={'phone-pad'}
               returnKeyType='done'
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#FFFFFF' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.mobile}
               onChangeText={mobile => this.checkPhoneNumber(mobile)}
@@ -617,7 +636,7 @@ class RegisterScreen extends PureComponent {
               style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10 }]}
               placeholder={__('Password', this.props.language)}
               secureTextEntry={true}
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#FFFFFF' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.password}
               onChangeText={password => this.setState({ password })}

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  Text,
+  Text,Image,
   StatusBar,
   AsyncStorage,
   TextInput,
@@ -12,10 +12,8 @@ import {
   ScrollView,ActivityIndicator
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
-
 import {NavigationActions} from 'react-navigation';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// import TextInput from "../vendor/react-native-material-textinput/lib/Input";
 import Toast from 'react-native-simple-toast';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
 import {styles, fonts, colors, metrics} from '../themes';
@@ -38,13 +36,11 @@ import appleAuth, {
   AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication';
 import axios from 'axios';
-import {StreamChat} from 'stream-chat';
 
 class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.chatClient = new StreamChat('3u7xqdx6e9m3');
   }
 
   state = {
@@ -344,19 +340,35 @@ class LoginScreen extends React.Component {
           />
           <View style={styleLoginScreen.containerTop}>
             <TouchableOpacity onPress={this.continueWithFb}>
-              <View style={[styles.fbLoginButton, styleLoginScreen.btnStyle]}>
-                <Text style={styles.tapButtonStyleTextWhite}>
-                  {__('Continue with Facebook', this.props.language)}
-                </Text>
-              </View>
+                <View style={[styles.fbLoginButton, styleLoginScreen.btnStyle]}>
+                   <View style={{alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
+                        <Image
+                            style={{height:20,width:20, alignItems: 'center', marginHorizontal: 10 }}
+                            resizeMode="contain"
+                            source={require('../resources/icons/icon_facebook.png')}
+                        />
+                        <Text style={[styles.tapButtonStyleTextWhite]}>
+                          {__('Continue with Facebook', this.props.language)}
+                        </Text>
+                    </View>
+                </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.onAppleButtonPress}>
-              <View style={[styles.appleLoginButton, styleLoginScreen.btnStyle]}>
-                <Text style={styles.tapButtonStyleTextWhite}>
-                  {__('Sign in with Apple', this.props.language)}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            {/*
+            <AppleButton
+                          buttonStyle={AppleButton.Style.BLACK}
+                          buttonType={AppleButton.Type.CONTINUE}
+                          cornerRadius="20"
+                          style={{
+                            height: 60,
+                            width: 360,
+                            justifyContent: 'center',
+                            alignSelf: 'center',
+                            borderRadius: metrics.radius40,
+                            fontFamily: Fonts.CircularMedium
+                          }}
+                          onPress={() => this.onAppleButtonPress()}
+                        />
+                        */}
 
             <SplitHeading
               text={__('Or', this.props.language)}

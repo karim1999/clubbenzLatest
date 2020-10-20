@@ -87,7 +87,7 @@ class NewHomeScreen extends Component {
                 Location: true
             },
             {
-                serviceName: 'Part Catalogue',
+                serviceName: 'Parts Catalogue',
                 arabic_serviceName: 'كتالوج قطع الغيار',
                 serviceUrl: require("./../resources/images/service4.png"),
                 // path: 'PartListScreen',
