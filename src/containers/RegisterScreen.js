@@ -504,25 +504,28 @@ class RegisterScreen extends PureComponent {
                         resizeMode="contain"
                         source={require('../resources/icons/icon_facebook.png')}
                     />
-                    <Text style={styles.tapButtonStyleTextWhite}>{__('Fill your info Facebook', this.props.language)}</Text>
+                    <Text style={{color: colors.white,textAlign: 'center',fontFamily: Fonts.CircularMedium,fontSize: fonts.size.h6}}>
+                        {__('Fill your info Facebook', this.props.language)}
+                    </Text>
                 </View>
             </View>
           </TouchableOpacity>
            {/*
            <AppleButton
-                         buttonStyle={AppleButton.Style.BLACK}
-                         buttonType={AppleButton.Type.SIGN_UP}
-                         cornerRadius="20"
-                         style={{
-                           height: 60,
-                           width: 360,
-                         justifyContent: 'center',
-                         alignSelf: 'center',
-                         borderRadius: metrics.radius40,
-                         fontFamily: Fonts.CircularMedium
-                       }}
-                       onPress={() => this.fillAppleInfo()}
-                     />
+                           buttonStyle={AppleButton.Style.BLACK}
+                           buttonType={AppleButton.Type.SIGN_UP}
+                           cornerRadius="20"
+                           style={{
+                             height: 60,
+                             width: 365,
+                           justifyContent: 'center',
+                           alignSelf: 'center',
+                           borderRadius: metrics.radius40,
+                           fontFamily: Fonts.CircularMedium,
+                           fontSize: fonts.size.h6
+                         }}
+                         onPress={() => this.fillAppleInfo()}
+                       />
                     */}
 
           <SplitHeading

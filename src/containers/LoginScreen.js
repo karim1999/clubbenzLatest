@@ -347,7 +347,7 @@ class LoginScreen extends React.Component {
                             resizeMode="contain"
                             source={require('../resources/icons/icon_facebook.png')}
                         />
-                        <Text style={[styles.tapButtonStyleTextWhite]}>
+                        <Text style={{color: colors.white,textAlign: 'center',fontFamily: Fonts.CircularMedium,fontSize: fonts.size.h6}}>
                           {__('Continue with Facebook', this.props.language)}
                         </Text>
                     </View>
@@ -355,19 +355,20 @@ class LoginScreen extends React.Component {
             </TouchableOpacity>
             {/*
             <AppleButton
-                          buttonStyle={AppleButton.Style.BLACK}
-                          buttonType={AppleButton.Type.CONTINUE}
-                          cornerRadius="20"
-                          style={{
-                            height: 60,
-                            width: 360,
-                            justifyContent: 'center',
-                            alignSelf: 'center',
-                            borderRadius: metrics.radius40,
-                            fontFamily: Fonts.CircularMedium
-                          }}
-                          onPress={() => this.onAppleButtonPress()}
-                        />
+                         buttonStyle={AppleButton.Style.BLACK}
+                         buttonType={AppleButton.Type.CONTINUE}
+                         cornerRadius="20"
+                         style={{
+                           height: 60,
+                           width: 365,
+                           justifyContent: 'center',
+                           alignSelf: 'center',
+                           borderRadius: metrics.radius40,
+                           fontFamily: Fonts.CircularMedium,
+                           fontSize: fonts.size.h6
+                         }}
+                         onPress={() => this.onAppleButtonPress()}
+                       />
                         */}
 
             <SplitHeading

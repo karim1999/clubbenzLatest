@@ -29,10 +29,10 @@ class CategoriesScreen extends Component {
 	partCategories = () => {
 		this.setState({ categories: [] });
 		this.setState({ top_products: [] });
-		//console.log("chassis",this.props.navigation.state.params.chassis);
+		//console.log("chassis",this.props.navigation.state);
 		partAction.partCategories({ chassis: this.props.navigation.state.params.chassis, search: '' })
 			.then(res => {
-			    console.log(res);
+			   //console.log(res);
 				if (res.success) {
 				    if(res.data)
 					    this.setState({ categories: res.data });
