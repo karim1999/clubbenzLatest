@@ -93,7 +93,7 @@ class ServicesDetailScreen extends PureComponent {
   createURL = () => {
 
     const link =
-      new firebase.links.DynamicLink('https://example.com/serviceshop/' + this.state.shopId, 'https://clubenzz.page.link')
+      new firebase.links.DynamicLink('https://clubenz.com/serviceshop/' + this.state.shopId, 'https://clubenzz.page.link')
         .android.setPackageName('com.clubbenz')
         .ios.setBundleId('org.reactjs.native.example.ClubBenz')
         .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')

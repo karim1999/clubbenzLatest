@@ -93,7 +93,7 @@ class WorkshopDetailScreen extends PureComponent {
   createURL = () => {
 
     const link =
-      new firebase.links.DynamicLink('https://example.com/workshop/' + this.state.shopId, 'https://clubenzz.page.link')
+      new firebase.links.DynamicLink('https://clubenz.com/workshop/' + this.state.shopId, 'https://clubenzz.page.link')
         .android.setPackageName('com.clubbenz')
         .ios.setBundleId('org.reactjs.native.example.ClubBenz')
         .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
@@ -127,8 +127,6 @@ class WorkshopDetailScreen extends PureComponent {
   }
 
   openShareDialog = () => {
-    console.log("this.state.shopShareURL");
-    console.log(this.state.shopShareURL);
     const shareLinkContent = {
           contentType: 'link',
           contentUrl: this.state.shopShareURL,
