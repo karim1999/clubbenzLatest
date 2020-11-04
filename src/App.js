@@ -44,9 +44,7 @@ export default class App extends React.Component {
 					const id = route.match(/\/([^\/]+)\/?$/)[1];
 					const routeName = route.split('/')[0];
 
-					console.log(url)
-					console.log("routeName")
-					console.log(routeName)
+					console.log("routeName:", routeName);
 
 					if (routeName === 'workshop') {
 						AsyncStorage.setItem("workshopId", id);
@@ -93,7 +91,7 @@ export default class App extends React.Component {
 	}
 
 	_handleAppStateChange = (nextAppState) => {
-		// console.log('curr state ' + this.state.appState + ' next state ' + nextAppState)
+		 console.log('curr state ' + this.state.appState + ' next state ' + nextAppState)
 		if (
 			this.state.appState.match(/inactive|background/) &&
 			nextAppState === 'active'
@@ -128,19 +126,20 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log("state:",this.state);
 		unsubscribe = NetInfo.addEventListener(state => {
-			console.log("Connection type", state.type);
+			//console.log("Connection type", state.type);
 			if(!state.isConnected){
 				Toast.show(__("Check your internet connection", this.props.language), Toast.LONG)
 			}
-			console.log("Is connected?", state.isConnected);
+			//console.log("Is connected?", state.isConnected);
 		});
 
 		firebase.links()
 			.getInitialLink()
 			.then((url) => {
-
 				if (url) {
+					console.log("returnShopOrCluster:", url);
 					this.returnShopOrCluster(url)
 				}
 			});
@@ -148,6 +147,7 @@ export default class App extends React.Component {
 		this.dynamicLinksListener = firebase.links()
 			.onLink((url) => {
 				if (url) {
+					console.log("returnShopOrCluster2:", url);
 					this.returnShopOrCluster(url)
 				}
 			});
@@ -156,14 +156,14 @@ export default class App extends React.Component {
 
 		window.navigate = this.navigate;
 		// commenting for now but is important for deep linking (non-universal)
-		// Linking.getInitialURL().then(url => {
-		// 	debugger
-		// 	if (url != null) {
-		// 		this.navigate(url)
-		// 		console.log(url)
-		// 	}
-		// });
+		 Linking.getInitialURL().then(url => {
+		 	if (url != null) {
+				console.log("Linking:",url);
+		 		this.navigate(url);
+		 	}
+		 });
 
+		 console.log("addEventListener:");
 		Linking.addEventListener('url', this._handleOpenURL);
 
 		this.checkPermission();
@@ -185,44 +185,44 @@ export default class App extends React.Component {
             // Required: Signal completion of your task to native code
             // If you fail to do this, the OS can terminate your app
             // or assign battery-blame for consuming too much background-time
-						console.log("fetching......")
+						//console.log("fetching......")
             Geolocation.watchPosition(
                 (position) => {
-                	console.log(position)
+                	//console.log(position)
 					AsyncStorage.getItem('user').then(userString => {
 						let user= JSON.parse(userString)
 						// console.log(user.id)
 						scheduleNotification(user.id, position).then(res => {
-							console.log(res);
+							//console.log(res);
 						}).catch(err => {
-							console.log(err)
+							//console.log(err)
 						})
 					}).catch(err => {
 					});
                 },
                 (error) => {
                     // See error code charts below.
-                    console.log(error.code, error.message);
+                    //console.log(error.code, error.message);
                 },
                 { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
             );
 
             BackgroundFetch.finish(taskId);
         }, (error) => {
-            console.log("[js] RNBackgroundFetch failed to start");
+            //console.log("[js] RNBackgroundFetch failed to start");
         });
         // Optional: Query the authorization status.
 		if(Platform.OS === "ios2"){
 			BackgroundFetch.status((status) => {
 				switch(status) {
 					case BackgroundFetch.STATUS_RESTRICTED:
-						console.log("BackgroundFetch restricted");
+						//console.log("BackgroundFetch restricted");
 						break;
 					case BackgroundFetch.STATUS_DENIED:
-						console.log("BackgroundFetch denied");
+						//console.log("BackgroundFetch denied");
 						break;
 					case BackgroundFetch.STATUS_AVAILABLE:
-						console.log("BackgroundFetch is enabled");
+						//console.log("BackgroundFetch is enabled");
 						break;
 				}
 			});
@@ -245,20 +245,20 @@ export default class App extends React.Component {
 			});
 
 			BackgroundGeolocation.on('location', (location) => {
-				console.log(location);
+				//console.log(location);
 				// handle your locations here
 				// to perform long running operation on iOS
 				// you need to create background task
 				BackgroundGeolocation.startTask(async (taskKey) => {
-					console.log(taskKey);
-					console.log(location)
+					//console.log(taskKey);
+					//console.log(location)
 					await AsyncStorage.getItem('user').then(async (userString) => {
 						let user= JSON.parse(userString)
 // console.log(user.id)
 						await scheduleNotification(user.id, {coords: location}).then(res => {
-							console.log(res);
+							//console.log(res);
 						}).catch(err => {
-							console.log(err)
+							//console.log(err)
 						})
 					}).catch(err => {
 					});
@@ -275,19 +275,19 @@ export default class App extends React.Component {
 			});
 
 			BackgroundGeolocation.on('error', (error) => {
-				console.log('[ERROR] BackgroundGeolocation error:', error);
+				//console.log('[ERROR] BackgroundGeolocation error:', error);
 			});
 
 			BackgroundGeolocation.on('start', () => {
-				console.log('[INFO] BackgroundGeolocation service has been started');
+				//console.log('[INFO] BackgroundGeolocation service has been started');
 			});
 
 			BackgroundGeolocation.on('stop', () => {
-				console.log('[INFO] BackgroundGeolocation service has been stopped');
+				//console.log('[INFO] BackgroundGeolocation service has been stopped');
 			});
 
 			BackgroundGeolocation.on('authorization', (status) => {
-				console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
+				//console.log('[INFO] BackgroundGeolocation authorization status: ' + status);
 				if (status !== BackgroundGeolocation.AUTHORIZED) {
 					// we need to set delay or otherwise alert may not be shown
 					setTimeout(() =>
@@ -299,15 +299,15 @@ export default class App extends React.Component {
 			});
 
 			BackgroundGeolocation.on('background', () => {
-				console.log('[INFO] App is in background');
+				//console.log('[INFO] App is in background');
 			});
 
 			BackgroundGeolocation.on('foreground', () => {
-				console.log('[INFO] App is in foreground');
+				//console.log('[INFO] App is in foreground');
 			});
 
 			BackgroundGeolocation.on('abort_requested', () => {
-				console.log('[INFO] Server responded with 285 Updates Not Required');
+				//console.log('[INFO] Server responded with 285 Updates Not Required');
 
 				// Here we can decide whether we want stop the updates or not.
 				// If you've configured the server to return 285, then it means the server does not require further update.
@@ -316,13 +316,13 @@ export default class App extends React.Component {
 			});
 
 			BackgroundGeolocation.on('http_authorization', () => {
-				console.log('[INFO] App needs to authorize the http requests');
+				//console.log('[INFO] App needs to authorize the http requests');
 			});
 
 			BackgroundGeolocation.checkStatus(status => {
-				console.log('[INFO] BackgroundGeolocation service is running', status.isRunning);
-				console.log('[INFO] BackgroundGeolocation services enabled', status.locationServicesEnabled);
-				console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
+				//console.log('[INFO] BackgroundGeolocation service is running', status.isRunning);
+				//console.log('[INFO] BackgroundGeolocation services enabled', status.locationServicesEnabled);
+				//console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
 
 				// you don't need to check status before start (this is just the example)
 				if (!status.isRunning) {
@@ -351,6 +351,7 @@ export default class App extends React.Component {
 	}
 
 	navigateToShop = (shop, id) => {
+		console.log("shop:", shop);
 		if (shop === 'workshop') {
 			AsyncStorage.setItem("workshopId", id);
 			if (NavigationService && NavigationService.navigate)
@@ -429,10 +430,8 @@ export default class App extends React.Component {
 	}
 
 	_handleOpenURL(event) {
-		// commenting for now but is important for deep linking
-		// debugger
-		// window.navigate(event.url)
-		// console.log(NavigationService);
+		console.log(event);
+		 window.navigate(event.url)
 	}
 
 	async createNotificationListeners() {

@@ -139,10 +139,13 @@ class LoginScreen extends React.Component {
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [
+          appleAuth.Scope.EMAIL,
           appleAuth.Scope.FULL_NAME
         ]
       });
-      self.loginWithSocialMedia(appleAuthRequestResponse.user.toString());
+      self.loginWithSocialMedia(appleAuthRequestResponse.user.toString(),
+      appleAuthRequestResponse.fullName.givenName + " " + appleAuthRequestResponse.fullName.familyName,
+      appleAuthRequestResponse.email);
       /*const credentialState = await appleAuth.getCredentialStateForUser(
         appleAuthRequestResponse.user
       );
@@ -217,20 +220,26 @@ class LoginScreen extends React.Component {
   afterLoginComplete = async token => {
     let self = this;
     let {fcm_token} = this.state;
-    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${token}`)
+    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name&access_token=${token}`)
       .then(responseJson => responseJson.json())
       .then(function(response) {
             console.log(response);
-            self.loginWithSocialMedia(response.id);
+            self.loginWithSocialMedia(response.id,response.name,response.email);
         
       });
   };
 
-  loginWithSocialMedia = async socialId => {
+  loginWithSocialMedia = async (socialId,name,email) => {
     let self = this;
     let {fcm_token} = this.state;
+    if(name == undefined || name == null || name == ""){
+      name = socialId;
+    }
+    if(email == undefined || email == null || email == ""){
+      email = socialId + "@clubenz.com";
+    }
         authAction
-          .loginWithFbUser({fcm_token: fcm_token, social_id: socialId})
+          .loginWithFbUser({fcm_token: fcm_token, social_id: socialId, name: name, email: email})
           .then(res => {
             if (res.success) {
               AsyncStorage.setItem('user', JSON.stringify(res.user));
@@ -397,7 +406,7 @@ class LoginScreen extends React.Component {
                 textInputStyle={{
                   textAlign: 'center',
                   fontFamily: Fonts.CircularMedium,
-                  color: '#FFFFFF',
+                  color: '#999999',
                 }}
                 placeholderTextColor="#999999"
                 value={this.state.email}
@@ -414,7 +423,7 @@ class LoginScreen extends React.Component {
                 textInputStyle={{
                   textAlign: 'center',
                   fontFamily: Fonts.CircularMedium,
-                  color: '#FFFFFF',
+                  color: '#999999',
                 }}
                 placeholderTextColor="#999999"
                 value={this.state.password}
