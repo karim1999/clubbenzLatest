@@ -128,12 +128,13 @@ class ItemsScreen extends PureComponent {
 	};
 
 	componentDidMount = () => {
-
-		// alert(JSON.stringify(this.props.user))
+		//console.log("preferences:",this.props.preferences);
 		this.partCategoriesList('').then(res => {
-			let newBrands= [...this.state.defaultBrand]
-			let usedBrands= [...this.state.defaultBrand]
-			this.state.parts_brand.map(brand => {
+			let newBrands= [...this.state.defaultBrand];
+			console.log("newBrands:",newBrands);
+			let usedBrands= [...this.state.defaultBrand];
+			console.log("usedBrands:",usedBrands);
+			this.props.preferences.parts_brand.map(brand => {
 				let isNew = false;
 				let isUsed= false;
 				res.shops.map(shop => {
@@ -214,7 +215,7 @@ class ItemsScreen extends PureComponent {
 
 	onChangeBrand = (item) => {
 		const self = this;
-		var parts_brand = this.state.parts_brand.map(function(el) {
+		var parts_brand = this.props.preferences.parts_brand.map(function(el) {
 			var BrandItem = Object.assign({}, el);
 				if(BrandItem.id == item.id ){
 					BrandItem.isActive = true;
@@ -246,7 +247,7 @@ class ItemsScreen extends PureComponent {
 		const self = this;
 		self.setState({ItemList:[] , totalCount:0 , selectBrand:'', start:0});
 
-		var parts_brand = this.state.parts_brand.map(function(el) {
+		var parts_brand = this.props.preferences.parts_brand.map(function(el) {
 			var BrandItem = Object.assign({}, el);
 			BrandItem.isActive = false;
 			return BrandItem;
@@ -426,7 +427,7 @@ class ItemsScreen extends PureComponent {
 						data={this.state.focus == 1 ? this.removeDuplicates(this.state.newBrands, this.state.usedBrands) : this.state.focus == 2 ? this.state.newBrands : this.state.usedBrands}
 						keyExtractor={(item, index) => item.id}
 						renderItem={({ item, index }) => (
-							<BrandItem item={item} index={index} onPress={(item) => this.onChangeBrand(item) } length={this.state.parts_brand.length} />
+							<BrandItem item={item} index={index} onPress={(item) => this.onChangeBrand(item) } length={this.props.preferences.parts_brand.length} />
 						)}
 						// ListFooterComponent={this._renderFooter}
 					/>

@@ -219,6 +219,16 @@ class RegisterScreen extends PureComponent {
       })
   }
 
+  alertMessageSuccess = async (title,message) => {
+    let self = this;
+    Alert.alert(title,message,
+      [
+        { text: __("Ok"), onPress: () =>  self.props.navigation.navigate('LoginScreen')}
+      ],
+      { cancelable: false }
+    );
+  }
+
   registerUser = () => {
     if(this.state.wrongPhone)
       return;
@@ -343,14 +353,9 @@ class RegisterScreen extends PureComponent {
           console.log(res)
           if (res.success) {
             self.props.updateUser(Object.assign(res.user, { verification_code: res.verification_code }));
-            Alert.alert(
-              '',
-              __("You have registered successfully", this.props.language),
-              [
-                { text: __("Ok"), onPress: () =>  self.props.navigation.navigate('LoginScreen')}
-              ],
-              { cancelable: false }
-            );
+            setTimeout(() => {
+              self.alertMessageSuccess( '', __("You have registered successfully", this.props.language));
+            }, 100);
           }
           else {
             // debugger
