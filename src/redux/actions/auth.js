@@ -149,6 +149,7 @@ export const loginUser = async data => {
 };
 
 export const loginWithFbUser = async data => {
+  console.log("loginWithFbUser");
   console.log(data);
   let params = {url: API_ROOT + 'user/fb_login', body: data};
   let response = await new RequestService(params).callCreate();

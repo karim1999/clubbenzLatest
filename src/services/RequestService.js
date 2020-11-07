@@ -13,6 +13,7 @@ export class RequestService {
   constructor(params) {
     if (!params.url) throw new Error('invalid request url')
 
+    console.log(params);
     this.params = params
   }
 
@@ -113,37 +114,33 @@ export class RequestService {
       method: this.params.method,
       headers: this.mountHeaders()
     }
-
+    console.log("request:",request);
     if (request.method !== GET && request.method !== HEAD) {
       request.body = this.mountBody()
     }
-    // debugger
+    console.log("requestmountBody:",request);
     return request
   }
+
 
   mountBody=()=> {
     if (!this.params.body) return {}
     let form_data = new FormData();
     let body = this.params.body
-
     for ( var key in body) {
-
         form_data.append(key, body[key]);
     }
-
     for (var file in this.params.files) {
-
       var photo = {
         uri: this.params.files[file],
         type: 'image/jpg',
         name: 'profile_picture.jpg',
       };
-
       form_data.append(file, photo);
     }
-    // console.log(form_data)
-
-    return form_data
+    form_data.append("app_type", "android");
+    console.log("form_data",form_data);
+    return form_data;
   }
 
   mountHeaders=()=> {

@@ -238,8 +238,7 @@ class LoginScreen extends React.Component {
     if(email == undefined || email == null || email == ""){
       email = socialId + "@clubenz.com";
     }
-        authAction
-          .loginWithFbUser({fcm_token: fcm_token, social_id: socialId, name: name, email: email})
+    authAction.loginWithFbUser({fcm_token: fcm_token, social_id: socialId, name: name, email: email})
           .then(res => {
             if (res.success) {
               AsyncStorage.setItem('user', JSON.stringify(res.user));
