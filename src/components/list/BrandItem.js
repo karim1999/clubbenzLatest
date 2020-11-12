@@ -19,7 +19,7 @@ const BrandItem = ({ item, onPress, length }) => {
 
 		<TouchableOpacity onPress={() => onPress(item)}>
 		<View style={styles.ItemNotSelect}>
-		{item.name == 'All' || item.name == 'كل القطع' ? <View style={[ styles.BrandViewStyle, {justifyContent: 'center', alignItems: 'center', borderColor: item.isActive ? colors.blueButton:'white', backgroundColor: 'white'}]}><Text style={{color: '#11455F', fontFamily: Fonts.circular_black}}>{item.name}</Text></View>
+		{item.name == 'All' || item.name == 'كل القطع' || item.name == 'الكل' ? <View style={[ styles.BrandViewStyle, {justifyContent: 'center', alignItems: 'center', borderColor: item.isActive ? colors.blueButton:'white', backgroundColor: 'white'}]}><Text style={{color: '#11455F', fontFamily: Fonts.circular_black}}>{item.name}</Text></View>
 		: <View style={{ borderWidth: 3, borderRadius: 5, borderColor: item.isActive ? colors.blueButton:'white', height: 34, width: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF'}}>
 			<Image style={[{height: 28, width: 84, overflow: 'hidden', margin: 2, resizeMode: 'contain'}]}
             source={ { uri: IMG_PREFIX_URL + item.image }}/>

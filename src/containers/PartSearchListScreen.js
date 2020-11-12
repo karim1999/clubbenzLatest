@@ -79,7 +79,7 @@ class PartSearchListScreen extends Component {
             data={this.state.ItemList}
             keyExtractor={(item, index) => item.id}
             renderItem={({ item, index }) => (
-              <ListItem item={item} index={index} onPress={this.openItem} language={this.state.ItemList.length} preferences={this.props.navigation.state.params.preferences} />
+              <ListItem item={item} index={index} onPress={this.openItem} language={this.props.navigation.state.params.language} preferences={this.props.navigation.state.params.preferences} />
             )}
             ListFooterComponent={this._renderFooter}
             ListEmptyComponent={this.ListEmptyView}

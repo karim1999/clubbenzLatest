@@ -29,8 +29,7 @@ renderAds = (preferences) => {
 const ListItem = ({ item, index, onPress, language, length, preferences, favorite }) => {
 	const arr_temp = "";
 	//console.log(item);
-	// alert(JSON.stringify(item))
-	// debugger;
+	//console.log(language);
 	TimeAgo.addLocale(ar)
 	TimeAgo.addLocale(en)
 	let timeAgo;
@@ -99,7 +98,7 @@ const ListItem = ({ item, index, onPress, language, length, preferences, favorit
 								</View>
 							</View>
 							<View style={{flex: .5}}>
-								<Text style={[styles.name, {paddingLeft: 0, maxWidth: 170, alignSelf: 'flex-start'}]}>{language.isArabic == true ? item.title + arr_temp : item.title}</Text>
+								<Text style={[styles.name, {paddingLeft: 0, maxWidth: 170, alignSelf: 'flex-start'}]}>{language.isArabic == true ? item.title_arabic + arr_temp : item.title}</Text>
 							</View>
 						</View>
 

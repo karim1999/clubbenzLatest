@@ -131,9 +131,7 @@ class ItemsScreen extends PureComponent {
 		//console.log("preferences:",this.props.preferences);
 		this.partCategoriesList('').then(res => {
 			let newBrands= [...this.state.defaultBrand];
-			console.log("newBrands:",newBrands);
 			let usedBrands= [...this.state.defaultBrand];
-			console.log("usedBrands:",usedBrands);
 			this.props.preferences.parts_brand.map(brand => {
 				let isNew = false;
 				let isUsed= false;
@@ -151,7 +149,9 @@ class ItemsScreen extends PureComponent {
 					usedBrands.push(brand)
 			})
 			this.setState({newBrands})
+			console.log("newBrands:",newBrands);
 			this.setState({usedBrands})
+			console.log("usedBrands:",usedBrands);
 		});
 	}
 
@@ -288,7 +288,6 @@ class ItemsScreen extends PureComponent {
   uniqueArray = a => [...new Set(a.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
 	removeDuplicates(arr1, arr2) {
 		let myArr= [...arr1, ...arr2];
-		// alert(JSON.stringify(myArr))
 		if(!myArr[0])
 			return []
 		var props = Object.keys(myArr[0])

@@ -413,10 +413,13 @@ class ClusterErrorSolutionsScreen extends Component {
 	createURL = () => {
 		const link =
 			new firebase.links.DynamicLink('https://clubenz.com/cluster/' + this.props.navigation.state.params.errorDetail.id + '/' + this.props.navigation.state.params.chassis, 'https://clubenzz.page.link')
-				.android.setPackageName('com.clubbenz')
-				.ios.setBundleId('org.reactjs.native.example.ClubBenz')
-				.ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
-				.android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz');
+            .android.setPackageName('com.clubbenz')
+			.android.setFallbackUrl('https://play.google.com/store/apps/details?id=com.clubbenz')
+            .ios.setBundleId('org.reactjs.native.example.ClubBenz')
+            .ios.setFallbackUrl('https://apps.apple.com/us/app/id1507160684')
+			.social.setTitle("Clubenz")
+			.social.setDescriptionText(__('Don’t miss the unique opportunity to gain excellent advice and insights from leading car experts – Clubenz application will help you pamper your car. To download, click on the below link', this.props.language))
+			.social.setImageUrl("https://clubenz.com/clubenz-master/assets/plugins/images/admin-logo-dark.png");
 		debugger
 		firebase.links().createShortDynamicLink(link, "SHORT").then((url) => {
 			this.setState({ errorShareURL: url })
