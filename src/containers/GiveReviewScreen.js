@@ -166,8 +166,7 @@ class GiveReviewScreen extends PureComponent {
                         <Text style={{fontSize: 36, color: '#C7C7CC', fontFamily: Fonts.circular_book,}}>{__('How was it' , this.props.language)}</Text>
                         <TextInput
                             style={{
-                                paddingLeft: 9, flex: 1,
-                                color: '#C7C7CC',
+                                paddingLeft: 9, flex: 1,color: '#000000',
                                 textAlignVertical: "top",
                                 fontSize: 14,
                                 fontFamily: Fonts.circular_book,

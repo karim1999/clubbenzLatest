@@ -605,9 +605,9 @@ class RegisterScreen extends PureComponent {
             <View style={{ flexDirection: 'row', marginVertical: 10, }}>
               <View style={[{ flex: 1, }]}>
                 <TextInput
-                  style={[styles.inputField, { borderColor: '#E5E5EA' }]}
+                  style={[styles.inputField, { borderColor: '#E5E5EA',color: '#000000' }]}
                   placeholder={__('First name', this.props.language)}
-                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#999999' }}
+                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium,color: '#000000' }}
                   placeholderTextColor='#999999'
                   value={this.state.first_name}
                   onChangeText={first_name => this.setState({ first_name })}
@@ -615,9 +615,9 @@ class RegisterScreen extends PureComponent {
               </View>
               <View style={[{ flex: 1, marginLeft: 13, }]}>
                 <TextInput
-                  style={[styles.inputField, { borderColor: '#E5E5EA' }]}
+                  style={[styles.inputField, { borderColor: '#E5E5EA',color: '#000000' }]}
                   placeholder={__('Surname', this.props.language)}
-                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#999999' }}
+                  textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium,color: '#000000' }}
                   placeholderTextColor='#999999'
                   value={this.state.last_name}
                   onChangeText={last_name => this.setState({ last_name })}
@@ -625,30 +625,30 @@ class RegisterScreen extends PureComponent {
               </View>
             </View>
             <TextInput
-              style={[styles.inputField, { borderColor: '#E5E5EA' }]}
+              style={[styles.inputField, { borderColor: '#E5E5EA',color: '#000000' }]}
               placeholder={__('Email Address', this.props.language)}
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#999999' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium,color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
             />
 
             <TextInput
-              style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10 }]}
+              style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10,color: '#000000' }]}
               placeholder={__('Mobile Number', this.props.language)}
               keyboardType={'phone-pad'}
               returnKeyType='done'
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#999999' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium,color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.mobile}
               onChangeText={mobile => this.checkPhoneNumber(mobile)}
             />
 
             <TextInput
-              style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10 }]}
+              style={[styles.inputField, { borderColor: '#E5E5EA', marginTop: 10,color: '#000000' }]}
               placeholder={__('Password', this.props.language)}
               secureTextEntry={true}
-              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium, color: '#999999' }}
+              textInputStyle={{ textAlign: "center", fontFamily: Fonts.CircularMedium,color: '#000000' }}
               placeholderTextColor='#999999'
               value={this.state.password}
               onChangeText={password => this.setState({ password })}

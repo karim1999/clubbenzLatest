@@ -398,14 +398,13 @@ class LoginScreen extends React.Component {
 
             <View style={styleLoginScreen.innerContainer}>
               <TextInput
-                style={[styles.inputField, {borderColor: '#E5E5EA'}]}
+                style={[styles.inputField, {borderColor: '#E5E5EA',color: '#000000'}]}
                 placeholder={__('Mobile Number', this.props.language)}
                 keyboardType={'phone-pad'}
                 returnKeyType="done"
                 textInputStyle={{
                   textAlign: 'center',
-                  fontFamily: Fonts.CircularMedium,
-                  color: '#999999',
+                  fontFamily: Fonts.CircularMedium,color: '#000000'
                 }}
                 placeholderTextColor="#999999"
                 value={this.state.email}
@@ -415,14 +414,13 @@ class LoginScreen extends React.Component {
               <TextInput
                 style={[
                   styles.inputField,
-                  {borderColor: '#E5E5EA', marginTop: 10},
+                  {borderColor: '#E5E5EA', marginTop: 10,color: '#000000'},
                 ]}
                 placeholder={__('Password', this.props.language)}
                 secureTextEntry={true}
                 textInputStyle={{
                   textAlign: 'center',
-                  fontFamily: Fonts.CircularMedium,
-                  color: '#999999',
+                  fontFamily: Fonts.CircularMedium,color: '#000000'
                 }}
                 placeholderTextColor="#999999"
                 value={this.state.password}

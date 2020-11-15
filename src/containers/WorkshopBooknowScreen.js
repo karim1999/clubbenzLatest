@@ -180,7 +180,7 @@ class WorkshopBooknowsScreen extends PureComponent {
 				<View style={[styles.commentInputField, {paddingLeft: 5}]}>
 					<TextInput
 						// style={[styles.commentInputField]}
-						style={{fontFamily: Fonts.CircularMedium, fontFamily: Fonts.CircularMedium}}
+						style={{fontFamily: Fonts.CircularMedium, fontFamily: Fonts.CircularMedium,color: '#000000'}}
 						placeholder={__('comments or requests' , this.props.language)}
 						placeholderTextColor='rgba(0,0,0, 0.4)'
 						onChangeText={comments => this.setState({ comments: comments })}

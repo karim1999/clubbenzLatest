@@ -551,7 +551,7 @@ class ClusterErrorSolutionsScreen extends Component {
 										<Image style={{ width: 33, height: 33 }} source={require('../resources/images/cross_image.png')} />
 									</TouchableOpacity>
 								</View>
-								<TextInput style={[styles.inputField, { borderColor: '#E5E5EA', height: 100,marginTop: 10, flex: 0.9, textAlign: this.props.language.isArabic ? 'right' : 'left' }]} multiline={true} numberOfLines={5} placeholder={__('Enter Solution...', this.props.language)} placeholderTextColor='rgba(0, 0, 0, 0.5)' value={this.state.solution} textInputStyle={{ fontFamily: Fonts.CircularMedium, color: '#000000' }} onChangeText={solution => this.setState({ solution: solution })} />
+								<TextInput style={[styles.inputField, { borderColor: '#E5E5EA',color: '#000000', height: 100,marginTop: 10, flex: 0.9, textAlign: this.props.language.isArabic ? 'right' : 'left' }]} multiline={true} numberOfLines={5} placeholder={__('Enter Solution...', this.props.language)} placeholderTextColor='rgba(0, 0, 0, 0.5)' value={this.state.solution} textInputStyle={{ fontFamily: Fonts.CircularMedium, color: '#000000' }} onChangeText={solution => this.setState({ solution: solution })} />
 								<TouchableOpacity onPress={() => this.showImagePicker()} style={styleClusterErrorScreen.staticImages}>
 									<View style={{ height: 60, width: 60, borderRadius: 50, overflow: 'hidden', justifyContent: 'flex-end' }}>
 										<Image
