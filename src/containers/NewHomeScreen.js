@@ -110,6 +110,7 @@ class NewHomeScreen extends Component {
         viewServicesSection: false,
         active_index: 1,
         slider_images: [],
+        currentPosition: {}
     };
 
     componentDidMount() {
@@ -130,12 +131,11 @@ class NewHomeScreen extends Component {
             this.getSliderImages();
             AsyncStorage.getItem('Notification').then((data) => {
 
-                // alert(JSON.stringify(data))
             })
         })
-        // console.log(this.props.user)
-
-
+        setTimeout(() => {
+            this.getLocation();
+        },1000);
     }
 
     getAdvertisement = () => {
@@ -294,9 +294,8 @@ class NewHomeScreen extends Component {
                 // console.log(pos)
 
                 var value = this.props.user.enableLocation == 'true' ? position : pos;
-                console.log('end')
-                store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false})
-
+                this.setState({currentPosition: value});
+                store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false});
                 NavigationService.navigate(data.path, { position: value, preferences: this.props.preferences, homeButton: false });
             },
             (error) => {
@@ -308,68 +307,14 @@ class NewHomeScreen extends Component {
         );
     }
 
-    onMenuPress = async (data) => {
-
-        if (data.Location) {
-
-            if (this.props.user.enableLocation == 'true') {
-
-                if (Platform.OS === "android") {
-                    const granted = await PermissionsAndroid.request(
-                        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                        {
-                            title: "Clubenz Location Permission",
-                            message:
-                                "Clubenz needs access to your Location " +
-                                "to locate the nearest shops."
-                        }
-                    );
-                    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                        this.getLocationAndNavigate(data)
-                    } else {
-                        alert(granted);
-                    }
-                } else {
-                    // Geolocation.requestAuthorization();
-
-                    Permissions.request('location').then(response => {
-                        // Returns once the user has chosen to 'allow' or to 'not allow' access
-                        // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-
-                        if (response === 'authorized') {
-                            console.log('authorized')
-
-                            this.getLocationAndNavigate(data)
-
-                        } else {
-                            // asking for permission using Permissions dialog.
-                            Alert.alert(
-                                'Location Access',
-                                'Clubenz needs access to your location',
-                                [
-                                    {
-                                        text: 'Cancel',
-                                        onPress: () => console.log('Permission denied'),
-                                        style: 'cancel',
-                                    },
-                                    { text: 'Open Settings', onPress: Permissions.openSettings },
-                                ],
-                            );
-
-                            console.log('denied')
-                        }
-                    });
-
-                }
-
-            } else {
+    getLocation = () => {
+        Geolocation.getCurrentPosition(
+            (position) => {
                 const pos = {
                     coords: {
                         accuracy: 17.291000366210938,
                         altitude: 171.5,
                         heading: 0,
-                        // latitude: 31.5429824,
-                        // longitude: 74.4008077,
                         latitude: 0,
                         longitude: 0,
                         speed: 0
@@ -377,25 +322,23 @@ class NewHomeScreen extends Component {
                     mocked: false,
                     timestamp: 1564646352931
                 }
-                NavigationService.navigate(data.path, { position: pos, preferences: this.props.preferences, homeButton: false });
-            }
-        } else {
+                var value = this.props.user.enableLocation == 'true' ? position : pos;
+                this.setState({currentPosition: value});
+            },
+            (error) => {
+                console.log(error.code, error.message);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }
 
-            // debugger
-
-            if (data.path === "SpecificationScreen") {
-                NavigationService.navigate(data.path, { selected_car: this.props.selected_car.car, selected_car_model: this.props.selected_car.model, selected_car_year: this.props.selected_car.year, user: this.props.user, preferences: this.props.preferences, homeButton: false });
-            } else if (data.path === "CategoriesScreen") {
-                // console.log(this.props.auth)
-                // debugger
-                // alert(JSON.stringify(this.props.user))
-                NavigationService.navigate(data.path, { chassis: this.props.selected_car.car.chassis, selected_car: this.props.selected_car.car, preferences: this.props.preferences, homeButton: false });
-            } else if (data.show_services == "on") {
-
-                AsyncStorage.setItem("serviceId", data.id);
-
-                if (this.props.user.enableLocation == "true") {
-
+    onMenuPress = async (data) => {
+        if(this.state.currentPosition && this.state.currentPosition.coords){
+            NavigationService.navigate(data.path, { position: this.state.currentPosition, preferences: this.props.preferences, homeButton: false });
+        }
+        else{
+            if (data.Location) {
+                if (this.props.user.enableLocation == 'true') {
                     if (Platform.OS === "android") {
                         const granted = await PermissionsAndroid.request(
                             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -406,25 +349,37 @@ class NewHomeScreen extends Component {
                                     "to locate the nearest shops."
                             }
                         );
-
                         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                            Geolocation.getCurrentPosition(
-                                (position) => {
-                                    this.props.navigation.navigate("ServiceShopScreen", { position, preferences: this.props.preferences, homeButton: false });
-                                },
-                                (error) => {
-                                    // See error code charts below.
-                                    console.log(error.code, error.message);
-                                },
-                                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-                            );
+                            this.getLocationAndNavigate(data)
                         } else {
                             alert(granted);
                         }
                     } else {
-                        console.log('IOS')
+                        // Geolocation.requestAuthorization();
+                        Permissions.request('location').then(response => {
+                            // Returns once the user has chosen to 'allow' or to 'not allow' access
+                            // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+                            if (response === 'authorized') {
+                                console.log('authorized')
+                                this.getLocationAndNavigate(data)
+                            } else {
+                                // asking for permission using Permissions dialog.
+                                Alert.alert(
+                                    'Location Access',
+                                    'Clubenz needs access to your location',
+                                    [
+                                        {
+                                            text: 'Cancel',
+                                            onPress: () => console.log('Permission denied'),
+                                            style: 'cancel',
+                                        },
+                                        { text: 'Open Settings', onPress: Permissions.openSettings },
+                                    ],
+                                );
+                                console.log('denied')
+                            }
+                        });
                     }
-
                 } else {
                     const pos = {
                         coords: {
@@ -440,17 +395,62 @@ class NewHomeScreen extends Component {
                         mocked: false,
                         timestamp: 1564646352931
                     }
-                    this.props.navigation.navigate("ServiceShopScreen", { position: pos, preferences: this.props.preferences });
+                    NavigationService.navigate(data.path, { position: pos, preferences: this.props.preferences, homeButton: false });
                 }
-
-
             } else {
-                NavigationService.navigate(data.path);
+                if (data.path === "SpecificationScreen") {
+                    NavigationService.navigate(data.path, { selected_car: this.props.selected_car.car, selected_car_model: this.props.selected_car.model, selected_car_year: this.props.selected_car.year, user: this.props.user, preferences: this.props.preferences, homeButton: false });
+                } else if (data.path === "CategoriesScreen") {
+                    NavigationService.navigate(data.path, { chassis: this.props.selected_car.car.chassis, selected_car: this.props.selected_car.car, preferences: this.props.preferences, homeButton: false });
+                } else if (data.show_services == "on") {
+                    AsyncStorage.setItem("serviceId", data.id);
+                    if (this.props.user.enableLocation == "true") {
+                        if (Platform.OS === "android") {
+                            const granted = await PermissionsAndroid.request(
+                                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                                {
+                                    title: "Clubenz Location Permission",
+                                    message:
+                                        "Clubenz needs access to your Location " +
+                                        "to locate the nearest shops."
+                                }
+                            );
+                            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                                Geolocation.getCurrentPosition(
+                                    (position) => {
+                                        this.props.navigation.navigate("ServiceShopScreen", { position, preferences: this.props.preferences, homeButton: false });
+                                    },
+                                    (error) => {
+                                        console.log(error.code, error.message);
+                                    },
+                                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+                                );
+                            } else {
+                                alert(granted);
+                            }
+                        } else {
+                            console.log('IOS')
+                        }
+                    } else {
+                        const pos = {
+                            coords: {
+                                accuracy: 17.291000366210938,
+                                altitude: 171.5,
+                                heading: 0,
+                                latitude: 0,
+                                longitude: 0,
+                                speed: 0
+                            },
+                            mocked: false,
+                            timestamp: 1564646352931
+                        }
+                        this.props.navigation.navigate("ServiceShopScreen", { position: pos, preferences: this.props.preferences });
+                    }
+                } else {
+                    NavigationService.navigate(data.path);
+                }
             }
-
-
         }
-
     };
 
     renderItem = ({ item, index }) => {

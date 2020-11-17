@@ -211,7 +211,7 @@ const es = {
   'Sort By': 'فرز',
   'Sort By:': 'فرز',
   'location': 'المسافة',
-  'Location': 'المسافة',
+  'Location': 'المكان',
   'rating': 'التقييم',
   'Rating': 'التقييم',
   'none': 'لأا شيء',

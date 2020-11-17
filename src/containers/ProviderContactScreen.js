@@ -55,7 +55,7 @@ class ProviderContactScreen extends PureComponent {
         return (
             <View style={[styleProviderContactScreen.container]}>
                 <SplitHeading
-                    text={"Location"}
+                    text={__("Location", this.props.language)}
                     headingStyle={{ padding: 5, marginTop: 15, marginBottom: 2 }}
                     lineColor={{ backgroundColor: 'rgba(6,0,41, 0.2)' }}
                     textColor={{ color: colors.grey93, fontFamily: Fonts.circular_medium }}

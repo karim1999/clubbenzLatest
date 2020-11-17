@@ -106,10 +106,10 @@ class LoginScreen extends React.Component {
           console.log(res);
           if (res.success) {
             //this.checkNumberVerified(res.user);
-			 res.user.verification_phone = 1;
-			 AsyncStorage.setItem('user', JSON.stringify(res.user))
-			 self.props.navigation.reset([NavigationActions.navigate({ routeName: 'EnableNotificationScreen' })], 0);
-             NavigationService.reset("HomeScreen");
+			      res.user.verification_phone = 1;
+			      AsyncStorage.setItem('user', JSON.stringify(res.user))
+			      self.props.navigation.reset([NavigationActions.navigate({ routeName: 'EnableNotificationScreen' })], 0);
+            NavigationService.reset("HomeScreen");
           } else {
             setTimeout(() => {
               if(__(res.message, this.props.language)){
@@ -143,16 +143,13 @@ class LoginScreen extends React.Component {
           appleAuth.Scope.FULL_NAME
         ]
       });
-      self.loginWithSocialMedia(appleAuthRequestResponse.user.toString(),
-      appleAuthRequestResponse.fullName.givenName + " " + appleAuthRequestResponse.fullName.familyName,
-      appleAuthRequestResponse.email);
-      /*const credentialState = await appleAuth.getCredentialStateForUser(
-        appleAuthRequestResponse.user
-      );
-
-      if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user.toString());
+      if (credentialState === appleAuth.State.AUTHORIZED) {
         console.log('User apple sign in auth authorized');
-        axios
+        self.loginWithSocialMedia(appleAuthRequestResponse.user.toString(),
+        appleAuthRequestResponse.fullName.givenName + " " + appleAuthRequestResponse.fullName.familyName,
+        appleAuthRequestResponse.email);
+       /* axios
           .post('https://NGROK_URL/auth', {
             username: appleAuthRequestResponse.user,
             code: appleAuthRequestResponse.authorizationCode,
@@ -169,9 +166,8 @@ class LoginScreen extends React.Component {
             });
             console.log('Could not authenticate user.. ', err);
           });
-        return;
+        return;*/
       }
-      Alert.alert('Auth', 'Could not authenticate you');*/
     } catch (err) {
       if (err === appleAuth.Error.CANCELED) {
         Alert.alert(
@@ -241,8 +237,15 @@ class LoginScreen extends React.Component {
     authAction.loginWithFbUser({fcm_token: fcm_token, social_id: socialId, name: name, email: email})
           .then(res => {
             if (res.success) {
+              res.user.verification_phone = 1;
               AsyncStorage.setItem('user', JSON.stringify(res.user));
-              NavigationService.reset('HomeScreen');
+              self.props.navigation.reset([NavigationActions.navigate({ routeName: 'EnableNotificationScreen' })], 0);
+              if(res.user.phone == '+20100'){
+                NavigationService.reset("MyProfileScreen");
+              }
+              else{
+                NavigationService.reset("HomeScreen");
+              }
             } else {
               setTimeout(() => {
                 Toast.show(res.message, Toast.LONG);

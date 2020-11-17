@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { View, Dimensions, I18nManager } from "react-native";
 import { connect } from "react-redux";
-import {
-  createAppContainer
-} from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import NavigationService from "./NavigationService";
@@ -20,16 +18,13 @@ import WorkshopDetailScreen from "./containers/WorkshopDetailScreen";
 import ServiceListScreen from "./containers/ServiceListScreen";
 import PartListScreen from "./containers/PartsListScreen";
 import WorkShopListScreen from "./containers/WorkShopListScreen";
-
 import HomeListScreen from "./containers/HomeListScreen";
-
 import PartsDetailScreen from "./containers/PartsDetailScreen";
 import ServicesDetailScreen from "./containers/ServicesDetailScreen";
 import CarPartsScreen from "./containers/CarPartsScreen";
 import CategoriesScreen from "./containers/CategoriesScreen";
 import MapScreen from "./containers/MapScreen";
 import MyProfileScreen from "./containers/MyProfileScreen";
-
 import PartShopScreen from "./containers/PartShopScreen";
 import PartShopDetailScreen from "./containers/PartShopDetailScreen";
 import CategoryListScreen from "./containers/CategoryListScreen";
@@ -39,13 +34,10 @@ import SpecificationScreen from "./containers/SpecificationScreen";
 import NotificationScreen from "./containers/NotificationScreen";
 import BookingScreen from "./containers/BookingScreen";
 import ThanksScreen from "./containers/ThanksScreen";
-
-
 import ItemsScreen from "./containers/ItemsScreen";
 import ScanVinNumberScreen from "./containers/ScanVinNumberScreen";
 import LocateVinNumberScreen from "./containers/LocateVinNumberScreen";
 import ClusterErrorScreen from "./containers/ClusterErrorScreen";
-
 import ClusterErrorSolutionsScreen from "./containers/ClusterErrorSolutionsScreen";
 import SlideMenuScreen from "./components/SlideMenu/SlideMenuScreen";
 import ClubScreen from "./containers/ClubScreen";
@@ -55,11 +47,8 @@ import CarGuideScreen from "./containers/CarGuideScreen";
 import LoadingIndicator from "./../src/components/common/loadingIndicator";
 import GiveReviewScreen from "./containers/GiveReviewScreen";
 import ForgotPassScreen from "./containers/ForgotPassScreen";
-
 import PasswordResetScreen from "./containers/PasswordResetScreen";
-
 import PartSearchListScreen from './containers/PartSearchListScreen';
-
 import ProviderScreen from './containers/ProviderScreen'
 import FavoritesScreen from "./containers/FavoritesScreen";
 import MembershipsScreen from "./containers/MembershipsScreen";
@@ -67,6 +56,7 @@ import SubscribeScreen from "./containers/SubscribeScreen";
 import MembershipAddress from './containers/MembershipAddress';
 import MembershipsThanksScreen from './containers/MembershipsThanksScreen';
 import MyCardScreen from './containers/MyCardScreen';
+
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {

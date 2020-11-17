@@ -7,11 +7,16 @@ import { Fonts } from '../resources/constants/Fonts';
 import { connect } from 'react-redux';
 import __ from '../resources/copy';
 
-const howto_full_service = require('../resources/images/howto_full_service.png')
-const howto_shops = require('../resources/images/howto_shops.png')
-const howto_ratings = require('../resources/images/howto_ratings.png')
-const howto_cluster_error = require('../resources/images/howto_cluster_error.png')
-const howto_car_parts = require('../resources/images/how_to_carparts.png')
+const howto_full_service_ar = require('../resources/images/howto_full_service_ar.png');
+const howto_full_service_en = require('../resources/images/howto_full_service_en.png');
+const howto_shops_ar = require('../resources/images/howto_shops_ar.png');
+const howto_shops_en = require('../resources/images/howto_shops_en.png');
+const howto_ratings_ar = require('../resources/images/howto_ratings_ar.png');
+const howto_ratings_en = require('../resources/images/howto_ratings_en.png');
+const howto_cluster_error_ar = require('../resources/images/howto_cluster_error_ar.png');
+const howto_cluster_error_en = require('../resources/images/howto_cluster_error_en.png');
+const how_to_carparts_ar = require('../resources/images/how_to_carparts_ar.png');
+const how_to_carparts_en = require('../resources/images/how_to_carparts_en.png');
 
 class HowToScreen extends Component {
 	constructor(props) {
@@ -100,90 +105,65 @@ class HowToScreen extends Component {
 						/>
 					</View>
 				</ImageBackground>
-				<View
-					style={{
-						width: width,
-						height: Height(85),
-						top: Height(20),
-					}}
-				>
-
+				<View style={{ width: width, height: Height(85), top: Height(20) }} >
 					{
 						this.props.language.isArabic ?
-							<View
-								style={[
-									{
-										position: 'absolute',
-										top: Height(-15),
-									}
-								]}
-							>
-
+							<View style={[ { position: 'absolute', top: Height(-15) } ]} >
 								{this.state.active_index==5?<Image
-									source={howto_full_service}
+									source={howto_full_service_ar}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==4?<Image
-									source={howto_shops}
+									source={howto_shops_ar}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==3?<Image
-									source={howto_ratings}
+									source={howto_ratings_ar}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==2?<Image
-									source={howto_cluster_error}
+									source={howto_cluster_error_ar}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==1?<Image
-									source={howto_car_parts}
+									source={how_to_carparts_ar}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 							</View>
 							:
-							<View
-								style={[
-									{
-										position: 'absolute',
-										top: Height(-15),
-									}
-								]}
-							>
-
+							<View style={[ { position: 'absolute', top: Height(-15) } ]} >
 								{this.state.active_index==1?<Image
-									source={howto_full_service}
+									source={howto_full_service_en}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==2?<Image
-									source={howto_shops}
+									source={howto_shops_en}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==3?<Image
-									source={howto_ratings}
+									source={howto_ratings_en}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==4?<Image
-									source={howto_cluster_error}
+									source={howto_cluster_error_en}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 								{this.state.active_index==5?<Image
-									source={howto_car_parts}
+									source={how_to_carparts_en}
 									style={{ height: Height(48.5), width: Width(77.6), marginHorizontal:Width(11.2) }}
 									resizeMode="cover"
 								/>:null}
 							</View>
 					}
-
-
 					<View style={{ position: 'absolute', justifyContent: 'flex-end', height: '100%' }}>
 						<View
 							style={{

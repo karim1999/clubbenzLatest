@@ -70,6 +70,7 @@ class Header extends PureComponent {
                                     <Icon size={16} color={"#FFFFFF"} name="search"/>
                                 </View>
                                 <TextInput
+                                    textAlign={this.props.language.isArabic ? 'right' : 'left'}
                                     onChangeText={(text)=>this.setState({text:text})}
                                     onSubmitEditing={()=> {
                                         if(this.props.onSearch){

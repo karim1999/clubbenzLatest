@@ -4,7 +4,6 @@ import { getPreferences } from './../redux/actions/init'
 import { styles, fonts, colors, metrics } from '../themes';
 import SimpleToast from 'react-native-simple-toast';
 import NetInfo from "@react-native-community/netinfo";
-
 import NavigationService from '../NavigationService';
 
 class SplashScreen extends PureComponent {
@@ -95,28 +94,20 @@ class SplashScreen extends PureComponent {
 	}
 
 	componentDidMount() {
-
-		getPreferences()
-
 		this._fadeAnimation()
-
 		AsyncStorage.getItem('user').then(value=>{
-
+			getPreferences()
 			setTimeout(() => {
-
-			this._moveAnimation()
-
-			setTimeout(() => {
-				if(value){
-					this.checkNumberVerified(value);
-				}
-				else{
-					this.props.navigation.replace('LanguageScreen');
-				}
-			}, 1200)
-
-		}, 2000);
-
+				this._moveAnimation()
+				setTimeout(() => {
+					if(value){
+						this.checkNumberVerified(value);
+					}
+					else{
+						this.props.navigation.replace('LanguageScreen');
+					}
+				}, 1000);
+			}, 2000);
 		})
 	}
 
@@ -125,27 +116,21 @@ class SplashScreen extends PureComponent {
 		return (
 			<View style={[styles.screen.container, styleSplashScreen.container]}>
 				<StatusBar hidden={true} />
-				<View
-					style={{
-						alignItems: 'center',
-						marginBottom: metrics.doubleBaseMargin,
-					}}
-				>
+				<View style={{ alignItems: 'center', marginBottom: metrics.doubleBaseMargin }}>
 					<View style={[styles.center, styleSplashScreen.picture]}>
-					<ImageBackground source={require('../resources/images/splash_screen.jpg')} style={[styles.center, styleSplashScreen.picture]}>
-					<Animated.View style={{width: metrics.deviceWidth, backgroundColor: "#000000", flex: 1, opacity: this.state.opacity,  }}>
-					</Animated.View>
-					<View style={{ opacity: this.state.logoOpacity, }}>
-					<Animated.Image
-							// source={require('../resources/images/clubenz_logo.png')}
-							source={require('../resources/images/benz_logo.png')}
-							style={[styleSplashScreen.logo, { bottom: this.state.logoTranslateYValue }]}
-							resizeMode='contain'
-						/>
-					</View>
-					</ImageBackground>
-					</View>		
-
+						<ImageBackground source={require('../resources/images/splash_screen.jpg')} style={[styles.center, styleSplashScreen.picture]}>
+							<Animated.View style={{width: metrics.deviceWidth, backgroundColor: "#000000", flex: 1, opacity: this.state.opacity,  }}>
+							</Animated.View>
+							<View style={{ opacity: this.state.logoOpacity, }}>
+								<Animated.Image
+									// source={require('../resources/images/clubenz_logo.png')}
+									source={require('../resources/images/benz_logo.png')}
+									style={[styleSplashScreen.logo, { bottom: this.state.logoTranslateYValue }]}
+									resizeMode='contain'
+								/>
+							</View>
+						</ImageBackground>
+					</View>	
 				</View>
 			</View>
 		);
