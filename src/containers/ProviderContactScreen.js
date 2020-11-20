@@ -60,18 +60,18 @@ class ProviderContactScreen extends PureComponent {
                     lineColor={{ backgroundColor: 'rgba(6,0,41, 0.2)' }}
                     textColor={{ color: colors.grey93, fontFamily: Fonts.circular_medium }}
                 />
-                <View style={styleProviderContactScreen.innerContainer}>
-                    <View>
-                        <Text style={styleProviderContactScreen.shopAddress}>
+                <View style={{alignSelf:'flex-start'}}>
+                    <View style={{alignSelf:'flex-start'}}>
+                        <Text style={[styleProviderContactScreen.shopAddress],{alignSelf:'flex-start'}}>
                             <Text style={{color: "black"}}>{__("Address:", this.props.language)}</Text> {this.state.provider.address}
                         </Text>
-                        <Text style={styleProviderContactScreen.shopAddress}>
+                        <Text style={[styleProviderContactScreen.shopAddress],{alignSelf:'flex-start'}}>
                             <Text style={{color: "black"}}>{__("City:", this.props.language)}</Text> {this.state.provider.city}
                         </Text>
-                        <Text style={styleProviderContactScreen.shopAddress}>
+                        <Text style={[styleProviderContactScreen.shopAddress],{alignSelf:'flex-start'}}>
                             <Text style={{color: "black"}}>{__("State:", this.props.language)}</Text> {this.state.provider.governorate.name}
                         </Text>
-                        <Text style={styleProviderContactScreen.shopAddress}>
+                        <Text style={[styleProviderContactScreen.shopAddress],{alignSelf:'flex-start'}}>
                             <Text style={{color: "black"}}>{__("Country:", this.props.language)}</Text> {this.state.provider.country.name}
                         </Text>
                     </View>

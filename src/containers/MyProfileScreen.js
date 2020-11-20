@@ -68,7 +68,7 @@ class MyProfileScreen extends PureComponent {
 			enableLocation: user.enableLocation == "true" ? true : false,
 			enablePushNotification: user.enablePushNotification == "true" ? true : false,
 			enableFacebook: user.enableFacebook == "true" ? true : false,
-            social_id: "",
+            social_id: user.social_id,
 			enableLinkToFacebook: false,
 			fromPicker: false,
 			fromPicker_uri: '',
@@ -87,7 +87,9 @@ class MyProfileScreen extends PureComponent {
 			current: null
 
 		};
-
+		/*console.log("social_id",user.social_id);
+		if (user.social_id)
+			this.getFacebookProfileFromFacebook();*/
 	}
 
 	// for getting user's profile image from facebook
@@ -400,35 +402,25 @@ class MyProfileScreen extends PureComponent {
 				// debugger
 				if (res.success) {
 					// Alert.alert('Info', 'Profile Updated Successfully');
-
-
 					setTimeout(() => {
 						// SimpleToast.show('Profile Updated Successfully', 1000)
 						Alert.alert(
 						'Info!',
 						'Profile Updated Successfully',
 						[
-							{ text: 'OK', onPress: () => store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false}) },
+							{ text: 'OK', onPress: () => {
+									//store.dispatch({ type: UPDATE_USER, data: res.data });
+									store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false});
+									NavigationService.reset('HomeScreen');
+								} 
+							},
 						],
 						{ cancelable: false }
 					)
-					}, 200)
-
+					}, 200);
 
 				} else {
 					store.dispatch({type:UPDATE_INDICATOR_FLAG,data:false})
-				}
-				console.log(res)
-				// here update the name which we are showing in the navigation
-				if (res.data) {
-					// debugger
-					// alert(JSON.stringify(res.data))
-					store.dispatch({ type: UPDATE_USER, data: res.data });
-					 //if (res.data.enableFacebook == 'true')
-					 	//this.getFacebookProfileFromFacebook();
-					console.log(store.getState());
-				} else {
-					SimpleToast.show(res.message, SimpleToast.LONG)
 				}
 			})
 			.catch((err) => {
@@ -638,7 +630,7 @@ class MyProfileScreen extends PureComponent {
 								style={styles.inputField}
 								textInputStyle={{ textAlign: 'center', fontFamily: Fonts.CircularMedium, marginTop: 10 }}
 								keyboardType={'phone-pad'}
-								editable={false}
+								editable={true}
 								label={__('Mobile Number', this.props.language)}
 								onChangeText={mobile => this.setState({ mobile })}
 								value={this.state.mobile}
